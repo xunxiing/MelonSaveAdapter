@@ -1,0 +1,14 @@
+[
+  {
+    "from_node_id": "AddNumbersNodeViewModel : 81f7140d-4794-44fc-9e7f-f5c6b4c39bea",
+    "from_port_index": 0,
+    "to_node_id": "AddNumbersNodeViewModel : 1c19389b-20ab-4dc0-97e6-cb5a0d15ddcd",
+    "to_port_index": 0
+  },
+  {
+    "from_node_id": "AddNumbersNodeViewModel : 1c19389b-20ab-4dc0-97e6-cb5a0d15ddcd",
+    "from_port_index": 0,
+    "to_node_id": "AddNumbersNodeViewModel : 4354ea88-a9d1-4116-8fe7-2e26b85c9dd4",
+    "to_port_index": 0
+  }
+]

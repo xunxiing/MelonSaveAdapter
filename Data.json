@@ -1,0 +1,290 @@
+{
+    "autoLightData": {
+        "isAutoLightEnabled": false,
+        "timeProgress": 0.5,
+        "minutesInDay": 10
+    },
+    "saveObjectContainers": [
+        {
+            "saveObjects": {
+                "objectId": 248,
+                "instanceId": -55784,
+                "modedObjectId": "",
+                "localId": 0,
+                "parentId": -1,
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0289526787
+                },
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "intensity": 0.0,
+                "layer": 0,
+                "sortingLayer": "Default",
+                "orderLayer": 0,
+                "gravity": true,
+                "freezed": false,
+                "rotationFrozen": false,
+                "notBreakable": false,
+                "isMeltable": false,
+                "isHuman": false,
+                "isActivationForced": false,
+                "TreeBranch": null,
+                "LightSaveData": {
+                    "IsActive": false,
+                    "ColorIsChanged": true,
+                    "Color": {
+                        "r": 0.0,
+                        "g": 0.0,
+                        "b": 0.0,
+                        "a": 0.0
+                    },
+                    "IsBrokenByWater": false,
+                    "ChildrenSaveData": null,
+                    "<IsActive>k__BackingField": false,
+                    "<ColorIsChanged>k__BackingField": true,
+                    "<Color>k__BackingField": {
+                        "r": 0.0,
+                        "g": 0.0,
+                        "b": 0.0,
+                        "a": 0.0
+                    },
+                    "<IsBrokenByWater>k__BackingField": false,
+                    "<ChildrenSaveData>k__BackingField": null
+                },
+                "BreakableSaveData": null,
+                "humanData": [],
+                "mechanicData": [
+                    {
+                        "activationInput": 0.0,
+                        "floatParameters": [
+                            0.0
+                        ],
+                        "mechanicSerializedInputs": "[{\"Key\":\"activation\",\"DataType\":2,\"DataName\":\"activation\",\"CanBeEdit\":false,\"GateData\":\"{\\\"Value\\\":0.0,\\\"Default\\\":0.0,\\\"Min\\\":-3.40282347E+38,\\\"Max\\\":3.40282347E+38,\\\"IsCheckbox\\\":false}\"}]"
+                    }
+                ],
+                "brokenJoints": [],
+                "hingeJoints": [],
+                "distJoints": [],
+                "constraints": [],
+                "collisionIgnores": [],
+                "addData": [],
+                "saveMetaDatas": [
+                    {
+                        "key": "chip_tps",
+                        "boolValue": false,
+                        "stringValue": null,
+                        "intValue": 30,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_period_name_index",
+                        "boolValue": false,
+                        "stringValue": null,
+                        "intValue": 2,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_inputs",
+                        "boolValue": false,
+                        "stringValue": "[\n  {\n    \"Key\": \"activation\",\n    \"DataName\": \"activation\",\n    \"SerializedValue\": \"{\\\"Value\\\":0.0,\\\"Default\\\":0.0,\\\"Min\\\":-3.40282347E+38,\\\"Max\\\":3.40282347E+38,\\\"IsCheckbox\\\":false}\",\n    \"GateDataType\": 2\n  }\n]",
+                        "intValue": 0,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_outputs",
+                        "boolValue": false,
+                        "stringValue": "[\n  {\n    \"Key\": \"entity\",\n    \"DataName\": \"entity\",\n    \"SerializedValue\": null,\n    \"GateDataType\": 1\n  },\n  {\n    \"Key\": \"activation\",\n    \"DataName\": \"activation\",\n    \"SerializedValue\": \"{\\\"Value\\\":0.0,\\\"Default\\\":0.0,\\\"Min\\\":-3.40282347E+38,\\\"Max\\\":3.40282347E+38,\\\"IsCheckbox\\\":false}\",\n    \"GateDataType\": 2\n  }\n]",
+                        "intValue": 0,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_variables",
+                        "boolValue": false,
+                        "stringValue": "[]",
+                        "intValue": 0,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_graph",
+                        "boolValue": false,
+                        "stringValue": "{\n  \"ValidationState\": 1,\n  \"Nodes\": [\n    {\n      \"Id\": \"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\",\n      \"ModelVersion\": 1,\n      \"Version\": \"0.1\",\n      \"OperationType\": 2304,\n      \"Inputs\": [\n        {\n          \"Id\": \"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\\nInput : Number 962dc162-85c8-4f64-a8fe-421a0b584cb9\",\n          \"DataType\": 2,\n          \"connectedOutputIdModel\": {\n            \"Id\": \"ConstantNodeViewModel : 62b4a7e4-7ed7-4882-9b30-a612cc39bba0\\nOutput : Number cd872a86-5d43-43f5-8454-c052b928d885\",\n            \"NodeId\": \"ConstantNodeViewModel : 62b4a7e4-7ed7-4882-9b30-a612cc39bba0\"\n          }\n        },\n        {\n          \"Id\": \"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\\nInput : Number c5fcc0fd-efe3-4752-9fa4-c3fdf0b944bc\",\n          \"DataType\": 2,\n          \"connectedOutputIdModel\": null\n        }\n      ],\n      \"Outputs\": [\n        {\n          \"Id\": \"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\\nOutput : Number 9bb7dac7-1e5f-4163-9c02-5bb0a9585e9f\",\n          \"DataType\": 2,\n          \"ConnectedInputsIds\": [\n            {\n              \"Id\": \"IdentityNodeViewModel : bdda07dc-0a55-4139-a59f-88545c55b44a\\nInput : Number 6dead178-e9f7-40a1-b262-2c0bd982535a\",\n              \"NodeId\": \"IdentityNodeViewModel : bdda07dc-0a55-4139-a59f-88545c55b44a\"\n            }\n          ]\n        }\n      ],\n      \"VisualPosition\": {\n        \"x\": -120.0,\n        \"y\": 180.0,\n        \"normalized\": {\n          \"x\": -0.5547002,\n          \"y\": 0.832050264,\n          \"magnitude\": 1.0,\n          \"sqrMagnitude\": 1.0\n        },\n        \"magnitude\": 216.333084,\n        \"sqrMagnitude\": 46800.0\n      },\n      \"VisualCollapsed\": false,\n      \"MechanicConnectionId\": null,\n      \"GateDataType\": 2,\n      \"SaveData\": null\n    },\n    {\n      \"Id\": \"ConstantNodeViewModel : 62b4a7e4-7ed7-4882-9b30-a612cc39bba0\",\n      \"ModelVersion\": 1,\n      \"Version\": \"0.1\",\n      \"OperationType\": 257,\n      \"Inputs\": [],\n      \"Outputs\": [\n        {\n          \"Id\": \"ConstantNodeViewModel : 62b4a7e4-7ed7-4882-9b30-a612cc39bba0\\nOutput : Number cd872a86-5d43-43f5-8454-c052b928d885\",\n          \"DataType\": 2,\n          \"ConnectedInputsIds\": [\n            {\n              \"Id\": \"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\\nInput : Number 962dc162-85c8-4f64-a8fe-421a0b584cb9\",\n              \"NodeId\": \"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\"\n            }\n          ]\n        }\n      ],\n      \"VisualPosition\": {\n        \"x\": -1160.0,\n        \"y\": 180.0,\n        \"normalized\": {\n          \"x\": -0.9881739,\n          \"y\": 0.15333733,\n          \"magnitude\": 1.0,\n          \"sqrMagnitude\": 1.0\n        },\n        \"magnitude\": 1173.88245,\n        \"sqrMagnitude\": 1378000.0\n      },\n      \"VisualCollapsed\": false,\n      \"MechanicConnectionId\": null,\n      \"GateDataType\": 2,\n      \"SaveData\": \"{\\n  \\\"DataValue\\\": \\\"0\\\"\\n}\"\n    },\n    {\n      \"Id\": \"IdentityNodeViewModel : bdda07dc-0a55-4139-a59f-88545c55b44a\",\n      \"ModelVersion\": 1,\n      \"Version\": \"0.1\",\n      \"OperationType\": 1,\n      \"Inputs\": [\n        {\n          \"Id\": \"IdentityNodeViewModel : bdda07dc-0a55-4139-a59f-88545c55b44a\\nInput : Number 6dead178-e9f7-40a1-b262-2c0bd982535a\",\n          \"DataType\": 2,\n          \"connectedOutputIdModel\": {\n            \"Id\": \"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\\nOutput : Number 9bb7dac7-1e5f-4163-9c02-5bb0a9585e9f\",\n            \"NodeId\": \"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\"\n          }\n        }\n      ],\n      \"Outputs\": [\n        {\n          \"Id\": \"IdentityNodeViewModel : bdda07dc-0a55-4139-a59f-88545c55b44a\\nOutput : Number fd32b0c7-c9db-4136-88fc-2a3894a3fc57\",\n          \"DataType\": 2,\n          \"ConnectedInputsIds\": []\n        }\n      ],\n      \"VisualPosition\": {\n        \"x\": 820.0,\n        \"y\": 180.0,\n        \"normalized\": {\n          \"x\": 0.976744354,\n          \"y\": 0.2144073,\n          \"magnitude\": 1.0,\n          \"sqrMagnitude\": 1.0\n        },\n        \"magnitude\": 839.5237,\n        \"sqrMagnitude\": 704800.0\n      },\n      \"VisualCollapsed\": false,\n      \"MechanicConnectionId\": null,\n      \"GateDataType\": 2,\n      \"SaveData\": null\n    },\n    {\n      \"Id\": \"AddNumbersNodeViewModel : d9c8b7a6-f5e4-4d3c-b2a1-09876543210f\",\n      \"ModelVersion\": 1,\n      \"Version\": \"0.1\",\n      \"OperationType\": 2304,\n      \"Inputs\": [\n        {\n          \"Id\": \"AddNumbersNodeViewModel : d9c8b7a6-f5e4-4d3c-b2a1-09876543210f\\nInput : Number c8b7a6f5-e4d3-4c2b-b1a0-fedcba987654\",\n          \"DataType\": 2,\n          \"connectedOutputIdModel\": null\n        },\n        {\n          \"Id\": \"AddNumbersNodeViewModel : d9c8b7a6-f5e4-4d3c-b2a1-09876543210f\\nInput : Number b7a6f5e4-d3c2-4b1a-a09f-edcba9876543\",\n          \"DataType\": 2,\n          \"connectedOutputIdModel\": null\n        }\n      ],\n      \"Outputs\": [\n        {\n          \"Id\": \"AddNumbersNodeViewModel : d9c8b7a6-f5e4-4d3c-b2a1-09876543210f\\nOutput : Number a6f5e4d3-c2b1-4a09-9f8e-dcba98765432\",\n          \"DataType\": 2,\n          \"ConnectedInputsIds\": []\n        }\n      ],\n      \"VisualPosition\": {\n        \"x\": -120.0,\n        \"y\": 380.0,\n        \"normalized\": {\n          \"x\": -0.3011391,\n          \"y\": 0.9535372,\n          \"magnitude\": 1.0,\n          \"sqrMagnitude\": 1.0\n        },\n        \"magnitude\": 398.497162,\n        \"sqrMagnitude\": 158800.0\n      },\n      \"VisualCollapsed\": false,\n      \"MechanicConnectionId\": null,\n      \"GateDataType\": 2,\n      \"SaveData\": null\n    }\n  ]\n}",
+                        "intValue": 0,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_editor_position",
+                        "boolValue": false,
+                        "stringValue": null,
+                        "intValue": 0,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": -138.912781,
+                            "y": -276.419647
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_editor_zoom",
+                        "boolValue": false,
+                        "stringValue": null,
+                        "intValue": 0,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.496272445,
+                            "y": 0.496272445,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    }
+                ]
+            },
+            "saveObjectChildren": []
+        }
+    ],
+    "averagePosition": {
+        "x": 3.43957,
+        "y": 0.127520934,
+        "z": -0.0190000013
+    }
+}

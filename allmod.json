@@ -1,0 +1,1186 @@
+{
+  "ConstantNodeViewModel": {
+    "display_name": "Constant",
+    "inputs": [],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "TimeNodeViewModel": {
+    "display_name": "Time",
+    "inputs": [],
+    "outputs": [
+      "Number",
+      "Number",
+      "Number",
+      "Number"
+    ]
+  },
+  "IdentityNodeViewModel": {
+    "display_name": "Identity",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "AbsNodeViewModel": {
+    "display_name": "Abs",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "AddNumbersNodeViewModel": {
+    "display_name": "Add",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "AverageNumberNodeViewModel": {
+    "display_name": "Average",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "CeilNodeViewModel": {
+    "display_name": "Ceil",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "ClampValueNodeViewModel": {
+    "display_name": "Clamp",
+    "inputs": [
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "Clamp01NodeViewModel": {
+    "display_name": "Clamp01",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "DivideNodeViewModel": {
+    "display_name": "Divide",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "ExpNodeViewModel": {
+    "display_name": "Exp",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "ENodeViewModel": {
+    "display_name": "E",
+    "inputs": [],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "ExpPowNumberNodeViewModel": {
+    "display_name": "ExpPow",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "NegateNodeViewModel": {
+    "display_name": "Negate",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "PercentNumberNodeViewModel": {
+    "display_name": "Percent",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "PiNodeViewModel": {
+    "display_name": "Pi",
+    "inputs": [],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "RandomNodeViewModel": {
+    "display_name": "Random",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "RoundNodeViewModel": {
+    "display_name": "Round",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "SignNodeViewModel": {
+    "display_name": "Sign",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "SqrNodeViewModel": {
+    "display_name": "Sqr",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "SqrtNodeViewModel": {
+    "display_name": "Sqrt",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "SubtractNumbersNodeViewModel": {
+    "display_name": "Subtract",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "FloorNodeViewModel": {
+    "display_name": "Floor",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "InverseNodeViewModel": {
+    "display_name": "Inverse",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "LerpNodeViewModel": {
+    "display_name": "Lerp",
+    "inputs": [
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "LogNumberNodeViewModel": {
+    "display_name": "Log",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "RemainderNumberNodeViewModel": {
+    "display_name": "Mod",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "MultiplyNumbersNodeViewModel": {
+    "display_name": "Multiply",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "PowNumberNodeViewModel": {
+    "display_name": "Pow",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "DeltaAngleNodeViewModel": {
+    "display_name": "DeltaAngle",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "AcosNodeViewModel": {
+    "display_name": "Acos",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "AsinNodeViewModel": {
+    "display_name": "Asin",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "AtanNodeViewModel": {
+    "display_name": "Atan",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "ArcCTanNodeViewModel": {
+    "display_name": "Actan",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "CosNodeViewModel": {
+    "display_name": "Cos",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "SinNodeViewModel": {
+    "display_name": "Sin",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "TanNodeViewModel": {
+    "display_name": "Tan",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "CTanNodeViewModel": {
+    "display_name": "Ctan",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "DegToRadSameNodeViewModel": {
+    "display_name": "DegToRad",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "RadToDegSameNodeViewModel": {
+    "display_name": "RadToDeg",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "CosineFormulaSideNodeViewModel": {
+    "display_name": "CosineFormulaSide",
+    "inputs": [
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "CosineFormulaAngleNodeViewModel": {
+    "display_name": "CosineFormulaAngle",
+    "inputs": [
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "PythagoreanCathetusNodeViewModel": {
+    "display_name": "PythagoreanCathetus",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "PythagoreanSideNodeViewModel": {
+    "display_name": "PythagoreanSide",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "AndNodeViewModel": {
+    "display_name": "And",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "BranchNodeViewModel": {
+    "display_name": "Branch",
+    "inputs": [
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "OrNodeViewModel": {
+    "display_name": "Or",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "NotAndNodeViewModel": {
+    "display_name": "Nand",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "NotOrNodeViewModel": {
+    "display_name": "Nor",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "NotSameNodeViewModel": {
+    "display_name": "Not",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "XorNodeViewModel": {
+    "display_name": "Xor",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "NotXorNodeViewModel": {
+    "display_name": "Nxor",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "EqualNodeViewModel": {
+    "display_name": "Equal",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "NotEqualNodeViewModel": {
+    "display_name": "NotEqual",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "GreaterOrEqualNodeViewModel": {
+    "display_name": "GreaterOrEqual",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "GreaterNodeViewModel": {
+    "display_name": "Greater",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "LessOrEqualNodeViewModel": {
+    "display_name": "LessOrEqual",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "LessNodeViewModel": {
+    "display_name": "Less",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "InRangeExclusiveNodeViewModel": {
+    "display_name": "InRangeExclusive",
+    "inputs": [
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "InRangeInclusiveNodeViewModel": {
+    "display_name": "InRangeInclusive",
+    "inputs": [
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "BitAndNodeViewModel": {
+    "display_name": "BitAnd",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "BitNotNodeViewModel": {
+    "display_name": "BitNot",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "BitOrNodeViewModel": {
+    "display_name": "BitOr",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "BitXorNodeViewModel": {
+    "display_name": "BitXor",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "BitShiftLeftNodeViewModel": {
+    "display_name": "BitShiftLeft",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "BitShiftRightNodeViewModel": {
+    "display_name": "BitShiftRight",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "CombineVectorNodeViewModel": {
+    "display_name": "Combine",
+    "inputs": [
+      "Number",
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "VectorCrossProductNodeViewModel": {
+    "display_name": "VectorCross",
+    "inputs": [
+      "Vector",
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "SplitVectorNodeViewModel": {
+    "display_name": "Split",
+    "inputs": [
+      "Vector"
+    ],
+    "outputs": [
+      "Number",
+      "Number",
+      "Number",
+      "Number"
+    ]
+  },
+  "VectorDotProductNodeViewModel": {
+    "display_name": "VectorDot",
+    "inputs": [
+      "Vector",
+      "Vector"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "NormalizeVectorNodeViewModel": {
+    "display_name": "Normalize",
+    "inputs": [
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "VectorPositiveNodeViewModel": {
+    "display_name": "VectorPositive",
+    "inputs": [
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "VectorRotateNodeViewModel": {
+    "display_name": "VectorRotate",
+    "inputs": [
+      "Vector",
+      "Number"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "VectorShiftLeftNodeViewModel": {
+    "display_name": "VectorShiftLeft",
+    "inputs": [
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "VectorShiftRightNodeViewModel": {
+    "display_name": "VectorShiftRight",
+    "inputs": [
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "VectorAngleBetweenNodeViewModel": {
+    "display_name": "VectorAngleBetween",
+    "inputs": [
+      "Vector",
+      "Vector"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "MagnitudeVectorNodeViewModel": {
+    "display_name": "Magnitude",
+    "inputs": [
+      "Vector"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "SqrMagnitudeVectorNodeViewModel": {
+    "display_name": "SqrMagnitude",
+    "inputs": [
+      "Vector"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "VectorRgbToHsvNodeViewModel": {
+    "display_name": "RgbToHsv",
+    "inputs": [
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "VectorHsvToRgbNodeViewModel": {
+    "display_name": "HsvToRgb",
+    "inputs": [
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "NormalEntityNodeViewModel": {
+    "display_name": "EntityNormal",
+    "inputs": [
+      "Entity"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "AngleEntityNodeViewModel": {
+    "display_name": "EntityAngle",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "AngularVelocityEntityNodeViewModel": {
+    "display_name": "AngularVelocity",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "VelocityEntityNodeViewModel": {
+    "display_name": "Velocity",
+    "inputs": [
+      "Entity",
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "AddForceEntityNodeViewModel": {
+    "display_name": "AddForce",
+    "inputs": [
+      "Entity",
+      "Vector"
+    ],
+    "outputs": []
+  },
+  "AddAngularForceEntityNodeViewModel": {
+    "display_name": "AddAngularForce",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": []
+  },
+  "AddOffsetForceEntityNodeViewModel": {
+    "display_name": "AddForceAtPosition",
+    "inputs": [
+      "Entity",
+      "Vector",
+      "Vector"
+    ],
+    "outputs": []
+  },
+  "ElevationEntityNodeViewModel": {
+    "display_name": "Elevation",
+    "inputs": [
+      "Entity",
+      "Vector"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "EntityIDNodeViewModel": {
+    "display_name": "EntityID",
+    "inputs": [
+      "Entity"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "IDToEntityNodeViewModel": {
+    "display_name": "IDToEntity",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Entity"
+    ]
+  },
+  "IDIsValidNodeViewModel": {
+    "display_name": "IDIsValid",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "WorldPositionToLocalEntityNodeViewModel": {
+    "display_name": "WorldPositionToLocal",
+    "inputs": [
+      "Entity",
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "WorldAngleToLocalEntityNodeViewModel": {
+    "display_name": "WorldAngleToLocal",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "LocalPositionToWorldEntityNodeViewModel": {
+    "display_name": "LocalPositionToWorld",
+    "inputs": [
+      "Entity",
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "LocalAngleToWorldEntityNodeViewModel": {
+    "display_name": "LocalAngleToWorld",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "LookAtEntityNodeViewModel": {
+    "display_name": "LookAt",
+    "inputs": [
+      "Entity",
+      "Entity",
+      "Number"
+    ],
+    "outputs": []
+  },
+  "MassEntityNodeViewModel": {
+    "display_name": "Mass",
+    "inputs": [
+      "Entity"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "MassCenterEntityNodeViewModel": {
+    "display_name": "MassCenter",
+    "inputs": [
+      "Entity"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "PositionEntityNodeViewModel": {
+    "display_name": "Position",
+    "inputs": [
+      "Entity",
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "VelocityAtPositionEntityNodeViewModel": {
+    "display_name": "VelocityAtPosition",
+    "inputs": [
+      "Entity",
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "TemperatureEntityNodeViewModel": {
+    "display_name": "Temperature",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "ColorEntityNodeViewModel": {
+    "display_name": "Color",
+    "inputs": [
+      "Entity",
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "CanBeActivatedEntityNodeViewModel": {
+    "display_name": "CanBeActivated",
+    "inputs": [
+      "Entity"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "ActivateEntityNodeViewModel": {
+    "display_name": "Activate",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": []
+  },
+  "GravityEntityNodeViewModel": {
+    "display_name": "Gravity",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "FreezeEntityNodeViewModel": {
+    "display_name": "Freeze",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "SizeEntityNodeViewModel": {
+    "display_name": "Size",
+    "inputs": [
+      "Entity",
+      "Vector"
+    ],
+    "outputs": [
+      "Vector"
+    ]
+  },
+  "IgniteEntityNodeViewModel": {
+    "display_name": "Ignite",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "ExtinguishEntityNodeViewModel": {
+    "display_name": "Extinguish",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": []
+  },
+  "FollowEntityNodeViewModel": {
+    "display_name": "Follow",
+    "inputs": [
+      "Entity",
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "CollisionEntityNodeViewModel": {
+    "display_name": "Collision",
+    "inputs": [
+      "Entity",
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "DeleteEntityNodeViewModel": {
+    "display_name": "Delete",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": []
+  },
+  "FindStringNodeViewModel": {
+    "display_name": "StringFind",
+    "inputs": [
+      "String",
+      "String"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "LengthStringNodeViewModel": {
+    "display_name": "StringLength",
+    "inputs": [
+      "String"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "LowercaseStringNodeViewModel": {
+    "display_name": "StringLowercase",
+    "inputs": [
+      "String"
+    ],
+    "outputs": [
+      "String"
+    ]
+  },
+  "UppercaseStringNodeViewModel": {
+    "display_name": "StringUppercase",
+    "inputs": [
+      "String"
+    ],
+    "outputs": [
+      "String"
+    ]
+  },
+  "ReverseStringNodeViewModel": {
+    "display_name": "StringReverse",
+    "inputs": [
+      "String"
+    ],
+    "outputs": [
+      "String"
+    ]
+  },
+  "ReplaceStringNodeViewModel": {
+    "display_name": "StringReplace",
+    "inputs": [
+      "String",
+      "String",
+      "String"
+    ],
+    "outputs": [
+      "String"
+    ]
+  },
+  "RepeatStringNodeViewModel": {
+    "display_name": "StringRepeat",
+    "inputs": [
+      "String",
+      "Number"
+    ],
+    "outputs": [
+      "String"
+    ]
+  },
+  "SubstringNodeViewModel": {
+    "display_name": "Substring",
+    "inputs": [
+      "String",
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "String"
+    ]
+  },
+  "TrimStringNodeViewModel": {
+    "display_name": "StringTrim",
+    "inputs": [
+      "String"
+    ],
+    "outputs": [
+      "String"
+    ]
+  },
+  "ToStringNodeViewModel": {
+    "display_name": "ToString",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "String"
+    ]
+  },
+  "SymbolToAsciiNumberNodeViewModel": {
+    "display_name": "ToAscii",
+    "inputs": [
+      "String",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "StickerNodeViewModel": {
+    "display_name": "Sticker",
+    "inputs": [],
+    "outputs": []
+  }
+}

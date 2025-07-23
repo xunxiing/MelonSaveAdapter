@@ -1,0 +1,81 @@
+{
+  "nodes": [
+    {
+      "id": "add1",
+      "type": "ADD",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": "DECIMAL"
+        },
+        {
+          "name": "B",
+          "type": "DECIMAL"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A+B",
+          "type": "DECIMAL"
+        }
+      ]
+    },
+    {
+      "id": "add2",
+      "type": "ADD",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": "DECIMAL"
+        },
+        {
+          "name": "B",
+          "type": "DECIMAL"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A+B",
+          "type": "DECIMAL"
+        }
+      ]
+    },
+    {
+      "id": "add3",
+      "type": "ADD",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": "DECIMAL"
+        },
+        {
+          "name": "B",
+          "type": "DECIMAL"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A+B",
+          "type": "DECIMAL"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from_node": "add1",
+      "from_port": "A+B",
+      "to_node": "add2",
+      "to_port": "A"
+    },
+    {
+      "from_node": "add2",
+      "from_port": "A+B",
+      "to_node": "add3",
+      "to_port": "A"
+    }
+  ]
+}
