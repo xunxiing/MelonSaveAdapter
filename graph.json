@@ -1,8 +1,41 @@
 {
   "nodes": [
     {
-      "id": "add1",
+      "id": "input_a",
+      "type": "INPUT",
+      "label": "输入参数A",
+      "attrs": {
+        "name": "#输入A",
+        "data_type": "DECIMAL"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "DECIMAL"
+        }
+      ]
+    },
+    {
+      "id": "input_b",
+      "type": "INPUT",
+      "label": "输入参数B",
+      "attrs": {
+        "name": "#输入B",
+        "data_type": "DECIMAL"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "DECIMAL"
+        }
+      ]
+    },
+    {
+      "id": "add_module",
       "type": "ADD",
+      "label": "加法器",
       "attrs": {},
       "inputs": [
         {
@@ -22,60 +55,40 @@
       ]
     },
     {
-      "id": "add2",
-      "type": "ADD",
-      "attrs": {},
+      "id": "output_sum",
+      "type": "OUTPUT",
+      "label": "输出结果",
+      "attrs": {
+        "name": "#输出和",
+        "data_type": "DECIMAL"
+      },
       "inputs": [
         {
-          "name": "A",
-          "type": "DECIMAL"
-        },
-        {
-          "name": "B",
+          "name": "INPUT",
           "type": "DECIMAL"
         }
       ],
-      "outputs": [
-        {
-          "name": "A+B",
-          "type": "DECIMAL"
-        }
-      ]
-    },
-    {
-      "id": "add3",
-      "type": "ADD",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "A",
-          "type": "DECIMAL"
-        },
-        {
-          "name": "B",
-          "type": "DECIMAL"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "A+B",
-          "type": "DECIMAL"
-        }
-      ]
+      "outputs": []
     }
   ],
   "edges": [
     {
-      "from_node": "add1",
-      "from_port": "A+B",
-      "to_node": "add2",
+      "from_node": "input_a",
+      "from_port": "OUTPUT",
+      "to_node": "add_module",
       "to_port": "A"
     },
     {
-      "from_node": "add2",
+      "from_node": "input_b",
+      "from_port": "OUTPUT",
+      "to_node": "add_module",
+      "to_port": "B"
+    },
+    {
+      "from_node": "add_module",
       "from_port": "A+B",
-      "to_node": "add3",
-      "to_port": "A"
+      "to_node": "output_sum",
+      "to_port": "INPUT"
     }
   ]
 }

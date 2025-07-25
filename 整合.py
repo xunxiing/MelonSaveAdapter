@@ -118,24 +118,47 @@ def run_subprocess(cmd: list[str]) -> str:
 
 
 def run_batch_add(modules: List[str], node_map: Dict[str, dict]) -> None:
+    """
+    批量调用《批量添加模块.py》，为每个节点写回 “ClassName : UUID”。
+
+    修复点：
+    1. **不再依赖返回顺序**，改为按 `class_name` / `game_name` 精准匹配；
+    2. 支持同类节点重复出现，防止错配；
+    3. 若存在缺失或类型不符，立即报错并给出未匹配节点列表。
+    """
+    # ---------- 1. 先把待添加模块写入 modules.json ----------
     MODULE_LIST_PATH.write_text(
         json.dumps(modules, ensure_ascii=False, indent=2),
         encoding="utf-8"
     )
-    stdout = run_subprocess([sys.executable, str(ADD_SCRIPT_PATH)])
-    print(stdout)   # 打印一份供观察
 
-    # 解析 “为新节点生成ID: ClassName : uuid”
+    # ---------- 2. 调用子进程批量添加 ----------
+    stdout = run_subprocess([sys.executable, str(ADD_SCRIPT_PATH)])
+    print(stdout)   # 打印子进程输出，方便调试
+
+    # ---------- 3. 正则解析 “为新节点生成ID: ClassName : uuid” ----------
     pattern = re.compile(
-        r"为新节点生成ID:\s+([A-Za-z0-9_]+)\s*:\s*([0-9a-fA-F-]{36})")
+        r"为新节点生成ID:\s+([A-Za-z0-9_]+)\s*:\s*([0-9a-fA-F-]{36})"
+    )
     extracted = pattern.findall(stdout)
     if len(extracted) != len(node_map):
         sys.exit("错误：批量添加生成的节点数量与 graph.json 不一致")
 
-    # 根据 order_index 写回 node_map
-    for node_id, meta in node_map.items():
-        class_name, uuid = extracted[meta["order_index"]]
-        meta["new_full_id"] = f"{class_name} : {uuid}"
+    # ---------- 4. 关键修复：按 class_name 精确匹配 ----------
+    unmatched: Dict[str, dict] = {nid: meta for nid, meta in node_map.items()}
+
+    for class_name, uuid in extracted:
+        # 在剩余未匹配的节点中寻找首个 game_name 相同的条目
+        for nid, meta in list(unmatched.items()):
+            if meta["game_name"] == class_name:
+                meta["new_full_id"] = f"{class_name} : {uuid}"
+                del unmatched[nid]          # 标记已分配
+                break
+
+    # ---------- 5. 若仍有未匹配节点，则抛出明确错误 ----------
+    if unmatched:
+        missed = [meta["friendly_name"] for meta in unmatched.values()]
+        sys.exit(f"错误：以下节点未匹配到新 ID：{missed}")
 
 
 def port_index(port_name: str, port_list: List[str]) -> int:

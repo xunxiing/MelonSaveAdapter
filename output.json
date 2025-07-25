@@ -1,14 +1,20 @@
 [
   {
-    "from_node_id": "AddNumbersNodeViewModel : 81f7140d-4794-44fc-9e7f-f5c6b4c39bea",
+    "from_node_id": "RootNodeViewModel : 5a455625-173c-49f1-b69b-0c90e6fd0ad1",
     "from_port_index": 0,
-    "to_node_id": "AddNumbersNodeViewModel : 1c19389b-20ab-4dc0-97e6-cb5a0d15ddcd",
+    "to_node_id": "AddNumbersNodeViewModel : 63d11934-7a23-400f-9e17-97697ce0f84a",
     "to_port_index": 0
   },
   {
-    "from_node_id": "AddNumbersNodeViewModel : 1c19389b-20ab-4dc0-97e6-cb5a0d15ddcd",
+    "from_node_id": "RootNodeViewModel : a3732155-9a29-499f-bd0e-f84ac88d26fe",
     "from_port_index": 0,
-    "to_node_id": "AddNumbersNodeViewModel : 4354ea88-a9d1-4116-8fe7-2e26b85c9dd4",
+    "to_node_id": "AddNumbersNodeViewModel : 63d11934-7a23-400f-9e17-97697ce0f84a",
+    "to_port_index": 1
+  },
+  {
+    "from_node_id": "AddNumbersNodeViewModel : 63d11934-7a23-400f-9e17-97697ce0f84a",
+    "from_port_index": 0,
+    "to_node_id": "ExitNodeViewModel : 182a9ee8-8083-480e-8b50-32c1f3717416",
     "to_port_index": 0
   }
 ]

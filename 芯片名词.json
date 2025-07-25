@@ -490,5 +490,21 @@
     "game_name": "StickerNodeViewModel",
     "inputs": [],
     "outputs": []
+  },
+  {
+    "friendly_name": "Input",
+    "game_name": "RootNodeViewModel",
+    "inputs": [],
+    "outputs": [
+        "input"
+    ]
+  },
+  {
+    "friendly_name": "Output",
+    "game_name": "ExitNodeViewModel",
+    "inputs": [
+        "output"
+    ],
+    "outputs": []
   }
 ]
