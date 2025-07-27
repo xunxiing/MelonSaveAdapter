@@ -1,0 +1,498 @@
+{
+    "257": {
+        "NodeName": "Constant",
+        "GateDataType": 2
+    },
+    "260": {
+        "NodeName": "Time",
+        "GateDataType": 0
+    },
+    "1": {
+        "NodeName": "Identity",
+        "GateDataType": 2
+    },
+    "2324": {
+        "NodeName": "Abs",
+        "GateDataType": 2
+    },
+    "2304": {
+        "NodeName": "Add",
+        "GateDataType": 2
+    },
+    "2309": {
+        "NodeName": "Average",
+        "GateDataType": 0
+    },
+    "2310": {
+        "NodeName": "Ceil",
+        "GateDataType": 2
+    },
+    "2311": {
+        "NodeName": "Clamp",
+        "GateDataType": 2
+    },
+    "2312": {
+        "NodeName": "Clamp01",
+        "GateDataType": 2
+    },
+    "2307": {
+        "NodeName": "Divide",
+        "GateDataType": 2
+    },
+    "2308": {
+        "NodeName": "Exp",
+        "GateDataType": 0
+    },
+    "259": {
+        "NodeName": "E",
+        "GateDataType": 0
+    },
+    "2314": {
+        "NodeName": "ExpPow",
+        "GateDataType": 0
+    },
+    "2315": {
+        "NodeName": "Negate",
+        "GateDataType": 2
+    },
+    "2316": {
+        "NodeName": "Percent",
+        "GateDataType": 2
+    },
+    "258": {
+        "NodeName": "Pi",
+        "GateDataType": 0
+    },
+    "261": {
+        "NodeName": "Random",
+        "GateDataType": 2
+    },
+    "2326": {
+        "NodeName": "Round",
+        "GateDataType": 2
+    },
+    "2318": {
+        "NodeName": "Sign",
+        "GateDataType": 2
+    },
+    "2321": {
+        "NodeName": "Sqr",
+        "GateDataType": 2
+    },
+    "2322": {
+        "NodeName": "Sqrt",
+        "GateDataType": 2
+    },
+    "2305": {
+        "NodeName": "Subtract",
+        "GateDataType": 2
+    },
+    "2319": {
+        "NodeName": "Floor",
+        "GateDataType": 2
+    },
+    "2320": {
+        "NodeName": "Inverse",
+        "GateDataType": 2
+    },
+    "2328": {
+        "NodeName": "Lerp",
+        "GateDataType": 2
+    },
+    "2323": {
+        "NodeName": "Log",
+        "GateDataType": 0
+    },
+    "2327": {
+        "NodeName": "Mod",
+        "GateDataType": 2
+    },
+    "2306": {
+        "NodeName": "Multiply",
+        "GateDataType": 2
+    },
+    "2325": {
+        "NodeName": "Pow",
+        "GateDataType": 2
+    },
+    "2059": {
+        "NodeName": "DeltaAngle",
+        "GateDataType": 0
+    },
+    "2052": {
+        "NodeName": "Acos",
+        "GateDataType": 0
+    },
+    "2051": {
+        "NodeName": "Asin",
+        "GateDataType": 0
+    },
+    "2054": {
+        "NodeName": "Atan",
+        "GateDataType": 0
+    },
+    "2056": {
+        "NodeName": "Actan",
+        "GateDataType": 0
+    },
+    "2050": {
+        "NodeName": "Cos",
+        "GateDataType": 0
+    },
+    "2049": {
+        "NodeName": "Sin",
+        "GateDataType": 0
+    },
+    "2053": {
+        "NodeName": "Tan",
+        "GateDataType": 0
+    },
+    "2055": {
+        "NodeName": "Ctan",
+        "GateDataType": 0
+    },
+    "2057": {
+        "NodeName": "DegToRad",
+        "GateDataType": 0
+    },
+    "2058": {
+        "NodeName": "RadToDeg",
+        "GateDataType": 0
+    },
+    "2060": {
+        "NodeName": "CosineFormulaSide",
+        "GateDataType": 0
+    },
+    "2061": {
+        "NodeName": "CosineFormulaAngle",
+        "GateDataType": 0
+    },
+    "2062": {
+        "NodeName": "PythagoreanCathetus",
+        "GateDataType": 0
+    },
+    "2063": {
+        "NodeName": "PythagoreanSide",
+        "GateDataType": 0
+    },
+    "2560": {
+        "NodeName": "And",
+        "GateDataType": 0
+    },
+    "2567": {
+        "NodeName": "Branch",
+        "GateDataType": 2
+    },
+    "2561": {
+        "NodeName": "Or",
+        "GateDataType": 0
+    },
+    "2562": {
+        "NodeName": "Nand",
+        "GateDataType": 0
+    },
+    "2563": {
+        "NodeName": "Nor",
+        "GateDataType": 0
+    },
+    "2564": {
+        "NodeName": "Not",
+        "GateDataType": 0
+    },
+    "2565": {
+        "NodeName": "Xor",
+        "GateDataType": 0
+    },
+    "2566": {
+        "NodeName": "Nxor",
+        "GateDataType": 0
+    },
+    "2816": {
+        "NodeName": "Equal",
+        "GateDataType": 2
+    },
+    "2817": {
+        "NodeName": "NotEqual",
+        "GateDataType": 2
+    },
+    "2818": {
+        "NodeName": "GreaterOrEqual",
+        "GateDataType": 0
+    },
+    "2820": {
+        "NodeName": "Greater",
+        "GateDataType": 0
+    },
+    "2819": {
+        "NodeName": "LessOrEqual",
+        "GateDataType": 0
+    },
+    "2821": {
+        "NodeName": "Less",
+        "GateDataType": 0
+    },
+    "2823": {
+        "NodeName": "InRangeExclusive",
+        "GateDataType": 0
+    },
+    "2822": {
+        "NodeName": "InRangeInclusive",
+        "GateDataType": 0
+    },
+    "3073": {
+        "NodeName": "BitAnd",
+        "GateDataType": 0
+    },
+    "3074": {
+        "NodeName": "BitNot",
+        "GateDataType": 0
+    },
+    "3075": {
+        "NodeName": "BitOr",
+        "GateDataType": 0
+    },
+    "3076": {
+        "NodeName": "BitXor",
+        "GateDataType": 0
+    },
+    "3077": {
+        "NodeName": "BitShiftLeft",
+        "GateDataType": 0
+    },
+    "3078": {
+        "NodeName": "BitShiftRight",
+        "GateDataType": 0
+    },
+    "1281": {
+        "NodeName": "Combine",
+        "GateDataType": 0
+    },
+    "1286": {
+        "NodeName": "VectorCross",
+        "GateDataType": 0
+    },
+    "1280": {
+        "NodeName": "Split",
+        "GateDataType": 0
+    },
+    "1288": {
+        "NodeName": "VectorDot",
+        "GateDataType": 0
+    },
+    "1282": {
+        "NodeName": "Normalize",
+        "GateDataType": 8
+    },
+    "1290": {
+        "NodeName": "VectorPositive",
+        "GateDataType": 0
+    },
+    "1292": {
+        "NodeName": "VectorRotate",
+        "GateDataType": 0
+    },
+    "1294": {
+        "NodeName": "VectorShiftLeft",
+        "GateDataType": 0
+    },
+    "1295": {
+        "NodeName": "VectorShiftRight",
+        "GateDataType": 0
+    },
+    "1296": {
+        "NodeName": "VectorAngleBetween",
+        "GateDataType": 0
+    },
+    "1283": {
+        "NodeName": "Magnitude",
+        "GateDataType": 0
+    },
+    "1284": {
+        "NodeName": "SqrMagnitude",
+        "GateDataType": 0
+    },
+    "1297": {
+        "NodeName": "RgbToHsv",
+        "GateDataType": 0
+    },
+    "1298": {
+        "NodeName": "HsvToRgb",
+        "GateDataType": 0
+    },
+    "1537": {
+        "NodeName": "EntityNormal",
+        "GateDataType": 0
+    },
+    "1540": {
+        "NodeName": "EntityAngle",
+        "GateDataType": 0
+    },
+    "1539": {
+        "NodeName": "AngularVelocity",
+        "GateDataType": 0
+    },
+    "1538": {
+        "NodeName": "Velocity",
+        "GateDataType": 0
+    },
+    "1542": {
+        "NodeName": "AddForce",
+        "GateDataType": 0
+    },
+    "1545": {
+        "NodeName": "AddAngularForce",
+        "GateDataType": 0
+    },
+    "1546": {
+        "NodeName": "AddForceAtPosition",
+        "GateDataType": 0
+    },
+    "1578": {
+        "NodeName": "Elevation",
+        "GateDataType": 0
+    },
+    "1549": {
+        "NodeName": "EntityID",
+        "GateDataType": 0
+    },
+    "1550": {
+        "NodeName": "IDToEntity",
+        "GateDataType": 0
+    },
+    "1552": {
+        "NodeName": "IDIsValid",
+        "GateDataType": 0
+    },
+    "1553": {
+        "NodeName": "WorldPositionToLocal",
+        "GateDataType": 0
+    },
+    "1554": {
+        "NodeName": "WorldAngleToLocal",
+        "GateDataType": 0
+    },
+    "1555": {
+        "NodeName": "LocalPositionToWorld",
+        "GateDataType": 0
+    },
+    "1556": {
+        "NodeName": "LocalAngleToWorld",
+        "GateDataType": 0
+    },
+    "1544": {
+        "NodeName": "LookAt",
+        "GateDataType": 0
+    },
+    "1557": {
+        "NodeName": "Mass",
+        "GateDataType": 0
+    },
+    "1558": {
+        "NodeName": "MassCenter",
+        "GateDataType": 0
+    },
+    "1559": {
+        "NodeName": "Position",
+        "GateDataType": 0
+    },
+    "1560": {
+        "NodeName": "VelocityAtPosition",
+        "GateDataType": 0
+    },
+    "1541": {
+        "NodeName": "Temperature",
+        "GateDataType": 0
+    },
+    "1543": {
+        "NodeName": "Color",
+        "GateDataType": 0
+    },
+    "1561": {
+        "NodeName": "CanBeActivated",
+        "GateDataType": 0
+    },
+    "1562": {
+        "NodeName": "Activate",
+        "GateDataType": 0
+    },
+    "1563": {
+        "NodeName": "Gravity",
+        "GateDataType": 0
+    },
+    "1566": {
+        "NodeName": "Freeze",
+        "GateDataType": 0
+    },
+    "1567": {
+        "NodeName": "Size",
+        "GateDataType": 0
+    },
+    "1569": {
+        "NodeName": "Ignite",
+        "GateDataType": 0
+    },
+    "1570": {
+        "NodeName": "Extinguish",
+        "GateDataType": 0
+    },
+    "1571": {
+        "NodeName": "Follow",
+        "GateDataType": 1
+    },
+    "1574": {
+        "NodeName": "Collision",
+        "GateDataType": 0
+    },
+    "1577": {
+        "NodeName": "Delete",
+        "GateDataType": 0
+    },
+    "3586": {
+        "NodeName": "StringFind",
+        "GateDataType": 0
+    },
+    "3587": {
+        "NodeName": "StringLength",
+        "GateDataType": 0
+    },
+    "3588": {
+        "NodeName": "StringLowercase",
+        "GateDataType": 0
+    },
+    "3589": {
+        "NodeName": "StringUppercase",
+        "GateDataType": 0
+    },
+    "3590": {
+        "NodeName": "StringReverse",
+        "GateDataType": 0
+    },
+    "3592": {
+        "NodeName": "StringReplace",
+        "GateDataType": 0
+    },
+    "3591": {
+        "NodeName": "StringRepeat",
+        "GateDataType": 0
+    },
+    "3593": {
+        "NodeName": "Substring",
+        "GateDataType": 0
+    },
+    "3594": {
+        "NodeName": "StringTrim",
+        "GateDataType": 0
+    },
+    "3595": {
+        "NodeName": "ToString",
+        "GateDataType": 2
+    },
+    "3596": {
+        "NodeName": "ToAscii",
+        "GateDataType": 2
+    },
+    "5": {
+        "NodeName": "Sticker",
+        "GateDataType": 0
+    }
+}

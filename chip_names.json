@@ -1,0 +1,521 @@
+[
+  {
+    "friendly_name": "Constant",
+    "game_name": "ConstantNodeViewModel",
+    "inputs": [],
+    "outputs": ["Output"]
+  },
+  {
+    "friendly_name": "Time",
+    "game_name": "TimeNodeViewModel",
+    "inputs": [],
+    "outputs": ["Time", "Delta time", "Sin Time", "Cos Time"]
+  },
+  {
+    "friendly_name": "Identity",
+    "game_name": "IdentityNodeViewModel",
+    "inputs": ["A"],
+    "outputs": ["A"]
+  },
+  {
+    "friendly_name": "Comment",
+    "game_name": "CommentNodeViewModel",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "friendly_name": "Delta Previous",
+    "game_name": "DeltaPreviousNodeViewModel",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "friendly_name": "Positive",
+    "game_name": "AbsNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Add",
+    "game_name": "AddNumbersNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["A + B"]
+  },
+  {
+    "friendly_name": "Average",
+    "game_name": "AverageNumberNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Ceiling",
+    "game_name": "CeilNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Clamp",
+    "game_name": "ClampValueNodeViewModel",
+    "inputs": ["Input", "Min", "Max"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Clamp01",
+    "game_name": "Clamp01NodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Divide",
+    "game_name": "DivideNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["A / B"]
+  },
+  {
+    "friendly_name": "Exponent",
+    "game_name": "ExpNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Exponent Power",
+    "game_name": "ExpPowNumberNodeViewModel",
+    "inputs": ["Value", "Exponent Argument"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Negate",
+    "game_name": "NegateNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Percent",
+    "game_name": "PercentNumberNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Pi",
+    "game_name": "PiNodeViewModel",
+    "inputs": [],
+    "outputs": ["Output"]
+  },
+  {
+    "friendly_name": "Random",
+    "game_name": "RandomNodeViewModel",
+    "inputs": ["Min", "Max"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Round",
+    "game_name": "RoundNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Sign",
+    "game_name": "SignNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Sqr",
+    "game_name": "SqrNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Sqrt",
+    "game_name": "SqrtNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Subtract",
+    "game_name": "SubtractNumbersNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["A - B"]
+  },
+  {
+    "friendly_name": "Floor",
+    "game_name": "FloorNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Inverse",
+    "game_name": "InverseNodeViewModel",
+    "inputs": ["A"],
+    "outputs": ["1 / A"]
+  },
+  {
+    "friendly_name": "Interpolate",
+    "game_name": "LerpNodeViewModel",
+    "inputs": ["A", "B", "T"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Logarithm",
+    "game_name": "LogNumberNodeViewModel",
+    "inputs": ["Value", "Base"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Remainder",
+    "game_name": "RemainderNumberNodeViewModel",
+    "inputs": ["Dividend", "Divider"],
+    "outputs": ["Remainder"]
+  },
+  {
+    "friendly_name": "Multiply",
+    "game_name": "MultiplyNumbersNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["A × B"]
+  },
+  {
+    "friendly_name": "Power",
+    "game_name": "PowNumberNodeViewModel",
+    "inputs": ["Value", "Power"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Delta Angle",
+    "game_name": "DeltaAngleNodeViewModel",
+    "inputs": ["Angle (Deg) 1", "Angle (Deg) 2"],
+    "outputs": ["Deg"]
+  },
+  {
+    "friendly_name": "Arccosinus",
+    "game_name": "AcosNodeViewModel",
+    "inputs": ["Cos"],
+    "outputs": ["Angle (Rad)"]
+  },
+  {
+    "friendly_name": "Arcsinus",
+    "game_name": "AsinNodeViewModel",
+    "inputs": ["Sin"],
+    "outputs": ["Angle (Rad)"]
+  },
+  {
+    "friendly_name": "Arctangent",
+    "game_name": "AtanNodeViewModel",
+    "inputs": ["Tan"],
+    "outputs": ["Angle (Rad)"]
+  },
+  {
+    "friendly_name": "Arccatangent",
+    "game_name": "ArcCTanNodeViewModel",
+    "inputs": ["Ctan"],
+    "outputs": ["Angle (Rad)"]
+  },
+  {
+    "friendly_name": "Cos",
+    "game_name": "CosNodeViewModel",
+    "inputs": ["Angle (Rad)"],
+    "outputs": ["Cos"]
+  },
+  {
+    "friendly_name": "Sin",
+    "game_name": "SinNodeViewModel",
+    "inputs": ["Angle (Rad)"],
+    "outputs": ["Sin"]
+  },
+  {
+    "friendly_name": "Tangent",
+    "game_name": "TanNodeViewModel",
+    "inputs": ["Angle (Rad)"],
+    "outputs": ["Tan"]
+  },
+  {
+    "friendly_name": "Cotangent",
+    "game_name": "CTanNodeViewModel",
+    "inputs": ["Angle (Rad)"],
+    "outputs": ["Ctan"]
+  },
+  {
+    "friendly_name": "Deg to Rad",
+    "game_name": "DegToRadSameNodeViewModel",
+    "inputs": ["Deg"],
+    "outputs": ["Rad"]
+  },
+  {
+    "friendly_name": "Rad to Deg",
+    "game_name": "RadToDegSameNodeViewModel",
+    "inputs": ["Rad"],
+    "outputs": ["Deg"]
+  },
+  {
+    "friendly_name": "Cosine Formula (Side)",
+    "game_name": "CosineFormulaSideNodeViewModel",
+    "inputs": ["B", "C", "Cos"],
+    "outputs": ["A"]
+  },
+  {
+    "friendly_name": "Cosine Formula (Angle)",
+    "game_name": "CosineFormulaAngleNodeViewModel",
+    "inputs": ["A", "B", "C"],
+    "outputs": ["Cos"]
+  },
+  {
+    "friendly_name": "Pythagorean Theorem (Hypotenuse)",
+    "game_name": "PythagoreanSideNodeViewModel",
+    "inputs": ["Catheus A", "Catheus B"],
+    "outputs": ["Hypotenuse"]
+  },
+  {
+    "friendly_name": "Pythagorean Theorem (Catheus)",
+    "game_name": "PythagoreanCathetusNodeViewModel",
+    "inputs": ["Catheus A", "Hypotenuse"],
+    "outputs": ["Catheus B"]
+  },
+  {
+    "friendly_name": "AND",
+    "game_name": "AndNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Branch",
+    "game_name": "BranchNodeViewModel",
+    "inputs": ["If", "A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "OR",
+    "game_name": "OrNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "NOT AND",
+    "game_name": "NotAndNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "NOT OR",
+    "game_name": "NotOrNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "NOT",
+    "game_name": "NotSameNodeViewModel",
+    "inputs": ["A"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "XOR",
+    "game_name": "XorNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "NXOR",
+    "game_name": "NotXorNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Equal",
+    "game_name": "EqualNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Not Equal",
+    "game_name": "NotEqualNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Greater or Equal",
+    "game_name": "GreaterOrEqualNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Greater",
+    "game_name": "GreaterNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Less or Equal",
+    "game_name": "LessOrEqualNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Less",
+    "game_name": "LessNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Is in range exclusive",
+    "game_name": "InRangeExclusiveNodeViewModel",
+    "inputs": ["Value", "Min", "Max"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Is in range inclusive",
+    "game_name": "InRangeInclusiveNodeViewModel",
+    "inputs": ["Value", "Min", "Max"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "AND (Bit. Op.)",
+    "game_name": "BitAndNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "NOT (Bit. Op.)",
+    "game_name": "BitNotNodeViewModel",
+    "inputs": ["A"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "OR (Bit. Op.)",
+    "game_name": "BitOrNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "XOR (Bit. Op.)",
+    "game_name": "BitXorNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Shift Left (Bit. Op.)",
+    "game_name": "BitShiftLeftNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Shift Right (Bit. Op.)",
+    "game_name": "BitShiftRightNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Combine",
+    "game_name": "CombineVectorNodeViewModel",
+    "inputs": ["X", "Y", "Z", "W"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Cross Product",
+    "game_name": "VectorCrossProductNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Split",
+    "game_name": "SplitVectorNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["X", "Y", "Z", "W"]
+  },
+  {
+    "friendly_name": "Dot Product",
+    "game_name": "VectorDotProductNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Normalize",
+    "game_name": "NormalizeVectorNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Positive (Vectors)",
+    "game_name": "VectorPositiveNodeViewModel",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "friendly_name": "Rotate",
+    "game_name": "VectorRotateNodeViewModel",
+    "inputs": ["Value", "Angle"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Shift Left (Vectors)",
+    "game_name": "VectorShiftLeftNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Shift Right (Vectors)",
+    "game_name": "VectorShiftRightNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Angle Between",
+    "game_name": "VectorAngleBetweenNodeViewModel",
+    "inputs": ["A", "B"],
+    "outputs": ["Angle"]
+  },
+  {
+    "friendly_name": "Magnitude",
+    "game_name": "MagnitudeVectorNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "Sqr Magnitude",
+    "game_name": "SqrMagnitudeVectorNodeViewModel",
+    "inputs": ["Input"],
+    "outputs": ["Result"]
+  },
+  {
+    "friendly_name": "RGB to HSV",
+    "game_name": "VectorRgbToHsvNodeViewModel",
+    "inputs": ["RGB"],
+    "outputs": ["HSV"]
+  },
+  {
+    "friendly_name": "HSV to RGB",
+    "game_name": "VectorHsvToRgbNodeViewModel",
+    "inputs": ["HSV"],
+    "outputs": ["RGB"]
+  },
+  {
+    "friendly_name": "Sticker",
+    "game_name": "StickerNodeViewModel",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "friendly_name": "Input",
+    "game_name": "RootNodeViewModel",
+    "inputs": [],
+    "outputs": [
+        "input"
+    ]
+  },
+  {
+    "friendly_name": "Output",
+    "game_name": "ExitNodeViewModel",
+    "inputs": [
+        "output"
+    ],
+    "outputs": []
+  },
+  {
+    "friendly_name": "To String",
+    "game_name": "ToStringNodeViewModel",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "String"
+    ]
+  }
+
+]

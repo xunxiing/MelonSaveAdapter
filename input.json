@@ -1,0 +1,22 @@
+[
+  {
+    "node_id": "RootNodeViewModel : bd80600f-4023-42f2-a522-e6d518e323b9",
+    "new_data_type": 8
+  },
+  {
+    "node_id": "RootNodeViewModel : 20e13c68-dbb9-48e6-a8e8-ae9f43804a23",
+    "new_data_type": 8
+  },
+  {
+    "node_id": "ConstantNodeViewModel : 2121c819-d655-4f46-ae3c-53bd685f0a22",
+    "new_data_type": 4
+  },
+  {
+    "node_id": "AddNumbersNodeViewModel : 3dfc2d78-de70-4fa5-9345-235341350fcc",
+    "new_data_type": 4
+  },
+  {
+    "node_id": "ExitNodeViewModel : f640fb19-4c08-422c-89c1-b9442a401c20",
+    "new_data_type": 4
+  }
+]
