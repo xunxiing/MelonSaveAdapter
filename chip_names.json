@@ -12,12 +12,6 @@
     "outputs": ["Time", "Delta time", "Sin Time", "Cos Time"]
   },
   {
-    "friendly_name": "Identity",
-    "game_name": "IdentityNodeViewModel",
-    "inputs": ["A"],
-    "outputs": ["A"]
-  },
-  {
     "friendly_name": "Comment",
     "game_name": "CommentNodeViewModel",
     "inputs": [],

@@ -1,91 +1,23 @@
 {
   "nodes": [
     {
-      "id": "maga_text_constant",
-      "type": "Constant (String)",
-      "label": "口号文本",
-      "attrs": {
-        "value": "Make America Great Again"
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING"
-        }
-      ]
-    },
-    {
-      "id": "text_output_port",
-      "type": "OUTPUT",
-      "label": "文本输出",
-      "attrs": {
-        "name": "#displayText",
-        "data_type": 4
-      },
-      "inputs": [
-        {
-          "name": "INPUT",
-          "type": "STRING"
-        }
-      ],
-      "outputs": []
-    },
-    {
-      "id": "red_color_constant",
-      "type": "Constant (Vector)",
-      "label": "颜色常量 (红色)",
-      "attrs": {
-        "value": "X:1 Y:0 Z:0 W:1"
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "VECTOR"
-        }
-      ]
-    },
-    {
-      "id": "color_output_port",
-      "type": "OUTPUT",
-      "label": "颜色输出",
-      "attrs": {
-        "name": "#textColor",
-        "data_type": 8
-      },
+      "id": "magnitude_1",
+      "type": "MAGNITUDE",
+      "label": "计算向量长度",
+      "attrs": {},
       "inputs": [
         {
           "name": "INPUT",
           "type": "VECTOR"
         }
       ],
-      "outputs": []
-    },
-    {
-      "id": "sticker_info",
-      "type": "Sticker",
-      "label": "使用说明",
-      "attrs": {
-        "Header": "如何使用",
-        "Text": "1. 连接 #displayText 到 text screen 的 text 输入。\n2. 连接 #textColor 到 text screen 的 tcolor 输入。"
-      },
-      "inputs": [],
-      "outputs": []
+      "outputs": [
+        {
+          "name": "RESULT",
+          "type": "DECIMAL"
+        }
+      ]
     }
   ],
-  "edges": [
-    {
-      "from_node": "maga_text_constant",
-      "from_port": "OUTPUT",
-      "to_node": "text_output_port",
-      "to_port": "INPUT"
-    },
-    {
-      "from_node": "red_color_constant",
-      "from_port": "OUTPUT",
-      "to_node": "color_output_port",
-      "to_port": "INPUT"
-    }
-  ]
+  "edges": []
 }

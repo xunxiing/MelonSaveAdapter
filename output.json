@@ -1,14 +1,1 @@
-[
-  {
-    "from_node_id": "ConstantNodeViewModel : 88605d3f-d0e0-416d-bb9e-eaa38e0f0547",
-    "from_port_index": 0,
-    "to_node_id": "ExitNodeViewModel : 86de3693-538a-4887-9ca3-b637a06bfa7c",
-    "to_port_index": 0
-  },
-  {
-    "from_node_id": "ConstantNodeViewModel : 56081108-0a66-4872-bd51-efd0f1c3b84f",
-    "from_port_index": 0,
-    "to_node_id": "ExitNodeViewModel : 975f1935-e48f-4abd-a5cf-b05e437c62fa",
-    "to_port_index": 0
-  }
-]
+[]

@@ -1,4 +1,4 @@
-# --- START OF FILE main.py ---
+# --- START OF FILE main.py (REVISED) ---
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -34,8 +34,9 @@ from batch_connect import apply_connections
 
 # =============================== 全局配置 (简化和修改) ===============================
 GRAPH_PATH        = Path("graph.json")
-CHIP_DICT_PATH    = Path("chip_names.json") # 暂时保留，用于解析graph.json
-MODULE_DEF_PATH   = Path("moduledef.json")   # 【新增】单一模块定义文件
+# 【已移除】不再需要 chip_names.json
+# CHIP_DICT_PATH    = Path("chip_names.json") 
+MODULE_DEF_PATH   = Path("moduledef.json")   # 【核心】现在是模块信息的唯一来源
 DATA_PATH         = Path("data.json")
 CONNECT_OUT_PATH  = Path("output.json")
 
@@ -63,35 +64,79 @@ def fuzzy_match(name: str, candidates: List[str], cutoff: float) -> str | None:
     return (get_close_matches(name, candidates, n=1, cutoff=cutoff) or [None])[0]
 
 # =========================== 主流程函数 (修改) ===========================
-def build_chip_index(chips: list) -> Dict[str, dict]:
-    return {normalize(c["friendly_name"]): c for c in chips}
 
+# 【新增函数】从 moduledef.json 构建索引，替代旧的 build_chip_index
+def build_chip_index_from_moduledef(module_defs: Dict[str, Any]) -> Dict[str, dict]:
+    """
+    从 moduledef.json 的内容构建一个全面的芯片索引。
+    这个索引同时用于解析 graph.json 和后续的连线。
+    """
+    chip_index = {}
+
+    # 1. 遍历 moduledef.json 中的所有模块
+    for mod_id, mod_data in module_defs.items():
+        source_info = mod_data.get("source_info", {})
+        friendly_name = source_info.get("chip_names_friendly_name")
+        game_name = source_info.get("allmod_viewmodel")
+
+        if not friendly_name or not game_name:
+            continue
+        
+        normalized_key = normalize(friendly_name)
+        chip_index[normalized_key] = {
+            "friendly_name": friendly_name,
+            "game_name": game_name,
+            "inputs": [p.get("name", "Input") for p in mod_data.get("inputs", [])],
+            "outputs": [p.get("name", "Output") for p in mod_data.get("outputs", [])],
+        }
+
+    # 2. 手动添加 Input, Output, Constant 节点的定义
+    chip_index[normalize("Input")] = {
+        "friendly_name": "Input", "game_name": "RootNodeViewModel",
+        "inputs": [], "outputs": ["Number"]
+    }
+    chip_index[normalize("Output")] = {
+        "friendly_name": "Output", "game_name": "ExitNodeViewModel",
+        "inputs": ["Number"], "outputs": []
+    }
+    chip_index[normalize("Constant")] = {
+        "friendly_name": "Constant", "game_name": "ConstantNodeViewModel",
+        "inputs": [], "outputs": ["Number"]
+    }
+    
+    return chip_index
+
+# 【重构函数】简化 parse_graph，使其完全依赖新的 chip_index
 def parse_graph(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any], Dict[str, dict]]:
     modules: List[Any] = []
     node_map: Dict[str, dict] = {}
+    
+    all_chip_keys = list(chip_index.keys())
+
     for node in graph["nodes"]:
         key = normalize(node["type"])
-        node_type_lower = node["type"].lower()
+        best_match_key = fuzzy_match(key, all_chip_keys, FUZZY_CUTOFF_NODE)
         
+        if best_match_key is None:
+            sys.exit(f"错误：无法识别模块类型 “{node['type']}”")
+        
+        chip_info = chip_index[best_match_key]
+        node_type_lower = chip_info["friendly_name"].lower()
+
+        # 准备要传递给 batch_add_modules 的指令
         if node_type_lower in ('input', 'output', 'constant'):
             modules.append({
                 "type": node_type_lower, 
-                "name": node.get("name", node_type_lower.title())
+                "name": node.get("name", chip_info["friendly_name"])
             })
-            chip_name = f"{node_type_lower.title()}NodeViewModel"
-            friendly_name = node_type_lower.title()
         else:
-            best = fuzzy_match(key, list(chip_index.keys()), FUZZY_CUTOFF_NODE)
-            if best is None:
-                sys.exit(f"错误：无法识别模块类型 “{node['type']}”")
-            chip = chip_index[best]
-            modules.append(chip["friendly_name"])
-            chip_name = chip["game_name"]
-            friendly_name = chip["friendly_name"]
+            # 对于普通模块，我们传递其友好名称
+            modules.append(chip_info["friendly_name"])
             
+        # 构建 node_map 用于后续步骤
         node_map[node["id"]] = {
-            "friendly_name": friendly_name,
-            "game_name": chip_name,
+            "friendly_name": chip_info["friendly_name"],
+            "game_name": chip_info["game_name"],
             "order_index": len(modules) - 1,
             "new_full_id": None,
         }
@@ -101,11 +146,9 @@ def parse_graph(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any], Di
 def run_batch_add(modules_to_add: List[Any], node_map: Dict[str, dict]) -> Dict[str, Any]:
     print("📦 正在执行模块添加...")
     game_data = load_json(DATA_PATH, "原始游戏存档")
-    # 【修改】加载新的单一模块定义文件
     module_defs = load_json(MODULE_DEF_PATH, "模块定义")
     
     try:
-        # 【修改】调用更新后的 add_modules 函数
         updated_game_data, created_nodes_info = add_modules(
             modules_wanted=modules_to_add,
             game_data=game_data,
@@ -158,12 +201,22 @@ def port_index(port_name: str, port_list: List[str]) -> int:
         sys.exit(f"错误：无法匹配端口 “{port_name}” ← 候选 {port_list}")
     return normalized_ports.index(best)
 
+# build_connections 不变，因为它依赖的 chip_index 结构保持了一致
 def build_connections(graph: dict, node_map: Dict[str, dict], chip_index: Dict[str, dict]) -> List[dict]:
     conns: List[dict] = []
     for e in graph["edges"]:
         f_meta, t_meta = node_map[e["from_node"]], node_map[e["to_node"]]
-        f_chip = chip_index[normalize(f_meta["friendly_name"])]
-        t_chip = chip_index[normalize(t_meta["friendly_name"])]
+        
+        # 查找 f_chip 和 t_chip 时使用 friendly_name 作为 key
+        f_chip_key = normalize(f_meta["friendly_name"])
+        t_chip_key = normalize(t_meta["friendly_name"])
+
+        if f_chip_key not in chip_index or t_chip_key not in chip_index:
+            sys.exit(f"内部错误: 无法在 chip_index 中找到 '{f_meta['friendly_name']}' 或 '{t_meta['friendly_name']}'")
+
+        f_chip = chip_index[f_chip_key]
+        t_chip = chip_index[t_chip_key]
+
         conns.append({
             "from_node_id": f_meta["new_full_id"],
             "from_port_index": port_index(e["from_port"], f_chip["outputs"]),
@@ -221,8 +274,10 @@ def main() -> None:
     # --- 步骤 1: 解析输入文件 ---
     print("--- 步骤 1: 解析输入文件 ---")
     graph = load_json(GRAPH_PATH, "graph.json")
-    chip_table = load_json(CHIP_DICT_PATH, "芯片名词.json")
-    chip_index = build_chip_index(chip_table)
+    # 【修改】加载 moduledef.json 并用它构建索引
+    module_definitions = load_json(MODULE_DEF_PATH, "模块定义文件")
+    chip_index = build_chip_index_from_moduledef(module_definitions)
+    
     modules, node_map = parse_graph(graph, chip_index)
     print("✅ 解析完成。")
 
@@ -269,4 +324,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-# --- END OF FILE main.py ---
+
+# --- END OF FILE main.py (REVISED) ---
