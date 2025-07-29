@@ -494,5 +494,33 @@
     "5": {
         "NodeName": "Sticker",
         "GateDataType": 0
-    }
+    },
+        "4097": {
+        "NodeName": "DeltaPreviousCurrent",
+        "GateDataType": 2
+    },
+    "4098": {
+        "NodeName": "Counter",
+        "GateDataType": 2
+    },
+    "4099": {
+        "NodeName": "Delay",
+        "GateDataType": 2
+    },
+    "4100": {
+        "NodeName": "Accumulate",
+        "GateDataType": 2
+    },
+    "4101": {
+        "NodeName": "PreviousFrameState",
+        "GateDataType": 2
+    },
+      "1540": {
+    "NodeName": "AngleEntity",
+    "GateDataType": 0
+    },
+      "1545": {
+    "NodeName": "AddAngularForceEntity",
+    "GateDataType": 0
+  }
 }

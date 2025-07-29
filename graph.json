@@ -1,199 +1,11 @@
 {
   "nodes": [
     {
-      "id": "input_coord1",
-      "type": "INPUT",
-      "label": "坐标1",
+      "id": "maga_text_constant",
+      "type": "Constant (String)",
+      "label": "口号文本",
       "attrs": {
-        "name": "#Coord1",
-        "data_type": 8
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "VECTOR"
-        }
-      ]
-    },
-    {
-      "id": "input_coord2",
-      "type": "INPUT",
-      "label": "坐标2",
-      "attrs": {
-        "name": "#Coord2",
-        "data_type": 8
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "VECTOR"
-        }
-      ]
-    },
-    {
-      "id": "dot_product",
-      "type": "VECTOR DOT PRODUCT",
-      "label": "向量点积",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "A",
-          "type": "VECTOR"
-        },
-        {
-          "name": "B",
-          "type": "VECTOR"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "A · B",
-          "type": "DECIMAL"
-        }
-      ]
-    },
-    {
-      "id": "magnitude1",
-      "type": "MAGNITUDE",
-      "label": "向量1的长度",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "INPUT",
-          "type": "VECTOR"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "RESULT",
-          "type": "DECIMAL"
-        }
-      ]
-    },
-    {
-      "id": "magnitude2",
-      "type": "MAGNITUDE",
-      "label": "向量2的长度",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "INPUT",
-          "type": "VECTOR"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "RESULT",
-          "type": "DECIMAL"
-        }
-      ]
-    },
-    {
-      "id": "mult_magnitudes",
-      "type": "MULTIPLY",
-      "label": "长度相乘",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "A",
-          "type": "DECIMAL"
-        },
-        {
-          "name": "B",
-          "type": "DECIMAL"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "AB",
-          "type": "DECIMAL"
-        }
-      ]
-    },
-    {
-      "id": "div_for_acos",
-      "type": "DIVIDE",
-      "label": "计算cos(θ)",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "A",
-          "type": "DECIMAL"
-        },
-        {
-          "name": "B",
-          "type": "DECIMAL"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "A/B",
-          "type": "DECIMAL"
-        }
-      ]
-    },
-    {
-      "id": "acos_rad",
-      "type": "ACOS",
-      "label": "计算弧度",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "Value",
-          "type": "DECIMAL"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "acos(Value)",
-          "type": "DECIMAL"
-        }
-      ]
-    },
-    {
-      "id": "rad_to_deg",
-      "type": "RAD to DEG",
-      "label": "转为角度",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "RAD",
-          "type": "DECIMAL"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "DEG",
-          "type": "DECIMAL"
-        }
-      ]
-    },
-    {
-      "id": "angle_to_string",
-      "type": "TO STRING",
-      "label": "角度转字符串",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "Number",
-          "type": "DECIMAL"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING"
-        }
-      ]
-    },
-    {
-      "id": "prefix_string",
-      "type": "constant",
-      "label": "前缀文本",
-      "attrs": {
-        "data_type": 4
+        "value": "Make America Great Again"
       },
       "inputs": [],
       "outputs": [
@@ -204,33 +16,11 @@
       ]
     },
     {
-      "id": "concat_output",
-      "type": "Add",
-      "label": "拼接字符串",
-      "attrs": {"data_type": 4},
-      "inputs": [
-        {
-          "name": "A",
-          "type": "STRING"
-        },
-        {
-          "name": "B",
-          "type": "STRING"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "A + B",
-          "type": "STRING"
-        }
-      ]
-    },
-    {
-      "id": "final_output",
+      "id": "text_output_port",
       "type": "OUTPUT",
-      "label": "最终输出",
+      "label": "文本输出",
       "attrs": {
-        "name": "#AngleString",
+        "name": "#displayText",
         "data_type": 4
       },
       "inputs": [
@@ -240,91 +30,61 @@
         }
       ],
       "outputs": []
+    },
+    {
+      "id": "red_color_constant",
+      "type": "Constant (Vector)",
+      "label": "颜色常量 (红色)",
+      "attrs": {
+        "value": "X:1 Y:0 Z:0 W:1"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "VECTOR"
+        }
+      ]
+    },
+    {
+      "id": "color_output_port",
+      "type": "OUTPUT",
+      "label": "颜色输出",
+      "attrs": {
+        "name": "#textColor",
+        "data_type": 8
+      },
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "VECTOR"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "sticker_info",
+      "type": "Sticker",
+      "label": "使用说明",
+      "attrs": {
+        "Header": "如何使用",
+        "Text": "1. 连接 #displayText 到 text screen 的 text 输入。\n2. 连接 #textColor 到 text screen 的 tcolor 输入。"
+      },
+      "inputs": [],
+      "outputs": []
     }
   ],
   "edges": [
     {
-      "from_node": "input_coord1",
+      "from_node": "maga_text_constant",
       "from_port": "OUTPUT",
-      "to_node": "dot_product",
-      "to_port": "A"
-    },
-    {
-      "from_node": "input_coord2",
-      "from_port": "OUTPUT",
-      "to_node": "dot_product",
-      "to_port": "B"
-    },
-    {
-      "from_node": "input_coord1",
-      "from_port": "OUTPUT",
-      "to_node": "magnitude1",
+      "to_node": "text_output_port",
       "to_port": "INPUT"
     },
     {
-      "from_node": "input_coord2",
+      "from_node": "red_color_constant",
       "from_port": "OUTPUT",
-      "to_node": "magnitude2",
-      "to_port": "INPUT"
-    },
-    {
-      "from_node": "magnitude1",
-      "from_port": "RESULT",
-      "to_node": "mult_magnitudes",
-      "to_port": "A"
-    },
-    {
-      "from_node": "magnitude2",
-      "from_port": "RESULT",
-      "to_node": "mult_magnitudes",
-      "to_port": "B"
-    },
-    {
-      "from_node": "dot_product",
-      "from_port": "A · B",
-      "to_node": "div_for_acos",
-      "to_port": "A"
-    },
-    {
-      "from_node": "mult_magnitudes",
-      "from_port": "AB",
-      "to_node": "div_for_acos",
-      "to_port": "B"
-    },
-    {
-      "from_node": "div_for_acos",
-      "from_port": "A/B",
-      "to_node": "acos_rad",
-      "to_port": "Value"
-    },
-    {
-      "from_node": "acos_rad",
-      "from_port": "acos(Value)",
-      "to_node": "rad_to_deg",
-      "to_port": "RAD"
-    },
-    {
-      "from_node": "rad_to_deg",
-      "from_port": "DEG",
-      "to_node": "angle_to_string",
-      "to_port": "Number"
-    },
-    {
-      "from_node": "prefix_string",
-      "from_port": "OUTPUT",
-      "to_node": "concat_output",
-      "to_port": "A"
-    },
-    {
-      "from_node": "angle_to_string",
-      "from_port": "OUTPUT",
-      "to_node": "concat_output",
-      "to_port": "B"
-    },
-    {
-      "from_node": "concat_output",
-      "from_port": "A + B",
-      "to_node": "final_output",
+      "to_node": "color_output_port",
       "to_port": "INPUT"
     }
   ]

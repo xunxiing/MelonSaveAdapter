@@ -1,8 +1,11 @@
-import json
-import os
+# --- START OF FILE modifier.py ---
 
-# --- 默认值生成器 ---
-# 这些函数现在会为所有三个位置生成正确的默认值格式
+import json
+import argparse
+from typing import Dict, List, Any
+
+# --- 默认值生成器 (无变化) ---
+# These functions now generate the correct default value formats for all three locations.
 
 def get_default_save_data(data_type):
     """(用于 chip_graph) 生成 SaveData 字符串"""
@@ -38,20 +41,24 @@ def get_default_gate_data(data_type):
     }
     return values.get(data_type)
 
-def modify_chip_data_final(data_file_path, input_file_path, output_file_path):
+# --- 【核心重构】新的可导入函数 ---
+def apply_data_type_modifications(game_data: Dict[str, Any], mod_instructions: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
-    读取、修改并保存芯片数据，完全同步所有相关部分。
+    Reads game data and a list of instructions, then applies data type modifications.
+
+    Args:
+        game_data: The entire game save data as a Python dictionary.
+        mod_instructions: A list of modification instructions, where each is a dict
+                          like {'node_id': '...', 'new_data_type': ...}.
+
+    Returns:
+        The modified game_data dictionary.
     """
-    print(f"正在读取主数据文件: {data_file_path}")
-    with open(data_file_path, 'r', encoding='utf-8') as f:
-        main_data = json.load(f)
-
-    print(f"正在读取修改指令文件: {input_file_path}")
-    with open(input_file_path, 'r', encoding='utf-8') as f:
-        mod_instructions = json.load(f)
-
     connections_to_update = {}
     modification_made = False
+    
+    # We are working on a copy, but let's be explicit
+    main_data = game_data # or deepcopy(game_data) if you want to be safer
     
     for container in main_data.get('saveObjectContainers', []):
         save_objects = container.get('saveObjects', {})
@@ -73,19 +80,10 @@ def modify_chip_data_final(data_file_path, input_file_path, output_file_path):
                         if node.get('Id') == node_id:
                             print(f"  -> 找到节点: {node_id}, 准备更新类型为 {new_type}")
                             node['GateDataType'] = new_type
-                            
-                            # 更新输出端口
                             if 'Outputs' in node:
-                                for output in node['Outputs']: 
-                                    output['DataType'] = new_type
-                            
-                            # ---【关键修复】---
-                            # 新增: 更新输入端口
+                                for output in node['Outputs']: output['DataType'] = new_type
                             if 'Inputs' in node:
-                                for input_port in node['Inputs']:
-                                    input_port['DataType'] = new_type
-                            # ---【修复结束】---
-
+                                for input_port in node['Inputs']: input_port['DataType'] = new_type
                             node['SaveData'] = get_default_save_data(new_type)
                             modification_made = True
                             conn_id = node.get('MechanicConnectionId')
@@ -96,13 +94,13 @@ def modify_chip_data_final(data_file_path, input_file_path, output_file_path):
                 meta_data['stringValue'] = json.dumps(graph_data, indent=2)
                 break
 
-        if not connections_to_update:
+        if not connections_to_update and modification_made:
             print("\n警告: 未找到需要同步的外部连接。可能修改的是非IO节点。")
         
-        # --- 阶段 2: 同步 chip_inputs 和 chip_outputs ---
         print("\n--- 阶段 2: 同步 chip_inputs / chip_outputs (编辑器UI) ---")
         for meta_data in meta_datas:
             if meta_data.get('key') in ['chip_inputs', 'chip_outputs']:
+                # ... (rest of logic is identical) ...
                 key_name = meta_data['key']
                 io_list_str = meta_data.get('stringValue')
                 if not io_list_str: continue
@@ -114,12 +112,12 @@ def modify_chip_data_final(data_file_path, input_file_path, output_file_path):
                         print(f"  -> 在 {key_name} 中更新 '{item.get('Key')}' 的类型为 {new_type}")
                         item['GateDataType'] = new_type
                         item['SerializedValue'] = get_default_serialized_value(new_type)
-                        modification_made = True
                 meta_data['stringValue'] = json.dumps(io_list, indent=2)
 
-        # --- 阶段 3: 同步 mechanicSerializedInputs (核心运行时) ---
+
         print("\n--- 阶段 3: 同步 mechanicSerializedInputs (游戏运行时) ---")
         for mechanic_item in mechanic_data_list:
+            # ... (rest of logic is identical) ...
             mech_inputs_str = mechanic_item.get('mechanicSerializedInputs')
             if not mech_inputs_str: continue
 
@@ -130,28 +128,40 @@ def modify_chip_data_final(data_file_path, input_file_path, output_file_path):
                     print(f"  -> 在 mechanicSerializedInputs 中更新 '{item.get('Key')}' 的类型为 {new_type}")
                     item['DataType'] = new_type
                     item['GateData'] = get_default_gate_data(new_type)
-                    modification_made = True
             mechanic_item['mechanicSerializedInputs'] = json.dumps(mech_inputs)
 
+    if not modification_made:
+        print("警告: 没有执行任何修改。")
+        
+    return main_data
 
-    # --- 阶段 4: 保存结果 ---
-    print("\n--- 阶段 4: 保存文件 ---")
-    if modification_made:
-        print(f"修改完成，正在保存到: {output_file_path}")
-        with open(output_file_path, 'w', encoding='utf-8') as f:
-            json.dump(main_data, f, indent=4)
-        print("文件已成功保存！")
-    else:
-        print("没有执行任何修改。")
-
-
-# --- 程序主入口 ---
+# --- 程序主入口 (用于独立运行) ---
 if __name__ == "__main__":
-    data_json_path = 'data_modified_batch.json'
-    input_json_path = 'input.json'
-    output_json_path = 'Data_modified.json'
+    parser = argparse.ArgumentParser(description="Apply data type modifications to a game save file.")
+    parser.add_argument("-d", "--data", default='data_modified_batch.json', help="Path to the main data file.")
+    parser.add_argument("-i", "--instructions", default='input.json', help="Path to the modification instructions file.")
+    parser.add_argument("-o", "--output", default='Data_modified.json', help="Path to save the modified file.")
+    args = parser.parse_args()
 
-    if not os.path.exists(data_json_path) or not os.path.exists(input_json_path):
-        print(f"错误: 请确保 '{data_json_path}' 和 '{input_json_path}' 文件与脚本在同一目录下。")
-    else:
-        modify_chip_data_final(data_json_path, input_json_path, output_json_path)
+    try:
+        print(f"正在读取主数据文件: {args.data}")
+        with open(args.data, 'r', encoding='utf-8') as f:
+            game_data_content = json.load(f)
+
+        print(f"正在读取修改指令文件: {args.instructions}")
+        with open(args.instructions, 'r', encoding='utf-8') as f:
+            mod_instructions_content = json.load(f)
+            
+        # 调用核心函数
+        modified_data = apply_data_type_modifications(game_data_content, mod_instructions_content)
+
+        print("\n--- 阶段 4: 保存文件 ---")
+        print(f"修改完成，正在保存到: {args.output}")
+        with open(args.output, 'w', encoding='utf-8') as f:
+            json.dump(modified_data, f, indent=4)
+        print("文件已成功保存！")
+
+    except FileNotFoundError as e:
+        print(f"错误: 找不到文件 {e.filename}。请检查路径是否正确。")
+    except Exception as e:
+        print(f"处理过程中发生错误: {e}")

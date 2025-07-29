@@ -1,171 +1,20 @@
+# --- START OF FILE add_module.py ---
+
 import json
 import uuid
 import sys
 
 # --- 配置 ---
 
-# 模块类型名 -> 游戏内部数据类型代码的映射
-# 根据您的要求进行了更新和扩展
+# 【修改】模块类型名 -> 游戏内部数据类型代码的映射
+# 根据你的 moduledef.json 示例，将 "Number" 更新为 "DECIMAL"
+# 其他类型如果在新 json 中有不同名称，也需要在此更新
 DATA_TYPE_MAP = {
     "Entity": 1,
-    "Number": 2,
-    "String": 4,  # 已根据您的要求更新
+    "DECIMAL": 2, # "Number" 在新json中似乎被称为 "DECIMAL"
+    "String": 4,
     "Vector": 8,
-    # "Bool": 4, # 如果需要，可以取消注释
-}
-
-# 模块存档名 -> 游戏内部操作类型代码的映射
-# 这是个关键信息，需要根据游戏数据进行补充
-# 我根据您提供的例子预填了一部分
-OPERATION_TYPE_MAP = {
-    "ConstantNodeViewModel": 257,
-    "TimeNodeViewModel": 260,
-    "IdentityNodeViewModel": 1,
-    "AbsNodeViewModel": 2324,
-    "AddNumbersNodeViewModel": 2304,
-    "AverageNumberNodeViewModel": 2309,
-    "CeilNodeViewModel": 2310,
-    "ClampValueNodeViewModel": 2311,
-    "Clamp01NodeViewModel": 2312,
-    "DivideNodeViewModel": 2307,
-    "ExpNodeViewModel": 2308,
-    "ENodeViewModel": 259,
-    "ExpPowNumberNodeViewModel": 2314,
-    "NegateNodeViewModel": 2315,
-    "PercentNumberNodeViewModel": 2316,
-    "PiNodeViewModel": 258,
-    "RandomNodeViewModel": 261,
-    "RoundNodeViewModel": 2326,
-    "SignNodeViewModel": 2318,
-    "SqrNodeViewModel": 2321,
-    "SqrtNodeViewModel": 2322,
-    "SubtractNumbersNodeViewModel": 2305,
-    "FloorNodeViewModel": 2319,
-    "InverseNodeViewModel": 2320,
-    "LerpNodeViewModel": 2328,
-    "LogNumberNodeViewModel": 2323,
-    "RemainderNumberNodeViewModel": 2327,
-    "MultiplyNumbersNodeViewModel": 2306,
-    "PowNumberNodeViewModel": 2325,
-    "DeltaAngleNodeViewModel": 2059,
-    "AcosNodeViewModel": 2052,
-    "AsinNodeViewModel": 2051,
-    "AtanNodeViewModel": 2054,
-    "ArcCTanNodeViewModel": 2056,
-    "CosNodeViewModel": 2050,
-    "SinNodeViewModel": 2049,
-    "TanNodeViewModel": 2053,
-    "CTanNodeViewModel": 2055,
-    "DegToRadSameNodeViewModel": 2057,
-    "RadToDegSameNodeViewModel": 2058,
-    "CosineFormulaSideNodeViewModel": 2060,
-    "CosineFormulaAngleNodeViewModel": 2061,
-    "PythagoreanCathetusNodeViewModel": 2062,
-    "PythagoreanSideNodeViewModel": 2063,
-    "AndNodeViewModel": 2560,
-    "BranchNodeViewModel": 2567,
-    "OrNodeViewModel": 2561,
-    "NotAndNodeViewModel": 2562,
-    "NotOrNodeViewModel": 2563,
-    "NotSameNodeViewModel": 2564,
-    "XorNodeViewModel": 2565,
-    "NotXorNodeViewModel": 2566,
-    "EqualNodeViewModel": 2816,
-    "NotEqualNodeViewModel": 2817,
-    "GreaterOrEqualNodeViewModel": 2818,
-    "GreaterNodeViewModel": 2820,
-    "LessOrEqualNodeViewModel": 2819,
-    "LessNodeViewModel": 2821,
-    "InRangeExclusiveNodeViewModel": 2823,
-    "InRangeInclusiveNodeViewModel": 2822,
-    "BitAndNodeViewModel": 3073,
-    "BitNotNodeViewModel": 3074,
-    "BitOrNodeViewModel": 3075,
-    "BitXorNodeViewModel": 3076,
-    "BitShiftLeftNodeViewModel": 3077,
-    "BitShiftRightNodeViewModel": 3078,
-    "BitRotateLeftNodeViewModel": 3079,
-    "BitRotateRightNodeViewModel": 3080,
-    "MinNumbersNodeViewModel": 3081,
-    "MaxNumbersNodeViewModel": 3082,
-    "ClampIntValueNodeViewModel": 3083,
-    "AbsIntNodeViewModel": 3084,
-    "SignIntNodeViewModel": 3085,
-    "IncrementNodeViewModel": 3086,
-    "DecrementNodeViewModel": 3087,
-    "NegateIntNodeViewModel": 3088,
-    "SqrIntNodeViewModel": 3089,
-    "SqrtIntNodeViewModel": 3090,
-    "RandomIntNodeViewModel": 3091,
-    "ModuloNodeViewModel": 3092,
-    "PercentIntNumberNodeViewModel": 3093,
-    "IsPowerOfTwoNodeViewModel": 3094,
-    "NextPowerOfTwoNodeViewModel": 3095,
-    "PreviousPowerOfTwoNodeViewModel": 3096,
-    "DeltaIntNodeViewModel": 3097,
-    "AverageIntNodeViewModel": 3098,
-    "MedianIntNodeViewModel": 3099,
-    "ModeIntNodeViewModel": 3100,
-    "VarianceIntNodeViewModel": 3101,
-    "StdDevIntNodeViewModel": 3102,
-    "SkewnessIntNodeViewModel": 3103,
-    "KurtosisIntNodeViewModel": 3104,
-    "CorrelationIntNodeViewModel": 3105,
-    "CovarianceIntNodeViewModel": 3106,
-    "MinFloatNodeViewModel": 3107,
-    "MaxFloatNodeViewModel": 3108,
-    "ClampFloatNodeViewModel": 3109,
-    "AbsFloatNodeViewModel": 3110,
-    "SignFloatNodeViewModel": 3111,
-    "IncrementFloatNodeViewModel": 3112,
-    "DecrementFloatNodeViewModel": 3113,
-    "NegateFloatNodeViewModel": 3114,
-    "SqrFloatNodeViewModel": 3115,
-    "SqrtFloatNodeViewModel": 3116,
-    "RandomFloatNodeViewModel": 3117,
-    "ModuloFloatNodeViewModel": 3118,
-    "PercentFloatNumberNodeViewModel": 3119,
-    "IsEvenNodeViewModel": 3120,
-    "IsOddNodeViewModel": 3121,
-    "IsPrimeNodeViewModel": 3122,
-    "IsCompositeNodeViewModel": 3123,
-    "FactorialNodeViewModel": 3124,
-    "PermutationNodeViewModel": 3125,
-    "CombinationNodeViewModel": 3126,
-    "GammaNodeViewModel": 3127,
-    "BetaNodeViewModel": 3128,
-    "LogGammaNodeViewModel": 3129,
-    "DigammaNodeViewModel": 3130,
-    "TrigammaNodeViewModel": 3131,
-    "TetragammaNodeViewModel": 3132,
-    "PentagammaNodeViewModel": 3133,
-    "HexagammaNodeViewModel": 3134,
-    "LogBetaNodeViewModel": 3135,
-    "DirichletNodeViewModel": 3136,
-    "ZetaNodeViewModel": 3137,
-    "PolyGammaNodeViewModel": 3138,
-    "BernoulliNodeViewModel": 3139,
-    "EulerNodeViewModel": 3140,
-    "StirlingNodeViewModel": 3141,
-    "BellNodeViewModel": 3142,
-    "CatalanNodeViewModel": 3143,
-    "FibonacciNodeViewModel": 3144,
-    "CollisionEntityNodeViewModel": 1574,
-    "DeleteEntityNodeViewModel": 1577,
-    "FindStringNodeViewModel": 3586,
-    "LengthStringNodeViewModel": 3587,
-    "LowercaseStringNodeViewModel": 3588,
-    "UppercaseStringNodeViewModel": 3589,
-    "ReverseStringNodeViewModel": 3590,
-    "RepeatStringNodeViewModel": 3591,
-    "ReplaceStringNodeViewModel": 3592,
-    "SubstringNodeViewModel": 3593,
-    "TrimStringNodeViewModel": 3594,
-    "ToStringNodeViewModel": 3595,
-    "SymbolToAsciiNumberNodeViewModel": 3596,
-    "StickerNodeViewModel": 5,
-    "MagnitudeVectorNodeViewModel": 1283,
-    "VectorDotProductNodeViewModel": 1288,
+    "Bool": 16, # Bool通常是16
 }
 
 # 新节点在编辑器中的垂直间距
@@ -174,45 +23,57 @@ DEFAULT_X_POS = -120.0
 
 # --- 核心功能 ---
 
-def create_new_node(module_name, module_info, existing_nodes, datatype_map):
-    """根据模块信息，创建一个新的、带有唯一ID的节点字典"""
+def create_new_node(module_name, module_info, existing_nodes):
+    """
+    【函数已修改】
+    根据从 moduledef.json 读取的模块信息，创建一个新的、带有唯一ID的节点字典。
+    不再需要 datatype_map 参数，因为所有信息都在 module_info 中。
     
-    # 1. 检查 OperationType 是否已知
-    if module_name not in OPERATION_TYPE_MAP:
-        print(f"错误: 模块 '{module_name}' 的 OperationType 未知。")
-        print("请在脚本的 OPERATION_TYPE_MAP 字典中添加它。")
+    Args:
+        module_name (str): 模块的ViewModel名称, e.g., "ConstantNodeViewModel".
+        module_info (dict): 从 moduledef.json 中获取的该模块的完整定义。
+        existing_nodes (list): 芯片图中已存在的节点列表。
+    """
+    
+    # 1. 【修改】直接从 module_info 获取 OperationType (ID)
+    try:
+        op_type_code = int(module_info["id"])
+    except (ValueError, KeyError):
+        print(f"错误: 模块 '{module_name}' 的 'id' 缺失或格式不正确。")
         return None
-        
-    op_type_code = OPERATION_TYPE_MAP[module_name]
 
     # 2. 生成唯一的节点ID
     node_id = f"{module_name} : {uuid.uuid4()}"
     print(f"为新节点生成ID: {node_id}")
 
-    # 3. 创建输入端口
+    # 3. 【修改】根据新的输入/输出格式创建端口
     inputs = []
-    for input_type in module_info.get("inputs", []):
-        port_id = f"{node_id}\\nInput : {input_type} {uuid.uuid4()}"
+    for port_info in module_info.get("inputs", []):
+        port_type = port_info.get("type", "DECIMAL")
+        port_name = port_info.get("name", "Input")
+        port_id = f"{node_id}\\nInput : {port_name} {uuid.uuid4()}"
         inputs.append({
             "Id": port_id,
-            "DataType": DATA_TYPE_MAP.get(input_type, 0),
+            "DataType": DATA_TYPE_MAP.get(port_type, 0), # 使用 port_type 查表
             "connectedOutputIdModel": None
         })
 
-    # 4. 创建输出端口
+    # 4. 【修改】创建输出端口
     outputs = []
-    for output_type in module_info.get("outputs", []):
-        port_id = f"{node_id}\\nOutput : {output_type} {uuid.uuid4()}"
+    for port_info in module_info.get("outputs", []):
+        port_type = port_info.get("type", "DECIMAL")
+        port_name = port_info.get("name", "Output")
+        port_id = f"{node_id}\\nOutput : {port_name} {uuid.uuid4()}"
         outputs.append({
             "Id": port_id,
-            "DataType": DATA_TYPE_MAP.get(output_type, 0),
+            "DataType": DATA_TYPE_MAP.get(port_type, 0), # 使用 port_type 查表
             "ConnectedInputsIds": []
         })
         
-    # 5. 计算新节点的位置，避免重叠
+    # 5. 计算新节点的位置，避免重叠 (逻辑不变)
     max_y = -float('inf')
     if not existing_nodes:
-        max_y = 0 # 如果没有节点，从0开始
+        max_y = 0 
     else:
         for node in existing_nodes:
             y_pos = node.get("VisualPosition", {}).get("y", 0)
@@ -222,22 +83,13 @@ def create_new_node(module_name, module_info, existing_nodes, datatype_map):
     new_y = max_y + Y_SPACING if existing_nodes else 180.0
     new_position = {
         "x": DEFAULT_X_POS,
-        "y": new_y,
-        "normalized": {"x": 0.0, "y": 0.0, "magnitude": 0.0, "sqrMagnitude": 0.0},
-        "magnitude": 0.0,
-        "sqrMagnitude": 0.0
+        "y": new_y
     }
 
-    # 6. 【核心修改】从 datatype_map.json 中查找 GateDataType
-    gate_data_type = 2 # 默认值
-    op_type_code_str = str(op_type_code)
-    if op_type_code_str in datatype_map:
-        gate_data_type = datatype_map[op_type_code_str].get("GateDataType", 2)
-    else:
-        print(f"警告: 在 datatype_map.json 中未找到 OperationType '{op_type_code_str}'。GateDataType 将默认为 {gate_data_type}。")
+    # 6. 【修改】直接从 module_info 获取 GateDataType
+    gate_data_type = module_info.get("gate_data_type", 2) # 提供一个默认值以防万一
 
-
-    # 7. 组装完整的节点对象
+    # 7. 组装完整的节点对象 (逻辑不变, 删除了不必要的字段)
     new_node = {
         "Id": node_id,
         "ModelVersion": 1,
@@ -248,43 +100,52 @@ def create_new_node(module_name, module_info, existing_nodes, datatype_map):
         "VisualPosition": new_position,
         "VisualCollapsed": False,
         "MechanicConnectionId": None,
-        "GateDataType": gate_data_type, # 使用从map中查找到的值
+        "GateDataType": gate_data_type,
         "SaveData": None
     }
     
     return new_node
 
 def main():
-    """主执行函数"""
+    """主执行函数（用于独立测试）"""
     try:
-        # 加载文件
+        # 【修改】加载文件，现在只需要 data.json 和新的 moduledef.json
         with open('data.json', 'r', encoding='utf-8') as f:
             game_data = json.load(f)
-        with open('allmod.json', 'r', encoding='utf-8') as f:
-            all_modules = json.load(f)
-        # 【新增】加载 datatype_map.json
-        with open('datatype_map.json', 'r', encoding='utf-8') as f:
-            datatype_map = json.load(f)
+        with open('moduledef.json', 'r', encoding='utf-8') as f:
+            module_definitions = json.load(f)
+            
     except FileNotFoundError as e:
-        print(f"错误: 找不到文件 {e.filename}。请确保 data.json, allmod.json 和 datatype_map.json 文件与脚本在同一目录下。")
+        print(f"错误: 找不到文件 {e.filename}。请确保 data.json 和 moduledef.json 与脚本在同一目录下。")
         return
     except json.JSONDecodeError as e:
         print(f"错误: JSON文件格式不正确 - {e}")
         return
 
+    # 【新增】动态构建 ViewModel 名称到模块信息的映射
+    viewmodel_to_module_map = {}
+    for mod_id, mod_data in module_definitions.items():
+        viewmodel_name = mod_data.get("source_info", {}).get("allmod_viewmodel")
+        if viewmodel_name:
+            mod_data['id'] = mod_id  # 确保模块数据中包含其自身的ID
+            viewmodel_to_module_map[viewmodel_name] = mod_data
+        else:
+            print(f"警告: moduledef.json 中 ID 为 '{mod_id}' 的条目缺少 'allmod_viewmodel'，将无法通过名称添加。")
+
     # 获取用户输入
     print("可用模块 (存档名):")
-    for name in all_modules.keys():
+    for name in sorted(viewmodel_to_module_map.keys()):
         print(f"- {name}")
     module_to_add = input("\n请输入要添加的模块的准确存档名: ")
 
-    if module_to_add not in all_modules:
-        print(f"错误: 在 allmod.json 中找不到名为 '{module_to_add}' 的模块。")
+    # 【修改】使用新的映射来验证用户输入并获取模块信息
+    if module_to_add not in viewmodel_to_module_map:
+        print(f"错误: 在 moduledef.json 中找不到存档名为 '{module_to_add}' 的模块。")
         return
 
-    module_info = all_modules[module_to_add]
+    module_info = viewmodel_to_module_map[module_to_add]
     
-    # 定位 chip_graph
+    # 定位 chip_graph (逻辑不变)
     chip_graph_meta = None
     for container in game_data.get("saveObjectContainers", []):
         for meta in container.get("saveObjects", {}).get("saveMetaDatas", []):
@@ -295,26 +156,20 @@ def main():
             break
 
     if not chip_graph_meta:
-        print("错误: 在 data.json 中找不到 'chip_graph'。请检查文件是否为包含芯片的存档。")
+        print("错误: 在 data.json 中找不到 'chip_graph'。")
         return
 
-    # 解析 chip_graph 字符串
     chip_graph_data = json.loads(chip_graph_meta["stringValue"])
     
-    # 创建新节点，【新增】传入 datatype_map
-    new_node = create_new_node(module_to_add, module_info, chip_graph_data["Nodes"], datatype_map)
+    # 【修改】调用更新后的 create_new_node 函数
+    new_node = create_new_node(module_to_add, module_info, chip_graph_data["Nodes"])
 
     if new_node is None:
-        # 创建节点时发生错误，终止执行
         return
 
-    # 将新节点添加到图中
     chip_graph_data["Nodes"].append(new_node)
-    
-    # 将修改后的图转换回JSON字符串，并更新到主数据结构中
     chip_graph_meta["stringValue"] = json.dumps(chip_graph_data, indent=2)
 
-    # 保存到新文件
     try:
         with open('data_modified.json', 'w', encoding='utf-8') as f:
             json.dump(game_data, f, indent=4)
@@ -327,3 +182,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+# --- END OF FILE add_module.py ---

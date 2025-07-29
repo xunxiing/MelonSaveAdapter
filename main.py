@@ -1,3 +1,5 @@
+# --- START OF FILE main.py ---
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -5,184 +7,135 @@ integrated_pipeline.py
 ======================
 一键完成：
   1. 解析 graph.json
-  2. 生成 modules.json 并调用《批量添加模块.py》
-  3. 捕获 “为新节点生成ID” → 解析 UUID
-  4. 【新增】根据 graph.json 中的 data_type 生成修改指令
-  5. 【新增】调用《modifier.py》修改节点数据类型
+  2. 调用 batch_add_modules 函数，传入模块列表
+  3. 从函数返回值中获取新节点ID和更新后的存档
+  4. 根据 graph.json 中的 data_type 生成修改指令
+  5. 【已修改】直接调用 modifier 函数修改节点数据类型
   6. 生成 output.json（连线指令）
-  7. 自动调用《批量连线.py》把 output.json 写回存档
-
-适配中文 Windows 终端（GBK），强制父/子进程均使用 UTF-8 编码，避免
-Emoji / 中文输出触发 UnicodeEncodeError / DecodeError。
+  7. 直接调用函数执行批量连线
+  8. 调用《layout_chip.py》的布局引擎，对最终存档进行自动排版
 """
 
-# ---------------------------------------------------------------------
-# 预处理：父进程 stdout/stderr 切换到 UTF-8（仅 Windows 需要）
 import sys, os
-if os.name == "nt":                                    # Windows 环境
+if os.name == "nt":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
-# ---------------------------------------------------------------------
 
 import json, re, subprocess, locale
 from difflib import get_close_matches
 from pathlib import Path
 from typing import Dict, List, Tuple, Any
 
-# =============================== 全局配置 ===============================
-GRAPH_PATH        = Path("graph.json")         # 输入：思维导图
-CHIP_DICT_PATH    = Path("chip_names.json")       # 输入：模块端口字典
-MODULE_LIST_PATH  = Path("modules.json")       # 临时：批量添加输入
-CONNECT_OUT_PATH  = Path("output.json")        # 输出：批量连线输入
+# --- 修改后的导入 ---
+from batch_add_modules import add_modules
+from modifier import apply_data_type_modifications
+from layout_chip import run_layout_engine, find_and_update_chip_graph
+from batch_connect import apply_connections
 
-# --- 新增：数据类型修改流程配置 ---
-MODIFY_SCRIPT_PATH  = Path("modifier.py")            # 子进程：修改数据类型
-MODIFY_INPUT_PATH   = Path("input.json")             # 输出：给 modifier.py 的指令文件
-# 注意：你需要确保 modifier.py 脚本内部读取的文件名是 "input.json"。
-# 如果不是，请修改这里的 MODIFY_INPUT_PATH 或修改 modifier.py 脚本。
+# =============================== 全局配置 (简化和修改) ===============================
+GRAPH_PATH        = Path("graph.json")
+CHIP_DICT_PATH    = Path("chip_names.json") # 暂时保留，用于解析graph.json
+MODULE_DEF_PATH   = Path("moduledef.json")   # 【新增】单一模块定义文件
+DATA_PATH         = Path("data.json")
+CONNECT_OUT_PATH  = Path("output.json")
 
-ADD_SCRIPT_PATH   = Path("batch_add_modules.py")     # 子进程：批量添加
-CONNECT_SCRIPT_PATH = Path("batch_connect.py")      # 子进程：批量连线
+# 中间文件和最终文件
+MODIFIED_SAVE_PATH  = Path("data_after_modify.json")
+FINAL_SAVE_PATH = Path("ungraph.json")
 
-FUZZY_CUTOFF_NODE = 0.10                       # 节点 ↔ 芯片 模糊阈值
-FUZZY_CUTOFF_PORT = 0.40                       # 端口名   模糊阈值
+FUZZY_CUTOFF_NODE = 0.10
+FUZZY_CUTOFF_PORT = 0.40
 # ======================================================================
 
-
-# --------------------------- 工具函数 (无变化) ---------------------------
 def load_json(path: Path, desc: str) -> Any:
     if not path.exists():
         sys.exit(f"错误：未找到 {desc} 文件 “{path}”")
     try:
-        return json.load(path.open("r", encoding="utf-8"))
+        with path.open("r", encoding="utf-8", errors="ignore") as f:
+            return json.load(f)
     except json.JSONDecodeError as e:
-        sys.exit(f"错误：{desc} 文件解析失败：{e}")
-
+        sys.exit(f"错误：{desc} 文件 “{path}” 解析失败：{e}")
 
 def normalize(s: str) -> str:
-    """统一为小写并去掉非字母数字字符，用于模糊匹配。"""
     return re.sub(r"[^a-z0-9]+", "", s.lower())
 
-
 def fuzzy_match(name: str, candidates: List[str], cutoff: float) -> str | None:
-    """返回最佳匹配，若分数低于 cutoff 则 None。"""
     return (get_close_matches(name, candidates, n=1, cutoff=cutoff) or [None])[0]
-# ---------------------------------------------------------------------
 
-
-# =========================== 主流程函数 (部分新增/修改) ===========================
+# =========================== 主流程函数 (修改) ===========================
 def build_chip_index(chips: list) -> Dict[str, dict]:
     return {normalize(c["friendly_name"]): c for c in chips}
 
-
-def parse_graph(graph: dict, chip_index: Dict[str, dict]
-                ) -> Tuple[List[str], Dict[str, dict]]:
-    modules: List[str] = []
+def parse_graph(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any], Dict[str, dict]]:
+    modules: List[Any] = []
     node_map: Dict[str, dict] = {}
     for node in graph["nodes"]:
         key = normalize(node["type"])
-        best = fuzzy_match(key, list(chip_index.keys()), FUZZY_CUTOFF_NODE)
-        if best is None:
-            sys.exit(f"错误：无法识别模块类型 “{node['type']}”")
-        chip = chip_index[best]
-        order = len(modules)
-        modules.append(chip["friendly_name"])
+        node_type_lower = node["type"].lower()
+        
+        if node_type_lower in ('input', 'output', 'constant'):
+            modules.append({
+                "type": node_type_lower, 
+                "name": node.get("name", node_type_lower.title())
+            })
+            chip_name = f"{node_type_lower.title()}NodeViewModel"
+            friendly_name = node_type_lower.title()
+        else:
+            best = fuzzy_match(key, list(chip_index.keys()), FUZZY_CUTOFF_NODE)
+            if best is None:
+                sys.exit(f"错误：无法识别模块类型 “{node['type']}”")
+            chip = chip_index[best]
+            modules.append(chip["friendly_name"])
+            chip_name = chip["game_name"]
+            friendly_name = chip["friendly_name"]
+            
         node_map[node["id"]] = {
-            "friendly_name": chip["friendly_name"],
-            "game_name": chip["game_name"],
-            "order_index": order,
-            "new_full_id": None,   # 之后填充 “ClassName : UUID”
+            "friendly_name": friendly_name,
+            "game_name": chip_name,
+            "order_index": len(modules) - 1,
+            "new_full_id": None,
         }
     return modules, node_map
 
-
-def run_subprocess(cmd: list[str]) -> str:
-    """
-    运行子进程：强制 UTF-8 模式 (-X utf8)，捕获 stdout，
-    如出错则直接抛 RuntimeError。
-    """
-    script_path = Path(cmd[-1])
-    # 确保脚本存在
-    if not script_path.exists():
-        sys.exit(f"错误：未找到脚本 {script_path}")
+# 【核心修改】此函数现在加载 moduledef.json 并调用更新后的 add_modules
+def run_batch_add(modules_to_add: List[Any], node_map: Dict[str, dict]) -> Dict[str, Any]:
+    print("📦 正在执行模块添加...")
+    game_data = load_json(DATA_PATH, "原始游戏存档")
+    # 【修改】加载新的单一模块定义文件
+    module_defs = load_json(MODULE_DEF_PATH, "模块定义")
     
-    # 动态确定执行命令
-    if sys.executable:
-        # 优先使用当前 Python 解释器
-        base_cmd = [sys.executable]
-        # Windows 默认编码非 UTF-8，故加 -X utf8
-        if os.name == 'nt' and "-X" not in cmd:
-            base_cmd.extend(["-X", "utf8"])
-    else:
-        # 如果 sys.executable 不可用，则回退到直接运行脚本
-        base_cmd = []
+    try:
+        # 【修改】调用更新后的 add_modules 函数
+        updated_game_data, created_nodes_info = add_modules(
+            modules_wanted=modules_to_add,
+            game_data=game_data,
+            module_definitions=module_defs,
+            cutoff=FUZZY_CUTOFF_NODE
+        )
+    except ValueError as e:
+        sys.exit(f"错误: 模块添加失败 - {e}")
+        
+    print(f"✅ 模块添加逻辑执行完毕，获得 {len(created_nodes_info)} 个新节点信息。")
 
-    final_cmd = base_cmd + [str(script_path)]
+    if len(created_nodes_info) != len(modules_to_add):
+        print(f"警告：请求添加 {len(modules_to_add)} 个模块，实际成功创建 {len(created_nodes_info)} 个。")
 
-    # 运行
-    proc = subprocess.run(final_cmd, capture_output=True)
-    if proc.returncode != 0:
-        # 直接把子进程 stderr 打回终端（已是 UTF-8）
-        sys.stderr.buffer.write(proc.stderr)
-        raise RuntimeError(f"{script_path.name} 运行失败，返回码 {proc.returncode}")
-
-    # 智能解码 stdout：优先 UTF-8，退而 GBK，再退 locale 默认
-    for enc in ("utf-8", "gbk", locale.getpreferredencoding(False)):
-        try:
-            return proc.stdout.decode(enc)
-        except UnicodeDecodeError:
-            continue
-    # 最后兜底：替换非法字符
-    return proc.stdout.decode("utf-8", errors="replace")
-
-
-def run_batch_add(modules: List[str], node_map: Dict[str, dict]) -> None:
-    """
-    批量调用《批量添加模块.py》，为每个节点写回 “ClassName : UUID”。
-    """
-    # ---------- 1. 先把待添加模块写入 modules.json ----------
-    MODULE_LIST_PATH.write_text(
-        json.dumps(modules, ensure_ascii=False, indent=2),
-        encoding="utf-8"
-    )
-    print(f"✅ 已生成模块添加列表 → {MODULE_LIST_PATH}")
-
-    # ---------- 2. 调用子进程批量添加 ----------
-    print("📦 正在执行批量添加模块脚本 …")
-    stdout = run_subprocess([str(ADD_SCRIPT_PATH)])
-    print(stdout)
-
-    # ---------- 3. 正则解析 “为新节点生成ID: ClassName : uuid” ----------
-    pattern = re.compile(
-        r"为新节点生成ID:\s+([A-Za-z0-9_]+)\s*:\s*([0-9a-fA-F-]{36})"
-    )
-    extracted = pattern.findall(stdout)
-    if not extracted:
-        sys.exit("错误：从《批量添加模块.py》的输出中未能解析出任何新节点ID。请检查其输出格式。")
-    if len(extracted) != len(modules):
-        print(f"警告：批量添加生成的节点数量({len(extracted)})与请求数量({len(modules)})不一致。")
-
-
-    # ---------- 4. 按 class_name 精确匹配 ----------
-    unmatched: Dict[str, dict] = {nid: meta for nid, meta in node_map.items()}
-    for class_name, uuid in extracted:
-        found_match = False
-        for nid, meta in list(unmatched.items()):
-            if meta["game_name"] == class_name and meta["new_full_id"] is None:
-                meta["new_full_id"] = f"{class_name} : {uuid}"
-                del unmatched[nid]
-                found_match = True
-                break
-        if not found_match:
-             print(f"警告：解析到一个ID (Class: {class_name}, UUID: {uuid})，但在node_map中找不到未匹配的同类型节点。")
-
+    nodes_in_map = sorted(node_map.values(), key=lambda x: x['order_index'])
+    for i, created_node in enumerate(created_nodes_info):
+        if i < len(nodes_in_map):
+            node_to_update = nodes_in_map[i]
+            original_id = next(k for k, v in node_map.items() if v['order_index'] == node_to_update['order_index'])
+            node_map[original_id]["new_full_id"] = created_node["full_id"]
+        else:
+            print(f"警告: 创建了一个多余的节点 {created_node['full_id']}，无法在 node_map 中找到对应项。")
+    
+    unmatched = [meta['friendly_name'] for meta in node_map.values() if meta['new_full_id'] is None]
     if unmatched:
-        missed = [f"{meta['friendly_name']} ({meta['game_name']})" for meta in unmatched.values()]
-        sys.exit(f"错误：以下节点未匹配到新 ID：{', '.join(missed)}")
+        sys.exit(f"错误：以下节点未匹配到新 ID：{', '.join(unmatched)}")
+        
+    return updated_game_data
 
-# --- 新增函数 ---
 def generate_modify_instructions(graph: dict, node_map: Dict[str, dict]) -> List[dict]:
-    """从 graph.json 中提取需要修改数据类型的节点信息。"""
     instructions = []
     for node in graph["nodes"]:
         if "data_type" in node.get("attrs", {}):
@@ -197,35 +150,20 @@ def generate_modify_instructions(graph: dict, node_map: Dict[str, dict]) -> List
                  print(f"警告：节点 '{original_id}' 定义了 data_type 但未找到其生成的ID，将跳过。")
     return instructions
 
-# --- 新增函数 ---
-def run_data_type_modifier() -> None:
-    """调用《modifier.py》修改节点的数据类型。"""
-    print("⚙️  正在执行数据类型修改脚本 …")
-    stdout = run_subprocess([str(MODIFY_SCRIPT_PATH)])
-    print(stdout)
-
-
 def port_index(port_name: str, port_list: List[str]) -> int:
-    # 修正：当只有一个端口时，直接返回索引0，避免模糊匹配问题
-    if len(port_list) == 1:
-        return 0
-    
+    if len(port_list) == 1: return 0
     normalized_ports = [normalize(p) for p in port_list]
     best = fuzzy_match(normalize(port_name), normalized_ports, FUZZY_CUTOFF_PORT)
-    
     if best is None:
         sys.exit(f"错误：无法匹配端口 “{port_name}” ← 候选 {port_list}")
     return normalized_ports.index(best)
 
-
-def build_connections(graph: dict, node_map: Dict[str, dict],
-                      chip_index: Dict[str, dict]) -> List[dict]:
+def build_connections(graph: dict, node_map: Dict[str, dict], chip_index: Dict[str, dict]) -> List[dict]:
     conns: List[dict] = []
     for e in graph["edges"]:
         f_meta, t_meta = node_map[e["from_node"]], node_map[e["to_node"]]
         f_chip = chip_index[normalize(f_meta["friendly_name"])]
         t_chip = chip_index[normalize(t_meta["friendly_name"])]
-
         conns.append({
             "from_node_id": f_meta["new_full_id"],
             "from_port_index": port_index(e["from_port"], f_chip["outputs"]),
@@ -234,57 +172,101 @@ def build_connections(graph: dict, node_map: Dict[str, dict],
         })
     return conns
 
+def run_batch_connect(input_path: Path) -> None:
+    print("🔗 正在执行批量连线 …")
+    if not input_path.exists():
+        sys.exit(f"错误：在执行连线前，未找到输入存档文件 '{input_path}'。")
+    
+    success = apply_connections(
+        input_graph_path=str(input_path),
+        connections_path=str(CONNECT_OUT_PATH),
+        output_graph_path=str(FINAL_SAVE_PATH)
+    )
+    if not success:
+        sys.exit("错误：批量连线过程中发生错误，流程终止。")
 
-def run_batch_connect() -> None:
-    """调用《批量连线.py》将 output.json 写入存档。"""
-    print("🔗 正在执行批量连线脚本 …")
-    stdout = run_subprocess([str(CONNECT_SCRIPT_PATH)])
-    print(stdout)
+def run_auto_layout() -> None:
+    print("🎨 正在对最终存档文件进行自动布局...")
+    if not FINAL_SAVE_PATH.exists():
+        print(f"⚠️ 警告：找不到最终存档文件 '{FINAL_SAVE_PATH}'，跳过自动布局步骤。")
+        return
+        
+    full_save_data = load_json(FINAL_SAVE_PATH, "最终游戏存档")
+    try:
+        save_obj = full_save_data['saveObjectContainers'][0]['saveObjects']
+        chip_graph_str = next(md['stringValue'] for md in save_obj['saveMetaDatas'] if md.get('key') == 'chip_graph')
+        chip_nodes = json.loads(chip_graph_str).get('Nodes', [])
+    except (KeyError, IndexError, StopIteration, json.JSONDecodeError) as e:
+        print(f"⚠️ 警告：在存档文件 '{FINAL_SAVE_PATH}' 中无法找到或解析'chip_graph'，跳过布局。错误: {e}")
+        return
+
+    if not chip_nodes:
+        print("ℹ️ 'chip_graph'中没有节点，无需布局。")
+        return
+
+    print(f"   从存档中找到 {len(chip_nodes)} 个节点进行布局。")
+    final_positions = run_layout_engine(chip_nodes)
+    print("   使用新坐标更新存档数据...")
+    updated = find_and_update_chip_graph(full_save_data, final_positions)
+
+    if updated:
+        with FINAL_SAVE_PATH.open("w", encoding="utf-8") as f:
+            json.dump(full_save_data, f, separators=(',', ':'))
+        print(f"✅ 自动布局完成，已更新存档文件: '{FINAL_SAVE_PATH}'")
+    else:
+        print("❌ 错误：布局计算完成，但在存档中更新坐标失败。文件未被修改。")
 # ======================================================================
 
-
 def main() -> None:
-    # ---------- 1. 读入并解析基础文件 ----------
-    print("--- 步骤 1/5: 解析输入文件 ---")
+    # --- 步骤 1: 解析输入文件 ---
+    print("--- 步骤 1: 解析输入文件 ---")
     graph = load_json(GRAPH_PATH, "graph.json")
     chip_table = load_json(CHIP_DICT_PATH, "芯片名词.json")
     chip_index = build_chip_index(chip_table)
     modules, node_map = parse_graph(graph, chip_index)
     print("✅ 解析完成。")
 
-    # ---------- 2. 批量添加模块 ----------
-    print("\n--- 步骤 2/5: 批量添加模块 ---")
-    run_batch_add(modules, node_map)
+    # --- 步骤 2: 批量添加模块 ---
+    print("\n--- 步骤 2: 批量添加模块 ---")
+    current_save_data = run_batch_add(modules, node_map)
     print("✅ 模块添加完成，并已获取新节点ID。")
 
-    # ---------- 3. 【新增】修改数据类型 ----------
-    print("\n--- 步骤 3/5: 修改节点数据类型 ---")
+    # --- 步骤 3: 修改节点数据类型 ---
+    print("\n--- 步骤 3: 修改节点数据类型 ---")
     modify_instructions = generate_modify_instructions(graph, node_map)
+    
     if modify_instructions:
-        MODIFY_INPUT_PATH.write_text(
-            json.dumps(modify_instructions, ensure_ascii=False, indent=2),
-            encoding="utf-8")
-        print(f"✅ 已生成类型修改指令 → {MODIFY_INPUT_PATH}")
-        run_data_type_modifier()
+        print(f"ℹ️  需要进行 {len(modify_instructions)} 项数据类型修改。")
+        current_save_data = apply_data_type_modifications(current_save_data, modify_instructions)
         print("✅ 数据类型修改完成。")
     else:
         print("ℹ️ 无需修改数据类型，跳过此步骤。")
 
-
-    # ---------- 4. 生成连线指令 ----------
-    print("\n--- 步骤 4/5: 生成连线指令 ---")
+    # --- 步骤 4: 生成连线指令 ---
+    print("\n--- 步骤 4: 生成连线指令 ---")
     conns = build_connections(graph, node_map, chip_index)
     CONNECT_OUT_PATH.write_text(
         json.dumps(conns, ensure_ascii=False, indent=2),
         encoding="utf-8")
     print(f"✅ 已生成连线指令 → {CONNECT_OUT_PATH}")
 
-    # ---------- 5. 自动调用批量连线 ----------
-    print("\n--- 步骤 5/5: 执行批量连线 ---")
-    run_batch_connect()
+    # --- 步骤 5: 执行批量连线 ---
+    print("\n--- 步骤 5: 执行批量连线 ---")
+    print(f"ℹ️ 将当前存档状态写入到 '{MODIFIED_SAVE_PATH}' 以进行连线。")
+    with MODIFIED_SAVE_PATH.open("w", encoding="utf-8") as f:
+        json.dump(current_save_data, f, indent=4)
+        
+    run_batch_connect(MODIFIED_SAVE_PATH)
+
+    # --- 步骤 6: 执行自动布局 ---
+    print("\n--- 步骤 6: 执行自动布局 ---")
+    run_auto_layout()
+    
+    if MODIFIED_SAVE_PATH.exists():
+        MODIFIED_SAVE_PATH.unlink()
 
     print("\n🎉 全部流程完成！")
 
-
 if __name__ == "__main__":
     main()
+# --- END OF FILE main.py ---

@@ -1,0 +1,3102 @@
+{
+  "257": {
+    "id": "257",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Constant",
+      "allmod_viewmodel": "ConstantNodeViewModel",
+      "chip_names_friendly_name": "Constant"
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Output"
+      }
+    ]
+  },
+  "260": {
+    "id": "260",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Time",
+      "allmod_viewmodel": "TimeNodeViewModel",
+      "chip_names_friendly_name": "Time"
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Time"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Delta time"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Sin Time"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Cos Time"
+      }
+    ]
+  },
+  "1": {
+    "id": "1",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Identity",
+      "allmod_viewmodel": "IdentityNodeViewModel",
+      "chip_names_friendly_name": "Identity"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      }
+    ]
+  },
+  "2324": {
+    "id": "2324",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Abs",
+      "allmod_viewmodel": "AbsNodeViewModel",
+      "chip_names_friendly_name": "Positive"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2304": {
+    "id": "2304",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Add",
+      "allmod_viewmodel": "AddNumbersNodeViewModel",
+      "chip_names_friendly_name": "Add"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A + B"
+      }
+    ]
+  },
+  "2309": {
+    "id": "2309",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Average",
+      "allmod_viewmodel": "AverageNumberNodeViewModel",
+      "chip_names_friendly_name": "Average"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2310": {
+    "id": "2310",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Ceil",
+      "allmod_viewmodel": "CeilNodeViewModel",
+      "chip_names_friendly_name": "Ceiling"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2311": {
+    "id": "2311",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Clamp",
+      "allmod_viewmodel": "ClampValueNodeViewModel",
+      "chip_names_friendly_name": "Clamp"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "Input"
+      },
+      {
+        "type": "Number",
+        "name": "Min"
+      },
+      {
+        "type": "Number",
+        "name": "Max"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2312": {
+    "id": "2312",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Clamp01",
+      "allmod_viewmodel": "Clamp01NodeViewModel",
+      "chip_names_friendly_name": "Clamp01"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2307": {
+    "id": "2307",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Divide",
+      "allmod_viewmodel": "DivideNodeViewModel",
+      "chip_names_friendly_name": "Divide"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "A / B"
+      }
+    ]
+  },
+  "2308": {
+    "id": "2308",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Exp",
+      "allmod_viewmodel": "ExpNodeViewModel",
+      "chip_names_friendly_name": "Exponent"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "259": {
+    "id": "259",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "E",
+      "allmod_viewmodel": "ENodeViewModel",
+      "chip_names_friendly_name": "E Constant"
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Output"
+      }
+    ]
+  },
+  "2314": {
+    "id": "2314",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "ExpPow",
+      "allmod_viewmodel": "ExpPowNumberNodeViewModel",
+      "chip_names_friendly_name": "Exponent Power"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Value"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Exponent Argument"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2315": {
+    "id": "2315",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Negate",
+      "allmod_viewmodel": "NegateNodeViewModel",
+      "chip_names_friendly_name": "Negate"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2316": {
+    "id": "2316",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Percent",
+      "allmod_viewmodel": "PercentNumberNodeViewModel",
+      "chip_names_friendly_name": "Percent"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Value"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Total"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "258": {
+    "id": "258",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Pi",
+      "allmod_viewmodel": "PiNodeViewModel",
+      "chip_names_friendly_name": "Pi"
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Output"
+      }
+    ]
+  },
+  "261": {
+    "id": "261",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Random",
+      "allmod_viewmodel": "RandomNodeViewModel",
+      "chip_names_friendly_name": "Random"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Min"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Max"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2326": {
+    "id": "2326",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Round",
+      "allmod_viewmodel": "RoundNodeViewModel",
+      "chip_names_friendly_name": "Round"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2318": {
+    "id": "2318",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Sign",
+      "allmod_viewmodel": "SignNodeViewModel",
+      "chip_names_friendly_name": "Sign"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2321": {
+    "id": "2321",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Sqr",
+      "allmod_viewmodel": "SqrNodeViewModel",
+      "chip_names_friendly_name": "Sqr"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2322": {
+    "id": "2322",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Sqrt",
+      "allmod_viewmodel": "SqrtNodeViewModel",
+      "chip_names_friendly_name": "Sqrt"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2305": {
+    "id": "2305",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Subtract",
+      "allmod_viewmodel": "SubtractNumbersNodeViewModel",
+      "chip_names_friendly_name": "Subtract"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A - B"
+      }
+    ]
+  },
+  "2319": {
+    "id": "2319",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Floor",
+      "allmod_viewmodel": "FloorNodeViewModel",
+      "chip_names_friendly_name": "Floor"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2320": {
+    "id": "2320",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Inverse",
+      "allmod_viewmodel": "InverseNodeViewModel",
+      "chip_names_friendly_name": "Inverse"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "1 / A"
+      }
+    ]
+  },
+  "2328": {
+    "id": "2328",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Lerp",
+      "allmod_viewmodel": "LerpNodeViewModel",
+      "chip_names_friendly_name": "Interpolate"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "T"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2323": {
+    "id": "2323",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Log",
+      "allmod_viewmodel": "LogNumberNodeViewModel",
+      "chip_names_friendly_name": "Logarithm"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Value"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Base"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2327": {
+    "id": "2327",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Mod",
+      "allmod_viewmodel": "RemainderNumberNodeViewModel",
+      "chip_names_friendly_name": "Remainder"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Dividend"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Divider"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Remainder"
+      }
+    ]
+  },
+  "2306": {
+    "id": "2306",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Multiply",
+      "allmod_viewmodel": "MultiplyNumbersNodeViewModel",
+      "chip_names_friendly_name": "Multiply"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A × B"
+      }
+    ]
+  },
+  "2325": {
+    "id": "2325",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Pow",
+      "allmod_viewmodel": "PowNumberNodeViewModel",
+      "chip_names_friendly_name": "Power"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Value"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Power"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2059": {
+    "id": "2059",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "DeltaAngle",
+      "allmod_viewmodel": "DeltaAngleNodeViewModel",
+      "chip_names_friendly_name": "Delta Angle"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Angle (Deg) 1"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Angle (Deg) 2"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Deg"
+      }
+    ]
+  },
+  "2052": {
+    "id": "2052",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Acos",
+      "allmod_viewmodel": "AcosNodeViewModel",
+      "chip_names_friendly_name": "Arccosinus"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "Cos"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Angle (Rad)"
+      }
+    ]
+  },
+  "2051": {
+    "id": "2051",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Asin",
+      "allmod_viewmodel": "AsinNodeViewModel",
+      "chip_names_friendly_name": "Arcsinus"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "Sin"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Angle (Rad)"
+      }
+    ]
+  },
+  "2054": {
+    "id": "2054",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Atan",
+      "allmod_viewmodel": "AtanNodeViewModel",
+      "chip_names_friendly_name": "Arctangent"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "Tan"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Angle (Rad)"
+      }
+    ]
+  },
+  "2056": {
+    "id": "2056",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Actan",
+      "allmod_viewmodel": "ArcCTanNodeViewModel",
+      "chip_names_friendly_name": "Arccatangent"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "Ctan"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Angle (Rad)"
+      }
+    ]
+  },
+  "2050": {
+    "id": "2050",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Cos",
+      "allmod_viewmodel": "CosNodeViewModel",
+      "chip_names_friendly_name": "Cos"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "Angle (Rad)"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Cos"
+      }
+    ]
+  },
+  "2049": {
+    "id": "2049",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Sin",
+      "allmod_viewmodel": "SinNodeViewModel",
+      "chip_names_friendly_name": "Sin"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Angle (Rad)"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Sin"
+      }
+    ]
+  },
+  "2053": {
+    "id": "2053",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Tan",
+      "allmod_viewmodel": "TanNodeViewModel",
+      "chip_names_friendly_name": "Tangent"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Angle (Rad)"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Tan"
+      }
+    ]
+  },
+  "2055": {
+    "id": "2055",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Ctan",
+      "allmod_viewmodel": "CTanNodeViewModel",
+      "chip_names_friendly_name": "Cotangent"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Angle (Rad)"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Ctan"
+      }
+    ]
+  },
+  "2057": {
+    "id": "2057",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "DegToRad",
+      "allmod_viewmodel": "DegToRadSameNodeViewModel",
+      "chip_names_friendly_name": "Deg to Rad"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Deg"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Rad"
+      }
+    ]
+  },
+  "2058": {
+    "id": "2058",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "RadToDeg",
+      "allmod_viewmodel": "RadToDegSameNodeViewModel",
+      "chip_names_friendly_name": "Rad to Deg"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Rad"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Deg"
+      }
+    ]
+  },
+  "2060": {
+    "id": "2060",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "CosineFormulaSide",
+      "allmod_viewmodel": "CosineFormulaSideNodeViewModel",
+      "chip_names_friendly_name": "Cosine Formula (Side)"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "C"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Cos"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      }
+    ]
+  },
+  "2061": {
+    "id": "2061",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "CosineFormulaAngle",
+      "allmod_viewmodel": "CosineFormulaAngleNodeViewModel",
+      "chip_names_friendly_name": "Cosine Formula (Angle)"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "C"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Cos"
+      }
+    ]
+  },
+  "2062": {
+    "id": "2062",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "PythagoreanCathetus",
+      "allmod_viewmodel": "PythagoreanCathetusNodeViewModel",
+      "chip_names_friendly_name": "Pythagorean Theorem (Catheus)"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Catheus A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Hypotenuse"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Catheus B"
+      }
+    ]
+  },
+  "2063": {
+    "id": "2063",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "PythagoreanSide",
+      "allmod_viewmodel": "PythagoreanSideNodeViewModel",
+      "chip_names_friendly_name": "Pythagorean Theorem (Hypotenuse)"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Catheus A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Catheus B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Hypotenuse"
+      }
+    ]
+  },
+  "2560": {
+    "id": "2560",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "And",
+      "allmod_viewmodel": "AndNodeViewModel",
+      "chip_names_friendly_name": "AND"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2567": {
+    "id": "2567",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Branch",
+      "allmod_viewmodel": "BranchNodeViewModel",
+      "chip_names_friendly_name": "Branch"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "If"
+      },
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2561": {
+    "id": "2561",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Or",
+      "allmod_viewmodel": "OrNodeViewModel",
+      "chip_names_friendly_name": "OR"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2562": {
+    "id": "2562",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Nand",
+      "allmod_viewmodel": "NotAndNodeViewModel",
+      "chip_names_friendly_name": "NOT AND"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2563": {
+    "id": "2563",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Nor",
+      "allmod_viewmodel": "NotOrNodeViewModel",
+      "chip_names_friendly_name": "NOT OR"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2564": {
+    "id": "2564",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Not",
+      "allmod_viewmodel": "NotSameNodeViewModel",
+      "chip_names_friendly_name": "NOT"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2565": {
+    "id": "2565",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Xor",
+      "allmod_viewmodel": "XorNodeViewModel",
+      "chip_names_friendly_name": "XOR"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2566": {
+    "id": "2566",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Nxor",
+      "allmod_viewmodel": "NotXorNodeViewModel",
+      "chip_names_friendly_name": "NXOR"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2816": {
+    "id": "2816",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Equal",
+      "allmod_viewmodel": "EqualNodeViewModel",
+      "chip_names_friendly_name": "Equal"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2817": {
+    "id": "2817",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "NotEqual",
+      "allmod_viewmodel": "NotEqualNodeViewModel",
+      "chip_names_friendly_name": "Not Equal"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2818": {
+    "id": "2818",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "GreaterOrEqual",
+      "allmod_viewmodel": "GreaterOrEqualNodeViewModel",
+      "chip_names_friendly_name": "Greater or Equal"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "2820": {
+    "id": "2820",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Greater",
+      "allmod_viewmodel": "GreaterNodeViewModel",
+      "chip_names_friendly_name": "Greater"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2819": {
+    "id": "2819",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "LessOrEqual",
+      "allmod_viewmodel": "LessOrEqualNodeViewModel",
+      "chip_names_friendly_name": "Less or Equal"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2821": {
+    "id": "2821",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Less",
+      "allmod_viewmodel": "LessNodeViewModel",
+      "chip_names_friendly_name": "Less"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2823": {
+    "id": "2823",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "InRangeExclusive",
+      "allmod_viewmodel": "InRangeExclusiveNodeViewModel",
+      "chip_names_friendly_name": "Is in range exclusive"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Value"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Min"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Max"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "2822": {
+    "id": "2822",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "InRangeInclusive",
+      "allmod_viewmodel": "InRangeInclusiveNodeViewModel",
+      "chip_names_friendly_name": "Is in range inclusive"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Value"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Min"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Max"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "3073": {
+    "id": "3073",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "BitAnd",
+      "allmod_viewmodel": "BitAndNodeViewModel",
+      "chip_names_friendly_name": "AND (Bit. Op.)"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "3074": {
+    "id": "3074",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "BitNot",
+      "allmod_viewmodel": "BitNotNodeViewModel",
+      "chip_names_friendly_name": "NOT (Bit. Op.)"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "3075": {
+    "id": "3075",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "BitOr",
+      "allmod_viewmodel": "BitOrNodeViewModel",
+      "chip_names_friendly_name": "OR (Bit. Op.)"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "3076": {
+    "id": "3076",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "BitXor",
+      "allmod_viewmodel": "BitXorNodeViewModel",
+      "chip_names_friendly_name": "XOR (Bit. Op.)"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "3077": {
+    "id": "3077",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "BitShiftLeft",
+      "allmod_viewmodel": "BitShiftLeftNodeViewModel",
+      "chip_names_friendly_name": "Shift Left (Bit. Op.)"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "A"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "3078": {
+    "id": "3078",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "BitShiftRight",
+      "allmod_viewmodel": "BitShiftRightNodeViewModel",
+      "chip_names_friendly_name": "Shift Right (Bit. Op.)"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "1281": {
+    "id": "1281",
+    "gate_data_type": 8,
+    "source_info": {
+      "datatype_map_nodename": "Combine",
+      "allmod_viewmodel": "CombineVectorNodeViewModel",
+      "chip_names_friendly_name": "Combine"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "X"
+      },
+      {
+        "type": "Number",
+        "name": "Y"
+      },
+      {
+        "type": "Number",
+        "name": "Z"
+      },
+      {
+        "type": "Number",
+        "name": "W"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Vector",
+        "name": "Result"
+      }
+    ]
+  },
+  "1286": {
+    "id": "1286",
+    "gate_data_type": 8,
+    "source_info": {
+      "datatype_map_nodename": "VectorCross",
+      "allmod_viewmodel": "VectorCrossProductNodeViewModel",
+      "chip_names_friendly_name": "Cross Product"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "A"
+      },
+      {
+        "type": "Vector",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Vector",
+        "name": "Result"
+      }
+    ]
+  },
+  "1280": {
+    "id": "1280",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Split",
+      "allmod_viewmodel": "SplitVectorNodeViewModel",
+      "chip_names_friendly_name": "Split"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "X"
+      },
+      {
+        "type": "Number",
+        "name": "Y"
+      },
+      {
+        "type": "Number",
+        "name": "Z"
+      },
+      {
+        "type": "Number",
+        "name": "W"
+      }
+    ]
+  },
+  "1288": {
+    "id": "1288",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "VectorDot",
+      "allmod_viewmodel": "VectorDotProductNodeViewModel",
+      "chip_names_friendly_name": "Dot Product"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "A"
+      },
+      {
+        "type": "Vector",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "1282": {
+    "id": "1282",
+    "gate_data_type": 8,
+    "source_info": {
+      "datatype_map_nodename": "Normalize",
+      "allmod_viewmodel": "NormalizeVectorNodeViewModel",
+      "chip_names_friendly_name": "Normalize"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Vector",
+        "name": "Result"
+      }
+    ]
+  },
+  "1290": {
+    "id": "1290",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "VectorPositive",
+      "allmod_viewmodel": "VectorPositiveNodeViewModel",
+      "chip_names_friendly_name": "Positive (Vectors)"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Vector",
+        "name": "Result"
+      }
+    ]
+  },
+  "1292": {
+    "id": "1292",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "VectorRotate",
+      "allmod_viewmodel": "VectorRotateNodeViewModel",
+      "chip_names_friendly_name": "Rotate"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "Value"
+      },
+      {
+        "type": "Number",
+        "name": "Angle"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Vector",
+        "name": "Result"
+      }
+    ]
+  },
+  "1294": {
+    "id": "1294",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "VectorShiftLeft",
+      "allmod_viewmodel": "VectorShiftLeftNodeViewModel",
+      "chip_names_friendly_name": "Shift Left (Vectors)"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Vector",
+        "name": "Result"
+      }
+    ]
+  },
+  "1295": {
+    "id": "1295",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "VectorShiftRight",
+      "allmod_viewmodel": "VectorShiftRightNodeViewModel",
+      "chip_names_friendly_name": "Shift Right (Vectors)"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Vector",
+        "name": "Result"
+      }
+    ]
+  },
+  "1296": {
+    "id": "1296",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "VectorAngleBetween",
+      "allmod_viewmodel": "VectorAngleBetweenNodeViewModel",
+      "chip_names_friendly_name": "Angle Between"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "A"
+      },
+      {
+        "type": "Vector",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Angle"
+      }
+    ]
+  },
+  "1283": {
+    "id": "1283",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Magnitude",
+      "allmod_viewmodel": "MagnitudeVectorNodeViewModel",
+      "chip_names_friendly_name": "Magnitude"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "1284": {
+    "id": "1284",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "SqrMagnitude",
+      "allmod_viewmodel": "SqrMagnitudeVectorNodeViewModel",
+      "chip_names_friendly_name": "Sqr Magnitude"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "1297": {
+    "id": "1297",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "RgbToHsv",
+      "allmod_viewmodel": "VectorRgbToHsvNodeViewModel",
+      "chip_names_friendly_name": "RGB to HSV"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "RGB"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Vector",
+        "name": "HSV"
+      }
+    ]
+  },
+  "1298": {
+    "id": "1298",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "HsvToRgb",
+      "allmod_viewmodel": "VectorHsvToRgbNodeViewModel",
+      "chip_names_friendly_name": "HSV to RGB"
+    },
+    "inputs": [
+      {
+        "type": "Vector",
+        "name": "HSV"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Vector",
+        "name": "RGB"
+      }
+    ]
+  },
+  "1537": {
+    "id": "1537",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "EntityNormal",
+      "allmod_viewmodel": "NormalEntityNodeViewModel",
+      "chip_names_friendly_name": "EntityNormal"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "VECTOR",
+        "name": "Vector"
+      }
+    ]
+  },
+  "1540": {
+    "id": "1540",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "AngleEntity",
+      "allmod_viewmodel": "AngleEntityNodeViewModel",
+      "chip_names_friendly_name": "Angle"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      }
+    ]
+  },
+  "1539": {
+    "id": "1539",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "AngularVelocity",
+      "allmod_viewmodel": "AngularVelocityEntityNodeViewModel",
+      "chip_names_friendly_name": "AngularVelocity"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      }
+    ]
+  },
+  "1538": {
+    "id": "1538",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Velocity",
+      "allmod_viewmodel": "VelocityEntityNodeViewModel",
+      "chip_names_friendly_name": "Velocity"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "VECTOR",
+        "name": "Vector"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "VECTOR",
+        "name": "Vector"
+      }
+    ]
+  },
+  "1542": {
+    "id": "1542",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "AddForce",
+      "allmod_viewmodel": "AddForceEntityNodeViewModel",
+      "chip_names_friendly_name": "Add Force"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "VECTOR",
+        "name": "Vector"
+      }
+    ],
+    "outputs": []
+  },
+  "1545": {
+    "id": "1545",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "AddAngularForceEntity",
+      "allmod_viewmodel": "AddAngularForceEntityNodeViewModel",
+      "chip_names_friendly_name": "Add Angular Force"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "object"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "angular force"
+      }
+    ],
+    "outputs": []
+  },
+  "1546": {
+    "id": "1546",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "AddForceAtPosition",
+      "allmod_viewmodel": "AddOffsetForceEntityNodeViewModel",
+      "chip_names_friendly_name": "Add Force At Position"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "OBJECT"
+      },
+      {
+        "type": "VECTOR",
+        "name": "FORCE"
+      },
+      {
+        "type": "VECTOR",
+        "name": "OFFSET"
+      }
+    ],
+    "outputs": []
+  },
+  "1578": {
+    "id": "1578",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Elevation",
+      "allmod_viewmodel": "ElevationEntityNodeViewModel",
+      "chip_names_friendly_name": "Elevation"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "OBJECT"
+      },
+      {
+        "type": "VECTOR",
+        "name": "POSITION"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "ANGLE (DEG)"
+      }
+    ]
+  },
+  "1549": {
+    "id": "1549",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "EntityID",
+      "allmod_viewmodel": "EntityIDNodeViewModel",
+      "chip_names_friendly_name": "Entity ID"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "OBJECT"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "ID"
+      }
+    ]
+  },
+  "1550": {
+    "id": "1550",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "IDToEntity",
+      "allmod_viewmodel": "IDToEntityNodeViewModel",
+      "chip_names_friendly_name": "ID to Entity"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "ID"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "ENTITY",
+        "name": "OBJECT"
+      }
+    ]
+  },
+  "1552": {
+    "id": "1552",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "IDIsValid",
+      "allmod_viewmodel": "IDIsValidNodeViewModel",
+      "chip_names_friendly_name": "IDIsValid"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "Entity ID"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Is Valid"
+      }
+    ]
+  },
+  "1553": {
+    "id": "1553",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "WorldPositionToLocal",
+      "allmod_viewmodel": "WorldPositionToLocalEntityNodeViewModel",
+      "chip_names_friendly_name": "World Position to Local"
+    },
+    "inputs": [
+      {
+        "type": "Entity",
+        "name": "Entity"
+      },
+      {
+        "type": "Vector",
+        "name": "World Position"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Vector",
+        "name": "Local Position"
+      }
+    ]
+  },
+  "1554": {
+    "id": "1554",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "WorldAngleToLocal",
+      "allmod_viewmodel": "WorldAngleToLocalEntityNodeViewModel",
+      "chip_names_friendly_name": "World Angle to Local"
+    },
+    "inputs": [
+      {
+        "type": "Entity",
+        "name": "Entity"
+      },
+      {
+        "type": "Number",
+        "name": "World Angle (Deg)"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Local Angle (Deg)"
+      }
+    ]
+  },
+  "1555": {
+    "id": "1555",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "LocalPositionToWorld",
+      "allmod_viewmodel": "LocalPositionToWorldEntityNodeViewModel",
+      "chip_names_friendly_name": "Local Position to World"
+    },
+    "inputs": [
+      {
+        "type": "Entity",
+        "name": "Entity"
+      },
+      {
+        "type": "Vector",
+        "name": "Local Position"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Vector",
+        "name": "Local Position"
+      }
+    ]
+  },
+  "1556": {
+    "id": "1556",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "LocalAngleToWorld",
+      "allmod_viewmodel": "LocalAngleToWorldEntityNodeViewModel",
+      "chip_names_friendly_name": "Local Angle to World"
+    },
+    "inputs": [
+      {
+        "type": "Entity",
+        "name": "Entity"
+      },
+      {
+        "type": "Number",
+        "name": "Local Angle (Deg)"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "World Angle (Deg)"
+      }
+    ]
+  },
+  "1544": {
+    "id": "1544",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "LookAt",
+      "allmod_viewmodel": "LookAtEntityNodeViewModel",
+      "chip_names_friendly_name": "LookAt"
+    },
+    "inputs": [
+      {
+        "type": 1,
+        "name": "object"
+      },
+      {
+        "type": 1,
+        "name": "target"
+      },
+      {
+        "type": 2,
+        "name": "speed/factor"
+      }
+    ],
+    "outputs": []
+  },
+  "1557": {
+    "id": "1557",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Mass",
+      "allmod_viewmodel": "MassEntityNodeViewModel",
+      "chip_names_friendly_name": "Mass"
+    },
+    "inputs": [
+      {
+        "type": 1,
+        "name": "Entity"
+      }
+    ],
+    "outputs": [
+      {
+        "type": 2,
+        "name": "Mass"
+      }
+    ]
+  },
+  "1558": {
+    "id": "1558",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "MassCenter",
+      "allmod_viewmodel": "MassCenterEntityNodeViewModel",
+      "chip_names_friendly_name": "Mass Center"
+    },
+    "inputs": [
+      {
+        "type": 1,
+        "name": "Entity"
+      }
+    ],
+    "outputs": [
+      {
+        "type": 8,
+        "name": "Mass Center"
+      }
+    ]
+  },
+  "1559": {
+    "id": "1559",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Position",
+      "allmod_viewmodel": "PositionEntityNodeViewModel",
+      "chip_names_friendly_name": "position"
+    },
+    "inputs": [
+      {
+        "type": 1,
+        "name": "object"
+      },
+      {
+        "type": 8,
+        "name": "position"
+      }
+    ],
+    "outputs": [
+      {
+        "type": 8,
+        "name": "position"
+      }
+    ]
+  },
+  "1560": {
+    "id": "1560",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "VelocityAtPosition",
+      "allmod_viewmodel": "VelocityAtPositionEntityNodeViewModel",
+      "chip_names_friendly_name": "VelocityAtPosition"
+    },
+    "inputs": [
+      {
+        "type": 1,
+        "name": "Entity"
+      },
+      {
+        "type": 8,
+        "name": "World Position"
+      }
+    ],
+    "outputs": [
+      {
+        "type": 8,
+        "name": "Velocity Vector"
+      }
+    ]
+  },
+  "1541": {
+    "id": "1541",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Temperature",
+      "allmod_viewmodel": "TemperatureEntityNodeViewModel",
+      "chip_names_friendly_name": "Temperature"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Temperature"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Temperature"
+      }
+    ]
+  },
+  "1543": {
+    "id": "1543",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Color",
+      "allmod_viewmodel": "ColorEntityNodeViewModel",
+      "chip_names_friendly_name": "Color"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "VECTOR",
+        "name": "Color"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "VECTOR",
+        "name": "Color"
+      }
+    ]
+  },
+  "1561": {
+    "id": "1561",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "CanBeActivated",
+      "allmod_viewmodel": "CanBeActivatedEntityNodeViewModel",
+      "chip_names_friendly_name": "CanBeActivated"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Result"
+      }
+    ]
+  },
+  "1562": {
+    "id": "1562",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Activate",
+      "allmod_viewmodel": "ActivateEntityNodeViewModel",
+      "chip_names_friendly_name": "Activate"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Trigger"
+      }
+    ],
+    "outputs": []
+  },
+  "1563": {
+    "id": "1563",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Gravity",
+      "allmod_viewmodel": "GravityEntityNodeViewModel",
+      "chip_names_friendly_name": "Gravity"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Gravity Scale"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Gravity Scale"
+      }
+    ]
+  },
+  "1566": {
+    "id": "1566",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Freeze",
+      "allmod_viewmodel": "FreezeEntityNodeViewModel",
+      "chip_names_friendly_name": "Freeze"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      }
+    ]
+  },
+  "1567": {
+    "id": "1567",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Size",
+      "allmod_viewmodel": "SizeEntityNodeViewModel",
+      "chip_names_friendly_name": "Size"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "VECTOR",
+        "name": "Vector"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "VECTOR",
+        "name": "Vector"
+      }
+    ]
+  },
+  "1569": {
+    "id": "1569",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Ignite",
+      "allmod_viewmodel": "IgniteEntityNodeViewModel",
+      "chip_names_friendly_name": "Ignite"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      }
+    ]
+  },
+  "1570": {
+    "id": "1570",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Extinguish",
+      "allmod_viewmodel": "ExtinguishEntityNodeViewModel",
+      "chip_names_friendly_name": "Extinguish"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      }
+    ],
+    "outputs": []
+  },
+  "1571": {
+    "id": "1571",
+    "gate_data_type": 1,
+    "source_info": {
+      "datatype_map_nodename": "Follow",
+      "allmod_viewmodel": "FollowEntityNodeViewModel",
+      "chip_names_friendly_name": "Follow"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "Entity"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      }
+    ]
+  },
+  "1574": {
+    "id": "1574",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Collision",
+      "allmod_viewmodel": "CollisionEntityNodeViewModel",
+      "chip_names_friendly_name": "Collision"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "OBJECT"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "ENABLE COLLISION"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "DISABLE COLLISION"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "COLLISION ENABLED"
+      }
+    ]
+  },
+  "1577": {
+    "id": "1577",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Delete",
+      "allmod_viewmodel": "DeleteEntityNodeViewModel",
+      "chip_names_friendly_name": "Delete"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "OBJECT"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "INPUT"
+      }
+    ],
+    "outputs": []
+  },
+  "3586": {
+    "id": "3586",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "StringFind",
+      "allmod_viewmodel": "FindStringNodeViewModel",
+      "chip_names_friendly_name": "StringFind"
+    },
+    "inputs": [
+      {
+        "type": "STRING",
+        "name": "VALUE"
+      },
+      {
+        "type": "STRING",
+        "name": "TEXT TO FIND"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "INDEX"
+      }
+    ]
+  },
+  "3587": {
+    "id": "3587",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "StringLength",
+      "allmod_viewmodel": "LengthStringNodeViewModel",
+      "chip_names_friendly_name": "StringLength"
+    },
+    "inputs": [
+      {
+        "type": "STRING",
+        "name": "String"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Length"
+      }
+    ]
+  },
+  "3588": {
+    "id": "3588",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "StringLowercase",
+      "allmod_viewmodel": "LowercaseStringNodeViewModel",
+      "chip_names_friendly_name": "StringLowercase"
+    },
+    "inputs": [
+      {
+        "type": "STRING",
+        "name": "String"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "STRING",
+        "name": "Lowercase String"
+      }
+    ]
+  },
+  "3589": {
+    "id": "3589",
+    "gate_data_type": 4,
+    "source_info": {
+      "datatype_map_nodename": "StringUppercase",
+      "allmod_viewmodel": "UppercaseStringNodeViewModel",
+      "chip_names_friendly_name": "Uppercase"
+    },
+    "inputs": [
+      {
+        "type": "STRING",
+        "name": "String"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "STRING",
+        "name": "Uppercase String"
+      }
+    ]
+  },
+  "3590": {
+    "id": "3590",
+    "gate_data_type": 4,
+    "source_info": {
+      "datatype_map_nodename": "StringReverse",
+      "allmod_viewmodel": "ReverseStringNodeViewModel",
+      "chip_names_friendly_name": "Reverse"
+    },
+    "inputs": [
+      {
+        "type": "STRING",
+        "name": "String"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "STRING",
+        "name": "Reversed String"
+      }
+    ]
+  },
+  "3592": {
+    "id": "3592",
+    "gate_data_type": 4,
+    "source_info": {
+      "datatype_map_nodename": "StringReplace",
+      "allmod_viewmodel": "ReplaceStringNodeViewModel",
+      "chip_names_friendly_name": "Replace"
+    },
+    "inputs": [
+      {
+        "type": "STRING",
+        "name": "String"
+      },
+      {
+        "type": "STRING",
+        "name": "Old Value"
+      },
+      {
+        "type": "STRING",
+        "name": "New Value"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "STRING",
+        "name": "Replaced String"
+      }
+    ]
+  },
+  "3591": {
+    "id": "3591",
+    "gate_data_type": 4,
+    "source_info": {
+      "datatype_map_nodename": "StringRepeat",
+      "allmod_viewmodel": "RepeatStringNodeViewModel",
+      "chip_names_friendly_name": "Repeat"
+    },
+    "inputs": [
+      {
+        "type": "STRING",
+        "name": "String"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Count"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "STRING",
+        "name": "Repeated String"
+      }
+    ]
+  },
+  "3593": {
+    "id": "3593",
+    "gate_data_type": 4,
+    "source_info": {
+      "datatype_map_nodename": "Substring",
+      "allmod_viewmodel": "SubstringNodeViewModel",
+      "chip_names_friendly_name": "Substring"
+    },
+    "inputs": [
+      {
+        "type": "STRING",
+        "name": "String"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Start"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Length"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "STRING",
+        "name": "Substring"
+      }
+    ]
+  },
+  "3594": {
+    "id": "3594",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "StringTrim",
+      "allmod_viewmodel": "TrimStringNodeViewModel",
+      "chip_names_friendly_name": "Trim String"
+    },
+    "inputs": [
+      {
+        "type": "STRING",
+        "name": "String"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "STRING",
+        "name": "Trimmed String"
+      }
+    ]
+  },
+  "3595": {
+    "id": "3595",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "ToString",
+      "allmod_viewmodel": "ToStringNodeViewModel",
+      "chip_names_friendly_name": "To String"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "STRING",
+        "name": "String"
+      }
+    ]
+  },
+  "3596": {
+    "id": "3596",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "ToAscii",
+      "allmod_viewmodel": "SymbolToAsciiNumberNodeViewModel",
+      "chip_names_friendly_name": "To Ascii"
+    },
+    "inputs": [
+      {
+        "type": "STRING",
+        "name": "VALUE"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "INDEX"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "ASCII"
+      }
+    ]
+  },
+  "5": {
+    "id": "5",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Sticker",
+      "allmod_viewmodel": "StickerNodeViewModel",
+      "chip_names_friendly_name": "Sticker"
+    },
+    "inputs": [],
+    "outputs": []
+  },
+  "4097": {
+    "id": "4097",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "DeltaPreviousCurrent",
+      "allmod_viewmodel": "DeltaPreviousCurrentNodeViewModel",
+      "chip_names_friendly_name": "Delta Previous"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Value"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Delta"
+      }
+    ]
+  },
+  "4098": {
+    "id": "4098",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Counter",
+      "allmod_viewmodel": "CounterNodeViewModel",
+      "chip_names_friendly_name": "Counter"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Increment"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Decrement"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Reset"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Set"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Count"
+      }
+    ]
+  },
+  "4099": {
+    "id": "4099",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Delay",
+      "allmod_viewmodel": "DelayNodeViewModel",
+      "chip_names_friendly_name": "Delay"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Value"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Delay (s)"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Reset"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Enable"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Initial Value"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Delayed Value"
+      }
+    ]
+  },
+  "4100": {
+    "id": "4100",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Accumulate",
+      "allmod_viewmodel": "AccumulateNodeViewModel",
+      "chip_names_friendly_name": "Accumulator"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Number"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "Reset"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Total"
+      }
+    ]
+  },
+  "4101": {
+    "id": "4101",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "PreviousFrameState",
+      "allmod_viewmodel": "PreviousFrameStateViewModel",
+      "chip_names_friendly_name": "Prev Frame"
+    },
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Value"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Previous Value"
+      }
+    ]
+  },
+  "256": {
+      "id": "256",
+      "gate_data_type": 2,
+      "source_info": {
+        "datatype_map_nodename": "Input",
+        "allmod_viewmodel": "RootNodeViewModel",
+        "chip_names_friendly_name": "Input"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "DECIMAL",
+          "name": "Input"
+        }
+      ]
+    },
+    "255": {
+      "id": "255",
+      "gate_data_type": 2,
+      "source_info": {
+        "datatype_map_nodename": "Output",
+        "allmod_viewmodel": "ExitNodeViewModel",
+        "chip_names_friendly_name": "Output"
+      },
+      "inputs": [
+        {
+          "type": "DECIMAL",
+          "name": "output"
+        }
+      ],
+      "outputs": []
+    },
+    "257": {
+      "id": "257",
+      "gate_data_type": 2,
+      "source_info": {
+        "datatype_map_nodename": "Constant",
+        "allmod_viewmodel": "ConstantNodeViewModel",
+        "chip_names_friendly_name": "Constant"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "DECIMAL",
+          "name": "Output"
+        }
+      ]
+    }
+}

@@ -1182,5 +1182,73 @@
     "display_name": "Sticker",
     "inputs": [],
     "outputs": []
+  },
+    "TimeNodeViewModel": {
+    "display_name": "Time",
+    "inputs": [],
+    "outputs": [
+      "Number",
+      "Number",
+      "Number",
+      "Number"
+    ]
+  },
+  "CounterNodeViewModel": {
+    "display_name": "Counter",
+    "inputs": [
+      "Number",
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "AccumulateNodeViewModel": {
+    "display_name": "Accumulate",
+    "inputs": [
+      "Number",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+    "DeltaPreviousCurrentNodeViewModel": {
+    "display_name": "Delta previous",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "PreviousFrameStateViewModel": {
+    "display_name": "Previous Frame State",
+    "inputs": [
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+    "AngleEntityNodeViewModel": {
+    "display_name": "Angle",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": [
+      "Number"
+    ]
+  },
+  "AddAngularForceEntityNodeViewModel": {
+    "display_name": "Add Angular Force",
+    "inputs": [
+      "Entity",
+      "Number"
+    ],
+    "outputs": []
   }
 }

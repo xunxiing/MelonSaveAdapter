@@ -516,6 +516,54 @@
     "outputs": [
       "String"
     ]
+  },
+  {
+    "friendly_name": "Delta Previous",
+    "game_name": "DeltaPreviousCurrentNodeViewModel",
+    "inputs": ["Value"],
+    "outputs": ["Delta"]
+  },
+  {
+    "friendly_name": "Counter",
+    "game_name": "CounterNodeViewModel",
+    "inputs": ["Increment", "Decrement", "Reset", "Set"],
+    "outputs": ["Count"]
+  },
+  {
+    "friendly_name": "Delay",
+    "game_name": "DelayNodeViewModel",
+    "inputs": ["Value", "Delay (s)", "Reset", "Enable", "Initial Value"],
+    "outputs": ["Delayed Value"]
+  },
+  {
+    "friendly_name": "Accumulator",
+    "game_name": "AccumulateNodeViewModel",
+    "inputs": ["Number", "Reset"],
+    "outputs": ["Total"]
+  },
+  {
+    "friendly_name": "Prev Frame",
+    "game_name": "PreviousFrameStateViewModel",
+    "inputs": ["Value"],
+    "outputs": ["Previous Value"]
+  },
+  {
+    "friendly_name": "Angle",
+    "game_name": "AngleEntityNodeViewModel",
+    "inputs": ["Entity", "Number"],
+    "outputs": ["Number"]
+  },
+  {
+    "friendly_name": "Add Angular Force",
+    "game_name": "AddAngularForceEntityNodeViewModel",
+    "inputs": ["object", "angular force"],
+    "outputs": []
+  },
+  {
+    "friendly_name": "position",
+    "game_name": "PositionEntityNodeViewModel",
+    "inputs": ["object", "position"],
+    "outputs": ["position"]
   }
 
 ]
