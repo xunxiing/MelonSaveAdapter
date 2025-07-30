@@ -589,7 +589,7 @@
     "id": "2327",
     "gate_data_type": 2,
     "source_info": {
-      "datatype_map_nodename": "Mod",
+      "datatype_map_nodename": "Remainder",
       "allmod_viewmodel": "RemainderNumberNodeViewModel",
       "chip_names_friendly_name": "Remainder"
     },
@@ -1902,13 +1902,13 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       }
     ],
     "outputs": [
       {
         "type": "VECTOR",
-        "name": "Vector"
+        "name": "normal"
       }
     ]
   },
@@ -1923,17 +1923,17 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "ANGLE (DEG)"
       }
     ],
     "outputs": [
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "ANGLE (DEG)"
       }
     ]
   },
@@ -1948,17 +1948,17 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "AngularVelocity"
       }
     ],
     "outputs": [
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "AngularVelocity"
       }
     ]
   },
@@ -1973,17 +1973,17 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "VECTOR",
-        "name": "Vector"
+        "name": "Velocity"
       }
     ],
     "outputs": [
       {
         "type": "VECTOR",
-        "name": "Vector"
+        "name": "Velocity"
       }
     ]
   },
@@ -1998,11 +1998,11 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "VECTOR",
-        "name": "Vector"
+        "name": "FORCE"
       }
     ],
     "outputs": []
@@ -2150,7 +2150,7 @@
     "inputs": [
       {
         "type": "Entity",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "Vector",
@@ -2175,7 +2175,7 @@
     "inputs": [
       {
         "type": "Entity",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "Number",
@@ -2200,7 +2200,7 @@
     "inputs": [
       {
         "type": "Entity",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "Vector",
@@ -2225,7 +2225,7 @@
     "inputs": [
       {
         "type": "Entity",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "Number",
@@ -2274,7 +2274,7 @@
     "inputs": [
       {
         "type": 1,
-        "name": "Entity"
+        "name": "object"
       }
     ],
     "outputs": [
@@ -2295,7 +2295,7 @@
     "inputs": [
       {
         "type": 1,
-        "name": "Entity"
+        "name": "object"
       }
     ],
     "outputs": [
@@ -2341,7 +2341,7 @@
     "inputs": [
       {
         "type": 1,
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": 8,
@@ -2366,7 +2366,7 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "DECIMAL",
@@ -2391,7 +2391,7 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "VECTOR",
@@ -2416,7 +2416,7 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       }
     ],
     "outputs": [
@@ -2437,7 +2437,7 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "DECIMAL",
@@ -2457,7 +2457,7 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "DECIMAL",
@@ -2482,17 +2482,17 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "freeze"
       }
     ],
     "outputs": [
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "is frozen"
       }
     ]
   },
@@ -2507,17 +2507,17 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "VECTOR",
-        "name": "Vector"
+        "name": "size"
       }
     ],
     "outputs": [
       {
         "type": "VECTOR",
-        "name": "Vector"
+        "name": "size"
       }
     ]
   },
@@ -2532,17 +2532,17 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "ignite"
       }
     ],
     "outputs": [
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "is on fire"
       }
     ]
   },
@@ -2557,11 +2557,11 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "Extinguish"
       }
     ],
     "outputs": []
@@ -2577,21 +2577,21 @@
     "inputs": [
       {
         "type": "ENTITY",
-        "name": "Entity"
+        "name": "object"
       },
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "follow"
       },
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "unfollow"
       }
     ],
     "outputs": [
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "is following"
       }
     ]
   },
@@ -2701,7 +2701,7 @@
     "inputs": [
       {
         "type": "STRING",
-        "name": "String"
+        "name": "INPUT"
       }
     ],
     "outputs": [
@@ -2722,13 +2722,13 @@
     "inputs": [
       {
         "type": "STRING",
-        "name": "String"
+        "name": "Input"
       }
     ],
     "outputs": [
       {
         "type": "STRING",
-        "name": "Uppercase String"
+        "name": "Result"
       }
     ]
   },
@@ -2764,7 +2764,7 @@
     "inputs": [
       {
         "type": "STRING",
-        "name": "String"
+        "name": "Value"
       },
       {
         "type": "STRING",
@@ -2793,7 +2793,7 @@
     "inputs": [
       {
         "type": "STRING",
-        "name": "String"
+        "name": "Value"
       },
       {
         "type": "DECIMAL",
@@ -2818,7 +2818,7 @@
     "inputs": [
       {
         "type": "STRING",
-        "name": "String"
+        "name": "Value"
       },
       {
         "type": "DECIMAL",
@@ -2847,7 +2847,7 @@
     "inputs": [
       {
         "type": "STRING",
-        "name": "String"
+        "name": "INPUT"
       }
     ],
     "outputs": [
@@ -2868,7 +2868,7 @@
     "inputs": [
       {
         "type": "DECIMAL",
-        "name": "Number"
+        "name": "Input"
       }
     ],
     "outputs": [

@@ -1,23 +1,154 @@
 {
   "nodes": [
     {
-      "id": "magnitude_1",
-      "type": "MAGNITUDE",
-      "label": "计算向量长度",
-      "attrs": {},
+      "id": "input_trigger_signal",
+      "type": "INPUT",
+      "label": "跳跃触发",
+      "attrs": {
+        "name": "#JumpTrigger",
+        "data_type": 4
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "DECIMAL"
+        }
+      ]
+    },
+    {
+      "id": "input_target_entity",
+      "type": "INPUT",
+      "label": "目标物体",
+      "attrs": {
+        "name": "#TargetObject",
+        "data_type": 1
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "ENTITY"
+        }
+      ]
+    },
+    {
+      "id": "const_jump_force_vector",
+      "type": "Constant",
+      "label": "跳跃力度",
+      "attrs": {
+        "value": "X:0 Y:10000 Z:0 W:0",
+        "data_type": 8
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "VECTOR"
+        }
+      ]
+    },
+    {
+      "id": "const_zero_vector",
+      "type": "Constant",
+      "label": "零向量",
+      "attrs": {
+        "value": "X:0 Y:0 Z:0 W:0",
+        "data_type": 8
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "VECTOR"
+        }
+      ]
+    },
+    {
+      "id": "branch_force_selector",
+      "type": "branch",
+      "label": "力度选择",
+      "attrs": {"data_type": 8},
       "inputs": [
         {
-          "name": "INPUT",
-          "type": "VECTOR"
+          "name": "if",
+          "type": "DECIMAL"
+        },
+        {
+          "name": "A",
+          "type": "ANY"
+        },
+        {
+          "name": "B",
+          "type": "ANY"
         }
       ],
       "outputs": [
         {
-          "name": "RESULT",
-          "type": "DECIMAL"
+          "name": "OUTPUT",
+          "type": "ANY"
         }
       ]
+    },
+    {
+      "id": "action_add_force",
+      "type": "add FORCE",
+      "label": "施加力",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "object",
+          "type": "ENTITY"
+        },
+        {
+          "name": "Force",
+          "type": "VECTOR"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "sticker_info",
+      "type": "Sticker",
+      "label": "说明",
+      "attrs": {
+        "Header": "跳跃芯片说明",
+        "Text": "当 #JumpTrigger 输入为1时，对 #TargetObject 施加一个向上的力。\n可以修改“跳跃力度”模块的Y值来调整跳跃高度。"
+      },
+      "inputs": [],
+      "outputs": []
     }
   ],
-  "edges": []
+  "edges": [
+    {
+      "from_node": "input_trigger_signal",
+      "from_port": "OUTPUT",
+      "to_node": "branch_force_selector",
+      "to_port": "if"
+    },
+    {
+      "from_node": "const_jump_force_vector",
+      "from_port": "OUTPUT",
+      "to_node": "branch_force_selector",
+      "to_port": "A"
+    },
+    {
+      "from_node": "const_zero_vector",
+      "from_port": "OUTPUT",
+      "to_node": "branch_force_selector",
+      "to_port": "B"
+    },
+    {
+      "from_node": "branch_force_selector",
+      "from_port": "OUTPUT",
+      "to_node": "action_add_force",
+      "to_port": "Force"
+    },
+    {
+      "from_node": "input_target_entity",
+      "from_port": "OUTPUT",
+      "to_node": "action_add_force",
+      "to_port": "object"
+    }
+  ]
 }

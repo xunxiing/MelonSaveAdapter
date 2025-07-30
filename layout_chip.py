@@ -6,7 +6,7 @@ from typing import List, Dict, Any
 # 您可以根据最终效果微调这些值
 X_SPACING = 800.0  # 节点“列”之间的水平距离
 Y_SPACING = 600.0  # 同一列中节点之间的最小垂直距离
-GLOBAL_X_OFFSET = -11000.0 # 整体向左平移，以适应画布
+GLOBAL_X_OFFSET = -9000.0 # 整体向左平移，以适应画布
 
 # --- 文件名 (仅在独立运行时使用) ---
 INPUT_FILENAME = 'ungraph.json'

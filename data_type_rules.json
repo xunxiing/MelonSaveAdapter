@@ -1,0 +1,28 @@
+{
+  "comment": "在此定义模块端口数据类型的修改规则。'same' 表示跟随节点主数据类型，数字表示固定类型。",
+  "2304": {
+    "module_name": "Add",
+    "inputs": ["same", "same"],
+    "outputs": ["same"]
+  },
+  "2305": {
+    "module_name": "Subtract",
+    "inputs": ["same", "same"],
+    "outputs": ["same"]
+  },
+  "2567": {
+    "module_name": "Branch",
+    "inputs": [2, "same", "same"],
+    "outputs": ["same", "same"]
+  },
+  "1": {
+    "module_name": "Identity (Passthrough)",
+    "inputs": ["same"],
+    "outputs": ["same"]
+  },
+  "4101": {
+  "module_name": "PreviousFrameState",
+  "inputs": ["same"],
+  "outputs": ["same"]
+ }
+}
