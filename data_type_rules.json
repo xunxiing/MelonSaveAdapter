@@ -20,6 +20,11 @@
     "inputs": ["same"],
     "outputs": ["same"]
   },
+    "2328": {
+    "module_name": "Interpolate",
+    "inputs": ["same","same",2],
+    "outputs": ["same"]
+  },
   "4101": {
   "module_name": "PreviousFrameState",
   "inputs": ["same"],

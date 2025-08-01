@@ -535,7 +535,7 @@
     "id": "2328",
     "gate_data_type": 2,
     "source_info": {
-      "datatype_map_nodename": "Lerp",
+      "datatype_map_nodename": "Interpolate",
       "allmod_viewmodel": "LerpNodeViewModel",
       "chip_names_friendly_name": "Interpolate"
     },
@@ -2249,15 +2249,15 @@
     },
     "inputs": [
       {
-        "type": 1,
+        "type": "ENTITY",
         "name": "object"
       },
       {
-        "type": 1,
+        "type": "ENTITY",
         "name": "target"
       },
       {
-        "type": 2,
+        "type": "DECIMAL",
         "name": "speed/factor"
       }
     ],
@@ -2273,13 +2273,13 @@
     },
     "inputs": [
       {
-        "type": 1,
+        "type": "ENTITY",
         "name": "object"
       }
     ],
     "outputs": [
       {
-        "type": 2,
+        "type": "DECIMAL",
         "name": "Mass"
       }
     ]
@@ -2294,13 +2294,13 @@
     },
     "inputs": [
       {
-        "type": 1,
+        "type": "ENTITY",
         "name": "object"
       }
     ],
     "outputs": [
       {
-        "type": 8,
+        "type": "VECTOR",
         "name": "Mass Center"
       }
     ]
@@ -2315,17 +2315,17 @@
     },
     "inputs": [
       {
-        "type": 1,
+        "type": "ENTITY",
         "name": "object"
       },
       {
-        "type": 8,
+        "type": "VECTOR",
         "name": "position"
       }
     ],
     "outputs": [
       {
-        "type": 8,
+        "type": "VECTOR",
         "name": "position"
       }
     ]
@@ -2340,17 +2340,17 @@
     },
     "inputs": [
       {
-        "type": 1,
+        "type": "ENTITY",
         "name": "object"
       },
       {
-        "type": 8,
+        "type": "VECTOR",
         "name": "World Position"
       }
     ],
     "outputs": [
       {
-        "type": 8,
+        "type": "VECTOR",
         "name": "Velocity Vector"
       }
     ]

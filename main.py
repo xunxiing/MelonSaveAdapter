@@ -1,3 +1,5 @@
+# --- START OF FILE main.py ---
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -93,10 +95,22 @@ def parse_graph(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any], Di
         if best_match_key is None: sys.exit(f"错误：无法识别模块类型 “{node['type']}”")
         chip_info = chip_index[best_match_key]
         node_type_lower = chip_info["friendly_name"].lower()
+
         if node_type_lower in ('input', 'output', 'constant'):
-            modules.append({"type": node_type_lower, "name": node.get("name", chip_info["friendly_name"])})
+            module_def: Dict[str, Any] = {"type": node_type_lower, "name": node.get("name", chip_info["friendly_name"])}
+
+            if node_type_lower == 'constant':
+                # 【新】解析常量节点的 value
+                if "value" in node.get("attrs", {}):
+                    module_def["value"] = node["attrs"]["value"]
+                else:
+                    # 如果没有指定value，则给一个默认值
+                    module_def["value"] = 0
+            
+            modules.append(module_def)
         else:
             modules.append(chip_info["friendly_name"])
+        
         node_map[node["id"]] = {"friendly_name": chip_info["friendly_name"], "game_name": chip_info["game_name"], "order_index": len(modules) - 1, "new_full_id": None}
     return modules, node_map
 
@@ -199,6 +213,17 @@ def main() -> None:
     current_save_data = run_batch_add(modules, node_map)
     print("✅ 模块添加完成，并已获取新节点ID。")
 
+    # --- 3.1 预处理：为常量节点在 `modify_instructions` 中添加 `dataType` ---
+    # 这一步是为了确保在 `apply_data_type_modifications` 中正确设置常量节点的类型
+    # 即使 `main.py` 在 `parse_graph` 中已经给出了默认值，`apply_data_type_modifications` 会覆盖它。
+    # 这里确保 `dataType` 信息能传递过去。
+    for node in graph["nodes"]:
+        if node["type"].lower() == "constant":
+            # 确保即使 graph.json 没有指定 data_type，也会有一个默认值
+            # 并且这个值会被 generate_modify_instructions 捕获
+            node.setdefault("attrs", {})
+            node["attrs"].setdefault("data_type", "Number") # 默认常量为Number类型
+            
     # --- 步骤 3: 修改节点数据类型 ---
     print("\n--- 步骤 3: 修改节点数据类型 ---")
     modify_instructions = generate_modify_instructions(graph, node_map)

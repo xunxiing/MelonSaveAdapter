@@ -1,12 +1,11 @@
 {
   "nodes": [
     {
-      "id": "input_trigger_signal",
-      "type": "INPUT",
-      "label": "跳跃触发",
+      "id": "const_a",
+      "type": "Constant (Decimal)",
+      "label": "加数A",
       "attrs": {
-        "name": "#JumpTrigger",
-        "data_type": 4
+        "value": 5
       },
       "inputs": [],
       "outputs": [
@@ -17,138 +16,77 @@
       ]
     },
     {
-      "id": "input_target_entity",
-      "type": "INPUT",
-      "label": "目标物体",
+      "id": "const_b",
+      "type": "Constant (Decimal)",
+      "label": "加数B",
       "attrs": {
-        "name": "#TargetObject",
-        "data_type": 1
+        "value": 3
       },
       "inputs": [],
       "outputs": [
         {
           "name": "OUTPUT",
-          "type": "ENTITY"
-        }
-      ]
-    },
-    {
-      "id": "const_jump_force_vector",
-      "type": "Constant",
-      "label": "跳跃力度",
-      "attrs": {
-        "value": "X:0 Y:10000 Z:0 W:0",
-        "data_type": 8
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "VECTOR"
-        }
-      ]
-    },
-    {
-      "id": "const_zero_vector",
-      "type": "Constant",
-      "label": "零向量",
-      "attrs": {
-        "value": "X:0 Y:0 Z:0 W:0",
-        "data_type": 8
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "VECTOR"
-        }
-      ]
-    },
-    {
-      "id": "branch_force_selector",
-      "type": "branch",
-      "label": "力度选择",
-      "attrs": {"data_type": 8},
-      "inputs": [
-        {
-          "name": "if",
           "type": "DECIMAL"
-        },
-        {
-          "name": "A",
-          "type": "ANY"
-        },
-        {
-          "name": "B",
-          "type": "ANY"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "ANY"
         }
       ]
     },
     {
-      "id": "action_add_force",
-      "type": "add FORCE",
-      "label": "施加力",
+      "id": "adder",
+      "type": "ADD",
+      "label": "加法器",
       "attrs": {},
       "inputs": [
         {
-          "name": "object",
-          "type": "ENTITY"
+          "name": "A",
+          "type": "DECIMAL"
         },
         {
-          "name": "Force",
-          "type": "VECTOR"
+          "name": "B",
+          "type": "DECIMAL"
         }
       ],
-      "outputs": []
+      "outputs": [
+        {
+          "name": "A+B",
+          "type": "DECIMAL"
+        }
+      ]
     },
     {
-      "id": "sticker_info",
-      "type": "Sticker",
-      "label": "说明",
+      "id": "result_output",
+      "type": "OUTPUT",
+      "label": "结果",
       "attrs": {
-        "Header": "跳跃芯片说明",
-        "Text": "当 #JumpTrigger 输入为1时，对 #TargetObject 施加一个向上的力。\n可以修改“跳跃力度”模块的Y值来调整跳跃高度。"
+        "name": "#Result",
+        "data_type": 2
       },
-      "inputs": [],
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "DECIMAL"
+        }
+      ],
       "outputs": []
     }
   ],
   "edges": [
     {
-      "from_node": "input_trigger_signal",
+      "from_node": "const_a",
       "from_port": "OUTPUT",
-      "to_node": "branch_force_selector",
-      "to_port": "if"
-    },
-    {
-      "from_node": "const_jump_force_vector",
-      "from_port": "OUTPUT",
-      "to_node": "branch_force_selector",
+      "to_node": "adder",
       "to_port": "A"
     },
     {
-      "from_node": "const_zero_vector",
+      "from_node": "const_b",
       "from_port": "OUTPUT",
-      "to_node": "branch_force_selector",
+      "to_node": "adder",
       "to_port": "B"
     },
     {
-      "from_node": "branch_force_selector",
-      "from_port": "OUTPUT",
-      "to_node": "action_add_force",
-      "to_port": "Force"
-    },
-    {
-      "from_node": "input_target_entity",
-      "from_port": "OUTPUT",
-      "to_node": "action_add_force",
-      "to_port": "object"
+      "from_node": "adder",
+      "from_port": "A+B",
+      "to_node": "result_output",
+      "to_port": "INPUT"
     }
   ]
 }

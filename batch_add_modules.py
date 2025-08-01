@@ -50,7 +50,18 @@ def parse_special_notation(item: str) -> Dict[str, Any] | None:
         return None
     node_type = m.group(1).lower()
     name = (m.group("name") or node_type.title()).strip()
-    return {"type": node_type, "name": name, "dataType": 2}
+    
+    # 【注意】这里的数据类型和值是默认值，如果graph.json中指定了，最终会覆盖
+    # main.py会传递更准确的信息。这里主要是为了向下兼容旧的简单字符串指令。
+    node_def: Dict[str, Any] = {"type": node_type, "name": name}
+    
+    # 默认数据类型为 Number (2)
+    node_def["dataType"] = 2 
+    
+    if node_type == "constant":
+        node_def["value"] = 0 # 默认常量值为 0
+        
+    return node_def
 
 
 def fuzzy_best_match(name: str, candidates: List[str], cutoff: float = 0.5) -> str | None:
@@ -91,16 +102,10 @@ def add_modules(
     original_request_order = [] 
 
     for item in modules_wanted:
+        # 兼容 main.py 传递过来的完整字典定义
         if isinstance(item, dict) and item.get("type") in {"input", "output", "constant"}:
-            node_def = {
-                "type": item["type"].lower(),
-                "name": item.get("name", item["type"].title()),
-                "dataType": item.get("dataType", 2),
-            }
-            if node_def["type"] == "constant":
-                node_def["value"] = 0
-            special_node_defs.append(node_def)
-            original_request_order.append(node_def)
+            special_node_defs.append(item) # 直接使用 main.py 已经解析好的字典
+            original_request_order.append(item)
         elif isinstance(item, str):
             special = parse_special_notation(item)
             if special:
@@ -199,7 +204,7 @@ def add_modules(
         # 处理 input/output/constant 的逻辑不变
         elif node_type == "input":
             name = req_item.get("name", "Input")
-            data_type = req_item.get("dataType", 2)
+            data_type = req_item.get("dataType", 2) # 从 req_item 获取或使用默认值
             input_entry, graph_node = create_input_node(name, data_type)
             chip_inputs_data.append(input_entry)
             node_id = graph_node["Id"]
@@ -210,7 +215,7 @@ def add_modules(
         
         elif node_type == "output":
             name = req_item.get("name", "Output")
-            data_type = req_item.get("dataType", 2)
+            data_type = req_item.get("dataType", 2) # 从 req_item 获取或使用默认值
             output_entry, graph_node = create_output_node(name, data_type)
             chip_outputs_data.append(output_entry)
             node_id = graph_node["Id"]
@@ -220,8 +225,9 @@ def add_modules(
             created_nodes_info.append({"class_name": "ExitNodeViewModel", "full_id": node_id})
 
         elif node_type == "constant":
-            value = req_item.get("value", 0)
-            data_type = req_item.get("dataType", 2)
+            # 【修改】从 req_item 获取 value，如果不存在则默认为 0
+            value = req_item.get("value", 0) 
+            data_type = req_item.get("dataType", 2) # 从 req_item 获取或使用默认值
             graph_node = create_constant_node(value, data_type)
             node_id = graph_node["Id"]
             class_name = node_id.split(" : ")[0]
@@ -301,4 +307,3 @@ def main_cli() -> None:
 
 if __name__ == "__main__":
     main_cli()
-# --- END OF FILE batch_add_modules.py ---

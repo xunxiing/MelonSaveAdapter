@@ -1,7 +1,9 @@
+# --- START OF FILE chip_modifier.py ---
+
 import json
 import uuid
 import re
-
+from typing import Any # <-- 添加这一行
 # --- 辅助函数 ---
 
 def find_meta_data(meta_datas, key):
@@ -104,13 +106,26 @@ def create_output_node(name, data_type):
     }
     return output_entry, graph_node
 
-def create_constant_node(value, data_type):
+def create_constant_node(value: Any, data_type: int):
     """创建常量节点所需的所有数据结构"""
     node_guid = str(uuid.uuid4())
     pin_guid = str(uuid.uuid4())
 
     # SaveData 是一个被转义的JSON字符串
-    save_data_inner_dict = {"DataValue": str(value)}
+    # 根据传入的value类型，转换为DataValue的字符串表示
+    if isinstance(value, (int, float, str)):
+        # 对于数字和简单字符串，直接转换为字符串
+        save_data_inner_value = str(value)
+    elif isinstance(value, dict):
+        # 对于复杂类型（如向量），将其JSON序列化为字符串
+        # 游戏引擎会再次解析这个字符串
+        save_data_inner_value = json.dumps(value, separators=(',', ':'))
+    else:
+        # 默认回退
+        save_data_inner_value = "0" 
+
+    save_data_inner_dict = {"DataValue": save_data_inner_value}
+    # 外部的 SaveData 字段本身也是一个JSON字符串
     save_data_string = json.dumps(save_data_inner_dict, separators=(',', ':'))
 
     graph_node = {
@@ -153,6 +168,7 @@ def process_chip_file(chip_data, new_nodes_data):
         y_pos_counter = 400.0 # 新节点的起始Y坐标，避免与现有节点重叠
         for node_def in new_nodes_data:
             node_type = node_def.get("type")
+            # 注意：这里的 dataType 仅用于初始创建，后续可能会被 modifier.py 覆盖
             data_type = node_def.get("dataType", 2) # 默认为2 (Number)
 
             if node_type == "input":
@@ -168,7 +184,8 @@ def process_chip_file(chip_data, new_nodes_data):
                 y_pos_counter = add_node_to_graph(chip_graph_data, graph_node, y_pos_counter)
 
             elif node_type == "constant":
-                value = node_def.get("value", "0")
+                # 【修改】从 node_def 获取 value，如果不存在则默认为 "0"
+                value = node_def.get("value", 0) 
                 graph_node = create_constant_node(value, data_type)
                 y_pos_counter = add_node_to_graph(chip_graph_data, graph_node, y_pos_counter)
 

@@ -1,32 +1,20 @@
 [
   {
-    "from_node_id": "RootNodeViewModel : f301078a-65bd-43b5-b744-33fdbd7c8036",
+    "from_node_id": "ConstantNodeViewModel : 691ce7ae-2d14-4341-9adc-a28c0056cfe0",
     "from_port_index": 0,
-    "to_node_id": "BranchNodeViewModel : ccd517b2-e29e-41dc-bb38-49b28c08e450",
+    "to_node_id": "AddNumbersNodeViewModel : 88eae052-35c9-46a0-885c-1dbb1572d496",
     "to_port_index": 0
   },
   {
-    "from_node_id": "ConstantNodeViewModel : ad30b9d3-cb5a-442b-9550-4646764b5888",
+    "from_node_id": "ConstantNodeViewModel : fa9356af-02c5-4bb9-822e-19b6dea1bbed",
     "from_port_index": 0,
-    "to_node_id": "BranchNodeViewModel : ccd517b2-e29e-41dc-bb38-49b28c08e450",
+    "to_node_id": "AddNumbersNodeViewModel : 88eae052-35c9-46a0-885c-1dbb1572d496",
     "to_port_index": 1
   },
   {
-    "from_node_id": "ConstantNodeViewModel : ae914f20-e668-4042-8137-c81dbf417da5",
+    "from_node_id": "AddNumbersNodeViewModel : 88eae052-35c9-46a0-885c-1dbb1572d496",
     "from_port_index": 0,
-    "to_node_id": "BranchNodeViewModel : ccd517b2-e29e-41dc-bb38-49b28c08e450",
-    "to_port_index": 2
-  },
-  {
-    "from_node_id": "BranchNodeViewModel : ccd517b2-e29e-41dc-bb38-49b28c08e450",
-    "from_port_index": 0,
-    "to_node_id": "AddForceEntityNodeViewModel : 69d7a2d8-8eb4-42f8-bee0-f3eb7b7053eb",
-    "to_port_index": 1
-  },
-  {
-    "from_node_id": "RootNodeViewModel : 18181f30-1a72-465e-a4b9-0e7aaf40066b",
-    "from_port_index": 0,
-    "to_node_id": "AddForceEntityNodeViewModel : 69d7a2d8-8eb4-42f8-bee0-f3eb7b7053eb",
+    "to_node_id": "ExitNodeViewModel : 81fc8153-c0fa-44ce-808c-1c03c507cf24",
     "to_port_index": 0
   }
 ]
