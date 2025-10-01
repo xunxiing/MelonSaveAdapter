@@ -89,7 +89,7 @@
                         "key": "chip_tps",
                         "boolValue": false,
                         "stringValue": null,
-                        "intValue": 30,
+                        "intValue": 240,
                         "floatValue": 0.0,
                         "vector2Value": {
                             "x": 0.0,

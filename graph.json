@@ -1,69 +1,253 @@
 {
   "nodes": [
     {
-      "id": "const_a",
-      "type": "Constant (Decimal)",
-      "label": "加数A",
+      "id": "input_0",
+      "type": "INPUT",
+      "label": "Tracker",
       "attrs": {
-        "value": 5
+        "name": "Tracker",
+        "data_type": 1
       },
       "inputs": [],
       "outputs": [
         {
           "name": "OUTPUT",
-          "type": "DECIMAL"
+          "type": ""
         }
       ]
     },
     {
-      "id": "const_b",
-      "type": "Constant (Decimal)",
-      "label": "加数B",
+      "id": "input_1",
+      "type": "INPUT",
+      "label": "Target",
       "attrs": {
-        "value": 3
+        "name": "Target",
+        "data_type": 1
       },
       "inputs": [],
       "outputs": [
         {
           "name": "OUTPUT",
-          "type": "DECIMAL"
+          "type": ""
         }
       ]
     },
     {
-      "id": "adder",
-      "type": "ADD",
-      "label": "加法器",
+      "id": "input_2",
+      "type": "INPUT",
+      "label": "Force",
+      "attrs": {
+        "name": "Force",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "position_0",
+      "type": "Position",
+      "label": "Position",
       "attrs": {},
       "inputs": [
         {
-          "name": "A",
-          "type": "DECIMAL"
-        },
-        {
-          "name": "B",
-          "type": "DECIMAL"
+          "name": "object",
+          "type": ""
         }
       ],
       "outputs": [
         {
-          "name": "A+B",
-          "type": "DECIMAL"
+          "name": "Position",
+          "type": ""
         }
       ]
     },
     {
-      "id": "result_output",
-      "type": "OUTPUT",
-      "label": "结果",
-      "attrs": {
-        "name": "#Result",
-        "data_type": 2
-      },
+      "id": "position_1",
+      "type": "Position",
+      "label": "Position",
+      "attrs": {},
       "inputs": [
         {
-          "name": "INPUT",
-          "type": "DECIMAL"
+          "name": "object",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Position",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "subtract_0",
+      "type": "SUBTRACT",
+      "label": "SUBTRACT",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A-B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "normalize_0",
+      "type": "NORMALIZE",
+      "label": "NORMALIZE",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "input",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "split_0",
+      "type": "Split",
+      "label": "Split",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "Vector",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "X",
+          "type": ""
+        },
+        {
+          "name": "Y",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_0",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_1",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_0",
+      "type": "Constant",
+      "label": "Const 0.0",
+      "attrs": {
+        "value": 0.0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "combine_0",
+      "type": "Combine",
+      "label": "Combine",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "X",
+          "type": ""
+        },
+        {
+          "name": "Y",
+          "type": ""
+        },
+        {
+          "name": "Z",
+          "type": ""
+        },
+        {
+          "name": "W",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Vector",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_force_0",
+      "type": "add_FORCE",
+      "label": "add_FORCE",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "object",
+          "type": ""
+        },
+        {
+          "name": "Force",
+          "type": ""
         }
       ],
       "outputs": []
@@ -71,22 +255,100 @@
   ],
   "edges": [
     {
-      "from_node": "const_a",
+      "from_node": "input_0",
       "from_port": "OUTPUT",
-      "to_node": "adder",
+      "to_node": "position_0",
+      "to_port": "object"
+    },
+    {
+      "from_node": "input_1",
+      "from_port": "OUTPUT",
+      "to_node": "position_1",
+      "to_port": "object"
+    },
+    {
+      "from_node": "position_1",
+      "from_port": "Position",
+      "to_node": "subtract_0",
       "to_port": "A"
     },
     {
-      "from_node": "const_b",
-      "from_port": "OUTPUT",
-      "to_node": "adder",
+      "from_node": "position_0",
+      "from_port": "Position",
+      "to_node": "subtract_0",
       "to_port": "B"
     },
     {
-      "from_node": "adder",
-      "from_port": "A+B",
-      "to_node": "result_output",
-      "to_port": "INPUT"
+      "from_node": "subtract_0",
+      "from_port": "A-B",
+      "to_node": "normalize_0",
+      "to_port": "input"
+    },
+    {
+      "from_node": "normalize_0",
+      "from_port": "result",
+      "to_node": "split_0",
+      "to_port": "Vector"
+    },
+    {
+      "from_node": "split_0",
+      "from_port": "X",
+      "to_node": "multiply_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_2",
+      "from_port": "OUTPUT",
+      "to_node": "multiply_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "split_0",
+      "from_port": "Y",
+      "to_node": "multiply_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_2",
+      "from_port": "OUTPUT",
+      "to_node": "multiply_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_0",
+      "from_port": "A*B",
+      "to_node": "combine_0",
+      "to_port": "X"
+    },
+    {
+      "from_node": "multiply_1",
+      "from_port": "A*B",
+      "to_node": "combine_0",
+      "to_port": "Y"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "combine_0",
+      "to_port": "Z"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "combine_0",
+      "to_port": "W"
+    },
+    {
+      "from_node": "input_0",
+      "from_port": "OUTPUT",
+      "to_node": "add_force_0",
+      "to_port": "object"
+    },
+    {
+      "from_node": "combine_0",
+      "from_port": "Vector",
+      "to_node": "add_force_0",
+      "to_port": "Force"
     }
   ]
 }

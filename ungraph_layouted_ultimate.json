@@ -1,0 +1,290 @@
+{
+    "autoLightData": {
+        "isAutoLightEnabled": false,
+        "timeProgress": 0.5,
+        "minutesInDay": 10
+    },
+    "saveObjectContainers": [
+        {
+            "saveObjects": {
+                "objectId": 248,
+                "instanceId": -55784,
+                "modedObjectId": "",
+                "localId": 0,
+                "parentId": -1,
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0289526787
+                },
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "intensity": 0.0,
+                "layer": 0,
+                "sortingLayer": "Default",
+                "orderLayer": 0,
+                "gravity": true,
+                "freezed": false,
+                "rotationFrozen": false,
+                "notBreakable": false,
+                "isMeltable": false,
+                "isHuman": false,
+                "isActivationForced": false,
+                "TreeBranch": null,
+                "LightSaveData": {
+                    "IsActive": false,
+                    "ColorIsChanged": true,
+                    "Color": {
+                        "r": 0.0,
+                        "g": 0.0,
+                        "b": 0.0,
+                        "a": 0.0
+                    },
+                    "IsBrokenByWater": false,
+                    "ChildrenSaveData": null,
+                    "<IsActive>k__BackingField": false,
+                    "<ColorIsChanged>k__BackingField": true,
+                    "<Color>k__BackingField": {
+                        "r": 0.0,
+                        "g": 0.0,
+                        "b": 0.0,
+                        "a": 0.0
+                    },
+                    "<IsBrokenByWater>k__BackingField": false,
+                    "<ChildrenSaveData>k__BackingField": null
+                },
+                "BreakableSaveData": null,
+                "humanData": [],
+                "mechanicData": [
+                    {
+                        "activationInput": 0.0,
+                        "floatParameters": [
+                            0.0
+                        ],
+                        "mechanicSerializedInputs": "[{\"Key\":\"activation\",\"DataType\":2,\"DataName\":\"activation\",\"CanBeEdit\":false,\"GateData\":\"{\\\"Value\\\":0.0,\\\"Default\\\":0.0,\\\"Min\\\":-3.40282347E+38,\\\"Max\\\":3.40282347E+38,\\\"IsCheckbox\\\":false}\"}]"
+                    }
+                ],
+                "brokenJoints": [],
+                "hingeJoints": [],
+                "distJoints": [],
+                "constraints": [],
+                "collisionIgnores": [],
+                "addData": [],
+                "saveMetaDatas": [
+                    {
+                        "key": "chip_tps",
+                        "boolValue": false,
+                        "stringValue": null,
+                        "intValue": 30,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_period_name_index",
+                        "boolValue": false,
+                        "stringValue": null,
+                        "intValue": 2,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_inputs",
+                        "boolValue": false,
+                        "stringValue": "[\n  {\n    \"Key\": \"activation\",\n    \"DataName\": \"activation\",\n    \"SerializedValue\": \"{\\\"Value\\\":0.0,\\\"Default\\\":0.0,\\\"Min\\\":-3.40282347E+38,\\\"Max\\\":3.40282347E+38,\\\"IsCheckbox\\\":false}\",\n    \"GateDataType\": 2\n  },\n  {\n    \"Key\": \"entity_3dab\",\n    \"DataName\": \"##entity\",\n    \"SerializedValue\": null,\n    \"GateDataType\": 1\n  },\n  {\n    \"Key\": \"target_angle_9546\",\n    \"DataName\": \"##target_angle\",\n    \"SerializedValue\": \"{\\\"Value\\\": 0.0, \\\"Default\\\": 0.0, \\\"Min\\\": -3.40282347e+38, \\\"Max\\\": 3.40282347e+38, \\\"IsCheckbox\\\": false}\",\n    \"GateDataType\": 2\n  },\n  {\n    \"Key\": \"kp_6740\",\n    \"DataName\": \"##kp\",\n    \"SerializedValue\": \"{\\\"Value\\\": 0.0, \\\"Default\\\": 0.0, \\\"Min\\\": -3.40282347e+38, \\\"Max\\\": 3.40282347e+38, \\\"IsCheckbox\\\": false}\",\n    \"GateDataType\": 2\n  },\n  {\n    \"Key\": \"ki_ff3d\",\n    \"DataName\": \"##ki\",\n    \"SerializedValue\": \"{\\\"Value\\\": 0.0, \\\"Default\\\": 0.0, \\\"Min\\\": -3.40282347e+38, \\\"Max\\\": 3.40282347e+38, \\\"IsCheckbox\\\": false}\",\n    \"GateDataType\": 2\n  },\n  {\n    \"Key\": \"kd_b58d\",\n    \"DataName\": \"##kd\",\n    \"SerializedValue\": \"{\\\"Value\\\": 0.0, \\\"Default\\\": 0.0, \\\"Min\\\": -3.40282347e+38, \\\"Max\\\": 3.40282347e+38, \\\"IsCheckbox\\\": false}\",\n    \"GateDataType\": 2\n  }\n]",
+                        "intValue": 0,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_outputs",
+                        "boolValue": false,
+                        "stringValue": "[{\"Key\":\"entity\",\"DataName\":\"entity\",\"SerializedValue\":null,\"GateDataType\":1},{\"Key\":\"activation\",\"DataName\":\"activation\",\"SerializedValue\":\"{\\\"Value\\\":0.0,\\\"Default\\\":0.0,\\\"Min\\\":-3.40282347E+38,\\\"Max\\\":3.40282347E+38,\\\"IsCheckbox\\\":false}\",\"GateDataType\":2}]",
+                        "intValue": 0,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_variables",
+                        "boolValue": false,
+                        "stringValue": "[]",
+                        "intValue": 0,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_graph",
+                        "boolValue": false,
+                        "stringValue": "{\"ValidationState\":1,\"Nodes\":[{\"Id\":\"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":2304,\"Inputs\":[{\"Id\":\"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\\nInput : Number 962dc162-85c8-4f64-a8fe-421a0b584cb9\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"ConstantNodeViewModel : 62b4a7e4-7ed7-4882-9b30-a612cc39bba0\\nOutput : Number cd872a86-5d43-43f5-8454-c052b928d885\",\"NodeId\":\"ConstantNodeViewModel : 62b4a7e4-7ed7-4882-9b30-a612cc39bba0\"}},{\"Id\":\"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\\nInput : Number c5fcc0fd-efe3-4752-9fa4-c3fdf0b944bc\",\"DataType\":2,\"connectedOutputIdModel\":null}],\"Outputs\":[{\"Id\":\"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\\nOutput : Number 9bb7dac7-1e5f-4163-9c02-5bb0a9585e9f\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"IdentityNodeViewModel : bdda07dc-0a55-4139-a59f-88545c55b44a\\nInput : Number 6dead178-e9f7-40a1-b262-2c0bd982535a\",\"NodeId\":\"IdentityNodeViewModel : bdda07dc-0a55-4139-a59f-88545c55b44a\"}]}],\"VisualPosition\":{\"x\":3600.0,\"y\":-900.0,\"normalized\":{\"x\":-0.5547002,\"y\":0.832050264,\"magnitude\":1.0,\"sqrMagnitude\":1.0},\"magnitude\":216.333084,\"sqrMagnitude\":46800.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":null},{\"Id\":\"ConstantNodeViewModel : 62b4a7e4-7ed7-4882-9b30-a612cc39bba0\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":257,\"Inputs\":[],\"Outputs\":[{\"Id\":\"ConstantNodeViewModel : 62b4a7e4-7ed7-4882-9b30-a612cc39bba0\\nOutput : Number cd872a86-5d43-43f5-8454-c052b928d885\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\\nInput : Number 962dc162-85c8-4f64-a8fe-421a0b584cb9\",\"NodeId\":\"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\"}]}],\"VisualPosition\":{\"x\":2800.0,\"y\":-900.0,\"normalized\":{\"x\":-0.9881739,\"y\":0.15333733,\"magnitude\":1.0,\"sqrMagnitude\":1.0},\"magnitude\":1173.88245,\"sqrMagnitude\":1378000.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":\"{\\n  \\\"DataValue\\\": \\\"0\\\"\\n}\"},{\"Id\":\"IdentityNodeViewModel : bdda07dc-0a55-4139-a59f-88545c55b44a\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":1,\"Inputs\":[{\"Id\":\"IdentityNodeViewModel : bdda07dc-0a55-4139-a59f-88545c55b44a\\nInput : Number 6dead178-e9f7-40a1-b262-2c0bd982535a\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\\nOutput : Number 9bb7dac7-1e5f-4163-9c02-5bb0a9585e9f\",\"NodeId\":\"AddNumbersNodeViewModel : 538519d9-4437-4b43-b130-9495d0a12acc\"}}],\"Outputs\":[{\"Id\":\"IdentityNodeViewModel : bdda07dc-0a55-4139-a59f-88545c55b44a\\nOutput : Number fd32b0c7-c9db-4136-88fc-2a3894a3fc57\",\"DataType\":2,\"ConnectedInputsIds\":[]}],\"VisualPosition\":{\"x\":4400.0,\"y\":-900.0,\"normalized\":{\"x\":0.976744354,\"y\":0.2144073,\"magnitude\":1.0,\"sqrMagnitude\":1.0},\"magnitude\":839.5237,\"sqrMagnitude\":704800.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":null},{\"Id\":\"AddNumbersNodeViewModel : d9c8b7a6-f5e4-4d3c-b2a1-09876543210f\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":2304,\"Inputs\":[{\"Id\":\"AddNumbersNodeViewModel : d9c8b7a6-f5e4-4d3c-b2a1-09876543210f\\nInput : Number c8b7a6f5-e4d3-4c2b-b1a0-fedcba987654\",\"DataType\":2,\"connectedOutputIdModel\":null},{\"Id\":\"AddNumbersNodeViewModel : d9c8b7a6-f5e4-4d3c-b2a1-09876543210f\\nInput : Number b7a6f5e4-d3c2-4b1a-a09f-edcba9876543\",\"DataType\":2,\"connectedOutputIdModel\":null}],\"Outputs\":[{\"Id\":\"AddNumbersNodeViewModel : d9c8b7a6-f5e4-4d3c-b2a1-09876543210f\\nOutput : Number a6f5e4d3-c2b1-4a09-9f8e-dcba98765432\",\"DataType\":2,\"ConnectedInputsIds\":[]}],\"VisualPosition\":{\"x\":4400.0,\"y\":300.0,\"normalized\":{\"x\":-0.3011391,\"y\":0.9535372,\"magnitude\":1.0,\"sqrMagnitude\":1.0},\"magnitude\":398.497162,\"sqrMagnitude\":158800.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":null},{\"Id\":\"RootNodeViewModel : bc613aa1-35bb-448e-836f-fe915de0de57\",\"OperationType\":256,\"Inputs\":[],\"Outputs\":[{\"Id\":\"RootNodeViewModel : bc613aa1-35bb-448e-836f-fe915de0de57\\nOutput : Number 367c8b15-c1c2-4c8d-815e-1791f99e0593\",\"DataType\":1,\"ConnectedInputsIds\":[{\"Id\":\"AngleEntityNodeViewModel : dabb89f1-a68d-43a9-9ff5-eca23344b58e\\\\nInput : object fc718706-969e-4774-92d3-596d012c6ddf\",\"NodeId\":\"AngleEntityNodeViewModel : dabb89f1-a68d-43a9-9ff5-eca23344b58e\"},{\"Id\":\"AddAngularForceEntityNodeViewModel : 047df774-4193-4bac-86e8-2aba294d1a91\\\\nInput : object 8a1a17cf-9212-4e31-ac67-790cad14bb32\",\"NodeId\":\"AddAngularForceEntityNodeViewModel : 047df774-4193-4bac-86e8-2aba294d1a91\"}]}],\"MechanicConnectionId\":\"entity_3dab\",\"GateDataType\":1,\"SaveData\":null,\"VisualPosition\":{\"x\":-400.0,\"y\":300.0},\"VisualCollapsed\":false,\"ModelVersion\":1,\"Version\":\"0.1\"},{\"Id\":\"RootNodeViewModel : 420e7ea4-d6a2-4c09-9fa7-f481345097f1\",\"OperationType\":256,\"Inputs\":[],\"Outputs\":[{\"Id\":\"RootNodeViewModel : 420e7ea4-d6a2-4c09-9fa7-f481345097f1\\nOutput : Number ea4b4eb0-84dc-49f5-b641-a900712c4af5\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\\\\nInput : Angle (Deg) 1 9c97765a-5352-4ca1-b116-b4a17c55099e\",\"NodeId\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\"}]}],\"MechanicConnectionId\":\"target_angle_9546\",\"GateDataType\":2,\"SaveData\":null,\"VisualPosition\":{\"x\":400.0,\"y\":900.0},\"VisualCollapsed\":false,\"ModelVersion\":1,\"Version\":\"0.1\"},{\"Id\":\"RootNodeViewModel : d1f4c1bd-d2fa-4ea2-8837-6f3983e465c8\",\"OperationType\":256,\"Inputs\":[],\"Outputs\":[{\"Id\":\"RootNodeViewModel : d1f4c1bd-d2fa-4ea2-8837-6f3983e465c8\\nOutput : Number a5032fb8-fe1a-46a0-aa1d-7b8d51fc8d8d\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"MultiplyNumbersNodeViewModel : b99fa80f-6fbb-47c3-8f4d-7e29df03a3af\\\\nInput : A dbbd3947-8606-4dd4-baff-f3c4b07ff5a9\",\"NodeId\":\"MultiplyNumbersNodeViewModel : b99fa80f-6fbb-47c3-8f4d-7e29df03a3af\"}]}],\"MechanicConnectionId\":\"kp_6740\",\"GateDataType\":2,\"SaveData\":null,\"VisualPosition\":{\"x\":1200.0,\"y\":300.0},\"VisualCollapsed\":false,\"ModelVersion\":1,\"Version\":\"0.1\"},{\"Id\":\"RootNodeViewModel : 020d8307-61f5-44b2-8bd2-c435c2a6a142\",\"OperationType\":256,\"Inputs\":[],\"Outputs\":[{\"Id\":\"RootNodeViewModel : 020d8307-61f5-44b2-8bd2-c435c2a6a142\\nOutput : Number 9aad870f-48b6-43fc-b5ba-aa0635217954\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"MultiplyNumbersNodeViewModel : 4a7a0b84-cd20-4f11-a740-5066105745ab\\\\nInput : B f5925c35-223b-402c-98ba-56926e874a64\",\"NodeId\":\"MultiplyNumbersNodeViewModel : 4a7a0b84-cd20-4f11-a740-5066105745ab\"}]}],\"MechanicConnectionId\":\"ki_ff3d\",\"GateDataType\":2,\"SaveData\":null,\"VisualPosition\":{\"x\":-400.0,\"y\":-900.0},\"VisualCollapsed\":false,\"ModelVersion\":1,\"Version\":\"0.1\"},{\"Id\":\"RootNodeViewModel : ad836298-c288-464a-aca2-ce77e13d2215\",\"OperationType\":256,\"Inputs\":[],\"Outputs\":[{\"Id\":\"RootNodeViewModel : ad836298-c288-464a-aca2-ce77e13d2215\\nOutput : Number a10717ac-0d8a-44e5-a4ab-de998ce80444\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"MultiplyNumbersNodeViewModel : d2301ab3-91e6-40f4-9f9c-388340d1084e\\\\nInput : B b72edaf7-cdee-4ba4-8d90-ce7024df769a\",\"NodeId\":\"MultiplyNumbersNodeViewModel : d2301ab3-91e6-40f4-9f9c-388340d1084e\"}]}],\"MechanicConnectionId\":\"kd_b58d\",\"GateDataType\":2,\"SaveData\":null,\"VisualPosition\":{\"x\":2000.0,\"y\":300.0},\"VisualCollapsed\":false,\"ModelVersion\":1,\"Version\":\"0.1\"},{\"Id\":\"TimeNodeViewModel : be1e2183-374c-4474-b1e9-68d79275c7f2\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":260,\"Inputs\":[],\"Outputs\":[{\"Id\":\"TimeNodeViewModel : be1e2183-374c-4474-b1e9-68d79275c7f2\\\\nOutput : Time 7331b725-f5de-48a7-bafc-6e944bdd328a\",\"DataType\":2,\"ConnectedInputsIds\":[]},{\"Id\":\"TimeNodeViewModel : be1e2183-374c-4474-b1e9-68d79275c7f2\\\\nOutput : Delta time 84a4ffbe-2a21-45a3-981a-a52b71f796d1\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"MultiplyNumbersNodeViewModel : 09071cca-ef79-406b-bc68-e7158c488dce\\\\nInput : B 719313b2-f5f6-463d-8dc1-4fcac0976dc7\",\"NodeId\":\"MultiplyNumbersNodeViewModel : 09071cca-ef79-406b-bc68-e7158c488dce\"},{\"Id\":\"DivideNodeViewModel : 03a8f928-acea-414e-b1eb-7bbe8b210649\\\\nInput : B 83166870-2c7c-42ff-99e1-aa1b158e269a\",\"NodeId\":\"DivideNodeViewModel : 03a8f928-acea-414e-b1eb-7bbe8b210649\"}]},{\"Id\":\"TimeNodeViewModel : be1e2183-374c-4474-b1e9-68d79275c7f2\\\\nOutput : Sin Time 0de0757a-0653-4301-85c9-df994c9b1b7f\",\"DataType\":2,\"ConnectedInputsIds\":[]},{\"Id\":\"TimeNodeViewModel : be1e2183-374c-4474-b1e9-68d79275c7f2\\\\nOutput : Cos Time 288d1e1e-ee14-4ca5-8248-937ff3850ad3\",\"DataType\":2,\"ConnectedInputsIds\":[]}],\"VisualPosition\":{\"x\":400.0,\"y\":-300.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":0,\"SaveData\":null},{\"Id\":\"AngleEntityNodeViewModel : dabb89f1-a68d-43a9-9ff5-eca23344b58e\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":1540,\"Inputs\":[{\"Id\":\"AngleEntityNodeViewModel : dabb89f1-a68d-43a9-9ff5-eca23344b58e\\\\nInput : object fc718706-969e-4774-92d3-596d012c6ddf\",\"DataType\":1,\"connectedOutputIdModel\":{\"Id\":\"RootNodeViewModel : bc613aa1-35bb-448e-836f-fe915de0de57\\nOutput : Number 367c8b15-c1c2-4c8d-815e-1791f99e0593\",\"NodeId\":\"RootNodeViewModel : bc613aa1-35bb-448e-836f-fe915de0de57\"}},{\"Id\":\"AngleEntityNodeViewModel : dabb89f1-a68d-43a9-9ff5-eca23344b58e\\\\nInput : ANGLE (DEG) 6ac8f59f-a213-4877-9215-fe1e0eea1302\",\"DataType\":2,\"connectedOutputIdModel\":null}],\"Outputs\":[{\"Id\":\"AngleEntityNodeViewModel : dabb89f1-a68d-43a9-9ff5-eca23344b58e\\\\nOutput : ANGLE (DEG) ac26024c-2d58-4f4c-b68d-4cc91e8a7d52\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\\\\nInput : Angle (Deg) 2 bbff7253-fe3c-4499-a651-fefc408b2fa3\",\"NodeId\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\"}]}],\"VisualPosition\":{\"x\":400.0,\"y\":300.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":0,\"SaveData\":null},{\"Id\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":2059,\"Inputs\":[{\"Id\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\\\\nInput : Angle (Deg) 1 9c97765a-5352-4ca1-b116-b4a17c55099e\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"RootNodeViewModel : 420e7ea4-d6a2-4c09-9fa7-f481345097f1\\nOutput : Number ea4b4eb0-84dc-49f5-b641-a900712c4af5\",\"NodeId\":\"RootNodeViewModel : 420e7ea4-d6a2-4c09-9fa7-f481345097f1\"}},{\"Id\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\\\\nInput : Angle (Deg) 2 bbff7253-fe3c-4499-a651-fefc408b2fa3\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"AngleEntityNodeViewModel : dabb89f1-a68d-43a9-9ff5-eca23344b58e\\\\nOutput : ANGLE (DEG) ac26024c-2d58-4f4c-b68d-4cc91e8a7d52\",\"NodeId\":\"AngleEntityNodeViewModel : dabb89f1-a68d-43a9-9ff5-eca23344b58e\"}}],\"Outputs\":[{\"Id\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\\\\nOutput : Deg adf0be28-7018-4cbb-835d-5d56181cc40a\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"MultiplyNumbersNodeViewModel : b99fa80f-6fbb-47c3-8f4d-7e29df03a3af\\\\nInput : B 3a17ff83-a180-4d0d-9761-7a156eb8fd4e\",\"NodeId\":\"MultiplyNumbersNodeViewModel : b99fa80f-6fbb-47c3-8f4d-7e29df03a3af\"},{\"Id\":\"MultiplyNumbersNodeViewModel : 4a7a0b84-cd20-4f11-a740-5066105745ab\\\\nInput : A f323b13c-8193-4d20-b9b6-c5c28c840535\",\"NodeId\":\"MultiplyNumbersNodeViewModel : 4a7a0b84-cd20-4f11-a740-5066105745ab\"},{\"Id\":\"DeltaPreviousCurrentNodeViewModel : 08fa5ffe-e153-4841-910c-1fcf872368f7\\\\nInput : Value 669c535a-4195-4fa8-83f1-011218c8654e\",\"NodeId\":\"DeltaPreviousCurrentNodeViewModel : 08fa5ffe-e153-4841-910c-1fcf872368f7\"}]}],\"VisualPosition\":{\"x\":-400.0,\"y\":-300.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":0,\"SaveData\":null},{\"Id\":\"MultiplyNumbersNodeViewModel : b99fa80f-6fbb-47c3-8f4d-7e29df03a3af\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":2306,\"Inputs\":[{\"Id\":\"MultiplyNumbersNodeViewModel : b99fa80f-6fbb-47c3-8f4d-7e29df03a3af\\\\nInput : A dbbd3947-8606-4dd4-baff-f3c4b07ff5a9\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"RootNodeViewModel : d1f4c1bd-d2fa-4ea2-8837-6f3983e465c8\\nOutput : Number a5032fb8-fe1a-46a0-aa1d-7b8d51fc8d8d\",\"NodeId\":\"RootNodeViewModel : d1f4c1bd-d2fa-4ea2-8837-6f3983e465c8\"}},{\"Id\":\"MultiplyNumbersNodeViewModel : b99fa80f-6fbb-47c3-8f4d-7e29df03a3af\\\\nInput : B 3a17ff83-a180-4d0d-9761-7a156eb8fd4e\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\\\\nOutput : Deg adf0be28-7018-4cbb-835d-5d56181cc40a\",\"NodeId\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\"}}],\"Outputs\":[{\"Id\":\"MultiplyNumbersNodeViewModel : b99fa80f-6fbb-47c3-8f4d-7e29df03a3af\\\\nOutput : A \\u00d7 B 55b53a16-7aad-4cde-966d-7af49cfe296c\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"AddNumbersNodeViewModel : 1495966d-07f3-4ce6-b55e-53275b19becd\\\\nInput : A 84198e02-299b-4cc9-97fe-2e1a3cf00224\",\"NodeId\":\"AddNumbersNodeViewModel : 1495966d-07f3-4ce6-b55e-53275b19becd\"}]}],\"VisualPosition\":{\"x\":2000.0,\"y\":-300.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":null},{\"Id\":\"MultiplyNumbersNodeViewModel : 4a7a0b84-cd20-4f11-a740-5066105745ab\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":2306,\"Inputs\":[{\"Id\":\"MultiplyNumbersNodeViewModel : 4a7a0b84-cd20-4f11-a740-5066105745ab\\\\nInput : A f323b13c-8193-4d20-b9b6-c5c28c840535\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\\\\nOutput : Deg adf0be28-7018-4cbb-835d-5d56181cc40a\",\"NodeId\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\"}},{\"Id\":\"MultiplyNumbersNodeViewModel : 4a7a0b84-cd20-4f11-a740-5066105745ab\\\\nInput : B f5925c35-223b-402c-98ba-56926e874a64\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"RootNodeViewModel : 020d8307-61f5-44b2-8bd2-c435c2a6a142\\nOutput : Number 9aad870f-48b6-43fc-b5ba-aa0635217954\",\"NodeId\":\"RootNodeViewModel : 020d8307-61f5-44b2-8bd2-c435c2a6a142\"}}],\"Outputs\":[{\"Id\":\"MultiplyNumbersNodeViewModel : 4a7a0b84-cd20-4f11-a740-5066105745ab\\\\nOutput : A \\u00d7 B 775c4259-e901-4f9c-a529-7311e4946795\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"MultiplyNumbersNodeViewModel : 09071cca-ef79-406b-bc68-e7158c488dce\\\\nInput : A 0b0dd399-fab7-4eff-9ecd-5ff16c412ca7\",\"NodeId\":\"MultiplyNumbersNodeViewModel : 09071cca-ef79-406b-bc68-e7158c488dce\"}]}],\"VisualPosition\":{\"x\":400.0,\"y\":-900.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":null},{\"Id\":\"MultiplyNumbersNodeViewModel : 09071cca-ef79-406b-bc68-e7158c488dce\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":2306,\"Inputs\":[{\"Id\":\"MultiplyNumbersNodeViewModel : 09071cca-ef79-406b-bc68-e7158c488dce\\\\nInput : A 0b0dd399-fab7-4eff-9ecd-5ff16c412ca7\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"MultiplyNumbersNodeViewModel : 4a7a0b84-cd20-4f11-a740-5066105745ab\\\\nOutput : A \\u00d7 B 775c4259-e901-4f9c-a529-7311e4946795\",\"NodeId\":\"MultiplyNumbersNodeViewModel : 4a7a0b84-cd20-4f11-a740-5066105745ab\"}},{\"Id\":\"MultiplyNumbersNodeViewModel : 09071cca-ef79-406b-bc68-e7158c488dce\\\\nInput : B 719313b2-f5f6-463d-8dc1-4fcac0976dc7\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"TimeNodeViewModel : be1e2183-374c-4474-b1e9-68d79275c7f2\\\\nOutput : Delta time 84a4ffbe-2a21-45a3-981a-a52b71f796d1\",\"NodeId\":\"TimeNodeViewModel : be1e2183-374c-4474-b1e9-68d79275c7f2\"}}],\"Outputs\":[{\"Id\":\"MultiplyNumbersNodeViewModel : 09071cca-ef79-406b-bc68-e7158c488dce\\\\nOutput : A \\u00d7 B e3274ee4-d381-42e5-a875-8e439f46d70c\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"AccumulateNodeViewModel : 676ed73c-496f-44c6-bf7a-0ba35302ee8b\\\\nInput : Number 016917d0-fe83-46bf-bcf6-6ec1b6a5f953\",\"NodeId\":\"AccumulateNodeViewModel : 676ed73c-496f-44c6-bf7a-0ba35302ee8b\"}]}],\"VisualPosition\":{\"x\":1200.0,\"y\":-300.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":null},{\"Id\":\"ConstantNodeViewModel : 78fd3821-33aa-49dd-9889-1d921eb6de9d\",\"OperationType\":257,\"Inputs\":[],\"Outputs\":[{\"Id\":\"ConstantNodeViewModel : 78fd3821-33aa-49dd-9889-1d921eb6de9d\\nOutput : Number ac3b0d2a-128c-4706-ad37-c90bf48d2dbc\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"AccumulateNodeViewModel : 676ed73c-496f-44c6-bf7a-0ba35302ee8b\\\\nInput : Reset 214652bf-7df1-4855-bfaa-26019cc15b24\",\"NodeId\":\"AccumulateNodeViewModel : 676ed73c-496f-44c6-bf7a-0ba35302ee8b\"}]}],\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":\"{\\\"DataValue\\\": \\\"0.0\\\"}\",\"VisualPosition\":{\"x\":1200.0,\"y\":-900.0},\"VisualCollapsed\":false,\"ModelVersion\":1,\"Version\":\"0.1\"},{\"Id\":\"AccumulateNodeViewModel : 676ed73c-496f-44c6-bf7a-0ba35302ee8b\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":4100,\"Inputs\":[{\"Id\":\"AccumulateNodeViewModel : 676ed73c-496f-44c6-bf7a-0ba35302ee8b\\\\nInput : Number 016917d0-fe83-46bf-bcf6-6ec1b6a5f953\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"MultiplyNumbersNodeViewModel : 09071cca-ef79-406b-bc68-e7158c488dce\\\\nOutput : A \\u00d7 B e3274ee4-d381-42e5-a875-8e439f46d70c\",\"NodeId\":\"MultiplyNumbersNodeViewModel : 09071cca-ef79-406b-bc68-e7158c488dce\"}},{\"Id\":\"AccumulateNodeViewModel : 676ed73c-496f-44c6-bf7a-0ba35302ee8b\\\\nInput : Reset 214652bf-7df1-4855-bfaa-26019cc15b24\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"ConstantNodeViewModel : 78fd3821-33aa-49dd-9889-1d921eb6de9d\\nOutput : Number ac3b0d2a-128c-4706-ad37-c90bf48d2dbc\",\"NodeId\":\"ConstantNodeViewModel : 78fd3821-33aa-49dd-9889-1d921eb6de9d\"}}],\"Outputs\":[{\"Id\":\"AccumulateNodeViewModel : 676ed73c-496f-44c6-bf7a-0ba35302ee8b\\\\nOutput : Total 37ddf7fb-a806-4d80-abca-0b3ac448bf3d\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"AddNumbersNodeViewModel : 1495966d-07f3-4ce6-b55e-53275b19becd\\\\nInput : B 8c297201-3320-4f1e-8430-22dea6622963\",\"NodeId\":\"AddNumbersNodeViewModel : 1495966d-07f3-4ce6-b55e-53275b19becd\"}]}],\"VisualPosition\":{\"x\":2000.0,\"y\":-900.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":null},{\"Id\":\"DeltaPreviousCurrentNodeViewModel : 08fa5ffe-e153-4841-910c-1fcf872368f7\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":4097,\"Inputs\":[{\"Id\":\"DeltaPreviousCurrentNodeViewModel : 08fa5ffe-e153-4841-910c-1fcf872368f7\\\\nInput : Value 669c535a-4195-4fa8-83f1-011218c8654e\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\\\\nOutput : Deg adf0be28-7018-4cbb-835d-5d56181cc40a\",\"NodeId\":\"DeltaAngleNodeViewModel : 71febf6f-495f-4f7c-a716-3e6f1e4a4c90\"}}],\"Outputs\":[{\"Id\":\"DeltaPreviousCurrentNodeViewModel : 08fa5ffe-e153-4841-910c-1fcf872368f7\\\\nOutput : Delta 5c95aaa5-303a-4efd-84ae-3074660ecd47\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"DivideNodeViewModel : 03a8f928-acea-414e-b1eb-7bbe8b210649\\\\nInput : A 9a0fdeaa-1746-4e4f-b7ba-a3d228294721\",\"NodeId\":\"DivideNodeViewModel : 03a8f928-acea-414e-b1eb-7bbe8b210649\"}]}],\"VisualPosition\":{\"x\":1200.0,\"y\":900.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":null},{\"Id\":\"DivideNodeViewModel : 03a8f928-acea-414e-b1eb-7bbe8b210649\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":2307,\"Inputs\":[{\"Id\":\"DivideNodeViewModel : 03a8f928-acea-414e-b1eb-7bbe8b210649\\\\nInput : A 9a0fdeaa-1746-4e4f-b7ba-a3d228294721\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"DeltaPreviousCurrentNodeViewModel : 08fa5ffe-e153-4841-910c-1fcf872368f7\\\\nOutput : Delta 5c95aaa5-303a-4efd-84ae-3074660ecd47\",\"NodeId\":\"DeltaPreviousCurrentNodeViewModel : 08fa5ffe-e153-4841-910c-1fcf872368f7\"}},{\"Id\":\"DivideNodeViewModel : 03a8f928-acea-414e-b1eb-7bbe8b210649\\\\nInput : B 83166870-2c7c-42ff-99e1-aa1b158e269a\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"TimeNodeViewModel : be1e2183-374c-4474-b1e9-68d79275c7f2\\\\nOutput : Delta time 84a4ffbe-2a21-45a3-981a-a52b71f796d1\",\"NodeId\":\"TimeNodeViewModel : be1e2183-374c-4474-b1e9-68d79275c7f2\"}}],\"Outputs\":[{\"Id\":\"DivideNodeViewModel : 03a8f928-acea-414e-b1eb-7bbe8b210649\\\\nOutput : A / B 6829c934-f609-4542-b627-012faf8e54a1\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"MultiplyNumbersNodeViewModel : d2301ab3-91e6-40f4-9f9c-388340d1084e\\\\nInput : A e31757af-b572-4244-9669-550877ffc35e\",\"NodeId\":\"MultiplyNumbersNodeViewModel : d2301ab3-91e6-40f4-9f9c-388340d1084e\"}]}],\"VisualPosition\":{\"x\":2000.0,\"y\":900.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":null},{\"Id\":\"MultiplyNumbersNodeViewModel : d2301ab3-91e6-40f4-9f9c-388340d1084e\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":2306,\"Inputs\":[{\"Id\":\"MultiplyNumbersNodeViewModel : d2301ab3-91e6-40f4-9f9c-388340d1084e\\\\nInput : A e31757af-b572-4244-9669-550877ffc35e\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"DivideNodeViewModel : 03a8f928-acea-414e-b1eb-7bbe8b210649\\\\nOutput : A / B 6829c934-f609-4542-b627-012faf8e54a1\",\"NodeId\":\"DivideNodeViewModel : 03a8f928-acea-414e-b1eb-7bbe8b210649\"}},{\"Id\":\"MultiplyNumbersNodeViewModel : d2301ab3-91e6-40f4-9f9c-388340d1084e\\\\nInput : B b72edaf7-cdee-4ba4-8d90-ce7024df769a\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"RootNodeViewModel : ad836298-c288-464a-aca2-ce77e13d2215\\nOutput : Number a10717ac-0d8a-44e5-a4ab-de998ce80444\",\"NodeId\":\"RootNodeViewModel : ad836298-c288-464a-aca2-ce77e13d2215\"}}],\"Outputs\":[{\"Id\":\"MultiplyNumbersNodeViewModel : d2301ab3-91e6-40f4-9f9c-388340d1084e\\\\nOutput : A \\u00d7 B 287d63e6-1c45-4669-84e8-b42e8fedfb9d\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"AddNumbersNodeViewModel : dd342ef7-657d-4bbe-8188-63bf79ec0882\\\\nInput : B db24053c-3a43-4c58-9ab4-b7a7c86f20af\",\"NodeId\":\"AddNumbersNodeViewModel : dd342ef7-657d-4bbe-8188-63bf79ec0882\"}]}],\"VisualPosition\":{\"x\":2800.0,\"y\":300.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":null},{\"Id\":\"AddNumbersNodeViewModel : 1495966d-07f3-4ce6-b55e-53275b19becd\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":2304,\"Inputs\":[{\"Id\":\"AddNumbersNodeViewModel : 1495966d-07f3-4ce6-b55e-53275b19becd\\\\nInput : A 84198e02-299b-4cc9-97fe-2e1a3cf00224\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"MultiplyNumbersNodeViewModel : b99fa80f-6fbb-47c3-8f4d-7e29df03a3af\\\\nOutput : A \\u00d7 B 55b53a16-7aad-4cde-966d-7af49cfe296c\",\"NodeId\":\"MultiplyNumbersNodeViewModel : b99fa80f-6fbb-47c3-8f4d-7e29df03a3af\"}},{\"Id\":\"AddNumbersNodeViewModel : 1495966d-07f3-4ce6-b55e-53275b19becd\\\\nInput : B 8c297201-3320-4f1e-8430-22dea6622963\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"AccumulateNodeViewModel : 676ed73c-496f-44c6-bf7a-0ba35302ee8b\\\\nOutput : Total 37ddf7fb-a806-4d80-abca-0b3ac448bf3d\",\"NodeId\":\"AccumulateNodeViewModel : 676ed73c-496f-44c6-bf7a-0ba35302ee8b\"}}],\"Outputs\":[{\"Id\":\"AddNumbersNodeViewModel : 1495966d-07f3-4ce6-b55e-53275b19becd\\\\nOutput : A + B 56000ed3-db1a-4ee7-b186-3632af1862ff\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"AddNumbersNodeViewModel : dd342ef7-657d-4bbe-8188-63bf79ec0882\\\\nInput : A dedfed6e-86bc-47fa-8083-534afcd9a1eb\",\"NodeId\":\"AddNumbersNodeViewModel : dd342ef7-657d-4bbe-8188-63bf79ec0882\"}]}],\"VisualPosition\":{\"x\":2800.0,\"y\":-300.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":null},{\"Id\":\"AddNumbersNodeViewModel : dd342ef7-657d-4bbe-8188-63bf79ec0882\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":2304,\"Inputs\":[{\"Id\":\"AddNumbersNodeViewModel : dd342ef7-657d-4bbe-8188-63bf79ec0882\\\\nInput : A dedfed6e-86bc-47fa-8083-534afcd9a1eb\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"AddNumbersNodeViewModel : 1495966d-07f3-4ce6-b55e-53275b19becd\\\\nOutput : A + B 56000ed3-db1a-4ee7-b186-3632af1862ff\",\"NodeId\":\"AddNumbersNodeViewModel : 1495966d-07f3-4ce6-b55e-53275b19becd\"}},{\"Id\":\"AddNumbersNodeViewModel : dd342ef7-657d-4bbe-8188-63bf79ec0882\\\\nInput : B db24053c-3a43-4c58-9ab4-b7a7c86f20af\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"MultiplyNumbersNodeViewModel : d2301ab3-91e6-40f4-9f9c-388340d1084e\\\\nOutput : A \\u00d7 B 287d63e6-1c45-4669-84e8-b42e8fedfb9d\",\"NodeId\":\"MultiplyNumbersNodeViewModel : d2301ab3-91e6-40f4-9f9c-388340d1084e\"}}],\"Outputs\":[{\"Id\":\"AddNumbersNodeViewModel : dd342ef7-657d-4bbe-8188-63bf79ec0882\\\\nOutput : A + B c9ecbe77-f52d-42c7-b30d-5045438d21b0\",\"DataType\":2,\"ConnectedInputsIds\":[{\"Id\":\"AddAngularForceEntityNodeViewModel : 047df774-4193-4bac-86e8-2aba294d1a91\\\\nInput : angular force e2a7b195-523f-44ab-ae19-5d72f896b7f3\",\"NodeId\":\"AddAngularForceEntityNodeViewModel : 047df774-4193-4bac-86e8-2aba294d1a91\"}]}],\"VisualPosition\":{\"x\":3600.0,\"y\":-300.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":2,\"SaveData\":null},{\"Id\":\"AddAngularForceEntityNodeViewModel : 047df774-4193-4bac-86e8-2aba294d1a91\",\"ModelVersion\":1,\"Version\":\"0.1\",\"OperationType\":1545,\"Inputs\":[{\"Id\":\"AddAngularForceEntityNodeViewModel : 047df774-4193-4bac-86e8-2aba294d1a91\\\\nInput : object 8a1a17cf-9212-4e31-ac67-790cad14bb32\",\"DataType\":1,\"connectedOutputIdModel\":{\"Id\":\"RootNodeViewModel : bc613aa1-35bb-448e-836f-fe915de0de57\\nOutput : Number 367c8b15-c1c2-4c8d-815e-1791f99e0593\",\"NodeId\":\"RootNodeViewModel : bc613aa1-35bb-448e-836f-fe915de0de57\"}},{\"Id\":\"AddAngularForceEntityNodeViewModel : 047df774-4193-4bac-86e8-2aba294d1a91\\\\nInput : angular force e2a7b195-523f-44ab-ae19-5d72f896b7f3\",\"DataType\":2,\"connectedOutputIdModel\":{\"Id\":\"AddNumbersNodeViewModel : dd342ef7-657d-4bbe-8188-63bf79ec0882\\\\nOutput : A + B c9ecbe77-f52d-42c7-b30d-5045438d21b0\",\"NodeId\":\"AddNumbersNodeViewModel : dd342ef7-657d-4bbe-8188-63bf79ec0882\"}}],\"Outputs\":[],\"VisualPosition\":{\"x\":4400.0,\"y\":-300.0},\"VisualCollapsed\":false,\"MechanicConnectionId\":null,\"GateDataType\":0,\"SaveData\":null}]}",
+                        "intValue": 0,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_editor_position",
+                        "boolValue": false,
+                        "stringValue": null,
+                        "intValue": 0,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": -138.912781,
+                            "y": -276.419647
+                        },
+                        "vector3Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    },
+                    {
+                        "key": "chip_editor_zoom",
+                        "boolValue": false,
+                        "stringValue": null,
+                        "intValue": 0,
+                        "floatValue": 0.0,
+                        "vector2Value": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "vector3Value": {
+                            "x": 0.496272445,
+                            "y": 0.496272445,
+                            "z": 0.0
+                        },
+                        "vector4Value": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0
+                        }
+                    }
+                ]
+            },
+            "saveObjectChildren": []
+        }
+    ],
+    "averagePosition": {
+        "x": 3.43957,
+        "y": 0.127520934,
+        "z": -0.0190000013
+    }
+}

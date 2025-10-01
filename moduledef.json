@@ -3052,51 +3052,121 @@
     ]
   },
   "256": {
-      "id": "256",
-      "gate_data_type": 2,
-      "source_info": {
-        "datatype_map_nodename": "Input",
-        "allmod_viewmodel": "RootNodeViewModel",
-        "chip_names_friendly_name": "Input"
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "type": "DECIMAL",
-          "name": "Input"
-        }
-      ]
+    "id": "256",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Input",
+      "allmod_viewmodel": "RootNodeViewModel",
+      "chip_names_friendly_name": "Input"
     },
-    "255": {
-      "id": "255",
-      "gate_data_type": 2,
-      "source_info": {
-        "datatype_map_nodename": "Output",
-        "allmod_viewmodel": "ExitNodeViewModel",
-        "chip_names_friendly_name": "Output"
-      },
-      "inputs": [
-        {
-          "type": "DECIMAL",
-          "name": "output"
-        }
-      ],
-      "outputs": []
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Input"
+      }
+    ]
+  },
+  "255": {
+    "id": "255",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Output",
+      "allmod_viewmodel": "ExitNodeViewModel",
+      "chip_names_friendly_name": "Output"
     },
-    "257": {
-      "id": "257",
-      "gate_data_type": 2,
-      "source_info": {
-        "datatype_map_nodename": "Constant",
-        "allmod_viewmodel": "ConstantNodeViewModel",
-        "chip_names_friendly_name": "Constant"
+    "inputs": [
+      {
+        "type": "DECIMAL",
+        "name": "output"
+      }
+    ],
+    "outputs": []
+  },
+  "257": {
+    "id": "257",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Constant",
+      "allmod_viewmodel": "ConstantNodeViewModel",
+      "chip_names_friendly_name": "Constant"
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "DECIMAL",
+        "name": "Output"
+      }
+    ]
+  },
+  "1544": {
+    "id": "1544",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "LookAtEntity",
+      "allmod_viewmodel": "LookAtEntityNodeViewModel",
+      "chip_names_friendly_name": "LookAtEntity"
+    },
+    "inputs": [
+      {
+        "type": "ENTITY",
+        "name": "object"
       },
-      "inputs": [],
-      "outputs": [
-        {
-          "type": "DECIMAL",
-          "name": "Output"
-        }
-      ]
-    }
+      {
+        "type": "ENTITY",
+        "name": "target"
+      },
+      {
+        "type": "DECIMAL",
+        "name": "velocity"
+      }
+    ],
+    "outputs": []
+  },
+  "2330": {
+    "id": "2330",
+    "gate_data_type": 2,
+    "source_info": {
+      "datatype_map_nodename": "Max",
+      "allmod_viewmodel": "MaxValueNodeViewModel",
+      "chip_names_friendly_name": "Max"
+    },
+    "inputs": [
+      {
+        "type": "Number",
+        "name": "A"
+      },
+      {
+        "type": "Number",
+        "name": "B"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  },
+  "3598": {
+    "id": "3598",
+    "gate_data_type": 4,
+    "source_info": {
+      "datatype_map_nodename": "ToNumber",
+      "allmod_viewmodel": "StringToNumberNodeViewModel",
+      "chip_names_friendly_name": "ToNumber"
+    },
+    "inputs": [
+      {
+        "type": "String",
+        "name": "Input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Number",
+        "name": "Result"
+      }
+    ]
+  }
 }

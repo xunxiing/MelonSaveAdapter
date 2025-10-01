@@ -29,5 +29,10 @@
   "module_name": "PreviousFrameState",
   "inputs": ["same"],
   "outputs": ["same"]
- }
+ },
+  "257": {
+    "module_name": "Constant",
+    "inputs": [],
+    "outputs": ["same"]
+  }
 }
