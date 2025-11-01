@@ -1,0 +1,41 @@
+{
+  "nodes": [
+    {
+      "id": "output_0",
+      "type": "OUTPUT",
+      "label": "#dt",
+      "attrs": {
+        "name": "#dt",
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "time_0",
+      "type": "TIME",
+      "label": "TIME",
+      "attrs": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DELTA TIME",
+          "type": ""
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from_node": "time_0",
+      "from_port": "DELTA TIME",
+      "to_node": "output_0",
+      "to_port": "INPUT"
+    }
+  ]
+}

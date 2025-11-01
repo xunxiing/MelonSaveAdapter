@@ -153,15 +153,19 @@ def run_batch_add(modules_to_add: List[Any], node_map: Dict[str, dict]) -> Dict[
 def generate_modify_instructions(graph: dict, node_map: Dict[str, dict]) -> List[dict]:
     instructions = []
     for node in graph["nodes"]:
-        if "data_type" in node.get("attrs", {}):
-            original_id = node["id"]
-            if original_id in node_map and node_map[original_id]["new_full_id"]:
-                instructions.append({
-                    "node_id": node_map[original_id]["new_full_id"],
-                    "new_data_type": node["attrs"]["data_type"]
-                })
-            else:
-                print(f"警告：节点 '{original_id}' 定义了 data_type 但未找到其生成的ID，将跳过。")
+        attrs = node.get("attrs", {}) or {}
+        # 兼容两种写法
+        dt = attrs.get("data_type", attrs.get("datatype"))
+        if dt is None:
+            continue
+        original_id = node["id"]
+        if original_id in node_map and node_map[original_id]["new_full_id"]:
+            instructions.append({
+                "node_id": node_map[original_id]["new_full_id"],
+                "new_data_type": dt
+            })
+        else:
+            print(f"警告：节点 '{original_id}' 定义了 data_type/datatype 但未找到其生成的ID，将跳过。")
     return instructions
 
 def port_index(port_name: str, port_list: List[str]) -> int:

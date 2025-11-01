@@ -1,0 +1,63 @@
+{
+  "nodes": [
+    {
+      "id": "constant_0",
+      "type": "Constant",
+      "label": "Const 3",
+      "attrs": {
+        "value": 3
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_0",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "time_0",
+      "type": "TIME",
+      "label": "TIME",
+      "attrs": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DELTA TIME",
+          "type": ""
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from_node": "constant_0",
+      "from_port": "Output",
+      "to_node": "multiply_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "time_0",
+      "from_port": "DELTA TIME",
+      "to_node": "multiply_0",
+      "to_port": "B"
+    }
+  ]
+}

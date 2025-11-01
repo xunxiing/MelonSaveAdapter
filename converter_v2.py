@@ -125,15 +125,64 @@ class Converter(ast.NodeVisitor):
         self.inputs_seen: Dict[str, List[str]] = {}        # 节点ID -> 输入端口顺序
         self.outputs_seen: Dict[str, Set[str]] = {}        # 节点ID -> 被引用到的输出端口
         self.unresolved: List[Tuple[str, str, str, str]] = []  # (up_var, up_port, to_nid, to_port)
+        # NEW: 端口别名表（变量 -> (上游变量名, 端口名)）
+        self.alias_outputs: Dict[str, Tuple[str, str]] = {}
+    
+    def _emit_constant_node(self, lit) -> str:
+        nid = self.g.next_id("Constant")
+        attrs = {"value": lit}
+        node_rec = {
+            "id": nid,
+            "type": "Constant",
+            "label": _auto_label("Constant", attrs),
+            "attrs": attrs,
+            "inputs": [],
+            "outputs": []
+        }
+        self.g.add_node(node_rec)
+        self.inputs_seen.setdefault(nid, [])
+        self.outputs_seen.setdefault(nid, set())
+        return nid
 
-    # 仅处理最常见的顶层赋值： x = FUNC(...)
+    # 仅处理最常见的顶层赋值： x = FUNC(...) 或 x = some_var['PORT']（端口别名）
     def visit_Assign(self, node: ast.Assign):
+        # 情形 1：x = FUNC(...)
         if isinstance(node.value, ast.Call) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
             var = node.targets[0].id
             nid = self._emit_call_as_node(node.value)
-            # 采用"首次定义为准"，避免多次赋值造成前后引用歧义
             if var not in self.var2node:
                 self.var2node[var] = nid
+
+        # 情形 2：x = some_var['PORT']  —— 记录端口别名
+        elif isinstance(node.value, ast.Subscript) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
+            target = node.targets[0].id
+            sub = node.value
+            if isinstance(sub.value, ast.Name):
+                up_var = sub.value.id
+                # 切片必须是字符串字面量或可 literal_eval 的字符串
+                sl = sub.slice
+                if isinstance(sl, ast.Constant) and isinstance(sl.value, str):
+                    up_port = sl.value
+                else:
+                    try:
+                        up_port = ast.literal_eval(sl)
+                    except Exception:
+                        up_port = None
+                if isinstance(up_port, str):
+                    # 记录别名映射；此处不要求 up_var 已经定义，后续连边阶段会统一解析
+                    self.alias_outputs[target] = (up_var, up_port)
+        # 情形 3：x = 123 / "xyz" / {"x":1,"y":2,"z":3}
+        elif len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
+            try:
+                lit = ast.literal_eval(node.value)
+            except Exception:
+                lit = None
+            is_ok = isinstance(lit, (int, float, str)) or (isinstance(lit, dict) and all(k in lit for k in ("x", "y", "z")))
+            if is_ok:
+                var = node.targets[0].id
+                nid = self._emit_constant_node(lit)
+                if var not in self.var2node:
+                    self.var2node[var] = nid
         # 继续遍历（以便处理嵌套结构里可能出现的 Call）
         self.generic_visit(node)
 
@@ -193,10 +242,24 @@ class Converter(ast.NodeVisitor):
         }
         self.g.add_node(node_rec)
 
-        # 建立边：只接受 上游变量['PORT'] 或 None
+        # 建立边：原生接受 上游变量['PORT'] 或 None；新增支持"端口别名变量"
         seen_inputs: List[str] = []
         for port_name, expr in conns:
             if _ast_is_none(expr):
+                seen_inputs.append(port_name)
+            elif isinstance(expr, ast.Subscript) and isinstance(expr.value, ast.Call):
+                inline_call = expr.value
+                up_nid = self._emit_call_as_node(inline_call)
+                sl = expr.slice
+                if isinstance(sl, ast.Constant) and isinstance(sl.value, str):
+                    up_port = sl.value
+                else:
+                    try:
+                        up_port = ast.literal_eval(sl)
+                    except Exception:
+                        raise TypeError(f"{type_name}.{port_name}: 端口下标必须是字符串字面量")
+                self.g.add_edge(up_nid, up_port, nid, port_name)
+                self.outputs_seen.setdefault(up_nid, set()).add(up_port)
                 seen_inputs.append(port_name)
                 continue
             # 期望形态： Name['PORT']
@@ -220,9 +283,35 @@ class Converter(ast.NodeVisitor):
                     # 未定义：记录未决，稍后统一解析
                     self.unresolved.append((up_var, up_port, nid, port_name))
                 seen_inputs.append(port_name)
+            # NEW: 端口别名变量：Name 且在 alias_outputs 里
+            elif isinstance(expr, ast.Name) and expr.id in self.alias_outputs:
+                alias = expr.id
+                up_var, up_port = self.alias_outputs[alias]
+                if up_var in self.var2node:
+                    up_nid = self.var2node[up_var]
+                    self.g.add_edge(up_nid, up_port, nid, port_name)
+                    self.outputs_seen.setdefault(up_nid, set()).add(up_port)
+                else:
+                    # 允许前向引用：等 up_var 定义后再补
+                    self.unresolved.append((up_var, up_port, nid, port_name))
+                seen_inputs.append(port_name)
             else:
-                # 不做自动 Constant、不做句柄直传；你明确要求"必须通过下标"，这里就硬报错。
-                raise TypeError(f"{type_name}.{port_name}: 只接受 node['PORT'] 或 None，禁止直接传变量/字面量/调用结果")
+                # 字面量直传：OUTPUT(INPUT="...") / ADD(A=1.2) / MOVE(V={"x":0,"y":1,"z":0})
+                lit_ok = False
+                try:
+                    lit = ast.literal_eval(expr)
+                    lit_ok = isinstance(lit, (int, float, str)) or (isinstance(lit, dict) and all(k in lit for k in ("x", "y", "z")))
+                except Exception:
+                    lit_ok = False
+                
+                if lit_ok:
+                    up_nid = self._emit_constant_node(lit)
+                    # Constant 只有一个输出端口，叫 "Output"；下游那边只有一个输入或按名匹配
+                    self.g.add_edge(up_nid, "Output", nid, port_name)
+                    self.outputs_seen.setdefault(up_nid, set()).add("Output")
+                    seen_inputs.append(port_name)
+                else:
+                    raise TypeError(f"{type_name}.{port_name}: 只接受 node['PORT']、端口别名、None 或字面量（数值/字符串/xyz向量）")
 
         # 补齐 node.inputs（按出现顺序）
         node_rec["inputs"] = [{"name": p, "type": ""} for p in seen_inputs]
