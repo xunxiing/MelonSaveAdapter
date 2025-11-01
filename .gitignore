@@ -137,3 +137,6 @@ dmypy.json
 # OS
 .DS_Store
 Thumbs.db
+
+# Custom
+.melsave
