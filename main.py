@@ -248,15 +248,56 @@ def generate_constant_instructions(graph: dict, node_map: Dict[str, dict]) -> Li
 
             value_type = None
             new_value = None
+
+            # 标量：数字
             if isinstance(value, (int, float)):
                 value_type = 'decimal'
                 new_value = value
+
+            # 标量：字符串
             elif isinstance(value, str):
                 value_type = 'string'
                 new_value = value
+
+            # 向量：{x,y,z}
             elif isinstance(value, dict) and all(k in value for k in ['x', 'y', 'z']):
                 value_type = 'vector'
                 new_value = [value.get('x', 0.0), value.get('y', 0.0), value.get('z', 0.0)]
+
+            # ✅ 新增：数组支持
+            elif isinstance(value, list):
+                # 全是数字 → ArrayNumber
+                if all(isinstance(v, (int, float)) for v in value):
+                    value_type = 'array_number'
+                    new_value = [float(v) for v in value]
+
+                # 全是字符串 → ArrayString
+                elif all(isinstance(v, str) for v in value):
+                    value_type = 'array_string'
+                    new_value = value
+
+                # 全是向量 {x,y,z} 或 [x,y,z] → ArrayVector
+                elif all(
+                    (isinstance(v, dict) and all(k in v for k in ['x', 'y', 'z']))
+                    or (isinstance(v, (list, tuple)) and len(v) == 3)
+                    for v in value
+                ):
+                    value_type = 'array_vector'
+                    # 统一成 [x,y,z]
+                    norm_vecs = []
+                    for v in value:
+                        if isinstance(v, dict):
+                            norm_vecs.append([
+                                float(v.get('x', 0.0)),
+                                float(v.get('y', 0.0)),
+                                float(v.get('z', 0.0)),
+                            ])
+                        else:
+                            norm_vecs.append([float(v[0]), float(v[1]), float(v[2])])
+                    new_value = norm_vecs
+                else:
+                    print(f"警告：跳过常量 '{original_id}'，因为其列表元素类型混合或不支持: {value}")
+                    continue
             else:
                 print(f"警告：跳过常量 '{original_id}'，因为其 'value' 格式无法识别: {value}")
                 continue

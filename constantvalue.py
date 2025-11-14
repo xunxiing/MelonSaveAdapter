@@ -43,12 +43,11 @@ def create_vector_json_string(x: float, y: float, z: float) -> str:
 def _modify_single_node(
     game_data: Dict[str, Any],
     node_id: str,
-    new_value: Union[str, float, int, List[float], Tuple[float, ...]],
+    new_value: Union[str, float, int, List[Any]],
     value_type: str
 ) -> bool:
     """
-    在内存中的game_data字典里，查找并修改指定ID的常量节点的值。
-    返回 True 表示成功，False 表示失败。
+    修改 Constant 节点（含 ArrayXxx 和 DataType 更新）
     """
     try:
         save_object = game_data['saveObjectContainers'][0]['saveObjects']
@@ -56,37 +55,100 @@ def _modify_single_node(
 
         chip_graph_meta = next((meta for meta in meta_datas if meta.get('key') == 'chip_graph'), None)
         if not chip_graph_meta:
-            print(f"错误: (常量修改) 未找到 'chip_graph' 元数据。")
+            print("未找到 chip_graph")
             return False
 
         graph_data = json.loads(chip_graph_meta['stringValue'])
         nodes = graph_data.get('Nodes', [])
 
-        target_node = next((node for node in nodes if node_id in node.get('Id', '')), None)
+        target_node = next((n for n in nodes if node_id in n.get('Id','')), None)
         if not target_node:
-            print(f"错误: (常量修改) 未找到ID包含 '{node_id}' 的节点。")
+            print(f"找不到节点 {node_id}")
             return False
 
-        save_data_obj = json.loads(target_node['SaveData'])
+        # ---- 先准备 DataType 的字符串名称 ----
+        type_map = {
+            "string": "String",
+            "decimal": "Number",
+            "vector": "Vector",
+            "array_string": "ArrayString",
+            "array_number": "ArrayNumber",
+            "array_vector": "ArrayVector",
+        }
+        gate_type = type_map[value_type]
 
-        if value_type == 'string':
-            save_data_obj['DataValue'] = str(new_value)
-        elif value_type == 'decimal':
-            save_data_obj['DataValue'] = str(float(new_value))
-        elif value_type == 'vector':
-            if not isinstance(new_value, (list, tuple)) or len(new_value) != 3:
-                print(f"错误: (常量修改) 'vector'类型的值必须是包含3个数字的列表或元组。收到: {new_value}")
-                return False
-            save_data_obj['DataValue'] = create_vector_json_string(*new_value)
-        else:
-            print(f"错误: (常量修改) 未知的 value_type '{value_type}'。")
-            return False
+        # ---- 更新 GateDataType ----
+        target_node["GateDataType"] = gate_type
 
-        target_node['SaveData'] = json.dumps(save_data_obj)
-        chip_graph_meta['stringValue'] = json.dumps(graph_data, indent=2)
-        
-        # 修改已在传入的 game_data 字典上生效
+        # ---- 更新输出端口类型 ----
+        for port in target_node.get("Outputs", []):
+            port["DataType"] = gate_type
+
+        # ---- 解析原 SaveData ----
+        save_data_obj = json.loads(target_node["SaveData"]) if target_node.get("SaveData") else {}
+
+        # ==========================
+        #   标量处理
+        # ==========================
+        if value_type == "string":
+            save_data_obj["DataValue"] = str(new_value)
+
+        elif value_type == "decimal":
+            save_data_obj["DataValue"] = str(float(new_value))
+
+        elif value_type == "vector":
+            save_data_obj["DataValue"] = json.dumps({
+                "x": new_value[0],
+                "y": new_value[1],
+                "z": new_value[2],
+                "w": 0.0,
+                "magnitude": 0.0,
+                "sqrMagnitude": 0.0
+            })
+
+        # ==========================
+        #     ArrayString
+        # ==========================
+        elif value_type == "array_string":
+            save_data_obj["DataValue"] = json.dumps(new_value, ensure_ascii=False, indent=2)
+            save_data_obj["IsMultiline"] = None
+
+        # ==========================
+        #     ArrayNumber
+        # ==========================
+        elif value_type == "array_number":
+            arr = [float(v) for v in new_value]
+            save_data_obj["DataValue"] = json.dumps(arr, ensure_ascii=False, indent=2)
+            save_data_obj["IsMultiline"] = None
+
+        # ==========================
+        #     ArrayVector
+        # ==========================
+        elif value_type == "array_vector":
+            vecs = []
+            for v in new_value:
+                if isinstance(v, dict):
+                    x, y, z = v["x"], v["y"], v["z"]
+                else:
+                    x, y, z = v
+                vecs.append({
+                    "x": x, "y": y, "z": z,
+                    "w": 0.0,
+                    "magnitude": 0.0,
+                    "sqrMagnitude": 0.0
+                })
+            save_data_obj["DataValue"] = json.dumps(vecs, ensure_ascii=False, indent=2)
+            save_data_obj["IsMultiline"] = None
+
+        # ---------------- 更新 SaveData ----------------
+        target_node["SaveData"] = json.dumps(save_data_obj)
+        chip_graph_meta["stringValue"] = json.dumps(graph_data, indent=2)
+
         return True
+
+    except Exception as e:
+        print("修改常量错误:", e)
+        return False
 
     except (KeyError, IndexError, StopIteration) as e:
         print(f"处理JSON时发生错误：找不到预期的键或索引。路径可能不正确。错误详情: {e}")

@@ -1,108 +1,109 @@
 {
   "nodes": [
     {
-      "id": "input_0",
-      "type": "INPUT",
-      "label": "InTrigger",
+      "id": "constant_0",
+      "type": "Constant",
+      "label": "Const [\"a\", \"b\", \"c\"]",
       "attrs": {
-        "name": "InTrigger",
-        "data_type": 2
+        "value": [
+          "a",
+          "b",
+          "c"
+        ]
       },
       "inputs": [],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "input_1",
-      "type": "INPUT",
-      "label": "InHitEntity",
-      "attrs": {
-        "name": "InHitEntity",
-        "data_type": 1
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "not_0",
-      "type": "NOT",
-      "label": "NOT",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "A",
-          "type": ""
-        }
-      ],
       "outputs": []
     },
     {
-      "id": "not_1",
-      "type": "NOT",
-      "label": "NOT",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "A",
-          "type": ""
-        }
-      ],
+      "id": "constant_1",
+      "type": "Constant",
+      "label": "Const [1.0, 2.0, 3.0]",
+      "attrs": {
+        "value": [
+          1.0,
+          2.0,
+          3.0
+        ]
+      },
+      "inputs": [],
       "outputs": []
     },
     {
-      "id": "time_0",
-      "type": "TIME",
-      "label": "TIME",
-      "attrs": {},
+      "id": "constant_2",
+      "type": "Constant",
+      "label": "Const [{\"x\": 0.0, \"y\": 0…",
+      "attrs": {
+        "value": [
+          {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          {
+            "x": 1.0,
+            "y": 2.0,
+            "z": 3.0
+          }
+        ]
+      },
       "inputs": [],
-      "outputs": [
-        {
-          "name": "DELTA TIME",
-          "type": ""
-        }
-      ]
+      "outputs": []
     },
     {
-      "id": "collision_0",
-      "type": "COLLISION",
-      "label": "COLLISION",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "OBJECT",
-          "type": ""
+      "id": "constant_3",
+      "type": "Constant",
+      "label": "Const [[0.0, 0.0, 0.0], …",
+      "attrs": {
+        "value": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            2.0,
+            3.0
+          ]
+        ]
+      },
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "id": "constant_4",
+      "type": "Constant",
+      "label": "Const 42.0",
+      "attrs": {
+        "value": 42.0
+      },
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "id": "constant_5",
+      "type": "Constant",
+      "label": "Const hello",
+      "attrs": {
+        "value": "hello"
+      },
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "id": "constant_6",
+      "type": "Constant",
+      "label": "Const {\"x\": 1.0, \"y\": 2.…",
+      "attrs": {
+        "value": {
+          "x": 1.0,
+          "y": 2.0,
+          "z": 3.0
         }
-      ],
+      },
+      "inputs": [],
       "outputs": []
     }
   ],
-  "edges": [
-    {
-      "from_node": "input_0",
-      "from_port": "OUTPUT",
-      "to_node": "not_0",
-      "to_port": "A"
-    },
-    {
-      "from_node": "time_0",
-      "from_port": "DELTA TIME",
-      "to_node": "not_1",
-      "to_port": "A"
-    },
-    {
-      "from_node": "input_1",
-      "from_port": "OUTPUT",
-      "to_node": "collision_0",
-      "to_port": "OBJECT"
-    }
-  ]
+  "edges": []
 }
