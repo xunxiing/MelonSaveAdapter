@@ -311,7 +311,12 @@ class Converter(ast.NodeVisitor):
                     self.outputs_seen.setdefault(up_nid, set()).add("Output")
                     seen_inputs.append(port_name)
                 else:
-                    raise TypeError(f"{type_name}.{port_name}: 只接受 node['PORT']、端口别名、None 或字面量（数值/字符串/xyz向量）")
+                    raise TypeError(f"{type_name}.{port_name}: 参数必须是以下形式之一：\n"
+                                  f"  • node['端口名']  - 连接其他节点的输出端口\n"
+                                  f"  • 端口别名变量   - 通过别名引用端口\n"
+                                  f"  • None          - 空输入\n"
+                                  f"  • 字面量        - 数字、字符串或{x,y,z}向量\n"
+                                  f"当前表达式不被支持：{ast.unparse(expr) if hasattr(ast, 'unparse') else str(expr)}")
 
         # 补齐 node.inputs（按出现顺序）
         node_rec["inputs"] = [{"name": p, "type": ""} for p in seen_inputs]
@@ -352,7 +357,24 @@ def convert_dsl_to_graph(dsl_script_path: Path, output_path: Path) -> None:
         cvt.resolve_unresolved()
         cvt.finalize_outputs()
     except Exception as e:
-        sys.exit(f"Error executing DSL: {e}")
+        # 提供更详细的错误信息
+        error_msg = str(e)
+        if "name" in error_msg and "is not defined" in error_msg:
+            # 提取未定义的变量名
+            import re
+            match = re.search(r"name '(\w+)' is not defined", error_msg)
+            if match:
+                undefined_var = match.group(1)
+                sys.exit(f"DSL语法错误: 变量 '{undefined_var}' 未定义\n"
+                        f"提示: 在使用变量前，请先通过函数调用或赋值来定义它\n"
+                        f"例如: {undefined_var} = SOME_FUNCTION(...)")
+        
+        # 对于TypeError，我们已经有了详细的格式说明
+        if isinstance(e, TypeError):
+            sys.exit(f"DSL参数错误: {error_msg}")
+        
+        # 其他错误保持原样
+        sys.exit(f"DSL执行错误: {error_msg}")
 
     try:
         out = {"nodes": cvt.g.nodes, "edges": cvt.g.edges}

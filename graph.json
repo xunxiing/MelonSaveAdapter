@@ -1,111 +1,1320 @@
 {
   "nodes": [
     {
-      "id": "constant_0",
-      "type": "Constant",
-      "label": "Const [\"a\", \"b\", \"c\"]",
+      "id": "input_0",
+      "type": "INPUT",
+      "label": "ObjectA",
       "attrs": {
-        "value": [
-          "a",
-          "b",
-          "c"
-        ]
+        "name": "ObjectA",
+        "data_type": 1
       },
       "inputs": [],
-      "outputs": []
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_1",
+      "type": "INPUT",
+      "label": "ObjectB",
+      "attrs": {
+        "name": "ObjectB",
+        "data_type": 1
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_2",
+      "type": "INPUT",
+      "label": "SpringK",
+      "attrs": {
+        "name": "SpringK",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_3",
+      "type": "INPUT",
+      "label": "DamperD",
+      "attrs": {
+        "name": "DamperD",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_4",
+      "type": "INPUT",
+      "label": "RestLength",
+      "attrs": {
+        "name": "RestLength",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "position_0",
+      "type": "Position",
+      "label": "Position",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "object",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Position",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "position_1",
+      "type": "Position",
+      "label": "Position",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "object",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Position",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "velocity_0",
+      "type": "Velocity",
+      "label": "Velocity",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "object",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Velocity",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "velocity_1",
+      "type": "Velocity",
+      "label": "Velocity",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "object",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Velocity",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "subtract_0",
+      "type": "SUBTRACT",
+      "label": "SUBTRACT",
+      "attrs": {
+        "datatype": 8
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A-B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "magnitude_0",
+      "type": "MAGNITUDE",
+      "label": "MAGNITUDE",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "input",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "normalize_0",
+      "type": "NORMALIZE",
+      "label": "NORMALIZE",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "input",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "subtract_1",
+      "type": "SUBTRACT",
+      "label": "SUBTRACT",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A-B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_0",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "split_0",
+      "type": "Split",
+      "label": "Split",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "Vector",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "X",
+          "type": ""
+        },
+        {
+          "name": "Y",
+          "type": ""
+        },
+        {
+          "name": "Z",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_1",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_2",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_3",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_0",
+      "type": "Constant",
+      "label": "Const 0.0",
+      "attrs": {
+        "value": 0.0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "combine_0",
+      "type": "Combine",
+      "label": "Combine",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "X",
+          "type": ""
+        },
+        {
+          "name": "Y",
+          "type": ""
+        },
+        {
+          "name": "Z",
+          "type": ""
+        },
+        {
+          "name": "W",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Vector",
+          "type": ""
+        }
+      ]
     },
     {
       "id": "constant_1",
       "type": "Constant",
-      "label": "Const [1.0, 2.0, 3.0]",
+      "label": "Const -1.0",
       "attrs": {
-        "value": [
-          1.0,
-          2.0,
-          3.0
-        ]
+        "value": -1.0
       },
       "inputs": [],
-      "outputs": []
-    },
-    {
-      "id": "constant_2",
-      "type": "Constant",
-      "label": "Const [{\"x\": 0, \"y\": 0, …",
-      "attrs": {
-        "value": [
-          {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          },
-          {
-            "x": 1,
-            "y": 2,
-            "z": 3
-          }
-        ]
-      },
-      "inputs": [],
-      "outputs": []
-    },
-    {
-      "id": "constant_3",
-      "type": "Constant",
-      "label": "Const [[0, 0, 0, 0], [1,…",
-      "attrs": {
-        "value": [
-          [
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            1,
-            2,
-            3,
-            1
-          ]
-        ]
-      },
-      "inputs": [],
-      "outputs": []
-    },
-    {
-      "id": "constant_4",
-      "type": "Constant",
-      "label": "Const 42.0",
-      "attrs": {
-        "value": 42.0
-      },
-      "inputs": [],
-      "outputs": []
-    },
-    {
-      "id": "constant_5",
-      "type": "Constant",
-      "label": "Const hello",
-      "attrs": {
-        "value": "hello"
-      },
-      "inputs": [],
-      "outputs": []
-    },
-    {
-      "id": "constant_6",
-      "type": "Constant",
-      "label": "Const {\"x\": 1.0, \"y\": 2.…",
-      "attrs": {
-        "value": {
-          "x": 1.0,
-          "y": 2.0,
-          "z": 3.0
+      "outputs": [
+        {
+          "name": "OUT",
+          "type": ""
         }
+      ]
+    },
+    {
+      "id": "multiply_4",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_5",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_6",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "combine_1",
+      "type": "Combine",
+      "label": "Combine",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "X",
+          "type": ""
+        },
+        {
+          "name": "Y",
+          "type": ""
+        },
+        {
+          "name": "Z",
+          "type": ""
+        },
+        {
+          "name": "W",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Vector",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "subtract_2",
+      "type": "SUBTRACT",
+      "label": "SUBTRACT",
+      "attrs": {
+        "datatype": 8
       },
-      "inputs": [],
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A-B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "dot_product_0",
+      "type": "DOT_PRODUCT",
+      "label": "DOT_PRODUCT",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_7",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_8",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_9",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_10",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "combine_2",
+      "type": "Combine",
+      "label": "Combine",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "X",
+          "type": ""
+        },
+        {
+          "name": "Y",
+          "type": ""
+        },
+        {
+          "name": "Z",
+          "type": ""
+        },
+        {
+          "name": "W",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Vector",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_11",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_12",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_13",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "combine_3",
+      "type": "Combine",
+      "label": "Combine",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "X",
+          "type": ""
+        },
+        {
+          "name": "Y",
+          "type": ""
+        },
+        {
+          "name": "Z",
+          "type": ""
+        },
+        {
+          "name": "W",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Vector",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_0",
+      "type": "ADD",
+      "label": "ADD",
+      "attrs": {
+        "datatype": 8
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A+B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_1",
+      "type": "ADD",
+      "label": "ADD",
+      "attrs": {
+        "datatype": 8
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A+B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_force_0",
+      "type": "ADD_FORCE",
+      "label": "ADD_FORCE",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "OBJECT",
+          "type": ""
+        },
+        {
+          "name": "FORCE",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "add_force_1",
+      "type": "ADD_FORCE",
+      "label": "ADD_FORCE",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "OBJECT",
+          "type": ""
+        },
+        {
+          "name": "FORCE",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "output_0",
+      "type": "OUTPUT",
+      "label": "CurrentDistance",
+      "attrs": {
+        "name": "CurrentDistance",
+        "data_type": 1028
+      },
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "output_1",
+      "type": "OUTPUT",
+      "label": "ForceOnA",
+      "attrs": {
+        "name": "ForceOnA",
+        "data_type": 8
+      },
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "output_2",
+      "type": "OUTPUT",
+      "label": "ForceOnB",
+      "attrs": {
+        "name": "ForceOnB",
+        "data_type": 8
+      },
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": ""
+        }
+      ],
       "outputs": []
     }
   ],
-  "edges": []
+  "edges": [
+    {
+      "from_node": "input_0",
+      "from_port": "OUTPUT",
+      "to_node": "position_0",
+      "to_port": "object"
+    },
+    {
+      "from_node": "input_1",
+      "from_port": "OUTPUT",
+      "to_node": "position_1",
+      "to_port": "object"
+    },
+    {
+      "from_node": "input_0",
+      "from_port": "OUTPUT",
+      "to_node": "velocity_0",
+      "to_port": "object"
+    },
+    {
+      "from_node": "input_1",
+      "from_port": "OUTPUT",
+      "to_node": "velocity_1",
+      "to_port": "object"
+    },
+    {
+      "from_node": "position_1",
+      "from_port": "Position",
+      "to_node": "subtract_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "position_0",
+      "from_port": "Position",
+      "to_node": "subtract_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "subtract_0",
+      "from_port": "A-B",
+      "to_node": "magnitude_0",
+      "to_port": "input"
+    },
+    {
+      "from_node": "subtract_0",
+      "from_port": "A-B",
+      "to_node": "normalize_0",
+      "to_port": "input"
+    },
+    {
+      "from_node": "magnitude_0",
+      "from_port": "result",
+      "to_node": "subtract_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_4",
+      "from_port": "OUTPUT",
+      "to_node": "subtract_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "input_2",
+      "from_port": "OUTPUT",
+      "to_node": "multiply_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "subtract_1",
+      "from_port": "A-B",
+      "to_node": "multiply_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "normalize_0",
+      "from_port": "result",
+      "to_node": "split_0",
+      "to_port": "Vector"
+    },
+    {
+      "from_node": "split_0",
+      "from_port": "X",
+      "to_node": "multiply_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_0",
+      "from_port": "A*B",
+      "to_node": "multiply_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "split_0",
+      "from_port": "Y",
+      "to_node": "multiply_2",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_0",
+      "from_port": "A*B",
+      "to_node": "multiply_2",
+      "to_port": "B"
+    },
+    {
+      "from_node": "split_0",
+      "from_port": "Z",
+      "to_node": "multiply_3",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_0",
+      "from_port": "A*B",
+      "to_node": "multiply_3",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_1",
+      "from_port": "A*B",
+      "to_node": "combine_0",
+      "to_port": "X"
+    },
+    {
+      "from_node": "multiply_2",
+      "from_port": "A*B",
+      "to_node": "combine_0",
+      "to_port": "Y"
+    },
+    {
+      "from_node": "multiply_3",
+      "from_port": "A*B",
+      "to_node": "combine_0",
+      "to_port": "Z"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "combine_0",
+      "to_port": "W"
+    },
+    {
+      "from_node": "multiply_1",
+      "from_port": "A*B",
+      "to_node": "multiply_4",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_1",
+      "from_port": "OUT",
+      "to_node": "multiply_4",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_2",
+      "from_port": "A*B",
+      "to_node": "multiply_5",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_1",
+      "from_port": "OUT",
+      "to_node": "multiply_5",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_3",
+      "from_port": "A*B",
+      "to_node": "multiply_6",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_1",
+      "from_port": "OUT",
+      "to_node": "multiply_6",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_4",
+      "from_port": "A*B",
+      "to_node": "combine_1",
+      "to_port": "X"
+    },
+    {
+      "from_node": "multiply_5",
+      "from_port": "A*B",
+      "to_node": "combine_1",
+      "to_port": "Y"
+    },
+    {
+      "from_node": "multiply_6",
+      "from_port": "A*B",
+      "to_node": "combine_1",
+      "to_port": "Z"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "combine_1",
+      "to_port": "W"
+    },
+    {
+      "from_node": "velocity_1",
+      "from_port": "Velocity",
+      "to_node": "subtract_2",
+      "to_port": "A"
+    },
+    {
+      "from_node": "velocity_0",
+      "from_port": "Velocity",
+      "to_node": "subtract_2",
+      "to_port": "B"
+    },
+    {
+      "from_node": "normalize_0",
+      "from_port": "result",
+      "to_node": "dot_product_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "subtract_2",
+      "from_port": "A-B",
+      "to_node": "dot_product_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "input_3",
+      "from_port": "OUTPUT",
+      "to_node": "multiply_7",
+      "to_port": "A"
+    },
+    {
+      "from_node": "dot_product_0",
+      "from_port": "result",
+      "to_node": "multiply_7",
+      "to_port": "B"
+    },
+    {
+      "from_node": "split_0",
+      "from_port": "X",
+      "to_node": "multiply_8",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_7",
+      "from_port": "A*B",
+      "to_node": "multiply_8",
+      "to_port": "B"
+    },
+    {
+      "from_node": "split_0",
+      "from_port": "Y",
+      "to_node": "multiply_9",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_7",
+      "from_port": "A*B",
+      "to_node": "multiply_9",
+      "to_port": "B"
+    },
+    {
+      "from_node": "split_0",
+      "from_port": "Z",
+      "to_node": "multiply_10",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_7",
+      "from_port": "A*B",
+      "to_node": "multiply_10",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_8",
+      "from_port": "A*B",
+      "to_node": "combine_2",
+      "to_port": "X"
+    },
+    {
+      "from_node": "multiply_9",
+      "from_port": "A*B",
+      "to_node": "combine_2",
+      "to_port": "Y"
+    },
+    {
+      "from_node": "multiply_10",
+      "from_port": "A*B",
+      "to_node": "combine_2",
+      "to_port": "Z"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "combine_2",
+      "to_port": "W"
+    },
+    {
+      "from_node": "multiply_8",
+      "from_port": "A*B",
+      "to_node": "multiply_11",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_1",
+      "from_port": "OUT",
+      "to_node": "multiply_11",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_9",
+      "from_port": "A*B",
+      "to_node": "multiply_12",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_1",
+      "from_port": "OUT",
+      "to_node": "multiply_12",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_10",
+      "from_port": "A*B",
+      "to_node": "multiply_13",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_1",
+      "from_port": "OUT",
+      "to_node": "multiply_13",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_11",
+      "from_port": "A*B",
+      "to_node": "combine_3",
+      "to_port": "X"
+    },
+    {
+      "from_node": "multiply_12",
+      "from_port": "A*B",
+      "to_node": "combine_3",
+      "to_port": "Y"
+    },
+    {
+      "from_node": "multiply_13",
+      "from_port": "A*B",
+      "to_node": "combine_3",
+      "to_port": "Z"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "combine_3",
+      "to_port": "W"
+    },
+    {
+      "from_node": "combine_0",
+      "from_port": "Vector",
+      "to_node": "add_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "combine_2",
+      "from_port": "Vector",
+      "to_node": "add_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "combine_1",
+      "from_port": "Vector",
+      "to_node": "add_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "combine_3",
+      "from_port": "Vector",
+      "to_node": "add_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "input_0",
+      "from_port": "OUTPUT",
+      "to_node": "add_force_0",
+      "to_port": "OBJECT"
+    },
+    {
+      "from_node": "add_1",
+      "from_port": "A+B",
+      "to_node": "add_force_0",
+      "to_port": "FORCE"
+    },
+    {
+      "from_node": "input_1",
+      "from_port": "OUTPUT",
+      "to_node": "add_force_1",
+      "to_port": "OBJECT"
+    },
+    {
+      "from_node": "add_0",
+      "from_port": "A+B",
+      "to_node": "add_force_1",
+      "to_port": "FORCE"
+    },
+    {
+      "from_node": "magnitude_0",
+      "from_port": "result",
+      "to_node": "output_0",
+      "to_port": "INPUT"
+    },
+    {
+      "from_node": "add_1",
+      "from_port": "A+B",
+      "to_node": "output_1",
+      "to_port": "INPUT"
+    },
+    {
+      "from_node": "add_0",
+      "from_port": "A+B",
+      "to_node": "output_2",
+      "to_port": "INPUT"
+    }
+  ]
 }
