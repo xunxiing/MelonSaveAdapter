@@ -129,11 +129,16 @@ def _modify_single_node(
             for v in new_value:
                 if isinstance(v, dict):
                     x, y, z = v["x"], v["y"], v["z"]
+                    w = v.get("w", 0.0)
                 else:
-                    x, y, z = v
+                    # 支持3维或4维向量
+                    if len(v) == 4:
+                        x, y, z, w = v[0], v[1], v[2], v[3]
+                    else:
+                        x, y, z = v[0], v[1], v[2]
+                        w = 0.0
                 vecs.append({
-                    "x": x, "y": y, "z": z,
-                    "w": 0.0,
+                    "x": x, "y": y, "z": z, "w": w,
                     "magnitude": 0.0,
                     "sqrMagnitude": 0.0
                 })

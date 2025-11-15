@@ -276,24 +276,32 @@ def generate_constant_instructions(graph: dict, node_map: Dict[str, dict]) -> Li
                     value_type = 'array_string'
                     new_value = value
 
-                # 全是向量 {x,y,z} 或 [x,y,z] → ArrayVector
+                # 全是向量 {x,y,z} 或 [x,y,z] 或 [x,y,z,w] → ArrayVector
                 elif all(
                     (isinstance(v, dict) and all(k in v for k in ['x', 'y', 'z']))
-                    or (isinstance(v, (list, tuple)) and len(v) == 3)
+                    or (isinstance(v, (list, tuple)) and len(v) in [3, 4])
                     for v in value
                 ):
                     value_type = 'array_vector'
-                    # 统一成 [x,y,z]
+                    # 统一成 [x,y,z] 或 [x,y,z,w]
                     norm_vecs = []
                     for v in value:
                         if isinstance(v, dict):
-                            norm_vecs.append([
-                                float(v.get('x', 0.0)),
-                                float(v.get('y', 0.0)),
-                                float(v.get('z', 0.0)),
-                            ])
+                            # 支持3维或4维向量
+                            x = float(v.get('x', 0.0))
+                            y = float(v.get('y', 0.0))
+                            z = float(v.get('z', 0.0))
+                            w = float(v.get('w', 0.0)) if 'w' in v else 0.0
+                            if w != 0.0 or 'w' in v:
+                                norm_vecs.append([x, y, z, w])
+                            else:
+                                norm_vecs.append([x, y, z])
                         else:
-                            norm_vecs.append([float(v[0]), float(v[1]), float(v[2])])
+                            # 列表/元组，支持3维或4维
+                            if len(v) == 4:
+                                norm_vecs.append([float(v[0]), float(v[1]), float(v[2]), float(v[3])])
+                            else:
+                                norm_vecs.append([float(v[0]), float(v[1]), float(v[2])])
                     new_value = norm_vecs
                 else:
                     print(f"警告：跳过常量 '{original_id}'，因为其列表元素类型混合或不支持: {value}")
