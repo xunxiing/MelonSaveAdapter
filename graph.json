@@ -305,6 +305,24 @@
       ]
     },
     {
+      "id": "split_1",
+      "type": "Split",
+      "label": "Split",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "Vector",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "X",
+          "type": ""
+        }
+      ]
+    },
+    {
       "id": "multiply_2",
       "type": "MULTIPLY",
       "label": "MULTIPLY",
@@ -975,7 +993,13 @@
       "to_port": "Vector"
     },
     {
-      "from_node": "split_0",
+      "from_node": "normalize_0",
+      "from_port": "result",
+      "to_node": "split_1",
+      "to_port": "Vector"
+    },
+    {
+      "from_node": "split_1",
       "from_port": "X",
       "to_node": "multiply_1",
       "to_port": "A"

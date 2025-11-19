@@ -383,14 +383,24 @@ def convert_dsl_to_graph(dsl_script_path: Path, output_path: Path) -> None:
         sys.exit(f"Failed to write graph JSON '{output_path}': {e}")
 
 if __name__ == "__main__":
-    # 示例：把 demo_v2.py 转为 graph.json
-    DSL_PATH = Path("demo_v2.py")
-    OUT_PATH = Path("graph.json")
+    import sys
+    
+    # 支持命令行参数：python converter_v2.py [输入文件] [输出文件]
+    if len(sys.argv) >= 3:
+        DSL_PATH = Path(sys.argv[1])
+        OUT_PATH = Path(sys.argv[2])
+    else:
+        # 默认行为：使用 demo_v2.py
+        DSL_PATH = Path("demo_v2.py")
+        OUT_PATH = Path("graph.json")
 
     if not DSL_PATH.exists():
-        # 写入一个可运行的示例 DSL
-        DSL_PATH.write_text(
-            """
+        if len(sys.argv) >= 3:
+            sys.exit(f"输入文件 '{DSL_PATH}' 不存在")
+        else:
+            # 写入一个可运行的示例 DSL
+            DSL_PATH.write_text(
+                """
 # demo_v2.py — 纯 AST 转换器 DSL 样例
 # 时间源
 t = TIME()
@@ -406,9 +416,9 @@ xyz = Split(Vector=player_pos["OUT"])
 out_dt = OUTPUT(INPUT=t["DELTA TIME"], attrs={"name": "#deltaTime", "data_type": 2})
 out_g  = OUTPUT(INPUT=greet["OUT"],    attrs={"name": "#greeting",  "data_type": 4})
 out_x  = OUTPUT(INPUT=xyz["X"],        attrs={"name": "#playerX",   "data_type": 2})
-        """.strip(),
-            encoding="utf-8",
-        )
+            """.strip(),
+                encoding="utf-8",
+            )
 
     convert_dsl_to_graph(DSL_PATH, OUT_PATH)
     print(f"Graph saved -> {OUT_PATH}")

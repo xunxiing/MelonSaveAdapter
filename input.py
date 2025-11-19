@@ -33,7 +33,7 @@ spring_force_mag = MULTIPLY(A=spring_k["OUTPUT"], B=elongation["A-B"])
 # 将方向向量分解
 dir_split = Split(Vector=dir_ab["result"])
 # 计算作用在B上的弹簧力向量分量
-spring_b_x = MULTIPLY(A=dir_split["X"], B=spring_force_mag["A*B"])
+spring_b_x = MULTIPLY(A=Split(Vector=dir_ab["result"])["X"], B=spring_force_mag["A*B"])
 spring_b_y = MULTIPLY(A=dir_split["Y"], B=spring_force_mag["A*B"])
 spring_b_z = MULTIPLY(A=dir_split["Z"], B=spring_force_mag["A*B"])
 # 组合成向量
