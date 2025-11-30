@@ -1,88 +1,66 @@
-# --- 1. 输入参数 ---
-# 物体A
-obj_a = INPUT(attrs={"name": "ObjectA", "data_type": 1})
-# 物体B
-obj_b = INPUT(attrs={"name": "ObjectB", "data_type": 1})
-# 弹簧系数
-spring_k = INPUT(attrs={"name": "SpringK", "data_type": 2})
-# 阻尼系数
-damper_d = INPUT(attrs={"name": "DamperD", "data_type": 2})
-# 弹簧原长
-rest_length = INPUT(attrs={"name": "RestLength", "data_type": 2})
+# ================= Inputs (输入参数) =================
+# 控制的目标实体
+TargetEntity = INPUT(attrs={"name": "Controlled Entity", "data_type": 1})
 
-# --- 2. 获取物体状态 ---
-# 获取位置和速度
-pos_a = Position(object=obj_a["OUTPUT"])
-pos_b = Position(object=obj_b["OUTPUT"])
-vel_a = Velocity(object=obj_a["OUTPUT"])
-vel_b = Velocity(object=obj_b["OUTPUT"])
+# 目标角度 (0-360)
+TargetAngle = INPUT(attrs={"name": "Target Angle", "data_type": 2})
 
-# --- 3. 计算弹簧力 ---
-# 从A指向B的向量
-vec_ab = SUBTRACT(A=pos_b["Position"], B=pos_a["Position"], attrs={"datatype": 8})
-# AB距离
-dist_ab = MAGNITUDE(input=vec_ab["A-B"])
-# AB方向（单位向量）
-dir_ab = NORMALIZE(input=vec_ab["A-B"])
+# PID 参数 (建议初始值: Kp=50, Ki=1, Kd=10，根据物体质量调整)
+Kp = INPUT(attrs={"name": "Kp (Proportional)", "data_type": 2})
+Ki = INPUT(attrs={"name": "Ki (Integral)", "data_type": 2})
+Kd = INPUT(attrs={"name": "Kd (Derivative)", "data_type": 2})
 
-# 弹簧伸长量 = 当前距离 - 原长
-elongation = SUBTRACT(A=dist_ab["result"], B=rest_length["OUTPUT"])
-# 弹簧力大小 = k * 伸长量
-spring_force_mag = MULTIPLY(A=spring_k["OUTPUT"], B=elongation["A-B"])
+# ================= Sensors & Time (传感器与时间) =================
+# 获取全局时间数据
+TimeData = TIME()
 
-# 将方向向量分解
-dir_split = Split(Vector=dir_ab["result"])
-# 计算作用在B上的弹簧力向量分量
-spring_b_x = MULTIPLY(A=Split(Vector=dir_ab["result"])["X"], B=spring_force_mag["A*B"])
-spring_b_y = MULTIPLY(A=dir_split["Y"], B=spring_force_mag["A*B"])
-spring_b_z = MULTIPLY(A=dir_split["Z"], B=spring_force_mag["A*B"])
-# 组合成向量
-zero = Constant(attrs={"value": 0.0})
-spring_force_b = Combine(X=spring_b_x["A*B"], Y=spring_b_y["A*B"], Z=spring_b_z["A*B"], W=zero["OUT"])
+# 获取实体当前的旋转角度
+CurrentAngle = Angle(object=TargetEntity["OUTPUT"])
 
-# 作用在A上的弹簧力 = -作用在B上的弹簧力
-neg_one = Constant(attrs={"value": -1.0})
-spring_a_x = MULTIPLY(A=spring_b_x["A*B"], B=neg_one["OUT"])
-spring_a_y = MULTIPLY(A=spring_b_y["A*B"], B=neg_one["OUT"])
-spring_a_z = MULTIPLY(A=spring_b_z["A*B"], B=neg_one["OUT"])
-spring_force_a = Combine(X=spring_a_x["A*B"], Y=spring_a_y["A*B"], Z=spring_a_z["A*B"], W=zero["OUT"])
+# ================= Error Calculation (误差计算) =================
+# 使用 DeltaAngle 计算最短路径误差 (处理 360 度回绕)
+# 例如：目标 10度，当前 350度 -> 误差为 +20度
+ErrorNode = DeltaAngle(**{
+    "Angle (Deg) 1": TargetAngle["OUTPUT"],
+    "Angle (Deg) 2": CurrentAngle["Angle"]
+})
 
-# --- 4. 计算阻尼力 ---
-# 相对速度 = Vb - Va
-rel_vel = SUBTRACT(A=vel_b["Velocity"], B=vel_a["Velocity"], attrs={"datatype": 8})
-# 速度在弹簧方向上的投影（点积）
-vel_proj = DOT_PRODUCT(A=dir_ab["result"], B=rel_vel["A-B"])
-# 阻尼力大小 = d * 投影速度
-damper_force_mag = MULTIPLY(A=damper_d["OUTPUT"], B=vel_proj["result"])
+# ================= P-Term (比例项) =================
+# P = Error * Kp
+PTerm = MULTIPLY(A=ErrorNode["角度差"], B=Kp, attrs={"data_type": 2})
 
-# 计算作用在B上的阻尼力向量分量
-damper_b_x = MULTIPLY(A=dir_split["X"], B=damper_force_mag["A*B"])
-damper_b_y = MULTIPLY(A=dir_split["Y"], B=damper_force_mag["A*B"])
-damper_b_z = MULTIPLY(A=dir_split["Z"], B=damper_force_mag["A*B"])
-damper_force_b = Combine(X=damper_b_x["A*B"], Y=damper_b_y["A*B"], Z=damper_b_z["A*B"], W=zero["OUT"])
+# ================= I-Term (积分项) =================
+# 1. 计算当前帧的误差累积量: Error * dt
+Error_x_DT = MULTIPLY(A=ErrorNode["角度差"], B=TimeData["DELTA TIME"], attrs={"data_type": 2})
 
-# 作用在A上的阻尼力 = -作用在B上的阻尼力
-damper_a_x = MULTIPLY(A=damper_b_x["A*B"], B=neg_one["OUT"])
-damper_a_y = MULTIPLY(A=damper_b_y["A*B"], B=neg_one["OUT"])
-damper_a_z = MULTIPLY(A=damper_b_z["A*B"], B=neg_one["OUT"])
-damper_force_a = Combine(X=damper_a_x["A*B"], Y=damper_a_y["A*B"], Z=damper_a_z["A*B"], W=zero["OUT"])
+# 2. 累加误差 (积分)
+IntegralAccumulator = ACCUMULATOR(NUMBER=Error_x_DT["A*B"])
 
-# --- 5. 组合总力 ---
-# 作用在B上的总力
-total_force_b = ADD(A=spring_force_b["Vector"], B=damper_force_b["Vector"], attrs={"datatype": 8})
-# 作用在A上的总力
-total_force_a = ADD(A=spring_force_a["Vector"], B=damper_force_a["Vector"], attrs={"datatype": 8})
+# 3. I = Integral * Ki
+ITerm = MULTIPLY(A=IntegralAccumulator["RESULT"], B=Ki["OUTPUT"], attrs={"data_type": 2})
 
-# --- 6. 施加力 ---
-# 对A施加力
-apply_force_a = ADD_FORCE(OBJECT=obj_a["OUTPUT"], FORCE=total_force_a["A+B"])
-# 对B施加力
-apply_force_b = ADD_FORCE(OBJECT=obj_b["OUTPUT"], FORCE=total_force_b["A+B"])
+# ================= D-Term (微分项) =================
+# 1. 计算误差的变化率: (Error_Current - Error_Prev)
+DeltaError = DELTA_PREVIOUS(INPUT=ErrorNode["角度差"])
 
-# --- 7. 调试输出 ---
-# 当前距离
-out_dist = OUTPUT(INPUT=dist_ab["result"], attrs={"name": "CurrentDistance", "data_type": 1028})
-# 作用在A上的力
-out_force_a = OUTPUT(INPUT=total_force_a["A+B"], attrs={"name": "ForceOnA", "data_type": 8})
-# 作用在B上的力
-out_force_b = OUTPUT(INPUT=total_force_b["A+B"], attrs={"name": "ForceOnB", "data_type": 8})
+# 2. 计算导数: dE/dt
+Derivative = divide(A=DeltaError["RESULT"], B=TimeData["DELTA TIME"], attrs={"data_type": 2})
+
+# 3. D = Derivative * Kd
+DTerm = MULTIPLY(A=Derivative["A / B"], B=Kd["OUTPUT"], attrs={"data_type": 2})
+
+# ================= Summation (求和) =================
+# Total = P + I + D
+Sum_PI = ADD(A=PTerm["A*B"], B=ITerm["A*B"], attrs={"data_type": 2})
+Total_PID = ADD(A=Sum_PI["A+B"], B=DTerm["A*B"], attrs={"data_type": 2})
+
+# ================= Actuation (执行) =================
+# 将计算出的 PID 总值作为角力(扭矩)施加给物体
+ApplyTorque = ADD_ANGULAR_FORCE(**{
+    "OBJECT": TargetEntity["OUTPUT"],
+    "ANGULAR FORCE": Total_PID["A+B"]
+})
+
+# ================= Debug Output (调试输出 - 可选) =================
+# 输出当前的 PID 力度，方便在属性面板查看
+DebugOutput = OUTPUT(INPUT=Total_PID["A+B"], attrs={"name": "Output Torque", "data_type": 2})

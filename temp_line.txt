@@ -1,1 +1,0 @@
-                        raise TypeError(f"{type_name}.{port_name}: 端口下标必须是字符串字面�?)
