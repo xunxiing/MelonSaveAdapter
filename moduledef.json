@@ -3168,5 +3168,30 @@
         "name": "Result"
       }
     ]
-  }
+  },
+"Variable": {
+    "id": "Variable",
+    "gate_data_type": 0,
+    "source_info": {
+      "datatype_map_nodename": "Variable",
+      "allmod_viewmodel": "VariableNodeViewModel",
+      "chip_names_friendly_name": "Variable"
+    },
+    "inputs": [
+      {
+        "type": "Any",
+        "name": "Value"
+      },
+      {
+        "type": "Any",
+        "name": "Set"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "Any",
+        "name": "Value"
+      }
+    ]
+ }
 }

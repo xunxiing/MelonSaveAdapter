@@ -112,6 +112,8 @@ class Graph:
     def __init__(self) -> None:
         self.nodes: List[Dict[str, Any]] = []
         self.edges: List[Dict[str, Any]] = []
+        # 额外收集：DSL 中声明的变量定义（用于 chip_variables）
+        self.variables: List[Dict[str, Any]] = []
         self._used: Set[str] = set()
         self._ctr: Dict[str, int] = {}
 
@@ -140,7 +142,12 @@ class Graph:
         )
 
     def to_dict(self) -> Dict[str, Any]:
-        return {"nodes": self.nodes, "edges": self.edges}
+        # 保持向后兼容：原有字段 nodes / edges 不变，新增可选字段 variables
+        return {
+            "nodes": self.nodes,
+            "edges": self.edges,
+            "variables": self.variables,
+        }
 
 
 # ================== 解析器：只看语法，不执行 ==================
@@ -188,6 +195,37 @@ class Converter(ast.NodeVisitor):
         self.outputs_seen.setdefault(nid, set())
         return nid
 
+    # ---------- 变量定义收集 ----------
+
+    def _register_variable_def(self, lit: Dict[str, Any], alias_var: str | None) -> None:
+        """
+        收集 DSL 中的变量定义：
+            {
+              "Key": "变量ID",
+              "GateDataType": "Number/String/Vector/Entity/…",
+              "Value": ...
+            }
+
+        允许两种写法：
+          1) 赋值形式：   var_cfg = { ... }
+          2) 裸表达式形式：{ ... }
+        """
+        key = lit.get("Key")
+        gate_type = lit.get("GateDataType")
+        if not isinstance(key, str) or not isinstance(gate_type, str):
+            # 不是合法的变量定义，忽略
+            return
+
+        rec: Dict[str, Any] = {
+            "Key": key,
+            "GateDataType": gate_type,
+            "Value": lit.get("Value"),
+        }
+        if alias_var:
+            rec["dsl_name"] = alias_var
+
+        self.g.variables.append(rec)
+
     # ---------- 赋值语句 ----------
 
     # 仅处理最常见的顶层赋值：
@@ -229,20 +267,28 @@ class Converter(ast.NodeVisitor):
                     # 记录别名映射；端口统一转为字符串保存；此处不要求 up_var 已经定义，后续连边阶段会统一解析
                     self.alias_outputs[target] = (up_var, str(up_port))
 
-        # 情形 3：x = 123 / "xyz" / {"x":1,"y":2,"z":3}
+        # 情形 3：常量 / 向量 / 变量定义字面量
         elif len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
             try:
                 lit = ast.literal_eval(node.value)
             except Exception:
                 lit = None
-            is_ok = isinstance(lit, (int, float, str)) or (
-                isinstance(lit, dict) and all(k in lit for k in ("x", "y", "z"))
-            )
-            if is_ok:
-                var = node.targets[0].id
-                nid = self._emit_constant_node(lit)
-                if var not in self.var2node:
-                    self.var2node[var] = nid
+
+            # 3.1 变量定义：{"Key": "...", "GateDataType": "...", "Value": ...}
+            if isinstance(lit, dict) and {"Key", "GateDataType", "Value"} <= set(lit.keys()):
+                alias = node.targets[0].id
+                self._register_variable_def(lit, alias)
+
+            else:
+                # 3.2 普通常量 / 向量常量 -> Constant 节点
+                is_ok = isinstance(lit, (int, float, str)) or (
+                    isinstance(lit, dict) and all(k in lit for k in ("x", "y", "z"))
+                )
+                if is_ok:
+                    var = node.targets[0].id
+                    nid = self._emit_constant_node(lit)
+                    if var not in self.var2node:
+                        self.var2node[var] = nid
 
         # 继续遍历（以便处理嵌套结构里可能出现 Call）
         self.generic_visit(node)
@@ -251,6 +297,17 @@ class Converter(ast.NodeVisitor):
 
     # 也允许裸调用（不赋值）作为产生节点的副作用
     def visit_Expr(self, node: ast.Expr) -> None:
+        # 变量定义的裸字面量：
+        #   { "Key": "...", "GateDataType": "...", "Value": ... }
+        try:
+            lit = ast.literal_eval(node.value)
+        except Exception:
+            lit = None
+        if isinstance(lit, dict) and {"Key", "GateDataType", "Value"} <= set(lit.keys()):
+            self._register_variable_def(lit, alias_var=None)
+            # 该表达式仅用于变量注册，不再生成图节点
+            return
+
         if isinstance(node.value, ast.Call):
             self._emit_call_as_node(node.value)
         self.generic_visit(node)
@@ -536,4 +593,3 @@ if __name__ == "__main__":
 
     convert_dsl_to_graph(DSL_PATH, OUT_PATH)
     print(f"Graph saved -> {OUT_PATH}")
-

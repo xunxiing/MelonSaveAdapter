@@ -19,6 +19,7 @@ import re
 import sys
 from pathlib import Path
 from typing import List, Dict, Any, Tuple
+import copy
 
 # ... (动态导入和复用工具部分保持不变) ...
 try:
@@ -32,6 +33,13 @@ except ModuleNotFoundError:
     print(" 无法找到 chip_modifier.py，请确保它与本脚本位于同一目录。")
     sys.exit(1)
 
+# 变量模块：用于写入 chip_variables + 变量节点
+try:
+    variable_mod = importlib.import_module("variable")
+except ModuleNotFoundError:
+    print(" 无法找到 variable.py，请确保它与本脚本位于同一目录。")
+    sys.exit(1)
+
 # 【修改】create_new_node 的调用方式将改变，但导入本身不变
 create_new_node = add_module.create_new_node 
 find_meta_data = chip_modifier.find_meta_data
@@ -39,6 +47,11 @@ create_input_node = chip_modifier.create_input_node
 create_output_node = chip_modifier.create_output_node
 create_constant_node = chip_modifier.create_constant_node
 add_node_to_graph = chip_modifier.add_node_to_graph
+
+create_variable_definition = variable_mod.create_variable_definition
+create_variable_node = variable_mod.create_graph_node
+find_variable_meta_data = variable_mod.find_meta_data
+DEFAULT_SERIALIZED_VALUES = variable_mod.DEFAULT_SERIALIZED_VALUES
 # ------------------------------------------------------------
 # 辅助函数 (无变化)
 # ------------------------------------------------------------
@@ -58,6 +71,68 @@ def fuzzy_best_match(name: str, candidates: List[str], cutoff: float = 0.5) -> s
     name_lower = name.lower().strip()
     match = get_close_matches(name_lower, candidates, n=1, cutoff=cutoff)
     return match[0] if match else None
+
+
+def build_serialized_value_for_variable(gate_type: str, value: Any) -> str | None:
+    """
+    根据 GateDataType 和 DSL 中提供的 Value，构造 chip_variables 所需的 SerializedValue 字符串。
+
+    若无法识别类型或值不合法，则返回基于默认模板的序列化结果（不改动默认值）。
+    """
+    base = DEFAULT_SERIALIZED_VALUES.get(gate_type)
+    if base is None:
+        return None
+
+    payload = copy.deepcopy(base)
+
+    # 标量 Number
+    if gate_type == "Number":
+        try:
+            if value is not None:
+                v = float(value)
+                payload["Value"] = v
+                payload["Default"] = v
+        except Exception:
+            pass
+
+    # 字符串 String
+    elif gate_type == "String":
+        if value is not None:
+            s = str(value)
+            payload["Value"] = s
+            payload["Default"] = s
+
+    # 向量 Vector：期望 dict {x,y,z[,w]}
+    elif gate_type == "Vector":
+        if isinstance(value, dict):
+            for axis in ("x", "y", "z", "w"):
+                if axis in value:
+                    try:
+                        v = float(value[axis])
+                    except Exception:
+                        continue
+                    payload["Value"][axis] = v
+                    if isinstance(payload.get("Default"), dict):
+                        payload["Default"][axis] = v
+
+    # 数组类型：简单地把 Value/Default 替换为传入的列表
+    elif gate_type == "ArrayNumber":
+        if isinstance(value, list):
+            try:
+                arr = [float(v) for v in value]
+            except Exception:
+                arr = []
+            payload["Value"] = arr
+            payload["Default"] = list(arr)
+    elif gate_type == "ArrayString":
+        if isinstance(value, list):
+            arr = [str(v) for v in value]
+            payload["Value"] = arr
+            payload["Default"] = list(arr)
+
+    # 其他类型（包括 Entity / ArrayVector / ArrayEntity 等）保持默认模板
+
+    return json.dumps(payload, separators=(",", ":"))
 
 # ------------------------------------------------------------
 # 主处理逻辑 (核心重构)
@@ -91,16 +166,31 @@ def add_modules(
     original_request_order = [] 
 
     for item in modules_wanted:
-        if isinstance(item, dict) and item.get("type") in {"input", "output", "constant"}:
-            node_def = {
-                "type": item["type"].lower(),
-                "name": item.get("name", item["type"].title()),
-                "dataType": item.get("dataType", 2),
-            }
-            if node_def["type"] == "constant":
-                node_def["value"] = 0
-            special_node_defs.append(node_def)
-            original_request_order.append(node_def)
+        if isinstance(item, dict):
+            t = item.get("type")
+            # input / output / constant：走原有专用分支
+            if t in {"input", "output", "constant"}:
+                node_def = {
+                    "type": t.lower(),
+                    "name": item.get("name", t.title()),
+                    "dataType": item.get("dataType", 2),
+                }
+                if node_def["type"] == "constant":
+                    node_def["value"] = 0
+                special_node_defs.append(node_def)
+                original_request_order.append(node_def)
+            # 新增：variable 变量节点（由 DSL + converter_v2 提供完整信息）
+            elif t == "variable":
+                node_def = {
+                    "type": "variable",
+                    "key": item.get("key"),
+                    "gateDataType": item.get("gateDataType", "Number"),
+                    "value": item.get("value"),
+                }
+                special_node_defs.append(node_def)
+                original_request_order.append(node_def)
+            else:
+                print(f" 警告: 跳过无法识别的 dict 指令: {item}")
         elif isinstance(item, str):
             special = parse_special_notation(item)
             if special:
@@ -160,21 +250,41 @@ def add_modules(
         elif isinstance(req, dict):
             processing_queue.append(req)
 
-    # 定位I/O元数据 (逻辑无变化)
+    # 定位 I/O / 变量 元数据
     meta_datas = None
     chip_inputs_meta = None
     chip_outputs_meta = None
-    if any(p.get("type") in ["input", "output"] for p in processing_queue):
+    chip_variables_meta = None
+
+    if any(p.get("type") in ["input", "output", "variable"] for p in processing_queue):
         try:
             save_objects = game_data["saveObjectContainers"][0]["saveObjects"]
             meta_datas = save_objects["saveMetaDatas"]
-            chip_inputs_meta = find_meta_data(meta_datas, "chip_inputs")
-            chip_outputs_meta = find_meta_data(meta_datas, "chip_outputs")
         except (KeyError, IndexError):
             raise ValueError("存档文件结构异常，无法定位 meta 数据区。")
 
-    chip_inputs_data = json.loads(chip_inputs_meta["stringValue"]) if chip_inputs_meta else []
-    chip_outputs_data = json.loads(chip_outputs_meta["stringValue"]) if chip_outputs_meta else []
+    chip_inputs_data: List[Dict[str, Any]] = []
+    chip_outputs_data: List[Dict[str, Any]] = []
+    chip_variables_data: List[Dict[str, Any]] = []
+
+    if meta_datas is not None:
+        if any(p.get("type") == "input" for p in processing_queue):
+            chip_inputs_meta = find_meta_data(meta_datas, "chip_inputs")
+            raw = chip_inputs_meta.get("stringValue") if chip_inputs_meta else None
+            chip_inputs_data = json.loads(raw) if raw else []
+
+        if any(p.get("type") == "output" for p in processing_queue):
+            chip_outputs_meta = find_meta_data(meta_datas, "chip_outputs")
+            raw = chip_outputs_meta.get("stringValue") if chip_outputs_meta else None
+            chip_outputs_data = json.loads(raw) if raw else []
+
+        if any(p.get("type") == "variable" for p in processing_queue):
+            var_meta_list, var_index = find_variable_meta_data(game_data, "chip_variables")
+            if var_meta_list is None or var_index is None:
+                raise ValueError("在 data.json 中找不到 'chip_variables'，请确认存档文件正确。")
+            chip_variables_meta = var_meta_list[var_index]
+            raw = chip_variables_meta.get("stringValue")
+            chip_variables_data = json.loads(raw) if raw else []
     
     max_y = max((n.get("VisualPosition", {}).get("y", 0) for n in existing_nodes), default=180.0)
     y_pos_counter = max_y + 200
@@ -230,11 +340,49 @@ def add_modules(
             print(f" 已添加: {class_name}")
             created_nodes_info.append({"class_name": class_name, "full_id": node_id})
 
+        elif node_type == "variable":
+            var_key = req_item.get("key")
+            gate_type = req_item.get("gateDataType", "Number")
+            init_value = req_item.get("value")
+
+            if not isinstance(var_key, str) or not var_key:
+                print(" 警告: 跳过一个变量节点，因为缺少合法的 key。")
+                continue
+
+            # 1) chip_variables 中追加 / 更新变量定义
+            existing_def = None
+            for vd in chip_variables_data:
+                if vd.get("Key") == var_key:
+                    existing_def = vd
+                    break
+
+            if existing_def is None:
+                var_def = create_variable_definition(var_key, None, gate_type)
+            else:
+                var_def = existing_def
+
+            serialized = build_serialized_value_for_variable(gate_type, init_value)
+            if serialized is not None:
+                var_def["SerializedValue"] = serialized
+
+            if existing_def is None:
+                chip_variables_data.append(var_def)
+
+            # 2) chip_graph 中生成 Variable 节点
+            graph_node = create_variable_node(var_key, gate_type)
+            node_id = graph_node["Id"]
+            print(f"为新节点生成ID: {node_id}")
+            y_pos_counter = add_node_to_graph(chip_graph_data, graph_node, y_pos_counter)
+            print(" 已添加: VariableNodeViewModel")
+            created_nodes_info.append({"class_name": "VariableNodeViewModel", "full_id": node_id})
+
     # ---------- 5. 写回修改 (无变化) ----------
     if chip_inputs_meta:
         chip_inputs_meta["stringValue"] = json.dumps(chip_inputs_data, separators=(',', ':'))
     if chip_outputs_meta:
         chip_outputs_meta["stringValue"] = json.dumps(chip_outputs_data, separators=(',', ':'))
+    if chip_variables_meta:
+        chip_variables_meta["stringValue"] = json.dumps(chip_variables_data, separators=(',', ':'))
     
     chip_graph_meta["stringValue"] = json.dumps(chip_graph_data, ensure_ascii=False, indent=2)
 

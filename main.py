@@ -130,6 +130,15 @@ def build_chip_index_from_moduledef(module_defs: Dict[str, Any]) -> Dict[str, di
         "inputs": [],
         "outputs": ["Output"],
     }
+    # 变量节点：不在 moduledef.json 中，手动补充
+    # Inputs:  Value, Set
+    # Outputs: Value（唯一输出端口，方便裸节点变量自动端口）
+    chip_index[normalize("Variable")] = {
+        "friendly_name": "Variable",
+        "game_name": "VariableNodeViewModel",
+        "inputs": ["Value", "Set"],
+        "outputs": ["Value"],
+    }
     return chip_index
 
 
@@ -142,6 +151,11 @@ def parse_graph(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any], Di
     modules: List[Any] = []
     node_map: Dict[str, dict] = {}
     all_chip_keys = list(chip_index.keys())
+
+    # 从 graph.json 中取出可选的变量定义列表（由 converter_v2 收集）
+    # 每项形如 {"Key": "...", "GateDataType": "...", "Value": ...}
+    variable_defs: List[dict] = graph.get("variables") or []
+    variable_iter = iter(variable_defs)
 
     for node in graph["nodes"]:
         key = normalize(node["type"])
@@ -156,6 +170,23 @@ def parse_graph(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any], Di
         if node_type_lower in ("input", "output", "constant"):
             custom_name = node.get("attrs", {}).get("name", chip_info["friendly_name"])
             modules.append({"type": node_type_lower, "name": custom_name})
+        # VARIABLE 变量节点：从 graph["variables"] 顺序取出对应的定义
+        elif node_type_lower == "variable":
+            try:
+                var_def = next(variable_iter)
+            except StopIteration:
+                sys.exit(
+                    "错误：DSL 中存在 VARIABLE 节点，但未找到足够的变量定义 "
+                    '(形如 {"Key": "...", "GateDataType": "...", "Value": ...})'
+                )
+            modules.append(
+                {
+                    "type": "variable",
+                    "key": var_def.get("Key"),
+                    "gateDataType": var_def.get("GateDataType"),
+                    "value": var_def.get("Value"),
+                }
+            )
         else:
             modules.append(chip_info["friendly_name"])
 
@@ -165,6 +196,19 @@ def parse_graph(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any], Di
             "order_index": len(modules) - 1,
             "new_full_id": None,
         }
+
+    # 若存在变量定义但 DSL 中没有显式的 VARIABLE 节点，
+    # 为每个剩余的变量定义追加一个“孤立的”变量模块，
+    # 这样步骤 2 仍会帮我们写入 chip_variables 并生成 Variable 节点。
+    for var_def in variable_iter:
+        modules.append(
+            {
+                "type": "variable",
+                "key": var_def.get("Key"),
+                "gateDataType": var_def.get("GateDataType"),
+                "value": var_def.get("Value"),
+            }
+        )
 
     return modules, node_map
 
@@ -560,4 +604,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
