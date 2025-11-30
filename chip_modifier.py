@@ -33,8 +33,11 @@ def add_node_to_graph(chip_graph_data, node_data, new_node_y_pos):
         "y": new_node_y_pos,
     }
     node_data["VisualCollapsed"] = False
-    node_data["ModelVersion"] = 1
-    node_data["Version"] = "0.1"
+    # 保留调用方已经设置好的 ModelVersion / Version，避免覆盖 Variable 等特殊节点的版本号
+    if "ModelVersion" not in node_data:
+        node_data["ModelVersion"] = 1
+    if "Version" not in node_data:
+        node_data["Version"] = "0.1"
     chip_graph_data["Nodes"].append(node_data)
     return new_node_y_pos + 200 # 为下一个节点增加Y坐标，防止重叠
 
