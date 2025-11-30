@@ -213,6 +213,165 @@ def parse_graph(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any], Di
     return modules, node_map
 
 
+def parse_graph_v2(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any], Dict[str, dict]]:
+    """
+    新版 graph 解析：
+    - 支持同一个变量 Key 对应多个 VARIABLE 节点
+    - 通过连线自动推断 VARIABLE 节点应该使用哪个变量定义
+    """
+    modules: List[Any] = []
+    node_map: Dict[str, dict] = {}
+    all_chip_keys = list(chip_index.keys())
+
+    # 从 graph.json 中取出可选的变量定义列表（由 converter_v2 收集）
+    variable_defs: List[dict] = graph.get("variables") or []
+    # 按 Key 建立索引，保持插入顺序
+    var_defs_by_key: Dict[str, dict] = {}
+    for vd in variable_defs:
+        k = vd.get("Key")
+        if isinstance(k, str):
+            var_defs_by_key[k] = vd
+    var_keys_set = set(var_defs_by_key.keys())
+
+    # ---------- 为 VARIABLE 节点预先推断变量 Key ----------
+    nodes_by_id: Dict[str, dict] = {n["id"]: n for n in graph.get("nodes", [])}
+    edges = graph.get("edges") or []
+    edges_by_to: Dict[str, List[dict]] = {}
+    for e in edges:
+        to_node = e.get("to_node")
+        if isinstance(to_node, str):
+            edges_by_to.setdefault(to_node, []).append(e)
+
+    # 第一步：从 Value 端口上游的 Constant 节点里拿字符串，匹配 variables[*]["Key"]
+    var_key_for_node: Dict[str, str] = {}
+    for node in graph.get("nodes", []):
+        if str(node.get("type", "")).lower() != "variable":
+            continue
+        nid = node["id"]
+        incoming = edges_by_to.get(nid, []) or []
+        for e in incoming:
+            if e.get("to_port") != "Value":
+                continue
+            up = nodes_by_id.get(e.get("from_node"))
+            if not up or str(up.get("type", "")).lower() != "constant":
+                continue
+            v = (up.get("attrs") or {}).get("value")
+            if isinstance(v, str) and v in var_keys_set:
+                var_key_for_node[nid] = v
+                break
+
+    # 第二步：若 Value 来自其他 VARIABLE 节点，则继承其 key（支持多次“转手”）
+    changed = True
+    while changed:
+        changed = False
+        for node in graph.get("nodes", []):
+            if str(node.get("type", "")).lower() != "variable":
+                continue
+            nid = node["id"]
+            if nid in var_key_for_node:
+                continue
+            incoming = edges_by_to.get(nid, []) or []
+            for e in incoming:
+                if e.get("to_port") != "Value":
+                    continue
+                up = nodes_by_id.get(e.get("from_node"))
+                if not up or str(up.get("type", "")).lower() != "variable":
+                    continue
+                up_id = up["id"]
+                if up_id in var_key_for_node:
+                    var_key_for_node[nid] = var_key_for_node[up_id]
+                    changed = True
+                    break
+
+    # 记录每个变量 Key 已经创建了多少个 VARIABLE 节点（首个用于设初值，其余只生成节点）
+    var_instance_count: Dict[str, int] = {}
+    used_var_keys: set[str] = set()
+
+    for node in graph["nodes"]:
+        key = normalize(node["type"])
+        best_match_key = fuzzy_match(key, all_chip_keys, FUZZY_CUTOFF_NODE)
+        if best_match_key is None:
+            sys.exit(f"错误：无法识别模块类型 \"{node['type']}\"")
+
+        chip_info = chip_index[best_match_key]
+        node_type_lower = chip_info["friendly_name"].lower()
+
+        # INPUT / OUTPUT / CONSTANT 用 dict 形式，方便 add_modules 走专用分支
+        if node_type_lower in ("input", "output", "constant"):
+            custom_name = node.get("attrs", {}).get("name", chip_info["friendly_name"])
+            modules.append({"type": node_type_lower, "name": custom_name})
+        # VARIABLE 变量节点：根据图中的连接关系推断使用哪个变量 Key
+        elif node_type_lower == "variable":
+            nid = node["id"]
+            var_key = var_key_for_node.get(nid)
+            var_def = None
+
+            if var_key is not None:
+                var_def = var_defs_by_key.get(var_key)
+
+            # 若无法从连线中推断，则退回到“按顺序取尚未使用的定义”
+            if var_def is None:
+                fallback_key = None
+                for k in var_defs_by_key.keys():
+                    if k not in used_var_keys:
+                        fallback_key = k
+                        break
+                if fallback_key is None:
+                    sys.exit(
+                        "错误：DSL 中存在 VARIABLE 节点，但未找到足够、且可匹配的变量定义 "
+                        '(形如 {"Key": "...", "GateDataType": "...", "Value": ...})'
+                    )
+                var_key = fallback_key
+                var_def = var_defs_by_key[var_key]
+
+            used_var_keys.add(var_key)
+
+            # 同一变量可以对应多个 VARIABLE 节点：
+            #   - 第 1 个实例：使用变量定义中的 Value 作为初始值
+            #   - 之后的实例：不再改动变量定义（value=None，避免覆盖）
+            count = var_instance_count.get(var_key, 0)
+            if count == 0:
+                init_value = var_def.get("Value")
+            else:
+                init_value = None
+            var_instance_count[var_key] = count + 1
+
+            modules.append(
+                {
+                    "type": "variable",
+                    "key": var_key,
+                    "gateDataType": var_def.get("GateDataType"),
+                    "value": init_value,
+                }
+            )
+        else:
+            modules.append(chip_info["friendly_name"])
+
+        node_map[node["id"]] = {
+            "friendly_name": chip_info["friendly_name"],
+            "game_name": chip_info["game_name"],
+            "order_index": len(modules) - 1,
+            "new_full_id": None,
+        }
+
+    # 若存在变量定义但 DSL 中没有显式的 VARIABLE 节点：
+    # 为每个“完全未被使用”的变量定义追加一个“孤立的”变量模块，
+    # 这样步骤 2 仍会帮我们写入 chip_variables 并生成一个 Variable 节点。
+    for k, var_def in var_defs_by_key.items():
+        if k in used_var_keys:
+            continue
+        modules.append(
+            {
+                "type": "variable",
+                "key": var_def.get("Key"),
+                "gateDataType": var_def.get("GateDataType"),
+                "value": var_def.get("Value"),
+            }
+        )
+
+    return modules, node_map
+
+
 def run_batch_add(modules_to_add: List[Any], node_map: Dict[str, dict]) -> Dict[str, Any]:
     """
     调用 batch_add_modules.add_modules，将 DSL 中的节点实际添加到存档 data.json 里。
@@ -532,7 +691,7 @@ def main() -> None:
     rules = load_json(RULES_PATH, "数据类型规则文件")
 
     chip_index = build_chip_index_from_moduledef(module_definitions)
-    modules, node_map = parse_graph(graph, chip_index)
+    modules, node_map = parse_graph_v2(graph, chip_index)
     print("✔ graph.json 解析完成")
 
     # --- 步骤 2: 批量添加模块 ---

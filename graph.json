@@ -1,12 +1,554 @@
 {
-  "nodes": [],
-  "edges": [],
+  "nodes": [
+    {
+      "id": "input_0",
+      "type": "INPUT",
+      "label": "Target",
+      "attrs": {
+        "name": "Target",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_1",
+      "type": "INPUT",
+      "label": "Current",
+      "attrs": {
+        "name": "Current",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_2",
+      "type": "INPUT",
+      "label": "Kp",
+      "attrs": {
+        "name": "Kp",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_3",
+      "type": "INPUT",
+      "label": "Ki",
+      "attrs": {
+        "name": "Ki",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_4",
+      "type": "INPUT",
+      "label": "Kd",
+      "attrs": {
+        "name": "Kd",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "variable_0",
+      "type": "VARIABLE",
+      "label": "VARIABLE",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "Value",
+          "type": ""
+        },
+        {
+          "name": "Set",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_0",
+      "type": "Constant",
+      "label": "Const IntegralError",
+      "attrs": {
+        "value": "IntegralError"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "variable_1",
+      "type": "VARIABLE",
+      "label": "VARIABLE",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "Value",
+          "type": ""
+        },
+        {
+          "name": "Set",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_1",
+      "type": "Constant",
+      "label": "Const PrevError",
+      "attrs": {
+        "value": "PrevError"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "subtract_0",
+      "type": "SUBTRACT",
+      "label": "SUBTRACT",
+      "attrs": {
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_0",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_0",
+      "type": "ADD",
+      "label": "ADD",
+      "attrs": {
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "variable_2",
+      "type": "VARIABLE",
+      "label": "VARIABLE",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "Value",
+          "type": ""
+        },
+        {
+          "name": "Set",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "multiply_1",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "subtract_1",
+      "type": "SUBTRACT",
+      "label": "SUBTRACT",
+      "attrs": {
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "variable_3",
+      "type": "VARIABLE",
+      "label": "VARIABLE",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "Value",
+          "type": ""
+        },
+        {
+          "name": "Set",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "multiply_2",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_1",
+      "type": "ADD",
+      "label": "ADD",
+      "attrs": {
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_2",
+      "type": "ADD",
+      "label": "ADD",
+      "attrs": {
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "output_0",
+      "type": "OUTPUT",
+      "label": "Control",
+      "attrs": {
+        "name": "Control",
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    }
+  ],
+  "edges": [
+    {
+      "from_node": "constant_0",
+      "from_port": "Output",
+      "to_node": "variable_0",
+      "to_port": "Value"
+    },
+    {
+      "from_node": "constant_1",
+      "from_port": "Output",
+      "to_node": "variable_1",
+      "to_port": "Value"
+    },
+    {
+      "from_node": "input_0",
+      "from_port": "__auto__",
+      "to_node": "subtract_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_1",
+      "from_port": "__auto__",
+      "to_node": "subtract_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "subtract_0",
+      "from_port": "__auto__",
+      "to_node": "multiply_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_2",
+      "from_port": "__auto__",
+      "to_node": "multiply_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "variable_0",
+      "from_port": "__auto__",
+      "to_node": "add_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "subtract_0",
+      "from_port": "__auto__",
+      "to_node": "add_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "variable_0",
+      "from_port": "__auto__",
+      "to_node": "variable_2",
+      "to_port": "Value"
+    },
+    {
+      "from_node": "add_0",
+      "from_port": "__auto__",
+      "to_node": "variable_2",
+      "to_port": "Set"
+    },
+    {
+      "from_node": "add_0",
+      "from_port": "__auto__",
+      "to_node": "multiply_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_3",
+      "from_port": "__auto__",
+      "to_node": "multiply_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "subtract_0",
+      "from_port": "__auto__",
+      "to_node": "subtract_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "variable_1",
+      "from_port": "__auto__",
+      "to_node": "subtract_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "variable_1",
+      "from_port": "__auto__",
+      "to_node": "variable_3",
+      "to_port": "Value"
+    },
+    {
+      "from_node": "subtract_0",
+      "from_port": "__auto__",
+      "to_node": "variable_3",
+      "to_port": "Set"
+    },
+    {
+      "from_node": "subtract_1",
+      "from_port": "__auto__",
+      "to_node": "multiply_2",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_4",
+      "from_port": "__auto__",
+      "to_node": "multiply_2",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_0",
+      "from_port": "__auto__",
+      "to_node": "add_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_1",
+      "from_port": "__auto__",
+      "to_node": "add_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "add_1",
+      "from_port": "__auto__",
+      "to_node": "add_2",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_2",
+      "from_port": "__auto__",
+      "to_node": "add_2",
+      "to_port": "B"
+    },
+    {
+      "from_node": "add_2",
+      "from_port": "__auto__",
+      "to_node": "output_0",
+      "to_port": "INPUT"
+    }
+  ],
   "variables": [
     {
-      "Key": "hp",
+      "Key": "PrevError",
       "GateDataType": "Number",
-      "Value": 100,
-      "dsl_name": "hp_def"
+      "Value": 1,
+      "dsl_name": "PrevError"
+    },
+    {
+      "Key": "IntegralError",
+      "GateDataType": "Number",
+      "Value": 1,
+      "dsl_name": "IntegralError"
     }
   ]
 }
