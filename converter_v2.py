@@ -197,7 +197,12 @@ class Converter(ast.NodeVisitor):
 
     # ---------- 变量定义收集 ----------
 
-    def _register_variable_def(self, lit: Dict[str, Any], alias_var: str | None) -> None:
+    def _register_variable_def(
+        self,
+        lit: Dict[str, Any],
+        alias_var: str | None,
+        from_var_call: bool = False,
+    ) -> None:
         """
         收集 DSL 中的变量定义：
             {
@@ -226,6 +231,37 @@ class Converter(ast.NodeVisitor):
 
         self.g.variables.append(rec)
 
+        # 如果是通过 Name = {...} 形式声明的变量（alias_var 不为 None 并且不来自 Name = VARIABLE(...)），
+        # 默认同时为其生成一个 VARIABLE 节点，使得可以直接通过变量名作为“裸节点变量”使用。
+        # 为了不强制 Value 端口接一颗 Constant("Key")，这里两个端口都使用 None（保持“未连线”状态）。
+        if alias_var and not from_var_call:
+            try:
+                none_expr = ast.Constant(value=None)
+                call = ast.Call(
+                    func=ast.Name(id="VARIABLE", ctx=ast.Load()),
+                    args=[],
+                    keywords=[
+                        ast.keyword(arg="Value", value=none_expr),
+                        ast.keyword(arg="Set", value=none_expr),
+                    ],
+                )
+                nid = self._emit_call_as_node(call)
+
+                # 给该 VARIABLE 节点标记 dsl_name，便于 parse_graph_v2 中按 dsl_name 和 Key 建立对应
+                for node_rec in reversed(self.g.nodes):
+                    if node_rec.get("id") == nid:
+                        attrs = node_rec.get("attrs") or {}
+                        if "dsl_name" not in attrs:
+                            attrs["dsl_name"] = alias_var
+                        node_rec["attrs"] = attrs
+                        break
+
+                if alias_var not in self.var2node:
+                    self.var2node[alias_var] = nid
+            except Exception:
+                # 出错时不影响变量定义本身，只是不自动生成 VARIABLE 节点
+                pass
+
     # ---------- 赋值语句 ----------
 
     # 仅处理最常见的顶层赋值：
@@ -240,9 +276,63 @@ class Converter(ast.NodeVisitor):
             and isinstance(node.targets[0], ast.Name)
         ):
             var = node.targets[0].id
-            nid = self._emit_call_as_node(node.value)
+            call = node.value
+            func_name = _func_name(call.func)
+            nid = self._emit_call_as_node(call)
             if var not in self.var2node:
                 self.var2node[var] = nid
+
+            # 支持语法糖：VarName = VARIABLE(Value=..., Set=...)
+            # 作用：
+            #   - 自动在 graph["variables"] 中登记一条变量定义
+            #       {"Key": "VarName", "GateDataType": "...", "Value": <Value 字面量>}
+            #   - 给当前 VARIABLE 节点打上 attrs["dsl_name"] = "VarName"
+            # 注意：只在 Value 是“可 literal_eval 的字面量”且此前尚未为该 Key 建立定义时生效。
+            if func_name.upper() == "VARIABLE":
+                # 若已经有同名 Key 的定义，则不重复创建，保持显式定义的优先级更高
+                has_existing = any(vd.get("Key") == var for vd in self.g.variables)
+                if not has_existing:
+                    value_lit = None
+                    for kw in call.keywords or []:
+                        if kw.arg == "Value":
+                            try:
+                                value_lit = ast.literal_eval(kw.value)
+                            except Exception:
+                                value_lit = None
+                            break
+
+                    if value_lit is not None:
+                        # 根据字面量类型简单推断 GateDataType
+                        if isinstance(value_lit, (int, float)):
+                            gate_type = "Number"
+                        elif isinstance(value_lit, str):
+                            gate_type = "String"
+                        elif isinstance(value_lit, dict) and all(
+                            k in value_lit for k in ("x", "y", "z")
+                        ):
+                            gate_type = "Vector"
+                        else:
+                            gate_type = "Number"
+
+                        lit_def = {
+                            "Key": var,
+                            "GateDataType": gate_type,
+                            "Value": value_lit,
+                        }
+                        # from_var_call=True：不再为该定义额外生成一个新的 VARIABLE 节点
+                        self._register_variable_def(lit_def, alias_var=var, from_var_call=True)
+
+                # 无论是否生成定义，都给该 VARIABLE 节点打上 dsl_name，便于解析阶段用 DSL 变量名反查 Key
+                try:
+                    for node_rec in reversed(self.g.nodes):
+                        if node_rec.get("id") == nid:
+                            attrs = node_rec.get("attrs") or {}
+                            if "dsl_name" not in attrs:
+                                attrs["dsl_name"] = var
+                            node_rec["attrs"] = attrs
+                            break
+                except Exception:
+                    pass
 
         # 情形 2：x = some_var['PORT']  —— 记录端口别名
         elif (

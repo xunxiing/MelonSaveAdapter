@@ -233,6 +233,14 @@ def parse_graph_v2(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any],
             var_defs_by_key[k] = vd
     var_keys_set = set(var_defs_by_key.keys())
 
+    # 额外：按 dsl_name 建一个索引，便于通过 DSL 变量名反查 Key
+    dsl_name_to_key: Dict[str, str] = {}
+    for vd in variable_defs:
+        key = vd.get("Key")
+        dsl_name = vd.get("dsl_name")
+        if isinstance(key, str) and isinstance(dsl_name, str):
+            dsl_name_to_key[dsl_name] = key
+
     # ---------- 为 VARIABLE 节点预先推断变量 Key ----------
     nodes_by_id: Dict[str, dict] = {n["id"]: n for n in graph.get("nodes", [])}
     edges = graph.get("edges") or []
@@ -242,12 +250,26 @@ def parse_graph_v2(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any],
         if isinstance(to_node, str):
             edges_by_to.setdefault(to_node, []).append(e)
 
-    # 第一步：从 Value 端口上游的 Constant 节点里拿字符串，匹配 variables[*]["Key"]
+    # 第一步：优先使用 VARIABLE 节点 attrs.dsl_name / attrs.var_key 与变量定义中的 dsl_name 对应
     var_key_for_node: Dict[str, str] = {}
     for node in graph.get("nodes", []):
         if str(node.get("type", "")).lower() != "variable":
             continue
         nid = node["id"]
+        attrs = node.get("attrs") or {}
+        dsl_name = attrs.get("dsl_name") or attrs.get("var_key")
+        if isinstance(dsl_name, str):
+            key = dsl_name_to_key.get(dsl_name)
+            if isinstance(key, str):
+                var_key_for_node[nid] = key
+
+    # 第二步：若仍未能确定，则尝试从 Value 端口上游的 Constant 节点里拿字符串，匹配 variables[*]["Key"]
+    for node in graph.get("nodes", []):
+        if str(node.get("type", "")).lower() != "variable":
+            continue
+        nid = node["id"]
+        if nid in var_key_for_node:
+            continue
         incoming = edges_by_to.get(nid, []) or []
         for e in incoming:
             if e.get("to_port") != "Value":
@@ -260,7 +282,7 @@ def parse_graph_v2(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any],
                 var_key_for_node[nid] = v
                 break
 
-    # 第二步：若 Value 来自其他 VARIABLE 节点，则继承其 key（支持多次“转手”）
+    # 第三步：若 Value 来自其他 VARIABLE 节点，则继承其 key（支持多次“转手”）
     changed = True
     while changed:
         changed = False
