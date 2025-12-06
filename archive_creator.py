@@ -13,6 +13,8 @@ import string
 from pathlib import Path
 from typing import List
 
+from src.config import FINAL_SAVE_PATH, OUTPUT_DIR, ensure_output_dir
+
 def generate_random_filename(length: int = 8) -> str:
     """
     生成随机文件名
@@ -81,17 +83,20 @@ def run_archive_creation_stage() -> bool:
         bool: 是否成功完成
     """
     print("\n--- 阶段 7: 创建 .melsave 归档文件 ---")
-    
+
+    # 确保输出目录存在，统一写到 output/ 目录下
+    ensure_output_dir()
+
     # 定义文件路径
-    ungraph_path = Path("ungraph.json")
+    ungraph_path = FINAL_SAVE_PATH
     metadata_path = Path("MetaData")
     icon_path = Path("Icon")
-    
+
     # 生成随机文件名
     random_name = generate_random_filename()
-    output_path = Path(f"{random_name}.melsave")
-    
-    print(f"📁 生成随机文件名: {random_name}.melsave")
+    output_path = OUTPUT_DIR / f"{random_name}.melsave"
+
+    print(f"📁 生成随机文件名: {output_path.name}")
     
     # 创建归档
     success = create_melsave_archive(ungraph_path, metadata_path, icon_path, output_path)

@@ -1,0 +1,164 @@
+{
+  "nodes": [
+    {
+      "id": "variable_0",
+      "type": "VARIABLE",
+      "label": "VARIABLE",
+      "attrs": {
+        "dsl_name": "PrevError"
+      },
+      "inputs": [
+        {
+          "name": "Value",
+          "type": ""
+        },
+        {
+          "name": "Set",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "variable_1",
+      "type": "VARIABLE",
+      "label": "VARIABLE",
+      "attrs": {
+        "dsl_name": "IntegralError"
+      },
+      "inputs": [
+        {
+          "name": "Value",
+          "type": ""
+        },
+        {
+          "name": "Set",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "input_0",
+      "type": "INPUT",
+      "label": "Target",
+      "attrs": {
+        "name": "Target",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "id": "input_1",
+      "type": "INPUT",
+      "label": "Current",
+      "attrs": {
+        "name": "Current",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "id": "input_2",
+      "type": "INPUT",
+      "label": "Kp",
+      "attrs": {
+        "name": "Kp",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_3",
+      "type": "INPUT",
+      "label": "Ki",
+      "attrs": {
+        "name": "Ki",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "id": "input_4",
+      "type": "INPUT",
+      "label": "Kd",
+      "attrs": {
+        "name": "Kd",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "id": "variable_2",
+      "type": "VARIABLE",
+      "label": "VARIABLE",
+      "attrs": {
+        "dsl_name": "PrevError"
+      },
+      "inputs": [
+        {
+          "name": "Value",
+          "type": ""
+        },
+        {
+          "name": "Set",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "constant_0",
+      "type": "Constant",
+      "label": "Const 1",
+      "attrs": {
+        "value": 1
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from_node": "input_2",
+      "from_port": "__auto__",
+      "to_node": "variable_2",
+      "to_port": "Value"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "Output",
+      "to_node": "variable_2",
+      "to_port": "Set"
+    }
+  ],
+  "variables": [
+    {
+      "Key": "PrevError",
+      "GateDataType": "Number",
+      "Value": 1,
+      "dsl_name": "PrevError"
+    },
+    {
+      "Key": "IntegralError",
+      "GateDataType": "Number",
+      "Value": 1,
+      "dsl_name": "IntegralError"
+    }
+  ]
+}
