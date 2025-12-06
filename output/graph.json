@@ -1,74 +1,253 @@
 {
   "nodes": [
     {
-      "id": "variable_0",
-      "type": "VARIABLE",
-      "label": "VARIABLE",
+      "id": "constant_0",
+      "type": "Constant",
+      "label": "Const 0.0",
       "attrs": {
-        "dsl_name": "PrevError"
+        "value": 0.0
       },
-      "inputs": [
+      "inputs": [],
+      "outputs": [
         {
-          "name": "Value",
-          "type": ""
-        },
-        {
-          "name": "Set",
+          "name": "OUT",
           "type": ""
         }
-      ],
-      "outputs": []
+      ]
     },
     {
-      "id": "variable_1",
-      "type": "VARIABLE",
-      "label": "VARIABLE",
+      "id": "constant_1",
+      "type": "Constant",
+      "label": "Const 2.0",
       "attrs": {
-        "dsl_name": "IntegralError"
+        "value": 2.0
       },
-      "inputs": [
+      "inputs": [],
+      "outputs": [
         {
-          "name": "Value",
-          "type": ""
-        },
-        {
-          "name": "Set",
+          "name": "OUT",
           "type": ""
         }
-      ],
-      "outputs": []
+      ]
+    },
+    {
+      "id": "constant_2",
+      "type": "Constant",
+      "label": "Const 4.0",
+      "attrs": {
+        "value": 4.0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUT",
+          "type": ""
+        }
+      ]
     },
     {
       "id": "input_0",
       "type": "INPUT",
-      "label": "Target",
+      "label": "a",
       "attrs": {
-        "name": "Target",
+        "name": "a",
         "data_type": 2
       },
       "inputs": [],
-      "outputs": []
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
     },
     {
       "id": "input_1",
       "type": "INPUT",
-      "label": "Current",
+      "label": "b",
       "attrs": {
-        "name": "Current",
+        "name": "b",
         "data_type": 2
       },
       "inputs": [],
-      "outputs": []
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
     },
     {
       "id": "input_2",
       "type": "INPUT",
-      "label": "Kp",
+      "label": "c",
       "attrs": {
-        "name": "Kp",
+        "name": "c",
         "data_type": 2
       },
       "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "square_0",
+      "type": "SQUARE",
+      "label": "SQUARE",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*A",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_0",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {
+        "datatype": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_1",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {
+        "datatype": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "subtract_0",
+      "type": "SUBTRACT",
+      "label": "SUBTRACT",
+      "attrs": {
+        "datatype": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A-B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "less_than_0",
+      "type": "LESS_THAN",
+      "label": "LESS_THAN",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A < B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "greater_or_equal_0",
+      "type": "GREATER_OR_EQUAL",
+      "label": "GREATER_OR_EQUAL",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A >= B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "branch_0",
+      "type": "branch",
+      "label": "branch",
+      "attrs": {
+        "datatype": 2
+      },
+      "inputs": [
+        {
+          "name": "IF",
+          "type": ""
+        },
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
       "outputs": [
         {
           "name": "__auto__",
@@ -77,88 +256,489 @@
       ]
     },
     {
-      "id": "input_3",
-      "type": "INPUT",
-      "label": "Ki",
-      "attrs": {
-        "name": "Ki",
-        "data_type": 2
-      },
-      "inputs": [],
-      "outputs": []
+      "id": "sqrt_0",
+      "type": "SQRT",
+      "label": "SQRT",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sqrt(A)",
+          "type": ""
+        }
+      ]
     },
     {
-      "id": "input_4",
-      "type": "INPUT",
-      "label": "Kd",
+      "id": "subtract_1",
+      "type": "SUBTRACT",
+      "label": "SUBTRACT",
       "attrs": {
-        "name": "Kd",
-        "data_type": 2
-      },
-      "inputs": [],
-      "outputs": []
-    },
-    {
-      "id": "variable_2",
-      "type": "VARIABLE",
-      "label": "VARIABLE",
-      "attrs": {
-        "dsl_name": "PrevError"
+        "datatype": 2
       },
       "inputs": [
         {
-          "name": "Value",
+          "name": "A",
           "type": ""
         },
         {
-          "name": "Set",
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A-B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_0",
+      "type": "ADD",
+      "label": "ADD",
+      "attrs": {
+        "datatype": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A+B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "subtract_2",
+      "type": "SUBTRACT",
+      "label": "SUBTRACT",
+      "attrs": {
+        "datatype": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A-B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_2",
+      "type": "MULTIPLY",
+      "label": "MULTIPLY",
+      "attrs": {
+        "datatype": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "divide_0",
+      "type": "divide",
+      "label": "divide",
+      "attrs": {
+        "datatype": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A / B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "divide_1",
+      "type": "divide",
+      "label": "divide",
+      "attrs": {
+        "datatype": 2
+      },
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A / B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "branch_1",
+      "type": "branch",
+      "label": "branch",
+      "attrs": {
+        "datatype": 2
+      },
+      "inputs": [
+        {
+          "name": "IF",
+          "type": ""
+        },
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "branch_2",
+      "type": "branch",
+      "label": "branch",
+      "attrs": {
+        "datatype": 2
+      },
+      "inputs": [
+        {
+          "name": "IF",
+          "type": ""
+        },
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "output_0",
+      "type": "OUTPUT",
+      "label": "Root 1",
+      "attrs": {
+        "name": "Root 1",
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "INPUT",
           "type": ""
         }
       ],
       "outputs": []
     },
     {
-      "id": "constant_0",
-      "type": "Constant",
-      "label": "Const 1",
+      "id": "output_1",
+      "type": "OUTPUT",
+      "label": "Root 2",
       "attrs": {
-        "value": 1
+        "name": "Root 2",
+        "data_type": 2
       },
-      "inputs": [],
-      "outputs": [
+      "inputs": [
         {
-          "name": "Output",
+          "name": "INPUT",
           "type": ""
         }
-      ]
+      ],
+      "outputs": []
+    },
+    {
+      "id": "output_2",
+      "type": "OUTPUT",
+      "label": "Error",
+      "attrs": {
+        "name": "Error",
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": ""
+        }
+      ],
+      "outputs": []
     }
   ],
   "edges": [
     {
+      "from_node": "input_1",
+      "from_port": "OUTPUT",
+      "to_node": "square_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_2",
+      "from_port": "OUT",
+      "to_node": "multiply_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_0",
+      "from_port": "OUTPUT",
+      "to_node": "multiply_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_0",
+      "from_port": "A*B",
+      "to_node": "multiply_1",
+      "to_port": "A"
+    },
+    {
       "from_node": "input_2",
-      "from_port": "__auto__",
-      "to_node": "variable_2",
-      "to_port": "Value"
+      "from_port": "OUTPUT",
+      "to_node": "multiply_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "square_0",
+      "from_port": "A*A",
+      "to_node": "subtract_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_1",
+      "from_port": "A*B",
+      "to_node": "subtract_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "subtract_0",
+      "from_port": "A-B",
+      "to_node": "less_than_0",
+      "to_port": "A"
     },
     {
       "from_node": "constant_0",
-      "from_port": "Output",
-      "to_node": "variable_2",
-      "to_port": "Set"
-    }
-  ],
-  "variables": [
-    {
-      "Key": "PrevError",
-      "GateDataType": "Number",
-      "Value": 1,
-      "dsl_name": "PrevError"
+      "from_port": "OUT",
+      "to_node": "less_than_0",
+      "to_port": "B"
     },
     {
-      "Key": "IntegralError",
-      "GateDataType": "Number",
-      "Value": 1,
-      "dsl_name": "IntegralError"
+      "from_node": "subtract_0",
+      "from_port": "A-B",
+      "to_node": "greater_or_equal_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "greater_or_equal_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "greater_or_equal_0",
+      "from_port": "A >= B",
+      "to_node": "branch_0",
+      "to_port": "IF"
+    },
+    {
+      "from_node": "subtract_0",
+      "from_port": "A-B",
+      "to_node": "branch_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "branch_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "branch_0",
+      "from_port": "__auto__",
+      "to_node": "sqrt_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "subtract_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_1",
+      "from_port": "OUTPUT",
+      "to_node": "subtract_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "subtract_1",
+      "from_port": "A-B",
+      "to_node": "add_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "sqrt_0",
+      "from_port": "sqrt(A)",
+      "to_node": "add_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "subtract_1",
+      "from_port": "A-B",
+      "to_node": "subtract_2",
+      "to_port": "A"
+    },
+    {
+      "from_node": "sqrt_0",
+      "from_port": "sqrt(A)",
+      "to_node": "subtract_2",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_1",
+      "from_port": "OUT",
+      "to_node": "multiply_2",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_0",
+      "from_port": "OUTPUT",
+      "to_node": "multiply_2",
+      "to_port": "B"
+    },
+    {
+      "from_node": "add_0",
+      "from_port": "A+B",
+      "to_node": "divide_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_2",
+      "from_port": "A*B",
+      "to_node": "divide_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "subtract_2",
+      "from_port": "A-B",
+      "to_node": "divide_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_2",
+      "from_port": "A*B",
+      "to_node": "divide_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "greater_or_equal_0",
+      "from_port": "A >= B",
+      "to_node": "branch_1",
+      "to_port": "IF"
+    },
+    {
+      "from_node": "divide_0",
+      "from_port": "A / B",
+      "to_node": "branch_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "branch_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "greater_or_equal_0",
+      "from_port": "A >= B",
+      "to_node": "branch_2",
+      "to_port": "IF"
+    },
+    {
+      "from_node": "divide_1",
+      "from_port": "A / B",
+      "to_node": "branch_2",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "branch_2",
+      "to_port": "B"
+    },
+    {
+      "from_node": "branch_1",
+      "from_port": "__auto__",
+      "to_node": "output_0",
+      "to_port": "INPUT"
+    },
+    {
+      "from_node": "branch_2",
+      "from_port": "__auto__",
+      "to_node": "output_1",
+      "to_port": "INPUT"
+    },
+    {
+      "from_node": "less_than_0",
+      "from_port": "A < B",
+      "to_node": "output_2",
+      "to_port": "INPUT"
     }
-  ]
+  ],
+  "variables": []
 }

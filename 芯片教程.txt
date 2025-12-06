@@ -396,8 +396,8 @@ Result: 在 Min 与 Max 之间(包含边界)的随机数 (DECIMAL)。
 
  功能:  根据条件选择输出不同的值 (支持)。
  输入: 
-     if:条件 (DECIMAL, 0 代表 false, 非 0 代表 true)。
-     A:如果条件为 true，则输出此值 (任意类型)。
+     IF:条件 (DECIMAL, 0 代表 false, 非 0 代表 true)。
+     A:如果条件为 true，则输出此值 (任意类型)。（注意直接填写小写if可能导致python语法错误，建议使用IF）
      B:如果条件为 false，则输出此值 (任意类型)。
  输出: 
     * 根据条件选择输出的值 (类型与模块类型相同)。记得规定datatype
