@@ -176,11 +176,11 @@ Entity 及其他类型：保持默认模板（Value 为 null）。
      B:第二个数值 (DECIMAL)。
  输出: 
      result:A 和 B 中较大的值 (DECIMAL)。
- 3.16. `SQUARE 
+ 3.16.SQR
  输入: 
-     A:要计算平方的数值 (DECIMAL)。
+     input:要计算平方的数值 (DECIMAL)。
  输出: 
-     A*A:A 的平方 (DECIMAL)。
+     result:A 的平方 (DECIMAL)。
  3.17. `Inverse 
  输入: 
      输入值 / `A`: 需要计算倒数的数值 (DECIMAL)。
