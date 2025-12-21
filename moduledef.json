@@ -13,7 +13,8 @@
         "type": "DECIMAL",
         "name": "Output"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "260": {
     "id": "260",
@@ -41,7 +42,8 @@
         "type": "DECIMAL",
         "name": "Cos Time"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1": {
     "id": "1",
@@ -62,7 +64,8 @@
         "type": "DECIMAL",
         "name": "A"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2324": {
     "id": "2324",
@@ -83,7 +86,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2304": {
     "id": "2304",
@@ -108,7 +112,8 @@
         "type": "DECIMAL",
         "name": "A + B"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2309": {
     "id": "2309",
@@ -133,7 +138,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2310": {
     "id": "2310",
@@ -154,7 +160,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2311": {
     "id": "2311",
@@ -183,7 +190,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2312": {
     "id": "2312",
@@ -204,7 +212,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2307": {
     "id": "2307",
@@ -229,7 +238,8 @@
         "type": "Number",
         "name": "A / B"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2308": {
     "id": "2308",
@@ -250,7 +260,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "259": {
     "id": "259",
@@ -266,7 +277,8 @@
         "type": "DECIMAL",
         "name": "Output"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2314": {
     "id": "2314",
@@ -291,7 +303,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2315": {
     "id": "2315",
@@ -312,7 +325,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2316": {
     "id": "2316",
@@ -337,7 +351,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "258": {
     "id": "258",
@@ -353,7 +368,8 @@
         "type": "DECIMAL",
         "name": "Output"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "261": {
     "id": "261",
@@ -378,7 +394,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2326": {
     "id": "2326",
@@ -399,7 +416,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2318": {
     "id": "2318",
@@ -420,7 +438,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2321": {
     "id": "2321",
@@ -441,7 +460,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2322": {
     "id": "2322",
@@ -462,7 +482,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2305": {
     "id": "2305",
@@ -487,7 +508,8 @@
         "type": "DECIMAL",
         "name": "A - B"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2319": {
     "id": "2319",
@@ -508,7 +530,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2320": {
     "id": "2320",
@@ -529,7 +552,8 @@
         "type": "DECIMAL",
         "name": "1 / A"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2328": {
     "id": "2328",
@@ -558,7 +582,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2323": {
     "id": "2323",
@@ -583,7 +608,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2327": {
     "id": "2327",
@@ -608,7 +634,8 @@
         "type": "DECIMAL",
         "name": "Remainder"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2306": {
     "id": "2306",
@@ -633,7 +660,8 @@
         "type": "DECIMAL",
         "name": "A × B"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2325": {
     "id": "2325",
@@ -658,7 +686,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2059": {
     "id": "2059",
@@ -683,7 +712,8 @@
         "type": "DECIMAL",
         "name": "Deg"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2052": {
     "id": "2052",
@@ -704,7 +734,8 @@
         "type": "Number",
         "name": "Angle (Rad)"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2051": {
     "id": "2051",
@@ -725,7 +756,8 @@
         "type": "Number",
         "name": "Angle (Rad)"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2054": {
     "id": "2054",
@@ -746,7 +778,8 @@
         "type": "Number",
         "name": "Angle (Rad)"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2056": {
     "id": "2056",
@@ -767,7 +800,8 @@
         "type": "Number",
         "name": "Angle (Rad)"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2050": {
     "id": "2050",
@@ -788,7 +822,8 @@
         "type": "Number",
         "name": "Cos"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2049": {
     "id": "2049",
@@ -809,7 +844,8 @@
         "type": "DECIMAL",
         "name": "Sin"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2053": {
     "id": "2053",
@@ -830,7 +866,8 @@
         "type": "DECIMAL",
         "name": "Tan"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2055": {
     "id": "2055",
@@ -851,7 +888,8 @@
         "type": "DECIMAL",
         "name": "Ctan"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2057": {
     "id": "2057",
@@ -872,7 +910,8 @@
         "type": "DECIMAL",
         "name": "Rad"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2058": {
     "id": "2058",
@@ -893,7 +932,8 @@
         "type": "DECIMAL",
         "name": "Deg"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2060": {
     "id": "2060",
@@ -922,7 +962,8 @@
         "type": "DECIMAL",
         "name": "A"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2061": {
     "id": "2061",
@@ -951,7 +992,8 @@
         "type": "DECIMAL",
         "name": "Cos"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2062": {
     "id": "2062",
@@ -976,7 +1018,8 @@
         "type": "DECIMAL",
         "name": "Catheus B"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2063": {
     "id": "2063",
@@ -1001,7 +1044,8 @@
         "type": "DECIMAL",
         "name": "Hypotenuse"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2560": {
     "id": "2560",
@@ -1026,7 +1070,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2567": {
     "id": "2567",
@@ -1055,7 +1100,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2561": {
     "id": "2561",
@@ -1080,7 +1126,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2562": {
     "id": "2562",
@@ -1105,7 +1152,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2563": {
     "id": "2563",
@@ -1130,7 +1178,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2564": {
     "id": "2564",
@@ -1151,7 +1200,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2565": {
     "id": "2565",
@@ -1176,7 +1226,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2566": {
     "id": "2566",
@@ -1201,7 +1252,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2816": {
     "id": "2816",
@@ -1226,7 +1278,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2817": {
     "id": "2817",
@@ -1251,7 +1304,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2818": {
     "id": "2818",
@@ -1276,7 +1330,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2820": {
     "id": "2820",
@@ -1301,7 +1356,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2819": {
     "id": "2819",
@@ -1326,7 +1382,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2821": {
     "id": "2821",
@@ -1351,7 +1408,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2823": {
     "id": "2823",
@@ -1380,7 +1438,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "2822": {
     "id": "2822",
@@ -1409,7 +1468,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3073": {
     "id": "3073",
@@ -1434,7 +1494,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3074": {
     "id": "3074",
@@ -1455,7 +1516,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3075": {
     "id": "3075",
@@ -1480,7 +1542,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3076": {
     "id": "3076",
@@ -1505,7 +1568,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3077": {
     "id": "3077",
@@ -1530,7 +1594,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3078": {
     "id": "3078",
@@ -1555,7 +1620,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1281": {
     "id": "1281",
@@ -1588,7 +1654,8 @@
         "type": "Vector",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1286": {
     "id": "1286",
@@ -1613,7 +1680,8 @@
         "type": "Vector",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1280": {
     "id": "1280",
@@ -1646,7 +1714,8 @@
         "type": "Number",
         "name": "W"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1288": {
     "id": "1288",
@@ -1671,7 +1740,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1282": {
     "id": "1282",
@@ -1692,7 +1762,8 @@
         "type": "Vector",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1290": {
     "id": "1290",
@@ -1713,7 +1784,8 @@
         "type": "Vector",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1292": {
     "id": "1292",
@@ -1738,7 +1810,8 @@
         "type": "Vector",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1294": {
     "id": "1294",
@@ -1759,7 +1832,8 @@
         "type": "Vector",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1295": {
     "id": "1295",
@@ -1780,7 +1854,8 @@
         "type": "Vector",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1296": {
     "id": "1296",
@@ -1805,7 +1880,8 @@
         "type": "Number",
         "name": "Angle"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1283": {
     "id": "1283",
@@ -1826,7 +1902,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1284": {
     "id": "1284",
@@ -1847,7 +1924,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1297": {
     "id": "1297",
@@ -1868,7 +1946,8 @@
         "type": "Vector",
         "name": "HSV"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1298": {
     "id": "1298",
@@ -1889,7 +1968,8 @@
         "type": "Vector",
         "name": "RGB"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1537": {
     "id": "1537",
@@ -1910,7 +1990,8 @@
         "type": "VECTOR",
         "name": "normal"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1540": {
     "id": "1540",
@@ -1935,7 +2016,8 @@
         "type": "DECIMAL",
         "name": "ANGLE (DEG)"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1539": {
     "id": "1539",
@@ -1960,7 +2042,8 @@
         "type": "DECIMAL",
         "name": "AngularVelocity"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1538": {
     "id": "1538",
@@ -1985,7 +2068,8 @@
         "type": "VECTOR",
         "name": "Velocity"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1542": {
     "id": "1542",
@@ -2005,7 +2089,8 @@
         "name": "FORCE"
       }
     ],
-    "outputs": []
+    "outputs": [],
+    "can_modify_data_type": true
   },
   "1545": {
     "id": "1545",
@@ -2025,7 +2110,8 @@
         "name": "angular force"
       }
     ],
-    "outputs": []
+    "outputs": [],
+    "can_modify_data_type": true
   },
   "1546": {
     "id": "1546",
@@ -2049,7 +2135,8 @@
         "name": "OFFSET"
       }
     ],
-    "outputs": []
+    "outputs": [],
+    "can_modify_data_type": true
   },
   "1578": {
     "id": "1578",
@@ -2074,7 +2161,8 @@
         "type": "DECIMAL",
         "name": "ANGLE (DEG)"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1549": {
     "id": "1549",
@@ -2095,7 +2183,8 @@
         "type": "DECIMAL",
         "name": "ID"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1550": {
     "id": "1550",
@@ -2116,7 +2205,8 @@
         "type": "ENTITY",
         "name": "OBJECT"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1552": {
     "id": "1552",
@@ -2137,7 +2227,8 @@
         "type": "Number",
         "name": "Is Valid"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1553": {
     "id": "1553",
@@ -2162,7 +2253,8 @@
         "type": "Vector",
         "name": "Local Position"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1554": {
     "id": "1554",
@@ -2187,7 +2279,8 @@
         "type": "Number",
         "name": "Local Angle (Deg)"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1555": {
     "id": "1555",
@@ -2212,7 +2305,8 @@
         "type": "Vector",
         "name": "Local Position"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1556": {
     "id": "1556",
@@ -2237,15 +2331,16 @@
         "type": "Number",
         "name": "World Angle (Deg)"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1544": {
     "id": "1544",
     "gate_data_type": 0,
     "source_info": {
-      "datatype_map_nodename": "LookAt",
+      "datatype_map_nodename": "LookAtEntity",
       "allmod_viewmodel": "LookAtEntityNodeViewModel",
-      "chip_names_friendly_name": "LookAt"
+      "chip_names_friendly_name": "LookAtEntity"
     },
     "inputs": [
       {
@@ -2258,10 +2353,11 @@
       },
       {
         "type": "DECIMAL",
-        "name": "speed/factor"
+        "name": "velocity"
       }
     ],
-    "outputs": []
+    "outputs": [],
+    "can_modify_data_type": true
   },
   "1557": {
     "id": "1557",
@@ -2282,7 +2378,8 @@
         "type": "DECIMAL",
         "name": "Mass"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1558": {
     "id": "1558",
@@ -2303,7 +2400,8 @@
         "type": "VECTOR",
         "name": "Mass Center"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1559": {
     "id": "1559",
@@ -2328,7 +2426,8 @@
         "type": "VECTOR",
         "name": "position"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1560": {
     "id": "1560",
@@ -2353,7 +2452,8 @@
         "type": "VECTOR",
         "name": "Velocity Vector"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1541": {
     "id": "1541",
@@ -2378,7 +2478,8 @@
         "type": "DECIMAL",
         "name": "Temperature"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1543": {
     "id": "1543",
@@ -2403,7 +2504,8 @@
         "type": "VECTOR",
         "name": "Color"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1561": {
     "id": "1561",
@@ -2424,7 +2526,8 @@
         "type": "DECIMAL",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1562": {
     "id": "1562",
@@ -2444,7 +2547,8 @@
         "name": "Trigger"
       }
     ],
-    "outputs": []
+    "outputs": [],
+    "can_modify_data_type": true
   },
   "1563": {
     "id": "1563",
@@ -2469,7 +2573,8 @@
         "type": "DECIMAL",
         "name": "Gravity Scale"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1566": {
     "id": "1566",
@@ -2494,7 +2599,8 @@
         "type": "DECIMAL",
         "name": "is frozen"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1567": {
     "id": "1567",
@@ -2519,7 +2625,8 @@
         "type": "VECTOR",
         "name": "size"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1569": {
     "id": "1569",
@@ -2544,7 +2651,8 @@
         "type": "DECIMAL",
         "name": "is on fire"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1570": {
     "id": "1570",
@@ -2564,7 +2672,8 @@
         "name": "Extinguish"
       }
     ],
-    "outputs": []
+    "outputs": [],
+    "can_modify_data_type": true
   },
   "1571": {
     "id": "1571",
@@ -2593,7 +2702,8 @@
         "type": "DECIMAL",
         "name": "is following"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1574": {
     "id": "1574",
@@ -2622,7 +2732,8 @@
         "type": "DECIMAL",
         "name": "COLLISION ENABLED"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "1577": {
     "id": "1577",
@@ -2642,7 +2753,8 @@
         "name": "INPUT"
       }
     ],
-    "outputs": []
+    "outputs": [],
+    "can_modify_data_type": true
   },
   "3586": {
     "id": "3586",
@@ -2667,7 +2779,8 @@
         "type": "DECIMAL",
         "name": "INDEX"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3587": {
     "id": "3587",
@@ -2688,7 +2801,8 @@
         "type": "DECIMAL",
         "name": "Length"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3588": {
     "id": "3588",
@@ -2709,7 +2823,8 @@
         "type": "STRING",
         "name": "Lowercase String"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3589": {
     "id": "3589",
@@ -2730,7 +2845,8 @@
         "type": "STRING",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3590": {
     "id": "3590",
@@ -2751,7 +2867,8 @@
         "type": "STRING",
         "name": "Reversed String"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3592": {
     "id": "3592",
@@ -2780,7 +2897,8 @@
         "type": "STRING",
         "name": "Replaced String"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3591": {
     "id": "3591",
@@ -2805,7 +2923,8 @@
         "type": "STRING",
         "name": "Repeated String"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3593": {
     "id": "3593",
@@ -2834,7 +2953,8 @@
         "type": "STRING",
         "name": "Substring"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3594": {
     "id": "3594",
@@ -2855,7 +2975,8 @@
         "type": "STRING",
         "name": "Trimmed String"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3595": {
     "id": "3595",
@@ -2876,7 +2997,8 @@
         "type": "STRING",
         "name": "String"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3596": {
     "id": "3596",
@@ -2901,7 +3023,8 @@
         "type": "DECIMAL",
         "name": "ASCII"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "5": {
     "id": "5",
@@ -2912,7 +3035,8 @@
       "chip_names_friendly_name": "Sticker"
     },
     "inputs": [],
-    "outputs": []
+    "outputs": [],
+    "can_modify_data_type": true
   },
   "4097": {
     "id": "4097",
@@ -2933,7 +3057,8 @@
         "type": "DECIMAL",
         "name": "Delta"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "4098": {
     "id": "4098",
@@ -2966,7 +3091,8 @@
         "type": "DECIMAL",
         "name": "Count"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "4099": {
     "id": "4099",
@@ -3003,7 +3129,8 @@
         "type": "DECIMAL",
         "name": "Delayed Value"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "4100": {
     "id": "4100",
@@ -3028,7 +3155,8 @@
         "type": "DECIMAL",
         "name": "Total"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "4101": {
     "id": "4101",
@@ -3049,7 +3177,8 @@
         "type": "DECIMAL",
         "name": "Previous Value"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "256": {
     "id": "256",
@@ -3065,7 +3194,8 @@
         "type": "DECIMAL",
         "name": "Input"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "255": {
     "id": "255",
@@ -3081,47 +3211,8 @@
         "name": "output"
       }
     ],
-    "outputs": []
-  },
-  "257": {
-    "id": "257",
-    "gate_data_type": 2,
-    "source_info": {
-      "datatype_map_nodename": "Constant",
-      "allmod_viewmodel": "ConstantNodeViewModel",
-      "chip_names_friendly_name": "Constant"
-    },
-    "inputs": [],
-    "outputs": [
-      {
-        "type": "DECIMAL",
-        "name": "Output"
-      }
-    ]
-  },
-  "1544": {
-    "id": "1544",
-    "gate_data_type": 0,
-    "source_info": {
-      "datatype_map_nodename": "LookAtEntity",
-      "allmod_viewmodel": "LookAtEntityNodeViewModel",
-      "chip_names_friendly_name": "LookAtEntity"
-    },
-    "inputs": [
-      {
-        "type": "ENTITY",
-        "name": "object"
-      },
-      {
-        "type": "ENTITY",
-        "name": "target"
-      },
-      {
-        "type": "DECIMAL",
-        "name": "velocity"
-      }
-    ],
-    "outputs": []
+    "outputs": [],
+    "can_modify_data_type": true
   },
   "2330": {
     "id": "2330",
@@ -3146,7 +3237,8 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
   "3598": {
     "id": "3598",
@@ -3167,9 +3259,10 @@
         "type": "Number",
         "name": "Result"
       }
-    ]
+    ],
+    "can_modify_data_type": true
   },
-"Variable": {
+  "Variable": {
     "id": "Variable",
     "gate_data_type": 0,
     "source_info": {
@@ -3192,6 +3285,7 @@
         "type": "Any",
         "name": "Value"
       }
-    ]
- }
+    ],
+    "can_modify_data_type": true
+  }
 }

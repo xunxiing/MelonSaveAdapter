@@ -10,6 +10,101 @@
     "inputs": ["same", "same"],
     "outputs": ["same"]
   },
+  "2306": {
+    "module_name": "Multiply",
+    "inputs": ["same", "same"],
+    "outputs": ["same"]
+  },
+  "2307": {
+    "module_name": "Divide",
+    "inputs": ["same", "same"],
+    "outputs": ["same"]
+  },
+  "2310": {
+    "module_name": "Ceiling",
+    "inputs": ["same"],
+    "outputs": ["same"]
+  },
+  "2311": {
+    "module_name": "Clamp",
+    "inputs": [2, 2, 2],
+    "outputs": [2]
+  },
+  "2312": {
+    "module_name": "Clamp01",
+    "inputs": [2],
+    "outputs": [2]
+  },
+  "2315": {
+    "module_name": "Negate",
+    "inputs": ["same"],
+    "outputs": ["same"]
+  },
+  "2318": {
+    "module_name": "Sign",
+    "inputs": [2],
+    "outputs": [2]
+  },
+  "2319": {
+    "module_name": "Floor",
+    "inputs": ["same"],
+    "outputs": ["same"]
+  },
+  "2320": {
+    "module_name": "Inverse",
+    "inputs": [2],
+    "outputs": [2]
+  },
+  "2322": {
+    "module_name": "Sqrt",
+    "inputs": [2],
+    "outputs": [2]
+  },
+  "2323": {
+    "module_name": "Logarithm",
+    "inputs": [2, 2],
+    "outputs": [2]
+  },
+  "2324": {
+    "module_name": "Positive",
+    "inputs": [2],
+    "outputs": [2]
+  },
+  "2325": {
+    "module_name": "Power",
+    "inputs": [2, 2],
+    "outputs": [2]
+  },
+  "2326": {
+    "module_name": "Round",
+    "inputs": ["same"],
+    "outputs": ["same"]
+  },
+  "2327": {
+    "module_name": "Remainder",
+    "inputs": [2, 2],
+    "outputs": [2]
+  },
+  "2330": {
+    "module_name": "Max",
+    "inputs": [2, 2],
+    "outputs": [2]
+  },
+  "2308": {
+    "module_name": "Exponent",
+    "inputs": [2],
+    "outputs": [2]
+  },
+  "2309": {
+    "module_name": "Average",
+    "inputs": [2, 2],
+    "outputs": [2]
+  },
+  "261": {
+    "module_name": "Random",
+    "inputs": [2, 2],
+    "outputs": [2]
+  },
   "2567": {
     "module_name": "Branch",
     "inputs": [2, "same", "same"],

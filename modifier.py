@@ -129,6 +129,12 @@ def apply_data_type_modifications(
                     op_type = node_found.get('OperationType')
                     module_name = get_friendly_module_name(op_type, module_defs)
 
+                    # moduledef.json 中可通过 can_modify_data_type 控制该模块是否允许类型修改
+                    mod_def = module_defs.get(str(op_type), {}) if op_type is not None else {}
+                    if isinstance(mod_def, dict) and mod_def.get("can_modify_data_type") is False:
+                        print(f"     skip: module '{module_name}' (OpType: {op_type}) is marked as non-modifiable")
+                        continue
+
                     # --- 逻辑修正点 ---
                     # 1. 无论节点类型如何，只要它是外部IO，就必须先记录下来以便同步
                     conn_id = node_found.get('MechanicConnectionId')
