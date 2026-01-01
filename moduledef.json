@@ -14,7 +14,7 @@
         "name": "Output"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "260": {
     "id": "260",
@@ -43,7 +43,7 @@
         "name": "Cos Time"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1": {
     "id": "1",
@@ -65,7 +65,7 @@
         "name": "A"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2324": {
     "id": "2324",
@@ -87,7 +87,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2304": {
     "id": "2304",
@@ -113,7 +113,7 @@
         "name": "A + B"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2309": {
     "id": "2309",
@@ -139,7 +139,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2310": {
     "id": "2310",
@@ -161,7 +161,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2311": {
     "id": "2311",
@@ -191,7 +191,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2312": {
     "id": "2312",
@@ -213,7 +213,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2307": {
     "id": "2307",
@@ -239,7 +239,7 @@
         "name": "A / B"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2308": {
     "id": "2308",
@@ -261,7 +261,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "259": {
     "id": "259",
@@ -278,7 +278,7 @@
         "name": "Output"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2314": {
     "id": "2314",
@@ -304,7 +304,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2315": {
     "id": "2315",
@@ -326,7 +326,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2316": {
     "id": "2316",
@@ -352,7 +352,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "258": {
     "id": "258",
@@ -369,7 +369,7 @@
         "name": "Output"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "261": {
     "id": "261",
@@ -395,7 +395,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2326": {
     "id": "2326",
@@ -417,7 +417,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2318": {
     "id": "2318",
@@ -439,7 +439,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2321": {
     "id": "2321",
@@ -461,7 +461,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2322": {
     "id": "2322",
@@ -483,7 +483,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2305": {
     "id": "2305",
@@ -509,7 +509,7 @@
         "name": "A - B"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2319": {
     "id": "2319",
@@ -531,7 +531,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2320": {
     "id": "2320",
@@ -553,7 +553,7 @@
         "name": "1 / A"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2328": {
     "id": "2328",
@@ -583,7 +583,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2323": {
     "id": "2323",
@@ -609,7 +609,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2327": {
     "id": "2327",
@@ -635,7 +635,7 @@
         "name": "Remainder"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2306": {
     "id": "2306",
@@ -661,7 +661,7 @@
         "name": "A × B"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2325": {
     "id": "2325",
@@ -687,7 +687,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2059": {
     "id": "2059",
@@ -713,7 +713,7 @@
         "name": "Deg"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2052": {
     "id": "2052",
@@ -735,7 +735,7 @@
         "name": "Angle (Rad)"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2051": {
     "id": "2051",
@@ -757,7 +757,7 @@
         "name": "Angle (Rad)"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2054": {
     "id": "2054",
@@ -779,7 +779,7 @@
         "name": "Angle (Rad)"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2056": {
     "id": "2056",
@@ -801,7 +801,7 @@
         "name": "Angle (Rad)"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2050": {
     "id": "2050",
@@ -823,7 +823,7 @@
         "name": "Cos"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2049": {
     "id": "2049",
@@ -845,7 +845,7 @@
         "name": "Sin"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2053": {
     "id": "2053",
@@ -867,7 +867,7 @@
         "name": "Tan"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2055": {
     "id": "2055",
@@ -889,7 +889,7 @@
         "name": "Ctan"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2057": {
     "id": "2057",
@@ -911,7 +911,7 @@
         "name": "Rad"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2058": {
     "id": "2058",
@@ -933,7 +933,7 @@
         "name": "Deg"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2060": {
     "id": "2060",
@@ -963,7 +963,7 @@
         "name": "A"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2061": {
     "id": "2061",
@@ -993,7 +993,7 @@
         "name": "Cos"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2062": {
     "id": "2062",
@@ -1019,7 +1019,7 @@
         "name": "Catheus B"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2063": {
     "id": "2063",
@@ -1045,7 +1045,7 @@
         "name": "Hypotenuse"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2560": {
     "id": "2560",
@@ -1071,7 +1071,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2567": {
     "id": "2567",
@@ -1101,7 +1101,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2561": {
     "id": "2561",
@@ -1127,7 +1127,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2562": {
     "id": "2562",
@@ -1153,7 +1153,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2563": {
     "id": "2563",
@@ -1179,7 +1179,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2564": {
     "id": "2564",
@@ -1201,7 +1201,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2565": {
     "id": "2565",
@@ -1227,7 +1227,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2566": {
     "id": "2566",
@@ -1253,7 +1253,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2816": {
     "id": "2816",
@@ -1279,7 +1279,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2817": {
     "id": "2817",
@@ -1305,7 +1305,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2818": {
     "id": "2818",
@@ -1331,7 +1331,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2820": {
     "id": "2820",
@@ -1357,7 +1357,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2819": {
     "id": "2819",
@@ -1383,7 +1383,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2821": {
     "id": "2821",
@@ -1409,7 +1409,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2823": {
     "id": "2823",
@@ -1439,7 +1439,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2822": {
     "id": "2822",
@@ -1469,7 +1469,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3073": {
     "id": "3073",
@@ -1495,7 +1495,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3074": {
     "id": "3074",
@@ -1517,7 +1517,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3075": {
     "id": "3075",
@@ -1543,7 +1543,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3076": {
     "id": "3076",
@@ -1569,7 +1569,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3077": {
     "id": "3077",
@@ -1595,7 +1595,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3078": {
     "id": "3078",
@@ -1621,7 +1621,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1281": {
     "id": "1281",
@@ -1655,7 +1655,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1286": {
     "id": "1286",
@@ -1681,7 +1681,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1280": {
     "id": "1280",
@@ -1715,7 +1715,7 @@
         "name": "W"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1288": {
     "id": "1288",
@@ -1741,7 +1741,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1282": {
     "id": "1282",
@@ -1763,7 +1763,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1290": {
     "id": "1290",
@@ -1785,7 +1785,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1292": {
     "id": "1292",
@@ -1811,7 +1811,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1294": {
     "id": "1294",
@@ -1833,7 +1833,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1295": {
     "id": "1295",
@@ -1855,7 +1855,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1296": {
     "id": "1296",
@@ -1881,7 +1881,7 @@
         "name": "Angle"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1283": {
     "id": "1283",
@@ -1903,7 +1903,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1284": {
     "id": "1284",
@@ -1925,7 +1925,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1297": {
     "id": "1297",
@@ -1947,7 +1947,7 @@
         "name": "HSV"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1298": {
     "id": "1298",
@@ -1969,7 +1969,7 @@
         "name": "RGB"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1537": {
     "id": "1537",
@@ -1991,7 +1991,7 @@
         "name": "normal"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1540": {
     "id": "1540",
@@ -2017,7 +2017,7 @@
         "name": "ANGLE (DEG)"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1539": {
     "id": "1539",
@@ -2043,7 +2043,7 @@
         "name": "AngularVelocity"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1538": {
     "id": "1538",
@@ -2069,7 +2069,7 @@
         "name": "Velocity"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1542": {
     "id": "1542",
@@ -2090,7 +2090,7 @@
       }
     ],
     "outputs": [],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1545": {
     "id": "1545",
@@ -2111,7 +2111,7 @@
       }
     ],
     "outputs": [],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1546": {
     "id": "1546",
@@ -2136,7 +2136,7 @@
       }
     ],
     "outputs": [],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1578": {
     "id": "1578",
@@ -2162,7 +2162,7 @@
         "name": "ANGLE (DEG)"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1549": {
     "id": "1549",
@@ -2184,7 +2184,7 @@
         "name": "ID"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1550": {
     "id": "1550",
@@ -2206,7 +2206,7 @@
         "name": "OBJECT"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1552": {
     "id": "1552",
@@ -2228,7 +2228,7 @@
         "name": "Is Valid"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1553": {
     "id": "1553",
@@ -2254,7 +2254,7 @@
         "name": "Local Position"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1554": {
     "id": "1554",
@@ -2280,7 +2280,7 @@
         "name": "Local Angle (Deg)"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1555": {
     "id": "1555",
@@ -2306,7 +2306,7 @@
         "name": "Local Position"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1556": {
     "id": "1556",
@@ -2332,7 +2332,7 @@
         "name": "World Angle (Deg)"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1544": {
     "id": "1544",
@@ -2357,7 +2357,7 @@
       }
     ],
     "outputs": [],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1557": {
     "id": "1557",
@@ -2379,7 +2379,7 @@
         "name": "Mass"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1558": {
     "id": "1558",
@@ -2401,7 +2401,7 @@
         "name": "Mass Center"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1559": {
     "id": "1559",
@@ -2427,7 +2427,7 @@
         "name": "position"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1560": {
     "id": "1560",
@@ -2453,7 +2453,7 @@
         "name": "Velocity Vector"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1541": {
     "id": "1541",
@@ -2479,7 +2479,7 @@
         "name": "Temperature"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1543": {
     "id": "1543",
@@ -2505,7 +2505,7 @@
         "name": "Color"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1561": {
     "id": "1561",
@@ -2527,7 +2527,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1562": {
     "id": "1562",
@@ -2548,7 +2548,7 @@
       }
     ],
     "outputs": [],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1563": {
     "id": "1563",
@@ -2574,7 +2574,7 @@
         "name": "Gravity Scale"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1566": {
     "id": "1566",
@@ -2600,7 +2600,7 @@
         "name": "is frozen"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1567": {
     "id": "1567",
@@ -2626,7 +2626,7 @@
         "name": "size"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1569": {
     "id": "1569",
@@ -2652,7 +2652,7 @@
         "name": "is on fire"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1570": {
     "id": "1570",
@@ -2673,7 +2673,7 @@
       }
     ],
     "outputs": [],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1571": {
     "id": "1571",
@@ -2703,7 +2703,7 @@
         "name": "is following"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1574": {
     "id": "1574",
@@ -2733,7 +2733,7 @@
         "name": "COLLISION ENABLED"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "1577": {
     "id": "1577",
@@ -2754,7 +2754,7 @@
       }
     ],
     "outputs": [],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3586": {
     "id": "3586",
@@ -2780,7 +2780,7 @@
         "name": "INDEX"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3587": {
     "id": "3587",
@@ -2802,7 +2802,7 @@
         "name": "Length"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3588": {
     "id": "3588",
@@ -2824,7 +2824,7 @@
         "name": "Lowercase String"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3589": {
     "id": "3589",
@@ -2846,7 +2846,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3590": {
     "id": "3590",
@@ -2868,7 +2868,7 @@
         "name": "Reversed String"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3592": {
     "id": "3592",
@@ -2898,7 +2898,7 @@
         "name": "Replaced String"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3591": {
     "id": "3591",
@@ -2924,7 +2924,7 @@
         "name": "Repeated String"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3593": {
     "id": "3593",
@@ -2954,7 +2954,7 @@
         "name": "Substring"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3594": {
     "id": "3594",
@@ -2976,7 +2976,7 @@
         "name": "Trimmed String"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3595": {
     "id": "3595",
@@ -2998,7 +2998,7 @@
         "name": "String"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3596": {
     "id": "3596",
@@ -3024,7 +3024,7 @@
         "name": "ASCII"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "5": {
     "id": "5",
@@ -3036,7 +3036,7 @@
     },
     "inputs": [],
     "outputs": [],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "4097": {
     "id": "4097",
@@ -3058,7 +3058,7 @@
         "name": "Delta"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "4098": {
     "id": "4098",
@@ -3092,7 +3092,7 @@
         "name": "Count"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "4099": {
     "id": "4099",
@@ -3130,7 +3130,7 @@
         "name": "Delayed Value"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "4100": {
     "id": "4100",
@@ -3156,7 +3156,7 @@
         "name": "Total"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "4101": {
     "id": "4101",
@@ -3178,7 +3178,7 @@
         "name": "Previous Value"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "256": {
     "id": "256",
@@ -3195,7 +3195,7 @@
         "name": "Input"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "255": {
     "id": "255",
@@ -3212,7 +3212,7 @@
       }
     ],
     "outputs": [],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "2330": {
     "id": "2330",
@@ -3238,7 +3238,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "3598": {
     "id": "3598",
@@ -3260,7 +3260,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   },
   "Variable": {
     "id": "Variable",
@@ -3286,6 +3286,6 @@
         "name": "Value"
       }
     ],
-    "can_modify_data_type": true
+    "can_modify_data_type": false
   }
 }

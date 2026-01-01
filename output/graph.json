@@ -1,24 +1,212 @@
 {
   "nodes": [
     {
-      "id": "output_0",
-      "type": "OUTPUT",
-      "label": "Root 1",
+      "id": "input_0",
+      "type": "INPUT",
+      "label": "mass",
       "attrs": {
-        "name": "Root 1"
+        "name": "mass",
+        "data_type": 2
       },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_1",
+      "type": "INPUT",
+      "label": "V y",
+      "attrs": {
+        "name": "V y",
+        "data_type": 8
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_2",
+      "type": "INPUT",
+      "label": "A",
+      "attrs": {
+        "name": "A",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_3",
+      "type": "INPUT",
+      "label": "input H",
+      "attrs": {
+        "name": "input H",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_4",
+      "type": "INPUT",
+      "label": "Pk Ik",
+      "attrs": {
+        "name": "Pk Ik",
+        "data_type": 8
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_5",
+      "type": "INPUT",
+      "label": "V k",
+      "attrs": {
+        "name": "V k",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "input_6",
+      "type": "INPUT",
+      "label": "c",
+      "attrs": {
+        "name": "c",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_0",
+      "type": "Constant",
+      "label": "Const 9.8",
+      "attrs": {
+        "value": 9.8
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_1",
+      "type": "Constant",
+      "label": "Const 0.0",
+      "attrs": {
+        "value": 0.0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_2",
+      "type": "Constant",
+      "label": "Const 1.0",
+      "attrs": {
+        "value": 1.0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_3",
+      "type": "Constant",
+      "label": "Const -1.0",
+      "attrs": {
+        "value": -1.0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "time_0",
+      "type": "TIME",
+      "label": "TIME",
+      "attrs": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DELTA TIME",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "split_0",
+      "type": "Split",
+      "label": "Split",
+      "attrs": {},
       "inputs": [
         {
-          "name": "INPUT",
+          "name": "Vector",
           "type": ""
         }
       ],
-      "outputs": []
+      "outputs": [
+        {
+          "name": "Y",
+          "type": ""
+        }
+      ]
     },
     {
-      "id": "add_0",
-      "type": "Add",
-      "label": "Add",
+      "id": "multiply_0",
+      "type": "Multiply",
+      "label": "Multiply",
       "attrs": {},
       "inputs": [
         {
@@ -32,59 +220,71 @@
       ],
       "outputs": [
         {
-          "name": "__auto__",
+          "name": "A*B",
           "type": ""
         }
       ]
     },
     {
-      "id": "power_0",
-      "type": "Power",
-      "label": "Power",
+      "id": "multiply_1",
+      "type": "Multiply",
+      "label": "Multiply",
       "attrs": {},
       "inputs": [
         {
-          "name": "Value",
+          "name": "A",
           "type": ""
         },
         {
-          "name": "Power",
+          "name": "B",
           "type": ""
         }
       ],
       "outputs": [
         {
-          "name": "__auto__",
+          "name": "A*B",
           "type": ""
         }
       ]
     },
     {
-      "id": "constant_0",
-      "type": "Constant",
-      "label": "Const 1",
+      "id": "prev_frame_0",
+      "type": "PREV_FRAME",
+      "label": "PREV_FRAME",
       "attrs": {
-        "value": 1
+        "datatype": 2
       },
-      "inputs": [],
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": ""
+        }
+      ],
       "outputs": [
         {
-          "name": "Output",
+          "name": "RESULT",
           "type": ""
         }
       ]
     },
     {
-      "id": "constant_1",
-      "type": "Constant",
-      "label": "Const 2",
-      "attrs": {
-        "value": 2
-      },
-      "inputs": [],
+      "id": "subtract_0",
+      "type": "Subtract",
+      "label": "Subtract",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
       "outputs": [
         {
-          "name": "Output",
+          "name": "A-B",
           "type": ""
         }
       ]
@@ -106,82 +306,805 @@
       ],
       "outputs": [
         {
-          "name": "__auto__",
+          "name": "A / B",
           "type": ""
         }
       ]
     },
     {
-      "id": "constant_2",
-      "type": "Constant",
-      "label": "Const 3",
-      "attrs": {
-        "value": 3
-      },
-      "inputs": [],
+      "id": "subtract_1",
+      "type": "Subtract",
+      "label": "Subtract",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
       "outputs": [
         {
-          "name": "Output",
+          "name": "A-B",
           "type": ""
         }
       ]
     },
     {
-      "id": "constant_3",
-      "type": "Constant",
-      "label": "Const 123",
-      "attrs": {
-        "value": 123
-      },
-      "inputs": [],
+      "id": "split_1",
+      "type": "Split",
+      "label": "Split",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "Vector",
+          "type": ""
+        }
+      ],
       "outputs": [
         {
-          "name": "Output",
+          "name": "X",
+          "type": ""
+        },
+        {
+          "name": "Y",
           "type": ""
         }
       ]
+    },
+    {
+      "id": "less_than_0",
+      "type": "LESS_THAN",
+      "label": "LESS_THAN",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A < B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "greater_than_0",
+      "type": "GREATER_THAN",
+      "label": "GREATER_THAN",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A > B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "and_0",
+      "type": "AND",
+      "label": "AND",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A AND B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "not_0",
+      "type": "NOT",
+      "label": "NOT",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "NOT A",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "and_1",
+      "type": "AND",
+      "label": "AND",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A AND B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_2",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_3",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "accumulator_0",
+      "type": "ACCUMULATOR",
+      "label": "ACCUMULATOR",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "NUMBER",
+          "type": ""
+        },
+        {
+          "name": "RESET",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "RESULT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_4",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_5",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_0",
+      "type": "Add",
+      "label": "Add",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A+B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_6",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "subtract_2",
+      "type": "Subtract",
+      "label": "Subtract",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A-B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_7",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "max_0",
+      "type": "Max",
+      "label": "Max",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "max",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "subtract_3",
+      "type": "Subtract",
+      "label": "Subtract",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A-B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "prev_frame_1",
+      "type": "PREV_FRAME",
+      "label": "PREV_FRAME",
+      "attrs": {
+        "datatype": 2
+      },
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "RESULT",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_8",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_9",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A*B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_1",
+      "type": "Add",
+      "label": "Add",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "A+B",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "output_0",
+      "type": "OUTPUT",
+      "label": "output F",
+      "attrs": {
+        "name": "output F",
+        "data_type": 2
+      },
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": ""
+        }
+      ],
+      "outputs": []
     }
   ],
   "edges": [
     {
-      "from_node": "constant_0",
-      "from_port": "Output",
-      "to_node": "power_0",
-      "to_port": "Value"
+      "from_node": "input_1",
+      "from_port": "OUTPUT",
+      "to_node": "split_0",
+      "to_port": "Vector"
     },
     {
-      "from_node": "constant_1",
-      "from_port": "Output",
-      "to_node": "power_0",
-      "to_port": "Power"
-    },
-    {
-      "from_node": "power_0",
-      "from_port": "__auto__",
-      "to_node": "add_0",
-      "to_port": "A"
-    },
-    {
-      "from_node": "constant_2",
-      "from_port": "Output",
-      "to_node": "divide_0",
+      "from_node": "split_0",
+      "from_port": "Y",
+      "to_node": "multiply_0",
       "to_port": "A"
     },
     {
       "from_node": "constant_3",
-      "from_port": "Output",
+      "from_port": "OUT",
+      "to_node": "multiply_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_0",
+      "from_port": "A*B",
+      "to_node": "multiply_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_5",
+      "from_port": "OUTPUT",
+      "to_node": "multiply_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "input_3",
+      "from_port": "OUTPUT",
+      "to_node": "prev_frame_0",
+      "to_port": "INPUT"
+    },
+    {
+      "from_node": "input_3",
+      "from_port": "OUTPUT",
+      "to_node": "subtract_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "prev_frame_0",
+      "from_port": "RESULT",
+      "to_node": "subtract_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "subtract_0",
+      "from_port": "A-B",
+      "to_node": "divide_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "time_0",
+      "from_port": "DELTA TIME",
       "to_node": "divide_0",
       "to_port": "B"
     },
     {
+      "from_node": "multiply_1",
+      "from_port": "A*B",
+      "to_node": "subtract_1",
+      "to_port": "A"
+    },
+    {
       "from_node": "divide_0",
-      "from_port": "__auto__",
+      "from_port": "A / B",
+      "to_node": "subtract_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "input_4",
+      "from_port": "OUTPUT",
+      "to_node": "split_1",
+      "to_port": "Vector"
+    },
+    {
+      "from_node": "input_3",
+      "from_port": "OUTPUT",
+      "to_node": "less_than_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_6",
+      "from_port": "OUTPUT",
+      "to_node": "less_than_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "split_0",
+      "from_port": "Y",
+      "to_node": "greater_than_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_1",
+      "from_port": "OUT",
+      "to_node": "greater_than_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "less_than_0",
+      "from_port": "A < B",
+      "to_node": "and_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "greater_than_0",
+      "from_port": "A > B",
+      "to_node": "and_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "and_0",
+      "from_port": "A AND B",
+      "to_node": "not_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_2",
+      "from_port": "OUTPUT",
+      "to_node": "and_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "not_0",
+      "from_port": "NOT A",
+      "to_node": "and_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "subtract_1",
+      "from_port": "A-B",
+      "to_node": "multiply_2",
+      "to_port": "A"
+    },
+    {
+      "from_node": "time_0",
+      "from_port": "DELTA TIME",
+      "to_node": "multiply_2",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_2",
+      "from_port": "A*B",
+      "to_node": "multiply_3",
+      "to_port": "A"
+    },
+    {
+      "from_node": "and_1",
+      "from_port": "A AND B",
+      "to_node": "multiply_3",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_3",
+      "from_port": "A*B",
+      "to_node": "accumulator_0",
+      "to_port": "NUMBER"
+    },
+    {
+      "from_node": "constant_1",
+      "from_port": "OUT",
+      "to_node": "accumulator_0",
+      "to_port": "RESET"
+    },
+    {
+      "from_node": "subtract_1",
+      "from_port": "A-B",
+      "to_node": "multiply_4",
+      "to_port": "A"
+    },
+    {
+      "from_node": "split_1",
+      "from_port": "X",
+      "to_node": "multiply_4",
+      "to_port": "B"
+    },
+    {
+      "from_node": "accumulator_0",
+      "from_port": "RESULT",
+      "to_node": "multiply_5",
+      "to_port": "A"
+    },
+    {
+      "from_node": "split_1",
+      "from_port": "Y",
+      "to_node": "multiply_5",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_4",
+      "from_port": "A*B",
+      "to_node": "add_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_5",
+      "from_port": "A*B",
       "to_node": "add_0",
       "to_port": "B"
     },
     {
+      "from_node": "input_0",
+      "from_port": "OUTPUT",
+      "to_node": "multiply_6",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "multiply_6",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "OUT",
+      "to_node": "subtract_2",
+      "to_port": "A"
+    },
+    {
       "from_node": "add_0",
-      "from_port": "__auto__",
+      "from_port": "A+B",
+      "to_node": "subtract_2",
+      "to_port": "B"
+    },
+    {
+      "from_node": "input_0",
+      "from_port": "OUTPUT",
+      "to_node": "multiply_7",
+      "to_port": "A"
+    },
+    {
+      "from_node": "subtract_2",
+      "from_port": "A-B",
+      "to_node": "multiply_7",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_7",
+      "from_port": "A*B",
+      "to_node": "max_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_1",
+      "from_port": "OUT",
+      "to_node": "max_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_2",
+      "from_port": "OUT",
+      "to_node": "subtract_3",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_2",
+      "from_port": "OUTPUT",
+      "to_node": "subtract_3",
+      "to_port": "B"
+    },
+    {
+      "from_node": "prev_frame_1",
+      "from_port": "RESULT",
+      "to_node": "multiply_8",
+      "to_port": "A"
+    },
+    {
+      "from_node": "subtract_3",
+      "from_port": "A-B",
+      "to_node": "multiply_8",
+      "to_port": "B"
+    },
+    {
+      "from_node": "max_0",
+      "from_port": "max",
+      "to_node": "multiply_9",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_2",
+      "from_port": "OUTPUT",
+      "to_node": "multiply_9",
+      "to_port": "B"
+    },
+    {
+      "from_node": "multiply_9",
+      "from_port": "A*B",
+      "to_node": "add_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_8",
+      "from_port": "A*B",
+      "to_node": "add_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "add_1",
+      "from_port": "A+B",
       "to_node": "output_0",
       "to_port": "INPUT"
     }

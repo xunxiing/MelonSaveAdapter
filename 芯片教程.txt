@@ -35,187 +35,18 @@ b = INPUT(attrs={"name": "NumberB", "data_type": 2})
  参数设置:  每个 OUTPUT 模块可以在其属性中定义一个名称(例如 `#OUTPUT 0` 或自定义如 `CurrentSpeed`)，这个名称非常重要，因为它是在芯片外部(如通过脚本查询、在其他芯片中引用此芯片的输出，或在游戏编辑器的属性检查器中查看)识别和获取这个特定输出值的关键。
  使用方法: 此模块有四种类型，请记得规定这个模块的datatype，对于这个模块的name务必不要使用中文，请使用英文
 执行基础及高等数学运算。
-2.1变量
-1. 变量定义与引用顺序
+2.1 变量 (Variables)
+1. 定义规则 (Definition) 必须先用字典定义变量属性，格式如下：
 
-变量必须先在 DSL 中以字面量 dict 定义，之后才能对应到 VARIABLE 节点。
-
-2. 变量定义格式
-
-在开头声明变量定义：，必须包含 Key、GateDataType、Value 三个字段。
-{
-  "Key": ...,
-  "GateDataType":number/entity/vector/string,
-  "Value": ...
-}
-
-3. VARIABLE 节点构造规则
-DSL 中使用：
-v = VARIABLE(Value=<需要保存的值>, Set=<是否更新变量>)
-VARIABLE 有固定端口结构：
-输入端口：Value, Set。value的意思是给这个变量写入什么数值，set意思是给不给更新，1为更新，0为不更新varaible的数值，1为更新。
-输出端口：Value（唯一输出）
-VARIABLE 的输出端口允许裸节点引用：v 等价于 v["Value"]。
-4. 序列化写入规则（chip_variables）
-根据 GateDataType 写入 SerializedValue：
-Number：写入 float 值到 Value / Default。
-String：写入字符串值到 Value / Default。
-Vector：更新 {x,y,z,w} 分量。Value 必须是一个 dict，且包含 { "x": ..., "y": ..., "z": ..., "w": ... } 四个字段。
-ArrayNumber / ArrayString：写入列表到 Value / Default。
-Entity 及其他类型：保持默认模板（Value 为 null）。
- 3.1. `ADD 
-
- 功能:  将两个数值/向量/字符串相加。
- 输入: 
-     A:第一个加数 DECIMAL/vector/string
-     B:第二个加数DECIMAL/vector/string
- 输出: 
-     A+B:A 和 B 的和 (DECIMAL)。
-  使用方法: 有三种类型，请记得规定这个模块的datatype
-
- 3.2. `SUBTRACT (
-
- 功能:  将两个数值相减。
- 输入: 
-     A:被减数 (DECIMAL/vector)。
-     B:减数 (DECIMAL/vector)。
- 输出: 
-     A-B:A 和 B 的差 (DECIMAL/vector))。
- 使用方法: 有两种类型，请记得规定这个模块的datatype
-
- 3.3. `MULTIPLY 
-
- 功能:  将两个数值/向量相乘。
- 输入: 
-     A:第一个乘数(DECIMAL/vector)。
-     B:第二个乘数 (DECIMAL/vector)。
- 输出: 
-     A*B:A 和 B 的积  (DECIMAL/vector)。(向量类型就是把两个对应分量相乘之后的结果为新的对应分量，允许一个向量乘一个数字)
- 使用方法: 有两种类型，请记得规定这个模块的datatype
-
- 3.4.divide
-
- 功能:  将两个数值相除。
- 输入端口: 
-     A:被除数 (DECIMAL/vector)。
-     B:除数 (DECIMAL/vector)。
- 输出端口: 
-     A / B:A 和 B 的商(DECIMAL/vector)。(向量类型就是把两个对应分量相除之后的结果为新的对应分量)
- 使用方法: 有两种类型，请记得规定这个模块的datatype
-
- 3.5. `Remainder 
-
- 功能:  计算两个数值相除的余数。
- 输入: 
-     Dividend:被除数 (DECIMAL)。
-     Divider:除数 (DECIMAL)。
- 输出: 
-     Remainder:Dividend 除以 Divider 的余数 (DECIMAL)。
-3.6. `POWER 
-
- 功能:  计算一个数值的幂。
- 输入: 
-     A:底数 (DECIMAL)。
-     B:指数 (DECIMAL)。
- 输出: 
-     A^B:A 的 B 次方 (DECIMAL)。
- 3.7. `SQRT 
- 功能:  计算一个数值的平方根。
- 输入: 
-     A:被开方数 (DECIMAL)。
- 输出: 
-     sqrt(A):A 的平方根 (DECIMAL)。
- 3.8. `ABS 
- 输入: 
-     A:要求绝对值的数值 (DECIMAL)。
- 输出: 
-     abs(A):A 的绝对值 (DECIMAL)。
- 3.9. `ROUND 
- 输入: 
-     input:要四舍五入的数值 (DECIMAL/vector)。
- 输出: 
-    result:A 四舍五入后的整数值(DECIMAL/vector)。
- 使用方法: 此模块有两种类型，请记得规定这个模块的datatype
-
- 3.10. `FLOOR 
- 输入: 
-     input:要向下取整的数值(DECIMAL/vector)。
- 输出: 
-     result:A 向下取整后的数值 (DECIMAL/vector)。
- 使用方法: 此模块有两种类型，请记得规定这个模块的datatype
- 3.11. `CEIL 
- 输入: 
-     A:要向上取整的数值(DECIMAL/vector)。
- 输出: 
-     ceil(A):A 向上取整后的整数值 (DECIMAL/vector)。
-  使用方法: 此模块有两种类型，请记得规定这个模块的datatype
-
- 3.12. `CLAMP (DECIMAL) 
- 输入: 
-     INPUT / `A: 你想要限制的数值 (DECIMAL)。
-     Min: 允许的最小值 (DECIMAL)。
-     Max: 允许的最大值 (DECIMAL)。
- 输出: 
-     clamp(A, Min, Max) / `RESULT:经过限制后的数值 (DECIMAL)。
- 3.13. `AVERAGE 
- 输入: 
-     A:第一个数值 (DECIMAL)。
-     B:第二个数值 (DECIMAL)。
- 输出: 
-     (A+B)/2:A 和 B 的平均值 (DECIMAL)。
-特别的，本模块仅有DECIMAL一种类型
- 3.14. `MIN 
- 输入: 
-     A:第一个数值 (DECIMAL)。
-     B:第二个数值 (DECIMAL)。
- 输出: 
-     min(A, B):A 和 B 中较小的值 (DECIMAL)。
- 3.15. `MAX 
- 输入: 
-     A:第一个数值 (DECIMAL)。
-     B:第二个数值 (DECIMAL)。
- 输出: 
-     result:A 和 B 中较大的值 (DECIMAL)。
- 3.16.SQR
- 输入: 
-     input:要计算平方的数值 (DECIMAL)。
- 输出: 
-     result:A 的平方 (DECIMAL)。
- 3.17. `Inverse 
- 输入: 
-     输入值 / `A`: 需要计算倒数的数值 (DECIMAL)。
- 输出: 
-     倒数 / `1/A`: 输入值的倒数 (DECIMAL)。注意：输入为 0 时结果未定义或为无穷大。
- 3.18. `SIGN 
- 输入: 
-     A:要判断符号的数值 (DECIMAL)。
- 输出: 
-     sign(A):A 的符号 (DECIMAL)。如果 A < 0，输出 -1；如果 A = 0，输出 0；如果 A > 0，输出 1。
- 3.19. `Clamp01 
- 输入: 
-     输入值`: 需要被限制的原始数值 (DECIMAL)。
- 输出: 
-     结果`: 经过限制处理后的数值，其值总是在 0 和 1 之间(包含 0 和 1)(DECIMAL)。
- 3.20. `Exp 
- 输入: 
-     指数`: 作为幂指数的数值 (DECIMAL)。
- 输出: 
-     结果`: e 的 `指数 次方计算结果 (DECIMAL)。
-3.21. `LOGARITHM` (对数) 
- 输入: 
-    * `VALUE` : 要求对数的真数 (DECIMAL)。
-    * `BASE` : 对数的底数 (DECIMAL)。
- 输出: 
-    * `RESULT` : `VALUE` 以 `BASE` 为底的对数值 (DECIMAL)。
-3.22Random
-功能:
-在指定的范围内生成一个随机数。
-输入:
-Min: 随机数的最小值 (DECIMAL)。
-Max: 随机数的最大值 (DECIMAL)。
-输出:
-Result: 在 Min 与 Max 之间(包含边界)的随机数 (DECIMAL)。
----
+config = {"Key": "变量名", "GateDataType": "类型", "Value": 初始值}
+类型支持: Number, String, Vector, Entity
+2. 节点使用 (Usage)
+构造: v = VARIABLE(Value=..., Set=...)
+Value: 要写入的数值（数字、字符串或 {"x":0,"y":0,"z":0} 字典）。
+Set: 1 代表写入/更新变量，0 代表仅读取/保持。
+引用: 变量变量 v 可直接作为输入参数传递给其他模块（例如 Add(A=v)）。
+ 3.1.数学运算，本部分支持python的部分原生语法
++, -, *, /, %, **, -a, abs(a), sqrt(a), round(a), floor(a), ceil(a), sign(a), exp(a), inverse(a), clamp01(a), sqr(a), min(a, b), max(a, b), average(a, b), log(Value, Base), random(Min, Max), pow(Value, Power), clamp(Input, Min, Max), lerp(A, B, T)
 
  4. 三角函数与角度 (Trigonometry & Angles) 
 
@@ -258,14 +89,6 @@ Result: 在 Min 与 Max 之间(包含边界)的随机数 (DECIMAL)。
      RAD:要转换的角度值 (DECIMAL，弧度)。
  输出: 
      DEG:转换后的角度值 (DECIMAL，度数)。
- 4.8. `Interpolate
- 输入端口: 
-     A:起始数值 (DECIMAL/vector)。
-     B:结束数值 (DECIMAL/vector)。
-     T:插值系数 (DECIMAL)
- 输出端口: 
-     result:A 和 B 之间的插值结果 (DECIMAL/vector)。
- 使用方法: 此模块有两种类型，请记得规定这个模块的datatype
 
  4.9. `DeltaAngle 
 
@@ -1098,8 +921,7 @@ example = Constant(attrs={
     ]
 })
    这些变量被视为 Constant 节点，可通过 a,b 引用,因为只有一个输出端口。
-3. 禁止使用python里面的表达式，比如说+，-，*，/。
-前向引用允许：可以先用 b["OUT"] 再定义 b = ...。
+3. 前向引用允许：可以先用 b["OUT"] 再定义 b = ...。
 保留键： 仅 attrs、id、label 有特殊含义。attrs 必须是字面量 dict。
 
 OUTPUT/INPUT 端口类型： 若出现，attrs["data_type"] 必须是 1/2/4/8(1=entity, 2=number, 4=string, 8=vector)。
@@ -1229,9 +1051,5 @@ clamped_f_right_y = CLAMP(INPUT=force_right_y["A+B"], Min=neg_const_max_thrust["
 # 组合成最终的推力向量
 final_force_left = Combine(X=clamped_fx["RESULT"], Y=clamped_f_left_y["RESULT"], Z=const_zero["OUT"], W=const_zero["OUT"])
 final_force_right = Combine(X=clamped_fx["RESULT"], Y=clamped_f_right_y["RESULT"], Z=const_zero["OUT"], W=const_zero["OUT"])
-
-
-# --- 9. 执行与输出 (Execution & Outputs) ---
-# 在指定位置施加力
 apply_force_left = ADD_FORCE_AT_POSITION(OBJECT=controlled_object["OUTPUT"], FORCE=final_force_left["Vector"], OFFSET=offset_left["Vector"])
 apply_force_right = ADD_FORCE_AT_POSITION(OBJECT=controlled_object["OUTPUT"], FORCE=final_force_right["Vector"], OFFSET=offset_right["Vector"])

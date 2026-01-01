@@ -635,18 +635,33 @@ class Converter(ast.NodeVisitor):
         ):
             target = node.targets[0].id
             sub = node.value
-            if isinstance(sub.value, ast.Name):
-                up_var = sub.value.id
-                sl = sub.slice
-                if isinstance(sl, ast.Constant):
-                    up_port = sl.value
-                else:
-                    try:
-                        up_port = ast.literal_eval(sl)
-                    except Exception:
-                        up_port = None
-                if isinstance(up_port, (str, int)):
-                    self.alias_outputs[target] = (up_var, str(up_port))
+            sl = sub.slice
+            if isinstance(sl, ast.Constant):
+                up_port = sl.value
+            else:
+                try:
+                    up_port = ast.literal_eval(sl)
+                except Exception:
+                    up_port = None
+
+            if isinstance(up_port, (str, int)):
+                up_port_str = str(up_port)
+
+                # alias = some_var["PORT"]
+                if isinstance(sub.value, ast.Name):
+                    up_var = sub.value.id
+                    self.alias_outputs[target] = (up_var, up_port_str)
+                    return
+
+                # alias = SomeNodeCall(... )["PORT"]
+                if isinstance(sub.value, ast.Call):
+                    ref = self._emit_expr_as_ref(sub.value)
+                    if ref.kind == "node":
+                        # trick: make alias_outputs resolvable via var2node by pointing to itself
+                        if target not in self.var2node:
+                            self.var2node[target] = ref.value
+                        self.alias_outputs[target] = (target, up_port_str)
+                    return
 
         elif len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
             try:
