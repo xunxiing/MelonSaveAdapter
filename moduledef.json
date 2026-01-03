@@ -3287,5 +3287,216 @@
       }
     ],
     "can_modify_data_type": false
-  }
+  },
+  "ArraysGet": {
+    "id": "ArraysGet",
+    "gate_data_type": 128,
+    "source_info": {
+      "datatype_map_nodename": "ArraysGet",
+      "allmod_viewmodel": "ArraysGetNodeViewModel",
+      "chip_names_friendly_name": "ArraysGet"
+    },
+    "inputs": [
+      { "type": "ArrayNumber", "name": "Array" },
+      { "type": "IntegerNumber", "name": "Index" }
+    ],
+    "outputs": [
+      { "type": "Number", "name": "Value" },
+      { "type": "IntegerNumber", "name": "Activation" }
+    ],
+    "can_modify_data_type": true
+  },
+  "ArraysAdd": {
+    "id": "ArraysAdd",
+    "gate_data_type": 128,
+    "source_info": {
+      "datatype_map_nodename": "ArraysAdd",
+      "allmod_viewmodel": "ArraysAddNodeViewModel",
+      "chip_names_friendly_name": "ArraysAdd"
+    },
+    "inputs": [
+      { "type": "ArrayNumber", "name": "Array" },
+      { "type": "Number", "name": "Value" },
+      { "type": "IntegerNumber", "name": "Index" },
+      { "type": "IntegerNumber", "name": "Activation" }
+    ],
+    "outputs": [
+      { "type": "ArrayNumber", "name": "Array" },
+      { "type": "IntegerNumber", "name": "Activation" }
+    ],
+    "can_modify_data_type": true
+  },
+  "ArraysSet": {
+    "id": "ArraysSet",
+    "gate_data_type": 128,
+    "source_info": {
+      "datatype_map_nodename": "ArraysSet",
+      "allmod_viewmodel": "ArraysSetNodeViewModel",
+      "chip_names_friendly_name": "Set"
+    },
+    "inputs": [
+      { "type": "ArrayNumber", "name": "Array" },
+      { "type": "IntegerNumber", "name": "Index" },
+      { "type": "Number", "name": "Value" },
+      { "type": "IntegerNumber", "name": "Activation" }
+    ],
+    "outputs": [
+      { "type": "ArrayNumber", "name": "Array" }
+    ],
+    "can_modify_data_type": true
+  },
+  "ArraysLength": {
+    "id": "ArraysLength",
+    "gate_data_type": 128,
+    "source_info": {
+      "datatype_map_nodename": "ArraysLength",
+      "allmod_viewmodel": "ArraysLengthNodeViewModel",
+      "chip_names_friendly_name": "ArraysLength"
+    },
+    "inputs": [
+      { "type": "ArrayNumber", "name": "Array" }
+    ],
+    "outputs": [
+      { "type": "IntegerNumber", "name": "Length" }
+    ],
+    "can_modify_data_type": true
+  },
+  "ArraysRemoveAllByValue": {
+    "id": "ArraysRemoveAllByValue",
+    "gate_data_type": 128,
+    "source_info": {
+      "datatype_map_nodename": "ArraysRemoveAllByValue",
+      "allmod_viewmodel": "ArraysRemoveAllByValueNodeViewModel",
+      "chip_names_friendly_name": "RemoveAllByValue"
+    },
+    "inputs": [
+      { "type": "ArrayNumber", "name": "Array" },
+      { "type": "Number", "name": "Value" },
+      { "type": "IntegerNumber", "name": "Activation" }
+    ],
+    "outputs": [
+      { "type": "ArrayNumber", "name": "Array" }
+    ],
+    "can_modify_data_type": true
+  },
+  "ArraysRemoveByIndex": {
+    "id": "ArraysRemoveByIndex",
+    "gate_data_type": 128,
+    "source_info": {
+      "datatype_map_nodename": "ArraysRemoveByIndex",
+      "allmod_viewmodel": "ArraysRemoveByIndexNodeViewModel",
+      "chip_names_friendly_name": "ArraysRemoveByIndex"
+    },
+    "inputs": [
+      { "type": "ArrayNumber", "name": "Array" },
+      { "type": "IntegerNumber", "name": "Index" },
+      { "type": "IntegerNumber", "name": "Activation" }
+    ],
+    "outputs": [
+      { "type": "ArrayNumber", "name": "Array" }
+    ],
+    "can_modify_data_type": true
+  },
+  "ArraysFind": {
+    "id": "ArraysFind",
+    "gate_data_type": 128,
+    "source_info": {
+      "datatype_map_nodename": "ArraysFind",
+      "allmod_viewmodel": "ArraysFindNodeViewModel",
+      "chip_names_friendly_name": "ArraysFind"
+    },
+    "inputs": [
+      { "type": "ArrayNumber", "name": "Array" },
+      { "type": "Number", "name": "Value" },
+      { "type": "IntegerNumber", "name": "StartIndex" },
+      { "type": "IntegerNumber", "name": "Activation" }
+    ],
+    "outputs": [
+      { "type": "IntegerNumber", "name": "Index" }
+    ],
+    "can_modify_data_type": true
+  },
+  "ArraysClear": {
+    "id": "ArraysClear",
+    "gate_data_type": 128,
+    "source_info": {
+      "datatype_map_nodename": "ArraysClear",
+      "allmod_viewmodel": "ArraysClearNodeViewModel",
+      "chip_names_friendly_name": "ArraysClear"
+    },
+    "inputs": [
+      { "type": "ArrayNumber", "name": "Array" },
+      { "type": "IntegerNumber", "name": "Activation" }
+    ],
+    "outputs": [
+      { "type": "ArrayNumber", "name": "Array" }
+    ],
+    "can_modify_data_type": true
+  },
+  "Select": {
+  "id": "Select",
+  "gate_data_type": 512,
+  "source_info": {
+    "datatype_map_nodename": "Select",
+    "allmod_viewmodel": "SelectNodeViewModel",
+    "chip_names_friendly_name": "Select"
+  },
+  "inputs": [
+    {
+      "type": "DECIMAL",
+      "name": "Index"
+    },
+    {
+      "type": "ARRAY",
+      "name": "Array 1"
+    },
+    {
+      "type": "ARRAY",
+      "name": "Array 2"
+    },
+    {
+      "type": "ARRAY",
+      "name": "Array 3"
+    },
+    {
+      "type": "ARRAY",
+      "name": "Array 4"
+    },
+    {
+      "type": "ARRAY",
+      "name": "Array 5"
+    },
+    {
+      "type": "ARRAY",
+      "name": "Array 6"
+    },
+    {
+      "type": "ARRAY",
+      "name": "Array 7"
+    },
+    {
+      "type": "ARRAY",
+      "name": "Array 8"
+    },
+    {
+      "type": "ARRAY",
+      "name": "Array 9"
+    },
+    {
+      "type": "ARRAY",
+      "name": "Array 10"
+    },
+    {
+      "type": "ARRAY",
+      "name": "Array 11"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "ARRAY",
+      "name": "Result"
+    }
+  ],
+  "can_modify_data_type": false
+ }
 }

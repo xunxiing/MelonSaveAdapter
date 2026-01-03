@@ -27,6 +27,15 @@ from batch_connect import apply_connections
 from archive_creator import run_archive_creation_stage
 from src.special_modules import build_special_module, append_unused_variable_definitions
 from src.type_inference import infer_gate_data_types
+from src.error_handler import (
+    PipelineError,
+    ModuleAddError,
+    ConnectionError,
+    FileIOError,
+    TypeInferenceError,
+    handle_error,
+    ErrorModule,
+)
 
 from src.config import (
     DSL_INPUT_PATH,
@@ -218,7 +227,11 @@ def parse_graph_v2(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any],
         key = normalize(node["type"])
         best_match_key = fuzzy_match(key, all_chip_keys, FUZZY_CUTOFF_NODE)
         if best_match_key is None:
-            sys.exit(f"错误：无法识别模块类型 \"{node['type']}\"")
+            raise PipelineError(
+                f"无法识别模块类型 \"{node['type']}\"",
+                stage="graph解析",
+                context={"node_id": node["id"], "node_type": node["type"]}
+            )
 
         chip_info = chip_index[best_match_key]
         node_type_lower = chip_info["friendly_name"].lower()
@@ -267,8 +280,15 @@ def run_batch_add(modules_to_add: List[Any], node_map: Dict[str, dict]) -> Dict[
     同时回填 node_map[*]["new_full_id"]。
     """
     print("📦 正在执行模块添加...")
-    game_data = load_json(DATA_PATH, "原始游戏存档")
-    module_defs = load_json(MODULE_DEF_PATH, "模块定义")
+    try:
+        game_data = load_json(DATA_PATH, "原始游戏存档")
+        module_defs = load_json(MODULE_DEF_PATH, "模块定义")
+    except Exception as e:
+        raise FileIOError(
+            f"加载游戏存档或模块定义失败",
+            file_path=str(DATA_PATH),
+            original_error=e
+        )
 
     try:
         updated_game_data, created_nodes_info = add_modules(
@@ -278,7 +298,17 @@ def run_batch_add(modules_to_add: List[Any], node_map: Dict[str, dict]) -> Dict[
             cutoff=FUZZY_CUTOFF_NODE,
         )
     except ValueError as e:
-        sys.exit(f"错误: 模块添加失败 - {e}")
+        raise ModuleAddError(
+            f"模块添加失败: {str(e)}",
+            context={"module_count": len(modules_to_add)},
+            original_error=e
+        )
+    except Exception as e:
+        raise ModuleAddError(
+            f"模块添加过程中发生未知错误: {str(e)}",
+            context={"module_count": len(modules_to_add)},
+            original_error=e
+        )
 
     print(f"✔ 模块添加逻辑执行完毕，获得 {len(created_nodes_info)} 个新节点信息")
     if len(created_nodes_info) != len(modules_to_add):
@@ -298,7 +328,10 @@ def run_batch_add(modules_to_add: List[Any], node_map: Dict[str, dict]) -> Dict[
 
     unmatched = [meta["friendly_name"] for meta in node_map.values() if meta["new_full_id"] is None]
     if unmatched:
-        sys.exit(f"错误：以下节点未匹配到新 ID：{', '.join(unmatched)}")
+        raise ModuleAddError(
+            f"以下节点未匹配到新 ID：{', '.join(unmatched)}",
+            context={"unmatched_nodes": unmatched}
+        )
     return updated_game_data
 
 
@@ -365,20 +398,21 @@ def generate_modify_instructions(
 
 def port_index(port_name: str, port_list: List[str]) -> int:
     """
-    将 DSL 里的“端口标识”转换为模块定义里的端口下标。
+    将 DSL 里的"端口标识"转换为模块定义里的端口下标。
 
     支持三种写法：
     1) 旧版：端口名字符串，例如 "OUTPUT"、"A*B"
     2) 新增：数字序号字符串，例如 "0"、"1"（直接视为端口下标）
-    3) 新增：特殊标记 "__auto__" —— 表示“唯一输出端口”（裸节点变量）
+    3) 新增：特殊标记 "__auto__" —— 表示"唯一输出端口"（裸节点变量）
     """
     # 特例：自动端口（裸节点变量）——必须只有一个端口
     if port_name == "__auto__":
         if not port_list:
-            sys.exit("错误：尝试从没有输出端口的节点上获取自动端口")
+            raise ConnectionError("尝试从没有输出端口的节点上获取自动端口")
         if len(port_list) != 1:
-            sys.exit(
-                f"错误：节点有多个输出端口 {port_list}，无法推断唯一输出，请在 DSL 中显式写端口名或数字序号"
+            raise ConnectionError(
+                f"节点有多个输出端口 {port_list}，无法推断唯一输出，请在 DSL 中显式写端口名或数字序号",
+                context={"port_list": port_list}
             )
         return 0
 
@@ -391,15 +425,19 @@ def port_index(port_name: str, port_list: List[str]) -> int:
         idx = int(port_name)
         if 0 <= idx < len(port_list):
             return idx
-        sys.exit(
-            f"错误：端口序号 {idx} 超出范围，可用序号为 0..{len(port_list) - 1}，端口列表: {port_list}"
+        raise ConnectionError(
+            f"端口序号 {idx} 超出范围，可用序号为 0..{len(port_list) - 1}",
+            context={"port_index": idx, "port_list": port_list}
         )
 
-    # 旧版：按端口“名字”做模糊匹配
+    # 旧版：按端口"名字"做模糊匹配
     normalized_ports = [normalize(p) for p in port_list]
     best = fuzzy_match(normalize(str(port_name)), normalized_ports, FUZZY_CUTOFF_PORT)
     if best is None:
-        sys.exit(f"错误：无法匹配端口 \"{port_name}\" 候选 {port_list}")
+        raise ConnectionError(
+            f"无法匹配端口 \"{port_name}\"",
+            context={"port_name": port_name, "candidates": port_list}
+        )
     return normalized_ports.index(best)
 
 
@@ -421,9 +459,9 @@ def build_connections(graph: dict, node_map: Dict[str, dict], chip_index: Dict[s
         f_chip_key = normalize(f_meta["friendly_name"])
         t_chip_key = normalize(t_meta["friendly_name"])
         if f_chip_key not in chip_index or t_chip_key not in chip_index:
-            sys.exit(
-                f"内部错误: 无法在 chip_index 中找到 \"{f_meta['friendly_name']}\" 或 "
-                f"\"{t_meta['friendly_name']}\""
+            raise ConnectionError(
+                f"无法在 chip_index 中找到 \"{f_meta['friendly_name']}\" 或 \"{t_meta['friendly_name']}\"",
+                context={"from_node": f_meta["friendly_name"], "to_node": t_meta["friendly_name"]}
             )
 
         f_chip = chip_index[f_chip_key]
@@ -445,15 +483,25 @@ def build_connections(graph: dict, node_map: Dict[str, dict], chip_index: Dict[s
 def run_batch_connect(input_path: Path) -> None:
     print("🔗 正在执行批量连线 ...")
     if not input_path.exists():
-        sys.exit(f"错误：在执行连线前，未找到输入存档文件 '{input_path}'")
+        raise FileIOError(
+            f"在执行连线前，未找到输入存档文件",
+            file_path=str(input_path)
+        )
 
-    success = apply_connections(
-        input_graph_path=str(input_path),
-        connections_path=str(CONNECT_OUT_PATH),
-        output_graph_path=str(FINAL_SAVE_PATH),
-    )
+    try:
+        success = apply_connections(
+            input_graph_path=str(input_path),
+            connections_path=str(CONNECT_OUT_PATH),
+            output_graph_path=str(FINAL_SAVE_PATH),
+        )
+    except Exception as e:
+        raise ConnectionError(
+            f"批量连线过程中发生错误: {str(e)}",
+            original_error=e
+        )
+    
     if not success:
-        sys.exit("错误：批量连线过程中发生错误，流程终止")
+        raise ConnectionError("批量连线过程中发生错误，流程终止")
 
 
 def run_auto_layout() -> None:
@@ -606,93 +654,105 @@ def run_full_pipeline() -> None:
     """
     执行从 DSL 到 .melsave 的完整流水线。
     """
-    # 确保输出目录存在
-    ensure_output_dir()
+    try:
+        # 确保输出目录存在
+        ensure_output_dir()
 
-    # --- 阶段 0: DSL -> graph.json ---
-    run_stage0_convert_dsl_to_graph(DSL_INPUT_PATH, GRAPH_PATH)
+        # --- 阶段 0: DSL -> graph.json ---
+        run_stage0_convert_dsl_to_graph(DSL_INPUT_PATH, GRAPH_PATH)
 
-    # --- 步骤 1: 解析输入文件 ---
-    print("\n--- 步骤 1: 解析输入文件 ---")
-    graph = load_json(GRAPH_PATH, "graph.json")
-    module_definitions = load_json(MODULE_DEF_PATH, "模块定义文件")
-    rules = load_json(RULES_PATH, "数据类型规则文件")
+        # --- 步骤 1: 解析输入文件 ---
+        print("\n--- 步骤 1: 解析输入文件 ---")
+        graph = load_json(GRAPH_PATH, "graph.json")
+        module_definitions = load_json(MODULE_DEF_PATH, "模块定义文件")
+        rules = load_json(RULES_PATH, "数据类型规则文件")
 
-    chip_index = build_chip_index_from_moduledef(module_definitions)
-    modules, node_map = parse_graph_v2(graph, chip_index)
-    print("✔ graph.json 解析完成")
+        chip_index = build_chip_index_from_moduledef(module_definitions)
+        modules, node_map = parse_graph_v2(graph, chip_index)
+        print("✔ graph.json 解析完成")
 
-    # --- 步骤 2: 批量添加模块 ---
-    print("\n--- 步骤 2: 批量添加模块 ---")
-    current_save_data = run_batch_add(modules, node_map)
-    print("✔ 模块添加完成，并已获取新节点 ID")
+        # --- 步骤 2: 批量添加模块 ---
+        print("\n--- 步骤 2: 批量添加模块 ---")
+        current_save_data = run_batch_add(modules, node_map)
+        print("✔ 模块添加完成，并已获取新节点 ID")
 
-    # --- 步骤 3: 节点修改阶段 ---
-    print("\n--- 步骤 3: 节点修改阶段 ---")
+        # --- 步骤 3: 节点修改阶段 ---
+        print("\n--- 步骤 3: 节点修改阶段 ---")
 
-    # 子步骤 3.1: 修改节点数据类型
-    print("\n--- 步骤 3.1: 修改节点数据类型 ---")
-    modify_instructions = generate_modify_instructions(
-        graph,
-        node_map,
-        chip_index=chip_index,
-        module_definitions=module_definitions,
-        rules=rules,
-    )
-    if modify_instructions:
-        print(f"ℹ️  需要进行 {len(modify_instructions)} 项数据类型修改")
-        current_save_data = apply_data_type_modifications(
-            game_data=current_save_data,
-            mod_instructions=modify_instructions,
+        # 子步骤 3.1: 修改节点数据类型
+        print("\n--- 步骤 3.1: 修改节点数据类型 ---")
+        modify_instructions = generate_modify_instructions(
+            graph,
+            node_map,
+            chip_index=chip_index,
+            module_definitions=module_definitions,
             rules=rules,
-            module_defs=module_definitions,
         )
-        print("✔ 数据类型修改完成")
-    else:
-        print("ℹ️ 无需修改数据类型，跳过此步骤")
+        if modify_instructions:
+            print(f"ℹ️  需要进行 {len(modify_instructions)} 项数据类型修改")
+            current_save_data = apply_data_type_modifications(
+                game_data=current_save_data,
+                mod_instructions=modify_instructions,
+                rules=rules,
+                module_defs=module_definitions,
+            )
+            print("✔ 数据类型修改完成")
+        else:
+            print("ℹ️ 无需修改数据类型，跳过此步骤")
 
-    # 子步骤 3.2: 修改常量节点
-    print("\n--- 步骤 3.2: 修改常量节点 ---")
-    constant_instructions = generate_constant_instructions(graph, node_map)
-    if constant_instructions:
-        print(f"ℹ️  需要进行 {len(constant_instructions)} 项常量值修改")
-        current_save_data = apply_constant_modifications(
-            game_data=current_save_data,
-            instructions=constant_instructions,
+        # 子步骤 3.2: 修改常量节点
+        print("\n--- 步骤 3.2: 修改常量节点 ---")
+        constant_instructions = generate_constant_instructions(graph, node_map)
+        if constant_instructions:
+            print(f"ℹ️  需要进行 {len(constant_instructions)} 项常量值修改")
+            current_save_data = apply_constant_modifications(
+                game_data=current_save_data,
+                instructions=constant_instructions,
+            )
+            print("✔ 常量值修改完成")
+        else:
+            print("ℹ️ 无需修改常量值，跳过此步骤")
+
+        # --- 步骤 4: 生成连线指令 ---
+        print("\n--- 步骤 4: 生成连线指令 ---")
+        conns = build_connections(graph, node_map, chip_index)
+        CONNECT_OUT_PATH.write_text(
+            json.dumps(conns, ensure_ascii=False, indent=2),
+            encoding="utf-8",
         )
-        print("✔ 常量值修改完成")
-    else:
-        print("ℹ️ 无需修改常量值，跳过此步骤")
+        print(f"✔ 已生成连线指令到 {CONNECT_OUT_PATH}")
 
-    # --- 步骤 4: 生成连线指令 ---
-    print("\n--- 步骤 4: 生成连线指令 ---")
-    conns = build_connections(graph, node_map, chip_index)
-    CONNECT_OUT_PATH.write_text(
-        json.dumps(conns, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
-    print(f"✔ 已生成连线指令到 {CONNECT_OUT_PATH}")
+        # --- 步骤 5: 执行批量连线 ---
+        print("\n--- 步骤 5: 执行批量连线 ---")
+        print(f"ℹ️ 将当前存档状态写入到 '{MODIFIED_SAVE_PATH}' 以进行连线")
+        with MODIFIED_SAVE_PATH.open("w", encoding="utf-8") as f:
+            json.dump(current_save_data, f, ensure_ascii=False, indent=4)
 
-    # --- 步骤 5: 执行批量连线 ---
-    print("\n--- 步骤 5: 执行批量连线 ---")
-    print(f"ℹ️ 将当前存档状态写入到 '{MODIFIED_SAVE_PATH}' 以进行连线")
-    with MODIFIED_SAVE_PATH.open("w", encoding="utf-8") as f:
-        json.dump(current_save_data, f, ensure_ascii=False, indent=4)
+        run_batch_connect(MODIFIED_SAVE_PATH)
 
-    run_batch_connect(MODIFIED_SAVE_PATH)
+        # --- 步骤 6: 执行自动布局 ---
+        print("\n--- 步骤 6: 执行自动布局 ---")
+        run_auto_layout()
 
-    # --- 步骤 6: 执行自动布局 ---
-    print("\n--- 步骤 6: 执行自动布局 ---")
-    run_auto_layout()
+        if MODIFIED_SAVE_PATH.exists():
+            MODIFIED_SAVE_PATH.unlink()
 
-    if MODIFIED_SAVE_PATH.exists():
-        MODIFIED_SAVE_PATH.unlink()
+        # --- 阶段 7: 创建 .melsave 归档文件 ---
+        print("\n--- 阶段 7: 创建 .melsave 归档文件 ---")
+        run_archive_creation_stage()
 
-    # --- 阶段 7: 创建 .melsave 归档文件 ---
-    print("\n--- 阶段 7: 创建 .melsave 归档文件 ---")
-    run_archive_creation_stage()
-
-    print("\n🎉 全部流程完成！")
+        print("\n🎉 全部流程完成！")
+    
+    except (PipelineError, ModuleAddError, ConnectionError, FileIOError, TypeInferenceError) as e:
+        handle_error(e)
+    except Exception as e:
+        # 捕获未处理的异常，包装为 PipelineError
+        pipeline_error = PipelineError(
+            f"流水线执行过程中发生未预期的错误: {str(e)}",
+            stage="未知阶段",
+            original_error=e
+        )
+        handle_error(pipeline_error)
 
 
 __all__ = [

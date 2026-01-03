@@ -5,46 +5,46 @@
 
  1.1. `Constant 
 
- 功能:  输出一个固定的DECIMAL,/STRING/ VECTOR
- 输入:  无
- 输出:  一个固定的DECIMAL,/STRING/ VECTOR 值。
- 使用:  在模块的属性里直接填好想要的数字，然后从唯一的输出端口获取这个数字。 此模块有三种类型，请记得必须规定这个模块的datatype，本模块没有默认的datatype
+ 功能: 输出一个固定的DECIMAL,/STRING/ VECTOR
+ 输入: 无
+ 输出: 一个固定的DECIMAL,/STRING/ VECTOR 值。
+ 使用: 在模块的属性里直接填好想要的数字，然后从唯一的输出端口获取这个数字。 此模块有三种类型，请记得必须规定这个模块的datatype，本模块没有默认的datatype
 
 1.4 INPUT (输入参数) 
 
- 核心功能:  定义芯片的一个输入参数，允许从芯片外部或芯片内部的其他模块连接一个值到此参数。
- 输入端口:  无 (其值由外部设定、直接调整或连接)。
- 输出端口: 
-    * `OUTPUT (NULL)` (紫色): 输出一个 NULL 实体引用。
-    * `OUTPUT (0.00)` : 输出一个数值 0.00。
-    * `OUTPUT (NULL)` (黄色): 输出一个 NULL 字符串。
-    * `OUTPUT (X:0 Y:0 Z:0 W:0)` (绿色): 输出一个零向量 (0,0,0,0)。
- 参数设置:  每个 INPUT 模块可以在其属性中定义一个名称(例如 `#INPUT 1`)，用于在芯片逻辑中识别和引用。同时，可以设置其数据类型(如图片所示，可以是实体、数值、字符串、向量)。
- 使用方法: a = INPUT(attrs={"name": "NumberA", "data_type": 2})
-b = INPUT(attrs={"name": "NumberB", "data_type": 2})
+ 核心功能: 定义芯片的一个输入参数，允许从芯片外部或芯片内部的其他模块连接一个值到此参数。
+ 输入端口: 无 (其值由外部设定、直接调整或连接)。
+ 输出端口:
+    * `OUTPUT (NULL)` :输出一个实体 实体引用。
+    * `OUTPUT (0.00)` :输出一个数值。
+    * `OUTPUT (NULL)` :输出一个字符串。
+    * `OUTPUT (X:0 Y:0 Z:0 W:0)` :输出一个向量。
+ 参数设置: 每个 INPUT 模块可以在其属性中定义一个名称(例如 `#INPUT 1`)，用于在芯片逻辑中识别和引用。同时，可以设置其数据类型(如图片所示，可以是实体、数值、字符串、向量)。
+ 使用方法:a = INPUT(attrs={"name":"NumberA", "data_type":2})
+b = INPUT(attrs={"name":"NumberB", "data_type":2})
 
  1.5. OUTPUT (输出端口) 
 
- 核心功能:  定义芯片的一个输出端口，其核心作用是作为数据从  芯片内部  流向  芯片外部  的通道。芯片内部经过计算或处理得到的结果值，通过连接到此模块的输入端口，便可被芯片外部的其他系统、其他芯片或游戏逻辑读取和使用。它实现了芯片运算结果的对外“广播”或“暴露”。
- 输入端口 (连接芯片内部的值): 
-    * `INPUT (NULL)` (紫色): 接收一个来自芯片内部逻辑的实体引用，以供外部读取。
-    * `INPUT (0.00)` : 接收一个来自芯片内部逻辑的数值，以供外部读取。
-    * `INPUT (NULL)` (黄色): 接收一个来自芯片内部逻辑的字符串，以供外部读取。
-    * `INPUT (X:0 Y:0 Z:0 W:0)` (绿色): 接收一个来自芯片内部逻辑的向量，以供外部读取。
- 输出端口 (面向芯片外部):  此模块本身不产生新的数据输出到芯片内部的其他模块；它的“输出”是定义了一个可供芯片外部读取的数据点。
- 参数设置:  每个 OUTPUT 模块可以在其属性中定义一个名称(例如 `#OUTPUT 0` 或自定义如 `CurrentSpeed`)，这个名称非常重要，因为它是在芯片外部(如通过脚本查询、在其他芯片中引用此芯片的输出，或在游戏编辑器的属性检查器中查看)识别和获取这个特定输出值的关键。
- 使用方法: 此模块有四种类型，请记得规定这个模块的datatype，对于这个模块的name务必不要使用中文，请使用英文
+ 核心功能: 定义芯片的一个输出端口，其核心作用是作为数据从  芯片内部  流向  芯片外部  的通道。芯片内部经过计算或处理得到的结果值，通过连接到此模块的输入端口，便可被芯片外部的其他系统、其他芯片或游戏逻辑读取和使用。它实现了芯片运算结果的对外“广播”或“暴露”。
+ 输入端口 (连接芯片内部的值):
+    * `INPUT (NULL)` :接收一个来自芯片内部逻辑的实体引用，以供外部读取。
+    * `INPUT (0.00)` :接收一个来自芯片内部逻辑的数值，以供外部读取。
+    * `INPUT (NULL)` :接收一个来自芯片内部逻辑的字符串，以供外部读取。
+    * `INPUT (X:0 Y:0 Z:0 W:0)` :接收一个来自芯片内部逻辑的向量，以供外部读取。
+ 输出端口 (面向芯片外部): 此模块本身不产生新的数据输出到芯片内部的其他模块；它的“输出”是定义了一个可供芯片外部读取的数据点。
+ 参数设置: 每个 OUTPUT 模块可以在其属性中定义一个名称(例如 `#OUTPUT 0` 或自定义如 `CurrentSpeed`)，这个名称非常重要，因为它是在芯片外部(如通过脚本查询、在其他芯片中引用此芯片的输出，或在游戏编辑器的属性检查器中查看)识别和获取这个特定输出值的关键。
+ 使用方法:此模块有四种类型，请记得规定这个模块的datatype，对于这个模块的name务必不要使用中文，请使用英文
 执行基础及高等数学运算。
 2.1 变量 (Variables)
 1. 定义规则 (Definition) 必须先用字典定义变量属性，格式如下：
 
-config = {"Key": "变量名", "GateDataType": "类型", "Value": 初始值}
-类型支持: Number, String, Vector, Entity
+config = {"Key":"变量名", "GateDataType":"类型", "Value":初始值}
+类型支持:Number, String, Vector, Entity
 2. 节点使用 (Usage)
-构造: v = VARIABLE(Value=..., Set=...)
-Value: 要写入的数值（数字、字符串或 {"x":0,"y":0,"z":0} 字典）。
-Set: 1 代表写入/更新变量，0 代表仅读取/保持。
-引用: 变量变量 v 可直接作为输入参数传递给其他模块（例如 Add(A=v)）。
+构造:v = VARIABLE(Value=..., Set=...)
+Value:要写入的数值（数字、字符串或 {"x":0,"y":0,"z":0} 字典）。
+Set:1 代表写入/更新变量，0 代表仅读取/保持。
+引用:变量变量 v 可直接作为输入参数传递给其他模块（例如 Add(A=v)）。
  3.1.数学运算，本部分支持python的部分原生语法
 +, -, *, /, %, **, -a, abs(a), sqrt(a), round(a), floor(a), ceil(a), sign(a), exp(a), inverse(a), clamp01(a), sqr(a), min(a, b), max(a, b), average(a, b), log(Value, Base), random(Min, Max), pow(Value, Power), clamp(Input, Min, Max), lerp(A, B, T)
 
@@ -54,197 +54,208 @@ Set: 1 代表写入/更新变量，0 代表仅读取/保持。
 
  4.1. `SIN 
 
- 功能:  计算一个角度的正弦值。
- 输入: 
+ 功能: 计算一个角度的正弦值。
+ 输入:
      Angle:要计算正弦值的角度 (DECIMAL，弧度)。
- 输出: 
+ 输出:
      sin(Angle):Angle 的正弦值 (DECIMAL)。
  4.2. `COS 
- 输入: 
+ 输入:
      Angle:要计算余弦值的角度 (DECIMAL，弧度)。
- 输出: 
+ 输出:
      cos(Angle):Angle 的余弦值 (DECIMAL)。
  4.3. `TAN 
- 输入: 
+ 输入:
      Angle:要计算正切值的角度 (DECIMAL，弧度)。
- 输出: 
+ 输出:
      tan(Angle):Angle 的正切值 (DECIMAL)。
  4.4. `ASIN 
- 输入: 
+ 输入:
      Value:要计算反正弦值的数值 (DECIMAL，范围通常在 -1 到 1 之间)。
- 输出: 
+ 输出:
      asin(Value):Value 的反正弦值 (DECIMAL，弧度)。
  4.5. `ACOS 
- 输入: 
+ 输入:
      Value:要计算反余弦值的数值 (DECIMAL，范围通常在 -1 到 1 之间)。
- 输出: 
+ 输出:
      acos(Value):Value 的反余弦值 (DECIMAL，弧度)。
  4.6. arctangent
- 输入: 
+ 输入:
      ctan:要计算反正切值的数值 (DECIMAL)。
- 输出: 
+ 输出:
      angle:ctan 的反正切值 (DECIMAL，弧度)。
  4.7. `RAD to DEG 
- 输入: 
+ 输入:
      RAD:要转换的角度值 (DECIMAL，弧度)。
- 输出: 
+ 输出:
      DEG:转换后的角度值 (DECIMAL，度数)。
 
  4.9. `DeltaAngle 
 
- 功能:  计算两个角度之间的最短角度差(处理 360 度回绕)。例如，350 度和 10 度之间的差是 20 度。
- 输入: 
-     “Angle (Deg) 1”: 第一个角度值(单位：度)(DECIMAL)。
-     “Angle (Deg) 2”: 第二个角度值(单位：度)(DECIMAL)。
- 输出: 
-     角度差`: 两个角度之间的最短差值(单位：度)，结果在 \[-180, 180] 区间内 (DECIMAL)。
+ 功能: 计算两个角度之间的最短角度差(处理 360 度回绕)。例如，350 度和 10 度之间的差是 20 度。
+ 输入:
+     “Angle (Deg) 1”:第一个角度值(单位：度)(DECIMAL)。
+     “Angle (Deg) 2”:第二个角度值(单位：度)(DECIMAL)。
+ 输出:
+     角度差`:两个角度之间的最短差值(单位：度)，结果在 \[-180, 180] 区间内 (DECIMAL)。
  4.10. `CosineFormulaSide 
- 功能:  使用余弦定理，根据三角形的两条边长和它们之间的夹角计算第三条边的长度。
- 输入: 
-     B: 三角形的一条边长 (DECIMAL)。
-     C: 三角形的另一条边长 (DECIMAL)。
-     Cos: 边长 B 和 C 之间的夹角(单位：度) (DECIMAL)。
- 输出: 
-    A: 计算得到的第三条边的长度 (DECIMAL)。
+ 功能: 使用余弦定理，根据三角形的两条边长和它们之间的夹角计算第三条边的长度。
+ 输入:
+     B:三角形的一条边长 (DECIMAL)。
+     C:三角形的另一条边长 (DECIMAL)。
+     Cos:边长 B 和 C 之间的夹角(单位：度) (DECIMAL)。
+ 输出:
+    A:计算得到的第三条边的长度 (DECIMAL)。
  4.11. `CosineFormulaAngle (余弦定理求角度) 
 
- 功能:  使用余弦定理，根据三角形的三条边长计算其中一个角的大小。
- 输入: 
-     边长A`: 三角形的一条边长 (DECIMAL)。
-     边长B`: 三角形的另一条边长 (DECIMAL)。
-     边长C`: 需要求其对角的第三条边长 (DECIMAL)。
- 输出: 
-     角度C`: 计算得到的边长 C 所对的角的大小(单位：度) (DECIMAL)。
+ 功能: 使用余弦定理，根据三角形的三条边长计算其中一个角的大小。
+ 输入:
+     边长A`:三角形的一条边长 (DECIMAL)。
+     边长B`:三角形的另一条边长 (DECIMAL)。
+     边长C`:需要求其对角的第三条边长 (DECIMAL)。
+ 输出:
+     角度C`:计算得到的边长 C 所对的角的大小(单位：度) (DECIMAL)。
  4.12. `PythagoreanCathetus (勾股定理求直角边) 
- 输入: 
-     斜边`: 直角三角形的斜边长度 (DECIMAL)。
-     直角边A`: 已知的一条直角边长度 (DECIMAL)。
- 输出: 
-     直角边B`: 计算得到的另一条直角边长度 (DECIMAL)。
+ 输入:
+     斜边`:直角三角形的斜边长度 (DECIMAL)。
+     直角边A`:已知的一条直角边长度 (DECIMAL)。
+ 输出:
+     直角边B`:计算得到的另一条直角边长度 (DECIMAL)。
  4.13. `PythagoreanSide (勾股定理求斜边) 
- 输入: 
-     直角边A`: 一条直角边长度 (DECIMAL)。
-     直角边B`: 另一条直角边长度 (DECIMAL)。
- 输出: 
-     斜边`: 计算得到的斜边长度 (DECIMAL)。
+ 输入:
+     直角边A`:一条直角边长度 (DECIMAL)。
+     直角边B`:另一条直角边长度 (DECIMAL)。
+ 输出:
+     斜边`:计算得到的斜边长度 (DECIMAL)。
  5. 逻辑与比较 (Logic & Comparison) 
 
 执行布尔逻辑和数值比较。 无特殊说明，DECIMAL，0 代表 false，非 0 代表 true。
  5.1. `AND 
- 输入: 
+ 输入:
      A:第一个布尔值 
      B:第二个布尔值 
- 输出: 
+ 输出:
      A AND B:A 和 B 的逻辑“与”结果
  5.2. `OR 
- 输入: 
+ 输入:
      A:第一个布尔值 
      B:第二个布尔值 
- 输出: 
+ 输出:
      A OR B:A 和 B 的逻辑“或”结果
  5.3. `XOR 
- 输入: 
+ 输入:
      A:第一个布尔值 
      B:第二个布尔值
- 输出: 
+ 输出:
      A XOR B:A 和 B 的逻辑“异或”结果 
  5.4. `NOT 
- 输入: 
+ 输入:
      A:要取反的布尔值 
- 输出: 
+ 输出:
      NOT A:A 的逻辑“非”结果 
  5.5. `NAND 
- 输入: 
+ 输入:
      A:第一个布尔值 
      B:第二个布尔值 
- 输出: 
+ 输出:
      NOT (A AND B):A 和 B 的逻辑“与非”结果 
  5.6. `NOR 
- 输入: 
+ 输入:
      A:第一个布尔值 
      B:第二个布尔值 
- 输出: 
+ 输出:
      NOT (A OR B):A 和 B 的逻辑“或非”结果 
  5.7. `NXOR 
- 输入: 
+ 输入:
      A:第一个布尔值 
      B:第二个布尔值 
- 输出: 
+ 输出:
      NOT (A XOR B):A 和 B 的逻辑“同或”结果 
  5.8. `GREATER THAN 
- 输入: 
+ 输入:
      A:第一个数值 (DECIMAL)。
      B:第二个数值 (DECIMAL)。
- 输出: 
+ 输出:
      A > B:如果 A 大于 B，则为1，否则为0(DECIMAL)。
  5.9. `LESS THAN 
- 输入: 
+ 输入:
      A:第一个数值 (DECIMAL)。
      B:第二个数值 (DECIMAL)。
- 输出: 
+ 输出:
      A < B:如果 A 小于 B，则为 1，否则为 0 (DECIMAL)。
  5.10. `EQUAL 
- 输入: 
+ 输入:
      A:第一个数值 (DECIMAL)。
      B:第二个数值 (DECIMAL)。
- 输出: 
+ 输出:
      A == B:如果 A 等于 B，则为 1，否则为 0 (DECIMAL)。
  5.11. `NOT EQUAL 
- 输入: 
+ 输入:
      A:第一个数值 (DECIMAL)。
      B:第二个数值 (DECIMAL)。
- 输出: 
+ 输出:
      A != B:如果 A 不等于 B，则为 1，否则为 0 (DECIMAL)。
 
 
  5.12. `GREATER OR EQUAL 
- 输入: 
+ 输入:
      A:第一个数值 (DECIMAL)。
      B:第二个数值 (DECIMAL)。
- 输出: 
+ 输出:
      A >= B:如果 A 大于或等于 B，则为 1，否则为 0 (DECIMAL)。
- 使用方法: 
+ 使用方法:
     1.  将需要比较的两个数值 (DECIMAL 类型) 连接到 `A 和 `B 输入。
     2.  从 `A >= B 输出读取结果 (DECIMAL 类型)。
 
  5.13. `LESS OR EQUAL 
 
- 功能:  判断一个数值是否小于或等于另一个数值。
- 输入: 
+ 功能: 判断一个数值是否小于或等于另一个数值。
+ 输入:
      A:第一个数值 (DECIMAL)。
      B:第二个数值 (DECIMAL)。
- 输出: 
+ 输出:
      A <= B:如果 A 小于或等于 B，则为 1，否则为 0 (DECIMAL)。
 5.15. `branch
 
- 功能:  根据条件选择输出不同的值 (支持)。
- 输入: 
+ 功能: 根据条件选择输出不同的值 (支持)。
+ 输入:
      IF:条件 (DECIMAL, 0 代表 false, 非 0 代表 true)。
      A:如果条件为 true，则输出此值 (任意类型)。（注意直接填写小写if可能导致python语法错误，建议使用IF）
      B:如果条件为 false，则输出此值 (任意类型)。
- 输出: 
+ 输出:
     * 根据条件选择输出的值 (类型与模块类型相同)。记得规定datatype
 
 
  5.16. `Is InRangeExclusive (开区间范围判断) 
 
- 输入: 
-     数值`: 需要判断的数值 (DECIMAL)。
-     最小值`: 范围的下限(不包含) (DECIMAL)。
-     最大值`: 范围的上限(不包含) (DECIMAL)。
- 输出: 
-     结果`: 如果 `最小值 < `数值 < `最大值`，则输出1，否则输出 0 (DECIMAL)。
+ 输入:
+     数值`:需要判断的数值 (DECIMAL)。
+     最小值`:范围的下限(不包含) (DECIMAL)。
+     最大值`:范围的上限(不包含) (DECIMAL)。
+ 输出:
+     结果`:如果 `最小值 < `数值 < `最大值`，则输出1，否则输出 0 (DECIMAL)。
 
 
  5.17. `Is InRangeInclusive (闭区间范围判断) 
 
- 功能:  判断一个数值是否位于指定的最小值和最大值之间(包含边界)。
- 输入: 
-     数值`: 需要判断的数值 (DECIMAL)。
-     最小值`: 范围的下限(包含) (DECIMAL)。
-     最大值`: 范围的上限(包含) (DECIMAL)。
- 输出: 
-     结果`: 如果 `最小值 <= `数值 <= `最大值`，则输出1，否则输出 0 (DECIMAL)。
+ 功能: 判断一个数值是否位于指定的最小值和最大值之间(包含边界)。
+ 输入:
+     数值`:需要判断的数值 (DECIMAL)。
+     最小值`:范围的下限(包含) (DECIMAL)。
+     最大值`:范围的上限(包含) (DECIMAL)。
+ 输出:
+     结果`:如果 `最小值 <= `数值 <= `最大值`，则输出1，否则输出 0 (DECIMAL)。
+5.18. Select
+输入：
+Index：要选择的索引位置,一索引
+Array 1 ~ Array 10：参与选择的数组（任意类型均可，array也可以）。
+
+输出：
+
+Result：根据 Index 从对应数组中选取的元素（类型与输入端口保持一致）
+
+说明：
+Select 节点根据 Index，从多个输入数组中选择对应位置的数据并输出。
 
 
  6. 向量与颜色 (Vector & Color) 
@@ -253,128 +264,107 @@ Set: 1 代表写入/更新变量，0 代表仅读取/保持。
 
  6.1. `Combine (组合为向量/颜色) 
 
- 功能:  将四个数值组合成一个四维向量 (VECTOR)，可用于表示位置、方向或颜色 (RGBA)。
- 输入: 
-     X (DECIMAL): 向量的 X 分量 或代表颜色的 R (红色) 分量。
-     Y (DECIMAL): 向量的 Y 分量 或代表颜色的 G (绿色) 分量。
-     Z  (DECIMAL): 向量的 Z 分量 或代表颜色的 B  分量。
-     W (DECIMAL): 向量的 W 分量 或代表颜色的 A (透明度) 分量。
- 输出: 
-     Vector (VECTOR): 组合成的四维向量 (X, Y, Z, W)。
+ 功能: 将四个数值组合成一个四维向量 (VECTOR)，可用于表示位置、方向或颜色 (RGBA)。
+ 输入:
+     X (DECIMAL):向量的 X 分量 或代表颜色的 R (红色) 分量。
+     Y (DECIMAL):向量的 Y 分量 或代表颜色的 G  分量。
+     Z  (DECIMAL):向量的 Z 分量 或代表颜色的 B  分量。
+     W (DECIMAL):向量的 W 分量 或代表颜色的 A (透明度) 分量。
+ 输出:
+     Vector (VECTOR):组合成的四维向量 (X, Y, Z, W)。
 
 
  6.2. `Split (分解向量/颜色) 
 
- 功能:  将一个四维向量 (VECTOR) 分解为其四个组成数值，可用于提取坐标分量或颜色通道。
- 输入: 
-     Vector (VECTOR): 需要分解的四维向量。
- 输出名称: 
-     X  (DECIMAL): 向量的 X 分量 或代表颜色的 R (红色) 分量。
-     Y  (DECIMAL): 向量的 Y 分量 或代表颜色的 G (绿色) 分量。
-     Z  (DECIMAL): 向量的 Z 分量 或代表颜色的 B  分量。
-     W  (DECIMAL): 向量的 W 分量 或代表颜色的 A (透明度) 分量。
+ 功能: 将一个四维向量 (VECTOR) 分解为其四个组成数值，可用于提取坐标分量或颜色通道。
+ 输入:
+     Vector (VECTOR):需要分解的四维向量。
+ 输出名称:
+     X  (DECIMAL):向量的 X 分量 或代表颜色的 R (红色) 分量。
+     Y  (DECIMAL):向量的 Y 分量 或代表颜色的 G  分量。
+     Z  (DECIMAL):向量的 Z 分量 或代表颜色的 B  分量。
+     W  (DECIMAL):向量的 W 分量 或代表颜色的 A (透明度) 分量。
  6.3. `NORMALIZE
 
- 功能:  将一个向量标准化(转换为单位向量，长度为 1)。
- 输入: 
+ 功能: 将一个向量标准化(转换为单位向量，长度为 1)。
+ 输入:
      input:要标准化的四维向量 (VECTOR)。
- 输出: 
+ 输出:
     result:标准化后的单位向量 (VECTOR)。
  6.4. ` DOT PRODUCT 
 
- 功能:  计算两个四维向量的点积。
- 输入: 
+ 功能: 计算两个四维向量的点积。
+ 输入:
      A:第一个四维向量 (VECTOR)。
      B:第二个四维向量 (VECTOR)。
- 输出: 
+ 输出:
      result:A 和 B 的点积 (DECIMAL)。
  6.5. `VECTOR CROSS PRODUCT 
- 功能:  计算两个四维向量的叉积。
- 输入: 
+ 功能: 计算两个四维向量的叉积。
+ 输入:
      A:第一个四维向量 (VECTOR)。
      B:第二个四维向量 (VECTOR)。
- 输出: 
+ 输出:
      A × B:A 和 B 的叉积 (VECTOR)，结果向量垂直于 A 和 B 构成的平面。
  6.6. `MAGNITUDE 
 
- 功能:  计算输入向量的幅度(长度或大小)。
- 输入:  一个向量 (VECTOR)。
- 输出:  该向量的幅度 (DECIMAL)。
+ 功能: 计算输入向量的幅度(长度或大小)。
+ 输入: 一个向量 (VECTOR)。
+ 输出: 该向量的幅度 (DECIMAL)。
  6.11. `HSV to RGB 
- 功能:  将颜色从 HSV颜色转换为 RGB
- 输入: 
+ 功能: 将颜色从 HSV颜色转换为 RGB
+ 输入:
      H:色相 (DECIMAL，范围通常在 0 到 1 或 0 到 360，具体取决于实现)。
      S:饱和度 (DECIMAL，范围通常在 0 到 1 之间)。
      V:明度 (DECIMAL，范围通常在 0 到 1 之间)。
- 输出: 
+ 输出:
      RGB Color:转换后的 RGB 颜色值 (通常是一个 VECTOR，X=R, Y=G, Z=B, W可能为1或Alpha)。
  6.12. `RGB to HSV 
- 功能:  将颜色从 RGB (红, 绿, 蓝) 颜色空间转换为 HSV (色相, 饱和度, 明度) 颜色空间。
- 输入: 
+ 功能: 将颜色从 RGB (红, 绿, 蓝) 颜色空间转换为 HSV (色相, 饱和度, 明度) 颜色空间。
+ 输入:
      R:红色分量 (DECIMAL，范围在 0 到 1 )。
      G:绿色分量 (DECIMAL，范围同 R)。
      B:蓝色分量 (DECIMAL，范围同 R)。
- 输出: 
+ 输出:
      HSV Color:转换后的 HSV 颜色值 (是一个 VECTOR，X=H, Y=S, Z=V, W不变)
  6.13. `OFFSET VECTOR 
 
- 功能:  通过指定偏移量来移动一个向量(相当于向量加法)。
- 输入: 
+ 功能: 通过指定偏移量来移动一个向量(相当于向量加法)。
+ 输入:
      Vector:要移动的向量 (VECTOR)。
      Offset:偏移量 (VECTOR)。
- 输出: 
+ 输出:
      Vector + Offset:移动后的向量 (VECTOR)。
 
 
  6.14. `ROTATE
 
- 功能:  将一个向量绕指定轴旋转一定角度。
- 输入: 
+ 功能: 将一个向量绕指定轴旋转一定角度。
+ 输入:
     vaule:要旋转的向量 (VECTOR)。
      Angle:旋转角度 (DECIMAL，弧度)。
- 输出: 
+ 输出:
      result:旋转后的向量 (VECTOR)。
-
-
-
-
- 6.17. `CLAMP VECTOR 
-
- 功能:  将向量的每个分量限制在指定的标量最小值和最大值之间。
- 输入: 
-     INPUT / `Vector: 要限制的向量 (VECTOR)。
-     Min: 每个分量允许的最小值 (DECIMAL)。
-     Max: 每个分量允许的最大值 (DECIMAL)。
- 输出: 
-     clamp(Vector, Min, Max) / `RESULT:将向量的每个分量限制在 Min 和 Max 之间的结果 (VECTOR)。
-
-
- 6.18. `WorldPositionToLocal (世界坐标转局部坐标) 
-
- 功能:  将一个世界坐标系下的位置向量转换为指定实体局部坐标系下的相对位置向量。
- 输入: 
-     参考实体`: 提供局部坐标系的参考实体 (ENTITY)。
-     世界坐标`: 需要转换的世界坐标位置 (VECTOR)。
- 输出: 
-     局部坐标`: 转换后，相对于 `参考实体 的局部坐标位置 (VECTOR)。
-
-
+ 6.18. `WorldPositionToLocal 
+ 输入:
+     object:提供局部坐标系的参考实体
+     World Position:需要转换的世界坐标位置
+ 输出:
+     Local Position:转换后，相对于参考实体的局部坐标位置
  6.19. `LocalPositionToWorld (局部坐标转世界坐标) 
-
- 功能:  将一个相对于指定实体局部坐标系的位置向量转换为世界坐标系下的位置向量。
- 输入: 
-     object`: 定义局部坐标系的参考实体 (ENTITY)。
-     Local Position: 需要转换的、相对于 object 的局部坐标位置 (VECTOR)。
- 输出: 
-     world position: 转换后的世界坐标位置 (VECTOR)。
+ 输入:
+     object:定义局部坐标系的参考实体 。
+     Local Position:需要转换的、相对于 object 的局部坐标位置 (VECTOR)。
+ 输出:
+     world position:转换后的世界坐标位置 (VECTOR)。
 
 6.20. `SQR MAGNITUDE` (向量长度平方) 
 
- 功能:  计算输入向量的长度(模)的平方。
- 输入: 
-    * `INPUT (X:0 Y:0 Z:0 W:0)` (绿色): 一个向量 (VECTOR)。
- 输出: 
-    * `RESULT (0.00)` : 该向量长度的平方值 (DECIMAL)。
+ 功能: 计算输入向量的长度(模)的平方。
+ 输入:
+    * `INPUT (X:0 Y:0 Z:0 W:0)` :一个向量 (VECTOR)。
+ 输出:
+    * `RESULT (0.00)` :该向量长度的平方值 (DECIMAL)。
 
  7. 位运算 (Bitwise Operations) 
 
@@ -382,20 +372,20 @@ Set: 1 代表写入/更新变量，0 代表仅读取/保持。
 
  7.1. `SHIFT LEFT 
 
- 功能:  将一个整数的二进制位向左移动指定的位数
- 输入: 
+ 功能: 将一个整数的二进制位向左移动指定的位数
+ 输入:
      Value:要进行移位操作的整数 (DECIMAL)。
      Bits:要移动的位数 (DECIMAL)。
- 输出: 
+ 输出:
      Value << Bits:移位后的整数 (DECIMAL)。
 
  7.2. `SHIFT RIGHT 
 
- 功能:  将一个整数的二进制位向右移动指定的位数。
- 输入: 
+ 功能: 将一个整数的二进制位向右移动指定的位数。
+ 输入:
      Value:要进行移位操作的整数 (DECIMAL)。
      Bits:要移动的位数 (DECIMAL)。
- 输出: 
+ 输出:
      Value >> Bits:移位后的整数 (DECIMAL)。
 
 
@@ -406,186 +396,186 @@ Set: 1 代表写入/更新变量，0 代表仅读取/保持。
 
  8.1. `Position (实体位置) 
 
- 功能:  获取或设置实体在世界坐标系中的位置。
- 输入: 
-    object(ENTITY): 需要操作的实体。
-     Position (VECTOR):  需要设置给实体的新世界坐标位置向量。
- 输出: 
-     Position (VECTOR): 实体当前的世界坐标位置向量。
+ 功能: 获取或设置实体在世界坐标系中的位置。
+ 输入:
+    object:需要操作的实体。
+     Position (VECTOR): 需要设置给实体的新世界坐标位置向量。
+ 输出:
+     Position (VECTOR):实体当前的世界坐标位置向量。
 
  8.2. `Angle (实体角度) 
 
- 功能:  获取或设置实体在世界坐标系中的旋转角度 (通常指 Z 轴旋转)。
- 输入: 
-     object (ENTITY): 需要操作的实体。
-     Angle (DECIMAL):  需要设置给实体的新旋转角度值 (单位：度)。
- 输出: 
-     Angle (DECIMAL): 实体当前的旋转角度值 (单位：度)。
+ 功能: 获取或设置实体在世界坐标系中的旋转角度 (通常指 Z 轴旋转)。
+ 输入:
+     object :需要操作的实体。
+     Angle (DECIMAL): 需要设置给实体的新旋转角度值 (单位：度)。
+ 输出:
+     Angle (DECIMAL):实体当前的旋转角度值 (单位：度)。
 
 
  8.3. `Size (实体尺寸/缩放) 
 
- 功能:  获取或设置实体各个轴向的缩放比例。
- 输入: 
-     object: 需要操作的实体。
-     Size (VECTOR):  需要设置给实体的新缩放比例向量 (X, Y 分量分别对应 2D 缩放)。
- 输出: 
-     Size : 实体当前的缩放比例向量。
+ 功能: 获取或设置实体各个轴向的缩放比例。
+ 输入:
+     object:需要操作的实体。
+     Size (VECTOR): 需要设置给实体的新缩放比例向量 (X, Y 分量分别对应 2D 缩放)。
+ 输出:
+     Size :实体当前的缩放比例向量。
 
 
  8.4. `Velocity (实体速度) 
 
- 功能:  获取或设置实体在世界坐标系中的线速度。
- 输入: 
-     object(ENTITY): 需要操作的实体。
-     Velocity (VECTOR):  需要设置给实体的新速度向量。
- 输出: 
-     Velocity (VECTOR): 实体当前的速度向量。
+ 功能: 获取或设置实体在世界坐标系中的线速度。
+ 输入:
+     object:需要操作的实体。
+     Velocity (VECTOR): 需要设置给实体的新速度向量。
+ 输出:
+     Velocity (VECTOR):实体当前的速度向量。
 
  8.5. `AngularVelocity (实体角速度) 
 
- 功能:  获取或设置实体的角速度 (通常指 Z 轴旋转速度)。
- 输入: 
-     object: 需要操作的实体。
-     Angular Velocity (DECIMAL):  需要设置给实体的新角速度值 (单位：度/秒 )
- 输出: 
-     Angular Velocity (DECIMAL): 实体当前的角速度值(单位：度/秒 )。
+ 功能: 获取或设置实体的角速度 (通常指 Z 轴旋转速度)。
+ 输入:
+     object:需要操作的实体。
+     Angular Velocity (DECIMAL): 需要设置给实体的新角速度值 (单位：度/秒 )
+ 输出:
+     Angular Velocity (DECIMAL):实体当前的角速度值(单位：度/秒 )。
 
  8.6. `MASS 
 
- 功能:  获取一个实体的质量。
- 输入: 
-     Entity:要获取质量的实体 (ENTITY)。
- 输出: 
+ 功能: 获取一个实体的质量。
+ 输入:
+     Entity:要获取质量的实体 。
+ 输出:
      Mass:实体的质量 (DECIMAL)。
- 使用方法: 
+ 使用方法:
     1.  将要获取质量的实体 (ENTITY 类型) 连接到 `Entity 输入。
     2.  从 `Mass 输出读取实体的质量 (DECIMAL 类型)。
 
  8.7. add FORCE 
 
- 功能:  对一个实体施加一个力(作用于质心)。
- 输入: 
-     object:要施加力的实体 (ENTITY)。
+ 功能: 对一个实体施加一个力(作用于质心)。
+ 输入:
+     object:要施加力的实体 。
      Force:要施加的力 (VECTOR)，表示力的大小和方向。
- 输出:  无
- 使用方法: 
+ 输出: 无
+ 使用方法:
     1.  将要施加力的实体 (ENTITY 类型) 连接到 `Entity 输入。
     2.  将要施加的力 (VECTOR 类型) 连接到 `Force 输入。该模块会立即施加一次力。
 
 8.8. delete (删除物体) 
 
- 功能:  销毁一个实体。
- 输入: 
-    * `OBJECT (NULL)` (紫色): 要销毁的实体 (ENTITY)。
-    * `INPUT (0.00)` : 触发信号 (DECIMAL)。当此输入端口接收到的值为 1 时，模块会执行销毁操作；输入为 0 或其他值时，不执行任何操作。
- 输出:  无
+ 功能: 销毁一个实体。
+ 输入:
+    * `OBJECT (NULL)` :要销毁的实体 。
+    * `INPUT (0.00)` :触发信号 (DECIMAL)。当此输入端口接收到的值为 1 时，模块会执行销毁操作；输入为 0 或其他值时，不执行任何操作。
+ 输出: 无
 
  8.9. IDIsValid (实体ID有效性检查) 
 
- 功能:  检查一个输入的实体 ID 是否对应当前游戏中一个有效存在的实体。
- 输入: 
-     ID: 需要检查的实体 ID 数值 (DECIMAL)。
- 输出: 
-     is vaild: 如果该 ID 对应一个有效实体，则输出1，否则输出 0 (DECIMAL)。
+ 功能: 检查一个输入的实体 ID 是否对应当前游戏中一个有效存在的实体。
+ 输入:
+     ID:需要检查的实体 ID 数值 (DECIMAL)。
+ 输出:
+     is vaild:如果该 ID 对应一个有效实体，则输出1，否则输出 0 (DECIMAL)。
 
 
  8.10. `WorldAngleToLocal (世界角度转局部角度) 
 
- 功能:  将一个世界坐标系下的角度转换为相对于指定实体朝向的局部角度。
- 输入: 
-     object: 提供局部朝向参考的实体 (ENTITY)。
-     world angle(deg): 需要转换的世界角度(单位：度) (DECIMAL)。
- 输出: 
-     local angle(deg): 转换后，相对于 `参考实体 朝向的局部角度(单位：度) (DECIMAL)。
+ 功能: 将一个世界坐标系下的角度转换为相对于指定实体朝向的局部角度。
+ 输入:
+     object:提供局部朝向参考的实体 。
+     world angle(deg):需要转换的世界角度(单位：度) (DECIMAL)。
+ 输出:
+     local angle(deg):转换后，相对于 `参考实体 朝向的局部角度(单位：度) (DECIMAL)。
 
  8.11. `LocalAngleToWorld (局部角度转世界角度) 
 
- 功能:  将一个相对于指定实体朝向的局部角度转换为世界坐标系下的角度。
- 输入: 
-    object: 定义局部朝向参考的实体 (ENTITY)。
-     loacl angle(deg): 需要转换的、相对于 `参考实体 朝向的局部角度(单位：度) (DECIMAL)。
- 输出: 
-     world angle(deg): 转换后的世界角度(单位：度) (DECIMAL)。
+ 功能: 将一个相对于指定实体朝向的局部角度转换为世界坐标系下的角度。
+ 输入:
+    object:定义局部朝向参考的实体 。
+     loacl angle(deg):需要转换的、相对于 `参考实体 朝向的局部角度(单位：度) (DECIMAL)。
+ 输出:
+     world angle(deg):转换后的世界角度(单位：度) (DECIMAL)。
 
 
  8.12. `LookAt (朝向目标) 
 
- 功能:  控制一个实体旋转，使其朝向另一个实体的位置 (通常是瞬间完成或平滑过渡，取决于实现和 `速度/因子`)。
- 输入: 
-     object: 需要旋转以朝向目标的实体 (ENTITY)。
-     target: 被朝向的目标实体 (ENTITY)。
-     velocity: 物体朝向目标物体的速度
- 输出:  无 
+ 功能: 控制一个实体旋转，使其朝向另一个实体的位置 (通常是瞬间完成或平滑过渡，取决于实现和 `速度/因子`)。
+ 输入:
+     object:需要旋转以朝向目标的实体 。
+     target:被朝向的目标实体 。
+     velocity:物体朝向目标物体的速度
+ 输出: 无 
 
 
  8.13. `MassCenter (质心位置) 
 
- 功能:  获取指定实体的质心(质量中心)在世界坐标系中的位置。
- 输入: 
-     实体`: 需要获取质心位置的实体 (ENTITY)。
- 输出: 
-     质心坐标`: 该实体质心的世界坐标位置向量 (VECTOR)。
+ 功能: 获取指定实体的质心(质量中心)在世界坐标系中的位置。
+ 输入:
+     实体`:需要获取质心位置的实体 。
+ 输出:
+     质心坐标`:该实体质心的世界坐标位置向量 (VECTOR)。
  8.14. `VelocityAtPosition (指定点速度) 
 
- 功能:  获取一个刚体(实体)上指定世界坐标点的瞬时速度向量(考虑线速度和角速度引起的旋转)。
- 输入: 
-     实体`: 运动的实体 (ENTITY)。
-     世界坐标点`: 实体上需要查询速度的点的当前世界坐标 (VECTOR)。
- 输出: 
-     速度向量`: 该点在当前时刻的世界速度向量 (VECTOR)。
+ 功能: 获取一个刚体(实体)上指定世界坐标点的瞬时速度向量(考虑线速度和角速度引起的旋转)。
+ 输入:
+     实体`:运动的实体 。
+     世界坐标点`:实体上需要查询速度的点的当前世界坐标 (VECTOR)。
+ 输出:
+     速度向量`:该点在当前时刻的世界速度向量 (VECTOR)。
 
  8.15. `CanBeActivated (可激活检查) 
 
- 功能:  检查指定的实体是否包含可以被激活的组件或机制(例如按钮、引擎等)。
- 输入: 
-     实体`: 需要检查的实体 (ENTITY)。
- 输出: 
-     可激活`: 如果实体可以被激活，输出1，否则输出 0 (DECIMAL)。
+ 功能: 检查指定的实体是否包含可以被激活的组件或机制(例如按钮、引擎等)。
+ 输入:
+     实体`:需要检查的实体 。
+ 输出:
+     可激活`:如果实体可以被激活，输出1，否则输出 0 (DECIMAL)。
 
 
  8.16. `Ignite (点燃/状态) 
 
- 功能:  点燃指定的实体，或查询其是否处于点燃状态。
- 输入: 
-     实体`: 需要操作或查询的实体 (ENTITY)。
-     点燃信号`: 输入 1 尝试点燃该实体；输入 0 则不执行点燃操作 (DECIMAL)。
- 输出: 
-     燃烧状态`: 输出 1 表示实体当前正在燃烧，输出 0 表示未燃烧 (DECIMAL)。
+ 功能: 点燃指定的实体，或查询其是否处于点燃状态。
+ 输入:
+     实体`:需要操作或查询的实体 。
+     点燃信号`:输入 1 尝试点燃该实体；输入 0 则不执行点燃操作 (DECIMAL)。
+ 输出:
+     燃烧状态`:输出 1 表示实体当前正在燃烧，输出 0 表示未燃烧 (DECIMAL)。
  8.17. `Extinguish (熄灭) 
- 功能:  熄灭指定实体上的火焰。
- 输入: 
-     实体`: 需要被熄灭火焰的实体 (ENTITY)。
-     熄灭信号`: 输入 1 来触发熄灭动作 (DECIMAL)。
- 输出:  无 (这是一个执行动作的模块)。
+ 功能: 熄灭指定实体上的火焰。
+ 输入:
+     实体`:需要被熄灭火焰的实体 。
+     熄灭信号`:输入 1 来触发熄灭动作 (DECIMAL)。
+ 输出: 无 (这是一个执行动作的模块)。
 
  8.8. delete 
 
- 功能:  销毁一个实体。
- 输入: 
-    * `OBJECT (NULL)` (紫色): 要销毁的实体 (ENTITY)。
-    * `INPUT (0.00)` : 触发信号 (DECIMAL)。当此输入端口接收到的值为 1 时，模块会执行销毁操作；输入为 0 或其他值时，不执行任何操作。
- 输出:  无
+ 功能: 销毁一个实体。
+ 输入:
+    * `OBJECT (NULL)` :要销毁的实体 。
+    * `INPUT (0.00)` :触发信号 (DECIMAL)。当此输入端口接收到的值为 1 时，模块会执行销毁操作；输入为 0 或其他值时，不执行任何操作。
+ 输出: 无
 
 8.19. `ADD FORCE AT POSITION` (在指定位置施加力) 
 
- 功能:  对一个实体上的指定局部坐标点施加一个力。
- 输入: 
-    * `OBJECT (NULL)` (紫色): 要施加力的实体 (ENTITY)。
-    * `FORCE (X:0 Y:0 Z:0 W:0)` (绿色): 要施加的力向量 (VECTOR)，表示力的大小和方向。
-    * `OFFSET (X:0 Y:0 Z:0 W:0)` (绿色): 相对于实体质心的局部坐标偏移量 (VECTOR)，力将作用于此点。
- 输出:  无
+ 功能: 对一个实体上的指定局部坐标点施加一个力。
+ 输入:
+    * `OBJECT (NULL)` :要施加力的实体 。
+    * `FORCE (X:0 Y:0 Z:0 W:0)` :要施加的力向量 (VECTOR)，表示力的大小和方向。
+    * `OFFSET (X:0 Y:0 Z:0 W:0)` :相对于实体质心的局部坐标偏移量 (VECTOR)，力将作用于此点。
+ 输出: 无
  
 
  8.20. `COLLISION` (碰撞状态) 
 
- 功能:  获取或设置实体的碰撞是否启用。
- 输入: 
-    * `OBJECT (NULL)` (紫色): 需要操作的实体 (ENTITY)。
-    * `ENABLE COLLISION (0.00)` :  设置碰撞是否启用的信号。输入 1 启用碰撞，输入 0 禁用碰撞。
-    * `DISABLE COLLISION (0.00)` :  专门用于禁用碰撞的信号。输入 1 禁用碰撞。 (注：此端口功能可能与 `ENABLE COLLISION` 输入 0 重叠或有特定优先级，通常使用 `ENABLE COLLISION` 更为通用。)
- 输出: 
-    * `COLLISION ENABLED (0.00)` : 实体当前的碰撞启用状态。1 表示已启用，0 表示已禁用 (DECIMAL)。
+ 功能: 获取或设置实体的碰撞是否启用。
+ 输入:
+    * `OBJECT (NULL)` :需要操作的实体 。
+    * `ENABLE COLLISION (0.00)` : 设置碰撞是否启用的信号。输入 1 启用碰撞，输入 0 禁用碰撞。
+    * `DISABLE COLLISION (0.00)` : 专门用于禁用碰撞的信号。输入 1 禁用碰撞。 (注：此端口功能可能与 `ENABLE COLLISION` 输入 0 重叠或有特定优先级，通常使用 `ENABLE COLLISION` 更为通用。)
+ 输出:
+    * `COLLISION ENABLED (0.00)` :实体当前的碰撞启用状态。1 表示已启用，0 表示已禁用 (DECIMAL)。
 
  8.21. `ELEVATION` (实体高度/层级) 
 
@@ -597,123 +587,123 @@ Set: 1 代表写入/更新变量，0 代表仅读取/保持。
 
 **输入端口：**
 
-*   `OBJECT (NULL)` (紫色): **参考实体 (ENTITY)**。计算角度时，以此实体的位置作为参考点。
-*   `POSITION (X:0 Y:0 Z:0 W:0)` (绿色): **目标坐标 (VECTOR)**。计算角度时，以此坐标点作为连线的终点
+*   `OBJECT (NULL)` :**参考实体 **。计算角度时，以此实体的位置作为参考点。
+*   `POSITION (X:0 Y:0 Z:0 W:0)` :**目标坐标 (VECTOR)**。计算角度时，以此坐标点作为连线的终点
 
 **输出端口：**
 
-*   `ANGLE (DEG) (0.00)` : **计算出的夹角 (DECIMAL)**。单位为度，范围在 -180° 到 +180°之间。该值表示从参考实体指向目标坐标点的向量与世界X轴正方向之间的有向夹角。
+*   `ANGLE (DEG) (0.00)` :**计算出的夹角 (DECIMAL)**。单位为度，范围在 -180° 到 +180°之间。该值表示从参考实体指向目标坐标点的向量与世界X轴正方向之间的有向夹角。
  9. 字符串操作 (String Operations) 
  8.22. `ENTITY ID` (获取实体ID) 
 
- 功能:  获取指定实体的唯一标识符 (ID)。
- 输入: 
-    * `OBJECT (NULL): 需要获取其ID的实体 (ENTITY)。
- 输出: 
-    * `ID : 该实体的唯一ID号 (DECIMAL)。如果输入未连接实体或实体无效，输出为0
+ 功能: 获取指定实体的唯一标识符 (ID)。
+ 输入:
+    * `OBJECT (NULL):需要获取其ID的实体 。
+ 输出:
+    * `ID :该实体的唯一ID号 (DECIMAL)。如果输入未连接实体或实体无效，输出为0
  
 
  8.23. `ID TO ENTITY` (ID转实体) 
 
- 功能:  通过实体的唯一标识符 (ID) 来获取该实体的引用。这允许你在知道一个实体ID的情况下，重新在芯片逻辑中“找到”并操作这个实体，即使你没有直接的实体连接。
- 输入: 
-    * `ID (0.00)` : 要转换为实体引用的实体ID号 (DECIMAL)。
- 输出: 
-    * `OBJECT (NULL)` (紫色): 与输入ID对应的实体 (ENTITY)。如果输入的ID无效或没有实体对应这个ID(例如实体已被销毁)，则输出 NULL。
+ 功能: 通过实体的唯一标识符 (ID) 来获取该实体的引用。这允许你在知道一个实体ID的情况下，重新在芯片逻辑中“找到”并操作这个实体，即使你没有直接的实体连接。
+ 输入:
+    * `ID (0.00)` :要转换为实体引用的实体ID号 (DECIMAL)。
+ 输出:
+    * `OBJECT (NULL)` :与输入ID对应的实体 。如果输入的ID无效或没有实体对应这个ID(例如实体已被销毁)，则输出 NULL。
  8.24. `ADD ANGULAR FORCE` (施加角力/扭矩) 
 
- 功能:  对指定的实体施加一个角力(也称为扭矩)，使其产生旋转加速度。
- 输入: 
-    * `OBJECT (NULL)` (紫色): 需要施加角力的实体 (ENTITY)。
-    * `ANGULAR FORCE : 要施加的角力大小 (DECIMAL)。这个值通常代表扭矩的大小。正值对应逆时针，负值对应顺时针
- 输出:  无 
+ 功能: 对指定的实体施加一个角力(也称为扭矩)，使其产生旋转加速度。
+ 输入:
+    * `OBJECT (NULL)` :需要施加角力的实体 。
+    * `ANGULAR FORCE :要施加的角力大小 (DECIMAL)。这个值通常代表扭矩的大小。正值对应逆时针，负值对应顺时针
+ 输出: 无 
 
 处理文本信息。
  8.25.color
 功能：设置物体的颜色
 输入端口：
-object：进行操作的物体(entity)
+object：进行操作的物体
 color:要给物体施加的rgb颜色
 输出端口：
 color：输出物体的rgb颜色(vector)
  9.2. `STRING LENGTH 
 
- 功能:  获取一个字符串的长度。
- 输入: 
+ 功能: 获取一个字符串的长度。
+ 输入:
      String:要获取长度的字符串 (STRING)。
- 输出: 
+ 输出:
      Length:字符串的长度 (DECIMAL)。
 
  9.3. `SUBSTRING 
 
- 功能:  从一个字符串中提取子字符串。
- 输入: 
+ 功能: 从一个字符串中提取子字符串。
+ 输入:
      value:要提取子字符串的字符串 (STRING)。
      Start:起始位置 (DECIMAL，从0开始)
      Length:要提取的长度 (DECIMAL)。
- 输出: 
+ 输出:
      Substring:提取的子字符串 (STRING)。
   9.4. `REPLACE STRING 
 
- 功能:  在一个字符串中替换所有出现的指定子字符串。
- 输入: 
+ 功能: 在一个字符串中替换所有出现的指定子字符串。
+ 输入:
      String:要进行替换的字符串 (STRING)。
      Old Value:要被替换的子字符串 (STRING)。
      New Value:用于替换的新字符串 (STRING)。
- 输出: 
+ 输出:
      Replaced String:替换后的字符串 (STRING)。
 
  9.5. `TO UPPERCASE 
- 输入: 
+ 输入:
      String:要转换为大写的字符串 (STRING)。
- 输出: 
+ 输出:
      Uppercase String:转换后的大写字符串 (STRING)。
 
 
  9.6. `TO LOWERCASE 
- 输入: 
+ 输入:
      String:要转换为小写的字符串 (STRING)。
- 输出: 
+ 输出:
      Lowercase String:转换后的小写字符串 (STRING)。
  9.7. `TRIM STRING 
- 输入: 
+ 输入:
      String:要去除空白字符的字符串 (STRING)。
- 输出: 
+ 输出:
      Trimmed String:去除空白字符后的字符串 (STRING)。
  9.8.  TO NUMBER 
- 输入: 
+ 输入:
      input:要转换的字符串 (STRING)。
- 输出: 
+ 输出:
     result：输出转化后的数字，如果字符串不能解析为有效的数值，输出0
 
  9.9.  TO STRING 
- 输入: 
+ 输入:
      input:要转换的数值 (DECIMAL)。
- 输出result: 
+ 输出result:
     * 转换后的字符串 (STRING)。
 
  9.10. TO ASCII
- 输入: 
-    * `VALUE (NULL)` (黄色): 包含至少一个字符的字符串 (STRING)。
-    * `INDEX (0.00)` :  指定字符串中要转换的字符的索引(从0开始)。如果未连接或为0，则转换第一个字符。
- 输出: 
-    * `ASCII (0.00)` : `VALUE` 字符串中在 `INDEX` 位置的字符所对应的 ASCII数值 (DECIMAL)。如果字符串为空或索引越界，结果是-1
+ 输入:
+    * `VALUE (NULL)` :包含至少一个字符的字符串 (STRING)。
+    * `INDEX (0.00)` : 指定字符串中要转换的字符的索引(从0开始)。如果未连接或为0，则转换第一个字符。
+ 输出:
+    * `ASCII:`VALUE` 字符串中在 `INDEX` 位置的字符所对应的 ASCII数值 (DECIMAL)。如果字符串为空或索引越界，结果是-1
 
 
  9.11. `FROM ASCII
- 输入: 
-    * `ASCII (0.00)` : 要转换为字符的 ASCII (或Unicode) 数值 (DECIMAL)。
- 输出: 
-    * `SYMBOL (STRING)` : 由输入的 `ASCII` 码值转换得到的单个字符组成的字符串 (STRING)。如果输入的数值无效，结果是空字符。
+ 输入:
+    * `ASCII:要转换为字符的 ASCII (或Unicode) 数值 (DECIMAL)。
+ 输出:
+    * `SYMBOL (STRING)` :由输入的 `ASCII` 码值转换得到的单个字符组成的字符串 (STRING)。如果输入的数值无效，结果是空字符。
 
 9.12. FIND (查找字符串)
-功能: 在一个主字符串中搜索指定的子字符串，并输出其首次出现的起始索引。如果未找到子字符串，则输出 -1。
+功能:在一个主字符串中搜索指定的子字符串，并输出其首次出现的起始索引。如果未找到子字符串，则输出 -1。
 
 输入:
 
-VALUE (黄色): 要在其中进行搜索的主字符串 (STRING)。
-TEXT TO FIND (黄色): 需要在 VALUE 中查找的子字符串 (STRING)。
-输出:INDEX : TEXT TO FIND 在 VALUE 中首次出现的从零开始的起始索引 (DECIMAL)。如果 TEXT TO FIND 未在 VALUE 中找到，则输出 -1。
+VALUE :要在其中进行搜索的主字符串 (STRING)。
+TEXT TO FIND :需要在 VALUE 中查找的子字符串 (STRING)。
+输出:INDEX :TEXT TO FIND 在 VALUE 中首次出现的从零开始的起始索引 (DECIMAL)。如果 TEXT TO FIND 未在 VALUE 中找到，则输出 -1。
  10. 输入/传感器 (Input/Sensors) 
 
 获取游戏环境信息。
@@ -721,77 +711,77 @@ TEXT TO FIND (黄色): 需要在 VALUE 中查找的子字符串 (STRING)。
  10.1. `Detector (侦测器 - 外部部件) 
 
  注意：  侦测器本身不是芯片内的模块，而是游戏中的一个物理部件，但它提供可以连接到芯片的输出端口。
- 功能:  检测与其连接的实体发生的碰撞。
- 输出端口: 
-     ENTITY (ENTITY): 侦测器自身(或连接到侦测器的实体)。
-     DIST (DECIMAL): 碰撞的距离。数值越小，碰撞越近 (可能为 0 或负数表示接触/穿透)。
-     TRIGGER (DECIMAL): 触发信号。当发生碰撞时，输出 1；否则输出 0。
-     HIT POINT (VECTOR): 碰撞点。一个二维向量，指示碰撞发生的具体世界坐标位置 (X, Y)。
-     HIT NORMAL (VECTOR): 碰撞法线。一个二维向量，指示碰撞表面的方向 (X, Y)，通常指向远离碰撞表面的方向。
-     HIT ENTITY (ENTITY): 与侦测器连接的实体发生碰撞的另一个实体。
-     ACTIVATION (DECIMAL): 激活信号。通常持续输出 1，表示侦测器处于激活(可检测)状态。
- 使用方法:  将侦测器的相应输出端口连接到芯片模块的输入端口，以利用碰撞信息(你需要引导用户去外部创建模块并且使用信号线把侦测器与对应的input，output连接)
+ 功能: 检测与其连接的实体发生的碰撞。
+ 输出端口:
+     ENTITY (ENTITY):侦测器自身(或连接到侦测器的实体)。
+     DIST (DECIMAL):碰撞的距离。数值越小，碰撞越近 (可能为 0 或负数表示接触/穿透)。
+     TRIGGER (DECIMAL):触发信号。当发生碰撞时，输出 1；否则输出 0。
+     HIT POINT (VECTOR):碰撞点。一个二维向量，指示碰撞发生的具体世界坐标位置 (X, Y)。
+     HIT NORMAL (VECTOR):碰撞法线。一个二维向量，指示碰撞表面的方向 (X, Y)，通常指向远离碰撞表面的方向。
+     HIT ENTITY (ENTITY):与侦测器连接的实体发生碰撞的另一个实体。
+     ACTIVATION (DECIMAL):激活信号。通常持续输出 1，表示侦测器处于激活(可检测)状态。
+ 使用方法: 将侦测器的相应输出端口连接到芯片模块的输入端口，以利用碰撞信息(你需要引导用户去外部创建模块并且使用信号线把侦测器与对应的input，output连接)
 
  10.2. `TIME 
 
- 功能:  提供与游戏时间相关的数值。
- 输入:  无
- 输出: 
-     TIME (DECIMAL): 当前游戏自启动以来经过的总时间，以秒为单位。
-     DELTA TIME (DECIMAL): 上一帧到当前帧的时间间隔(帧耗时)以秒为单位
-     SIN TIME (DECIMAL): `sin(TIME)`，当前游戏时间的正弦值
-     COS TIME (DECIMAL): `cos(TIME)`，当前游戏时间的余弦值
+ 功能: 提供与游戏时间相关的数值。
+ 输入: 无
+ 输出:
+     TIME (DECIMAL):当前游戏自启动以来经过的总时间，以秒为单位。
+     DELTA TIME (DECIMAL):上一帧到当前帧的时间间隔(帧耗时)以秒为单位
+     SIN TIME (DECIMAL):`sin(TIME)`，当前游戏时间的正弦值
+     COS TIME (DECIMAL):`cos(TIME)`，当前游戏时间的余弦值
 10.3 text screen
  注意：  text screen不是芯片内的模块，而是游戏中的一个物理部件，但它提供可以连接到芯片的输入。
- 功能:  在芯片外部展示数据
+ 功能: 在芯片外部展示数据
 使用方法：你需要在芯片内部创建一个output，类型为string，用户需要把output连接到text screen名叫text的输入，这样就可以在外部显示文本
  11.2. `ACCUMULATOR` (累加器) 
 
- 功能:  将输入的数值累加到一个内部总和上，并可以重置。
- 输入: 
-    * `NUMBER (0.00)` : 每一帧(或每次触发，取决于具体实现)要加到累加值上的数值 (DECIMAL)。
-    * `RESET (0.00)` : 重置信号 (DECIMAL)。当此输入为 1 时，累加器的总和将重置为 0(或其他初始值，通常为0)。
- 输出: 
-    * `RESULT (0.00)` : 当前的累加总和 (DECIMAL)。
- 使用方法: 
+ 功能: 将输入的数值累加到一个内部总和上，并可以重置。
+ 输入:
+    * `NUMBER:每一帧(或每次触发，取决于具体实现)要加到累加值上的数值 (DECIMAL)。
+    * `RESET:重置信号 (DECIMAL)。当此输入为 1 时，累加器的总和将重置为 0(或其他初始值，通常为0)。
+ 输出:
+    * `RESULT:当前的累加总和 (DECIMAL)。
+ 使用方法:
     1.  将需要累加的数值流 (DECIMAL 类型) 连接到 `NUMBER` 输入。
     2.   连接一个重置信号 (DECIMAL 类型，1 为重置) 到 `RESET` 输入，以在需要时清零累加器。
     3.  从 `RESULT` 输出读取当前的累加总和。
 
  11.3. `COUNTER` 
 
- 功能:  根据增量和减量信号来增加或减少一个内部计数值，并可以重置。
- 输入: 
-    * `NUMBER (0.00)` : (可选，可能用于设置初始值或直接设置计数值，具体取决于模块设计，但图片上未直接显示其典型用法，一般计数器不从此口输入计数值，而是通过增/减信号操作内部值。 可能性最大的用途是，如果不连接增减量，此端口可能作为直接设置值，或与复位后的初始值有关 )。
-    * `INCREMENT (0.00)` : 增加信号 (DECIMAL)。当此输入为 1 时(通常是上升沿触发或持续为1时每帧增加)，计数器的值增加1(或预设的步长)。
-    * `DECREMENT (0.00)` : 减少信号 (DECIMAL)。当此输入为 1 时(触发方式同INCREMENT)，计数器的值减少1(或预设的步长)。
-    * `RESET (0.00)` : 重置信号 (DECIMAL)。当此输入为 1 时，计数器的值将重置为初始值(通常为 0)。
- 输出: 
-    * `RESULT (0.00)` : 当前的计数值 (DECIMAL)。
+ 功能: 根据增量和减量信号来增加或减少一个内部计数值，并可以重置。
+ 输入:
+    * `NUMBER:(可选，可能用于设置初始值或直接设置计数值，具体取决于模块设计，但图片上未直接显示其典型用法，一般计数器不从此口输入计数值，而是通过增/减信号操作内部值。 可能性最大的用途是，如果不连接增减量，此端口可能作为直接设置值，或与复位后的初始值有关 )。
+    * `INCREMENT:增加信号 (DECIMAL)。当此输入为 1 时(通常是上升沿触发或持续为1时每帧增加)，计数器的值增加1(或预设的步长)。
+    * `DECREMENT:减少信号 (DECIMAL)。当此输入为 1 时(触发方式同INCREMENT)，计数器的值减少1(或预设的步长)。
+    * `RESET:重置信号 (DECIMAL)。当此输入为 1 时，计数器的值将重置为初始值(通常为 0)。
+ 输出:
+    * `RESULT:当前的计数值 (DECIMAL)。
 
 
  11.4. `DELAY` 
 
- 功能:  将输入信号延迟指定的时间或帧数后输出。
- 输入: 
-    * `NUMBER (0.00)` : 需要被延迟的输入数值 (DECIMAL)。
-    * `DELAY (0.00)` : 延迟时间(单位通常是秒)或延迟帧数 (DECIMAL)。
-    * `ENABLE (0.00)` :  启用信号 (DECIMAL)。当为 1 时，延迟功能工作；为 0 时，可能直接输出输入值或保持上一个延迟值，具体行为需测试。
-    * `RESET (0.00)` :  重置信号 (DECIMAL)。当为 1 时，可能会清除延迟队列或将输出重置为某个初始状态。
-    * `HOLD (0.00)` :  保持信号 (DECIMAL)。当为 1 时，可能会暂停延迟计时或保持当前输出值不变。
- 输出: 
-    * `RESULT (0.00)` : 经过指定延迟后的 `NUMBER` 值 (DECIMAL)。
+ 功能: 将输入信号延迟指定的时间或帧数后输出。
+ 输入:
+    * `NUMBER:需要被延迟的输入数值 (DECIMAL)。
+    * `DELAY:延迟时间(单位通常是秒)或延迟帧数 (DECIMAL)。
+    * `ENABLE: 启用信号 (DECIMAL)。当为 1 时，延迟功能工作；为 0 时，可能直接输出输入值或保持上一个延迟值，具体行为需测试。
+    * `RESET: 重置信号 (DECIMAL)。当为 1 时，可能会清除延迟队列或将输出重置为某个初始状态。
+    * `HOLD: 保持信号 (DECIMAL)。当为 1 时，可能会暂停延迟计时或保持当前输出值不变。
+ 输出:
+    * `RESULT:经过指定延迟后的 `NUMBER` 值 (DECIMAL)。
 
 
  11.5. `DELTA PREVIOUS`
 
- 功能:  计算当前帧的输入值与上一帧输入值之间的差值。
- 输入: 
-    * `INPUT (0.00)` : 当前帧的输入数值 (DECIMAL)。
- 输出: 
-    * `RESULT (0.00)` : `当前帧INPUT值` - `上一帧INPUT值` (DECIMAL)。
- 参数设置 (下拉框): 
-    * `DECIMAL`: 指示输入和输出是数值类型。
+ 功能: 计算当前帧的输入值与上一帧输入值之间的差值。
+ 输入:
+    * `INPUT:当前帧的输入数值 (DECIMAL)。
+ 输出:
+    * `RESULT:`当前帧INPUT值` - `上一帧INPUT值` (DECIMAL)。
+ 参数设置 (下拉框):
+    * `DECIMAL`:指示输入和输出是数值类型。
 11.6. PREV FRANE (上- -帧值)
 
 功能:将输入信号精确地延迟一帧后输出。 在任何当前帧,此模块的RESULT 输出值,都等于其INPUT输入端在前一帧所接收到的值。 这是在<甜瓜游乐场》中构建合法的、无报错的反馈循环的唯一官方指定核心模块。
@@ -820,11 +810,11 @@ TEXT TO FIND (黄色): 需要在 VALUE 中查找的子字符串 (STRING)。
 
 输入:
 
-●INPUT: 需要计算其帧间变化量的数值信号(DECIMAL)。
+●INPUT:需要计算其帧间变化量的数值信号(DECIMAL)。
 
 输出:
 
-●RESULT: 输入值在两帧之间的变化量(DECIMAL)。
+●RESULT:输入值在两帧之间的变化量(DECIMAL)。
 
 使用方法:
 
@@ -845,7 +835,7 @@ isdown：输出按钮是不是处于被按下的状态，如果处于被按下�
 steering wheel：是一个方向盘，有两个输出：第一个是angle(decimal)：输出方向盘的角度信息，以指向上为0角度，顺时针增加角度(也就是右方为90度，下为180，左为270)，第二个是up direction(vector)：输出方向盘角度的坐标信息(比如说摇杆指向右输出(1.0)，指向上输出(0,1) 。
 6.toggle是一个按钮，输出0或1的数值 value(decimal):输出按钮的状态
 注意：  ui 控制器本身不是芯片内的模块，而是游戏中的一个物理部件，但它提供可以连接到芯片的输出端口。
- 功能:  检测与其连接的实体发生的碰撞。
+ 功能: 检测与其连接的实体发生的碰撞。
  12. 其他重要信息 
 
 
@@ -859,6 +849,53 @@ steering wheel：是一个方向盘，有两个输出：第一个是angle(decima
 
 12.4长度概念
 甜瓜中的塑料块(白色正方体方块)边长的2.5倍等于坐标的一单位长度，等于激光探测器中显示的1单位长度(也就是距离1)
+12.1 ArraysGet
+
+输入：Array，Index
+输出：Value，Activation（越界 = 1）
+逻辑：读取值。
+
+12.2 ArraysSet
+
+输入：Array，Index，Value，Activation（Set = 1）
+输出：Array（原地修改）
+逻辑：唯一不改变长度、不需要回写的修改操作。
+
+12.3 ArraysAdd
+
+输入：Array，Value，Index（可选），Activation（Set = 1）
+输出：Array（新结构）
+逻辑：无索引则追加，有索引则插入。需回写。
+
+12.4 ArraysRemoveByIndex
+
+输入：Array，Index，Activation（Set = 1）
+输出：Array（新结构）
+逻辑：删指定位，后续前移。需回写。
+
+12.5 ArraysRemoveAllByValue
+
+输入：Array，Value，Activation（Set = 1）
+输出：Array（新结构）
+逻辑：删除所有匹配值。需回写。
+
+12.6 ArraysClear
+
+输入：Array，Activation（Set = 1）
+输出：Array（空）
+逻辑：长度置 0。需回写。
+
+12.7 ArraysFind
+
+输入：Array，Value，StartIndex（可选），Activation
+输出：Index
+逻辑：返回首个匹配索引。未找到返回 0。
+
+12.8 ArraysLength
+
+输入：Array
+输出：Length
+逻辑：元素总数。
 
 13. 术语和前提
 
@@ -915,7 +952,7 @@ AI 必须按照以下方式写数组：字符串数组["a", "b", "c"]
 ]
 写法 B：四维数组(推荐)
 example = Constant(attrs={
-    "value": [
+    "value":[
         [0,0,0,0],
         [1,2,3,1],
     ]
@@ -931,30 +968,30 @@ OUTPUT/INPUT 端口类型： 若出现，attrs["data_type"] 必须是 1/2/4/8(1=
 # --- 1. 输入参数 (Inputs & Parameters) ---
 
 # 核心控制目标
-controlled_object = INPUT(attrs={"name": "#ControlledObject", "data_type": 1})
-target_position = INPUT(attrs={"name": "#TargetPosition", "data_type": 8})
-target_angle = INPUT(attrs={"name": "#TargetAngle", "data_type": 2})
+controlled_object = INPUT(attrs={"name":"#ControlledObject", "data_type":1})
+target_position = INPUT(attrs={"name":"#TargetPosition", "data_type":8})
+target_angle = INPUT(attrs={"name":"#TargetAngle", "data_type":2})
 
 # 位置PID增益
-kp_pos = INPUT(attrs={"name": "#Kp_pos", "data_type": 2})
-ki_pos = INPUT(attrs={"name": "#Ki_pos", "data_type": 2})
-kd_pos = INPUT(attrs={"name": "#Kd_pos", "data_type": 2})
+kp_pos = INPUT(attrs={"name":"#Kp_pos", "data_type":2})
+ki_pos = INPUT(attrs={"name":"#Ki_pos", "data_type":2})
+kd_pos = INPUT(attrs={"name":"#Kd_pos", "data_type":2})
 
 # 角度PID增益
-kp_ang = INPUT(attrs={"name": "#Kp_ang", "data_type": 2})
-ki_ang = INPUT(attrs={"name": "#Ki_ang", "data_type": 2})
-kd_ang = INPUT(attrs={"name": "#Kd_ang", "data_type": 2})
+kp_ang = INPUT(attrs={"name":"#Kp_ang", "data_type":2})
+ki_ang = INPUT(attrs={"name":"#Ki_ang", "data_type":2})
+kd_ang = INPUT(attrs={"name":"#Kd_ang", "data_type":2})
 
 # --- 2. 物理常量 (Physical Constants) ---
 const_time = TIME()
-const_gravity_val = Constant(attrs={"value": 9.8})
-const_thruster_spacing = Constant(attrs={"value": 2.0}) # 两个推进器之间的总距离
-const_half_thruster_spacing = Constant(attrs={"value": 1.0})
-const_max_thrust = Constant(attrs={"value": 500.0}) # 单个推进器单轴最大推力
-neg_const_max_thrust = Constant(attrs={"value": -500.0})
-const_zero = Constant(attrs={"value": 0.0})
-const_two = Constant(attrs={"value": 2.0})
-const_neg_one = Constant(attrs={"value": -1.0})
+const_gravity_val = Constant(attrs={"value":9.8})
+const_thruster_spacing = Constant(attrs={"value":2.0}) # 两个推进器之间的总距离
+const_half_thruster_spacing = Constant(attrs={"value":1.0})
+const_max_thrust = Constant(attrs={"value":500.0}) # 单个推进器单轴最大推力
+neg_const_max_thrust = Constant(attrs={"value":-500.0})
+const_zero = Constant(attrs={"value":0.0})
+const_two = Constant(attrs={"value":2.0})
+const_neg_one = Constant(attrs={"value":-1.0})
 
 # 推进器局部偏移向量
 offset_left_x = MULTIPLY(A=const_half_thruster_spacing["OUT"], B=const_neg_one["OUT"])
@@ -962,7 +999,7 @@ offset_left = Combine(X=offset_left_x["A*B"], Y=const_zero["OUT"], Z=const_zero[
 offset_right = Combine(X=const_half_thruster_spacing["OUT"], Y=const_zero["OUT"], Z=const_zero["OUT"], W=const_zero["OUT"])
 
 
-# --- 3. 传感器：读取物体当前状态 (Sensors: Read Current State) ---
+# --- 3. 传感器：读取物体当前状态 (Sensors:Read Current State) ---
 current_pos_node = Position(object=controlled_object["OUTPUT"])
 current_vel_node = Velocity(object=controlled_object["OUTPUT"])
 current_angle_node = Angle(object=controlled_object["OUTPUT"])
@@ -971,22 +1008,22 @@ object_mass_node = MASS(Entity=controlled_object["OUTPUT"])
 
 # --- 4. 误差计算 (Error Calculation) ---
 # 位置误差向量 (Target - Current)
-pos_error_vec = SUBTRACT(A=target_position["OUTPUT"], B=current_pos_node["Position"], attrs={"datatype": 8})
+pos_error_vec = SUBTRACT(A=target_position["OUTPUT"], B=current_pos_node["Position"], attrs={"datatype":8})
 pos_error_split = Split(Vector=pos_error_vec["A-B"])
 
 # 角度误差 (处理回绕) - 已修正端口名称
-angle_error = DeltaAngle(**{'Angle (Deg) 1': target_angle["OUTPUT"], 'Angle (Deg) 2': current_angle_node["Angle"]})
+angle_error = DeltaAngle(**{'Angle (Deg) 1':target_angle["OUTPUT"], 'Angle (Deg) 2':current_angle_node["Angle"]})
 
 
 # --- 5. 位置PID控制器 (Position PID Controller) ---
 # P (Proportional) Term
-p_force_pos_unscaled = MULTIPLY(A=pos_error_vec["A-B"], B=kp_pos["OUTPUT"], attrs={"datatype": 8})
-p_force_pos = MULTIPLY(A=p_force_pos_unscaled["A*B"], B=object_mass_node["Mass"], attrs={"datatype": 8})
+p_force_pos_unscaled = MULTIPLY(A=pos_error_vec["A-B"], B=kp_pos["OUTPUT"], attrs={"datatype":8})
+p_force_pos = MULTIPLY(A=p_force_pos_unscaled["A*B"], B=object_mass_node["Mass"], attrs={"datatype":8})
 
 
 # D (Derivative) Term
-d_force_pos_unscaled = MULTIPLY(A=current_vel_node["Velocity"], B=kd_pos["OUTPUT"], attrs={"datatype": 8})
-d_force_pos = MULTIPLY(A=d_force_pos_unscaled["A*B"], B=object_mass_node["Mass"], attrs={"datatype": 8})
+d_force_pos_unscaled = MULTIPLY(A=current_vel_node["Velocity"], B=kd_pos["OUTPUT"], attrs={"datatype":8})
+d_force_pos = MULTIPLY(A=d_force_pos_unscaled["A*B"], B=object_mass_node["Mass"], attrs={"datatype":8})
 
 # I (Integral) Term
 pos_error_x_dt = MULTIPLY(A=pos_error_split["X"], B=const_time["DELTA TIME"])
@@ -994,18 +1031,18 @@ pos_error_y_dt = MULTIPLY(A=pos_error_split["Y"], B=const_time["DELTA TIME"])
 integral_acc_x = ACCUMULATOR(NUMBER=pos_error_x_dt["A*B"], RESET=const_zero["OUT"])
 integral_acc_y = ACCUMULATOR(NUMBER=pos_error_y_dt["A*B"], RESET=const_zero["OUT"])
 integral_term_vec_unscaled = Combine(X=integral_acc_x["RESULT"], Y=integral_acc_y["RESULT"], Z=const_zero["OUT"], W=const_zero["OUT"])
-i_force_pos_unscaled = MULTIPLY(A=integral_term_vec_unscaled["Vector"], B=ki_pos["OUTPUT"], attrs={"datatype": 8})
-i_force_pos = MULTIPLY(A=i_force_pos_unscaled["A*B"], B=object_mass_node["Mass"], attrs={"datatype": 8})
+i_force_pos_unscaled = MULTIPLY(A=integral_term_vec_unscaled["Vector"], B=ki_pos["OUTPUT"], attrs={"datatype":8})
+i_force_pos = MULTIPLY(A=i_force_pos_unscaled["A*B"], B=object_mass_node["Mass"], attrs={"datatype":8})
 
 # 组合PD项 (P - D)
-desired_force_pd = SUBTRACT(A=p_force_pos["A*B"], B=d_force_pos["A*B"], attrs={"datatype": 8})
+desired_force_pd = SUBTRACT(A=p_force_pos["A*B"], B=d_force_pos["A*B"], attrs={"datatype":8})
 # 组合PID项 (PD + I)
-desired_force_pid = ADD(A=desired_force_pd["A-B"], B=i_force_pos["A*B"], attrs={"datatype": 8})
+desired_force_pid = ADD(A=desired_force_pd["A-B"], B=i_force_pos["A*B"], attrs={"datatype":8})
 
 # 重力补偿 (Gravity Compensation)
 gravity_force_y = MULTIPLY(A=object_mass_node["Mass"], B=const_gravity_val["OUT"])
 gravity_comp_vec = Combine(X=const_zero["OUT"], Y=gravity_force_y["A*B"], Z=const_zero["OUT"], W=const_zero["OUT"])
-total_desired_force = ADD(A=desired_force_pid["A+B"], B=gravity_comp_vec["Vector"], attrs={"datatype": 8})
+total_desired_force = ADD(A=desired_force_pid["A+B"], B=gravity_comp_vec["Vector"], attrs={"datatype":8})
 
 
 # --- 6. 姿态PID控制器 (Attitude PID Controller) ---

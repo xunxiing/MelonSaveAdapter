@@ -217,6 +217,19 @@ def add_modules(
 
     chip_graph_data = json.loads(chip_graph_meta["stringValue"])
     existing_nodes = chip_graph_data["Nodes"]
+
+    # 新版存档：OperationType/GateDataType/DataType 可能为字符串
+    use_string_schema = False
+    for n in existing_nodes or []:
+        if isinstance(n.get("OperationType"), str) or isinstance(n.get("GateDataType"), str):
+            use_string_schema = True
+            break
+        for p in (n.get("Inputs") or []) + (n.get("Outputs") or []):
+            if isinstance(p.get("DataType"), str):
+                use_string_schema = True
+                break
+        if use_string_schema:
+            break
     
     # ---------- 3. 【核心修改】从 moduledef.json 构建模块匹配映射 ----------
     candidate_map: Dict[str, str] = {}
@@ -310,7 +323,7 @@ def add_modules(
         elif node_type == "input":
             name = req_item.get("name", "Input")
             data_type = req_item.get("dataType", 2)
-            input_entry, graph_node = create_input_node(name, data_type)
+            input_entry, graph_node = create_input_node(name, data_type, use_string_schema=use_string_schema)
             chip_inputs_data.append(input_entry)
             node_id = graph_node["Id"]
             print(f"为新节点生成ID: RootNodeViewModel : {node_id.split(' : ')[-1]}")
@@ -321,7 +334,7 @@ def add_modules(
         elif node_type == "output":
             name = req_item.get("name", "Output")
             data_type = req_item.get("dataType", 2)
-            output_entry, graph_node = create_output_node(name, data_type)
+            output_entry, graph_node = create_output_node(name, data_type, use_string_schema=use_string_schema)
             chip_outputs_data.append(output_entry)
             node_id = graph_node["Id"]
             print(f"为新节点生成ID: ExitNodeViewModel : {node_id.split(' : ')[-1]}")
@@ -332,7 +345,7 @@ def add_modules(
         elif node_type == "constant":
             value = req_item.get("value", 0)
             data_type = req_item.get("dataType", 2)
-            graph_node = create_constant_node(value, data_type)
+            graph_node = create_constant_node(value, data_type, use_string_schema=use_string_schema)
             node_id = graph_node["Id"]
             class_name = node_id.split(" : ")[0]
             print(f"为新节点生成ID: {node_id}")

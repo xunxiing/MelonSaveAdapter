@@ -129,5 +129,45 @@
     "module_name": "Constant",
     "inputs": [],
     "outputs": ["same"]
+  },
+  "ArraysGet": {
+    "module_name": "ArraysGet",
+    "inputs": ["same", 2],
+    "outputs": ["any", 2]
+  },
+  "ArraysAdd": {
+    "module_name": "ArraysAdd",
+    "inputs": ["same", "any", 2, 2],
+    "outputs": ["same", 2]
+  },
+  "ArraysSet": {
+    "module_name": "ArraysSet",
+    "inputs": ["same", 2, "any", 2],
+    "outputs": ["same"]
+  },
+  "ArraysLength": {
+    "module_name": "ArraysLength",
+    "inputs": ["same"],
+    "outputs": [2]
+  },
+  "ArraysRemoveAllByValue": {
+    "module_name": "ArraysRemoveAllByValue",
+    "inputs": ["same", "any", 2],
+    "outputs": ["same"]
+  },
+  "ArraysRemoveByIndex": {
+    "module_name": "ArraysRemoveByIndex",
+    "inputs": ["same", 2, 2],
+    "outputs": ["same"]
+  },
+  "ArraysFind": {
+    "module_name": "ArraysFind",
+    "inputs": ["same", "any", 2, 2],
+    "outputs": [2]
+  },
+  "ArraysClear": {
+    "module_name": "ArraysClear",
+    "inputs": ["same", 2],
+    "outputs": ["same"]
   }
 }

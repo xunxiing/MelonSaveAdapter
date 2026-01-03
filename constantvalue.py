@@ -77,12 +77,33 @@ def _modify_single_node(
         }
         gate_type = type_map[value_type]
 
+        def _uses_string_schema(node: Dict[str, Any]) -> bool:
+            if isinstance(node.get("GateDataType"), str):
+                return True
+            for p in (node.get("Inputs") or []) + (node.get("Outputs") or []):
+                if isinstance(p.get("DataType"), str):
+                    return True
+            return False
+
+        type_str_to_int = {
+            "Entity": 1,
+            "Number": 2,
+            "String": 4,
+            "Vector": 8,
+            "ArrayNumber": 128,
+            "ArrayString": 256,
+            "ArrayVector": 512,
+            "ArrayEntity": 1024,
+        }
+        use_string_schema = _uses_string_schema(target_node)
+        gate_type_value = gate_type if use_string_schema else type_str_to_int.get(gate_type, 0)
+
         # ---- 更新 GateDataType ----
-        target_node["GateDataType"] = gate_type
+        target_node["GateDataType"] = gate_type_value
 
         # ---- 更新输出端口类型 ----
         for port in target_node.get("Outputs", []):
-            port["DataType"] = gate_type
+            port["DataType"] = gate_type_value
 
         # ---- 解析原 SaveData ----
         save_data_obj = json.loads(target_node["SaveData"]) if target_node.get("SaveData") else {}

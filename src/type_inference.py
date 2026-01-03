@@ -21,7 +21,9 @@ from src.utils import fuzzy_match, normalize
 from src.config import FUZZY_CUTOFF_PORT
 
 
-TYPE_DOMAIN = {1, 2, 4, 8}
+# 旧版（以及部分推断逻辑）常用 1/2/4/8；
+# 新版数组模块会引入 ArrayXxx（在本项目里用 128/256/512/1024 表示）。
+TYPE_DOMAIN = {1, 2, 4, 8, 128, 256, 512, 1024}
 
 
 def _type_from_port_type_str(s: str | None) -> int | None:
@@ -39,6 +41,17 @@ def _type_from_port_type_str(s: str | None) -> int | None:
         return 8
     if key in ("entity", "signal"):
         return 1
+    if key in ("integernumber", "integer"):
+        # 旧类型系统没有单独的 IntegerNumber，这里按 Number 处理（用于推断 GateDataType）
+        return 2
+    if key in ("arraynumber",):
+        return 128
+    if key in ("arraystring",):
+        return 256
+    if key in ("arrayvector",):
+        return 512
+    if key in ("arrayentity",):
+        return 1024
     if key in ("any",):
         return None
     return None
@@ -53,6 +66,9 @@ def _parse_explicit_data_type(attrs: Dict[str, Any]) -> int | None:
     if isinstance(dt, str) and dt.strip().isdigit():
         v = int(dt.strip())
         return v if v in TYPE_DOMAIN else None
+    if isinstance(dt, str):
+        t = _type_from_port_type_str(dt)
+        return t if t in TYPE_DOMAIN else None
     return None
 
 
@@ -66,6 +82,16 @@ def _infer_constant_type(attrs: Dict[str, Any]) -> int | None:
         return 4
     if isinstance(v, dict) and all(k in v for k in ("x", "y", "z")):
         return 8
+    if isinstance(v, (list, tuple)):
+        if not v:
+            return None
+        # ArrayNumber / ArrayString / ArrayVector
+        if all(isinstance(x, (int, float)) for x in v):
+            return 128
+        if all(isinstance(x, str) for x in v):
+            return 256
+        if all(isinstance(x, dict) and all(k in x for k in ("x", "y", "z")) for x in v):
+            return 512
     return None
 
 
@@ -145,6 +171,9 @@ def infer_gate_data_types(
     """
     nodes = graph.get("nodes") or []
     edges = graph.get("edges") or []
+    nodes_by_id: Dict[str, Dict[str, Any]] = {
+        n.get("id"): n for n in nodes if isinstance(n, dict) and isinstance(n.get("id"), str)
+    }
 
     node_ids = [n.get("id") for n in nodes if isinstance(n.get("id"), str)]
     uf = _UnionFind(node_ids)
@@ -204,6 +233,14 @@ def infer_gate_data_types(
         if not isinstance(port_list, list):
             port_list = []
 
+        inst_ports = None
+        if not port_list:
+            inst = nodes_by_id.get(nid) or {}
+            inst_ports = inst.get(direction) or []
+            if not isinstance(inst_ports, list):
+                inst_ports = []
+            port_list = [p.get("name", "") if isinstance(p, dict) else str(p) for p in inst_ports]
+
         idx = _port_index(port_name, [str(p) for p in port_list])
         if idx is None:
             return None
@@ -234,10 +271,20 @@ def infer_gate_data_types(
             rule_list = rule.get("inputs" if direction == "inputs" else "outputs") or []
             if isinstance(rule_list, list) and idx < len(rule_list):
                 r = rule_list[idx]
+                if r is None or r == "any":
+                    return None
                 if r == "same":
                     return _PortTypeExpr("var", nid)
                 if isinstance(r, int) and r in TYPE_DOMAIN:
                     return _PortTypeExpr("fixed", r)
+
+        # fallback: graph.json 节点实例端口 type（若提供）
+        if isinstance(inst_ports, list) and idx < len(inst_ports):
+            p = inst_ports[idx]
+            if isinstance(p, dict):
+                t = _type_from_port_type_str(p.get("type"))
+                if t is not None:
+                    return _PortTypeExpr("fixed", t)
 
         # fallback：无规则的模块，把 moduledef 里的端口 type 当做固定类型
         mod_def = module_defs.get(op_key) if op_key is not None else None
@@ -290,6 +337,52 @@ def infer_gate_data_types(
         if left.kind == "var" and right.kind == "var":
             uf.union(str(left.value), str(right.value))
             continue
+
+    # 2.5) ArraysGet 多态：若已能确定其 ArrayXxx 类型，则把 Output[0] 的元素类型回灌给下游节点
+    for e in edges:
+        if not isinstance(e, dict):
+            continue
+        f_nid = e.get("from_node")
+        t_nid = e.get("to_node")
+        f_port = e.get("from_port")
+        t_port = e.get("to_port")
+        if not all(isinstance(x, str) for x in (f_nid, t_nid, f_port, t_port)):
+            continue
+
+        f_meta = node_map.get(f_nid) or {}
+        if str(f_meta.get("friendly_name", "")).lower() != "arraysget":
+            continue
+
+        chip_key = normalize(str(f_meta.get("friendly_name", "")))
+        info = chip_index.get(chip_key) or {}
+        outs = info.get("outputs") or []
+        if not isinstance(outs, list):
+            continue
+        out_idx = _port_index(f_port, [str(p) for p in outs])
+        if out_idx != 0:
+            continue
+
+        arr_t = uf.fixed.get(uf.find(f_nid))
+        if arr_t is None:
+            arr_t = node_default.get(f_nid)
+        if not isinstance(arr_t, int):
+            continue
+        if arr_t == 128:
+            elem_t = 2
+        elif arr_t == 256:
+            elem_t = 4
+        elif arr_t == 512:
+            elem_t = 8
+        elif arr_t == 1024:
+            elem_t = 1
+        else:
+            continue
+
+        right = port_expr(t_nid, direction="inputs", port_name=t_port)
+        if right is None:
+            continue
+        if right.kind == "var":
+            uf.set_fixed(str(right.value), int(elem_t))
 
     # 3) 给每个集合选择最终类型：fixed 优先，否则用集合内默认值投票
     groups: Dict[str, List[str]] = {}

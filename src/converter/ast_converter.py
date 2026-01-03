@@ -6,6 +6,7 @@ from typing import Any, Dict, List, Set, Tuple
 
 from src.converter.graph import Graph
 from src.converter.utils import _ast_is_none, _auto_label, _func_name
+from src.error_handler import ASTError, ErrorModule
 
 
 @dataclass(frozen=True)
@@ -120,7 +121,10 @@ class Converter(ast.NodeVisitor):
                 else:
                     up_port = ast.literal_eval(sl)
                 if not isinstance(up_port, (str, int)):
-                    raise TypeError("port subscript must be str/int literal")
+                    raise ASTError(
+                        "端口下标必须是字符串或整数字面量",
+                        context={"variable": up_var, "port": str(up_port)}
+                    )
                 up_port_str = str(up_port)
                 if up_var in self.var2node:
                     return _ValueRef("node", self.var2node[up_var], up_port_str)
@@ -129,14 +133,20 @@ class Converter(ast.NodeVisitor):
             if isinstance(expr.value, ast.Call):
                 up_ref = self._emit_expr_as_ref(expr.value)
                 if up_ref.kind != "node":
-                    raise TypeError("cannot subscript a non-node expression")
+                    raise ASTError(
+                        "无法对非节点表达式进行下标访问",
+                        context={"node_id": up_ref.value if hasattr(up_ref, 'value') else "unknown"}
+                    )
                 sl = expr.slice
                 if isinstance(sl, ast.Constant):
                     up_port = sl.value
                 else:
                     up_port = ast.literal_eval(sl)
                 if not isinstance(up_port, (str, int)):
-                    raise TypeError("port subscript must be str/int literal")
+                    raise ASTError(
+                        "端口下标必须是字符串或整数字面量",
+                        context={"node_id": up_ref.value}
+                    )
                 return _ValueRef("node", up_ref.value, str(up_port))
 
         try:
@@ -156,15 +166,15 @@ class Converter(ast.NodeVisitor):
             if isinstance(expr.op, ast.Add):
                 if k_left and k_right and k_left != k_right:
                     if "vector" in (k_left, k_right):
-                        raise TypeError("向量加法只支持 vector + vector")
+                        raise ASTError("向量加法只支持 vector + vector")
                     if "string" in (k_left, k_right):
-                        raise TypeError("字符串相加只支持 string + string")
+                        raise ASTError("字符串相加只支持 string + string")
                 type_name, a_name, b_name = "Add", "A", "B"
             elif isinstance(expr.op, ast.Sub):
                 if k_left and k_right and k_left != k_right and "vector" in (k_left, k_right):
-                    raise TypeError("向量减法只支持 vector - vector")
+                    raise ASTError("向量减法只支持 vector - vector")
                 if k_left in ("string",) or k_right in ("string",):
-                    raise TypeError("Subtract 不支持字符串类型")
+                    raise ASTError("Subtract 不支持字符串类型")
                 type_name, a_name, b_name = "Subtract", "A", "B"
             elif isinstance(expr.op, ast.Mult):
                 if k_left and k_right and k_left != k_right and "vector" in (k_left, k_right):
@@ -233,9 +243,9 @@ class Converter(ast.NodeVisitor):
                 kw = _kw_map(["input"])
                 arg = kw.get("input") or kw.get("a")
                 if arg is None:
-                    raise TypeError("abs/Positive 缺少参数")
+                    raise ASTError("abs/Positive 缺少参数", context={"node_type": "Positive"})
                 if self._literal_kind(arg) in ("vector", "string"):
-                    raise TypeError("ABS/Positive 只支持 DECIMAL 输入")
+                    raise ASTError("ABS/Positive 只支持 DECIMAL 输入", context={"node_type": "Positive"})
                 call = ast.Call(
                     func=ast.Name(id="Positive", ctx=ast.Load()),
                     args=[],
@@ -497,8 +507,9 @@ class Converter(ast.NodeVisitor):
                 return _ValueRef("node", nid, "__auto__")
 
             if expr.args:
-                raise TypeError(
-                    f"{fn}: DSL node call does not support positional args; use keyword ports like A=..., B=..."
+                raise ASTError(
+                    f"DSL 节点调用不支持位置参数，请使用关键字端口如 A=..., B=...",
+                    context={"node_type": fn}
                 )
 
             nid = self._emit_call_as_node(expr)
@@ -508,7 +519,7 @@ class Converter(ast.NodeVisitor):
             expr_s = ast.unparse(expr)  # type: ignore[attr-defined]
         except Exception:
             expr_s = str(expr)
-        raise TypeError(f"unsupported expression: {expr_s}")
+        raise ASTError(f"不支持的表达式: {expr_s}")
 
     def _emit_constant_node(self, lit: Any) -> str:
         nid = self.g.next_id("Constant")
@@ -772,7 +783,10 @@ class Converter(ast.NodeVisitor):
     def resolve_unresolved(self) -> None:
         for up_var, up_port, to_nid, to_port in self.unresolved:
             if up_var not in self.var2node:
-                raise NameError(f"{to_nid}.{to_port}: 引用了未定义变量 '{up_var}'（前向引用失败）")
+                raise ASTError(
+                    f"引用了未定义变量 '{up_var}'（前向引用失败）",
+                    context={"node_id": to_nid, "port": to_port, "variable": up_var}
+                )
             up_nid = self.var2node[up_var]
             self.g.add_edge(up_nid, up_port, to_nid, to_port)
             self.outputs_seen.setdefault(up_nid, set()).add(up_port)

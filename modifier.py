@@ -8,11 +8,56 @@ DATA_TYPE_MAP = {
     1: "entity",
     2: "Decimal",
     4: "String",
-    8: "Vector"
+    8: "Vector",
+    128: "ArrayNumber",
+    256: "ArrayString",
+    512: "ArrayVector",
+    1024: "ArrayEntity"
 }
+# 新版存档常见字符串类型名（与 chip_graph/variables 中一致）
+TYPE_INT_TO_STR = {
+    1: "Entity",
+    2: "Number",
+    4: "String",
+    8: "Vector",
+    128: "ArrayNumber",
+    256: "ArrayString",
+    512: "ArrayVector",
+    1024: "ArrayEntity",
+}
+TYPE_STR_TO_INT = {v: k for k, v in TYPE_INT_TO_STR.items()}
+
+
+def _node_uses_string_schema(node: Dict[str, Any]) -> bool:
+    if isinstance(node.get("OperationType"), str):
+        return True
+    if isinstance(node.get("GateDataType"), str):
+        return True
+    for p in (node.get("Inputs") or []) + (node.get("Outputs") or []):
+        if isinstance(p.get("DataType"), str):
+            return True
+    return False
+
+
+def _coerce_gate_type_value(t: int, *, use_string_types: bool) -> Any:
+    if use_string_types:
+        return TYPE_INT_TO_STR.get(t, t)
+    return t
+
+
+def _element_type_from_array_type(t: int) -> int | None:
+    if t == 128:
+        return 2
+    if t == 256:
+        return 4
+    if t == 512:
+        return 8
+    if t == 1024:
+        return 1
+    return None
 # 需要被忽略特殊处理的模块 OperationType
-# 256: Input, 257: Constant, 512: Output
-IGNORED_OPERATION_TYPES = {256, 512}
+# 256: Input, 257: Constant, 512: Output；新版也可能使用 "Root"/"Exit"
+IGNORED_OPERATION_TYPES = {256, 512, "Root", "Exit"}
 
 
 # --- 默认值生成器 (无变化) ---
@@ -36,6 +81,11 @@ def get_default_save_data(data_type: int) -> Optional[str]:
         8: VECTOR_VAL_STRING  # Vector 的 DataValue 是一个JSON字符串
     }
     
+    # 数组类型 (128, 256, 512, 1024) 在 chip_graph 的 Nodes 中 SaveData 通常为 null
+    if data_type in {128, 256, 512, 1024}:
+        return None
+
+
     value = values.get(data_type)
 
     # Signal/Boolean 类型 (1) 的 SaveData 字段本身就是 null
@@ -55,7 +105,11 @@ def get_default_serialized_value(data_type: int) -> Optional[str]:
         1: None, # Signal 在此也通常为 null
         2: json.dumps({"Value":0.0,"Default":0.0,"Min":-3.40282347E+38,"Max":3.40282347E+38,"IsCheckbox":False}),
         4: json.dumps({"Value":"","Default":None,"MaxLength":2147483647}),
-        8: json.dumps({"Value":VECTOR_OBJ,"Default":VECTOR_OBJ})
+        8: json.dumps({"Value":VECTOR_OBJ,"Default":VECTOR_OBJ}),
+        128: json.dumps({"Value":[],"Default":[]}),
+        256: json.dumps({"Value":[],"Default":[]}),
+        512: json.dumps({"Value":[],"Default":[]}),
+        1024: None # ArrayEntity 通常为 null
     }
     return values.get(data_type)
 
@@ -68,16 +122,63 @@ def get_default_gate_data(data_type: int) -> Optional[str]:
         1: None,
         2: json.dumps({"Value":0.0,"Default":0.0,"Min":-3.40282347E+38,"Max":3.40282347E+38,"IsCheckbox":False}),
         4: json.dumps({"Value":"","Default":None,"MaxLength":2147483647}),
-        8: json.dumps({"Value":VECTOR_OBJ,"Default":VECTOR_OBJ,"MinVector":MIN_VEC,"MaxVector":MAX_VEC})
+        8: json.dumps({"Value":VECTOR_OBJ,"Default":VECTOR_OBJ,"MinVector":MIN_VEC,"MaxVector":MAX_VEC}),
+        128: json.dumps({"Value":[],"Default":[]}),
+        256: json.dumps({"Value":[],"Default":[]}),
+        512: json.dumps({"Value":[],"Default":[]}),
+        1024: None # ArrayEntity 通常为 null
     }
     return values.get(data_type)
+
+
+def _resolve_moduledef_key(op_type: Any, module_defs: Dict[str, Any]) -> str | None:
+    """
+    将新版字符串 OperationType（如 "Add"）映射回 moduledef.json 的 key（如 "2304"）。
+    若本身就是 key（数字字符串/数组模块字符串 key），则原样返回。
+    """
+    if op_type is None:
+        return None
+    raw = str(op_type)
+    if raw in module_defs:
+        return raw
+
+    if not isinstance(op_type, str):
+        return raw
+
+    key_norm = op_type.strip().lower()
+    if not key_norm:
+        return raw
+
+    for mid, mod in module_defs.items():
+        if not isinstance(mod, dict):
+            continue
+        si = mod.get("source_info") or {}
+        if not isinstance(si, dict):
+            continue
+        for cand in (si.get("datatype_map_nodename"), si.get("chip_names_friendly_name")):
+            if isinstance(cand, str) and cand.strip().lower() == key_norm:
+                return str(mid)
+    return raw
+
+
+# 新版数组模块（OperationType 为字符串）
+ARRAY_OPERATION_TYPES = {
+    "ArraysGet",
+    "ArraysAdd",
+    "ArraysSet",
+    "ArraysLength",
+    "ArraysRemoveAllByValue",
+    "ArraysRemoveByIndex",
+    "ArraysFind",
+    "ArraysClear",
+}
 
 
 def get_friendly_type_name(data_type: int) -> str:
     """将数据类型数字转换为可读字符串"""
     return DATA_TYPE_MAP.get(data_type, f"Unknown({data_type})")
 
-def get_friendly_module_name(op_type: int, module_defs: Dict) -> str:
+def get_friendly_module_name(op_type: Any, module_defs: Dict) -> str:
     """从 moduledef 获取模块友好名称"""
     return module_defs.get(str(op_type), {}).get("source_info", {}).get("datatype_map_nodename", f"OpType({op_type})")
 
@@ -127,10 +228,13 @@ def apply_data_type_modifications(
                     
                     print(f"  -> 找到节点: {node_id}")
                     op_type = node_found.get('OperationType')
-                    module_name = get_friendly_module_name(op_type, module_defs)
+                    use_string_types = _node_uses_string_schema(node_found)
+                    new_gate_value = _coerce_gate_type_value(new_node_type, use_string_types=use_string_types)
+                    op_key = _resolve_moduledef_key(op_type, module_defs)
+                    module_name = get_friendly_module_name(op_key if op_key is not None else op_type, module_defs)
 
                     # moduledef.json 中可通过 can_modify_data_type 控制该模块是否允许类型修改
-                    mod_def = module_defs.get(str(op_type), {}) if op_type is not None else {}
+                    mod_def = module_defs.get(op_key, {}) if op_key is not None else {}
                     if isinstance(mod_def, dict) and mod_def.get("can_modify_data_type") is False:
                         print(f"     skip: module '{module_name}' (OpType: {op_type}) is marked as non-modifiable")
                         continue
@@ -147,48 +251,188 @@ def apply_data_type_modifications(
                     if op_type in IGNORED_OPERATION_TYPES:
                         print(f"     跳过对特殊模块 '{module_name}' (ID: {node_id}) 的内部修改。外部连接已记录。")
                         # (可选) 对于 Input/Output，可以只更新它们在chip_graph中的主类型，因为这有时是必要的
-                        node_found['GateDataType'] = new_node_type
+                        node_found['GateDataType'] = new_gate_value
                         # 简单的IO节点通常只有一个输出/输入，可以安全地也更新一下
-                        for port in node_found.get('Outputs', []): port['DataType'] = new_node_type
-                        for port in node_found.get('Inputs', []): port['DataType'] = new_node_type
+                        for port in node_found.get('Outputs', []): port['DataType'] = new_gate_value
+                        for port in node_found.get('Inputs', []): port['DataType'] = new_gate_value
                         continue # 跳过后续复杂的规则应用
+
+                    op_name = str(op_type)
+                    if op_name in ARRAY_OPERATION_TYPES:
+                        # 数组模块：GateDataType 代表 ArrayXxx，自身端口 DataType 需要按“数组元素类型”特殊处理
+                        node_found['GateDataType'] = new_gate_value
+                        node_found['SaveData'] = get_default_save_data(new_node_type)
+                        modification_made = True
+
+                        elem_type = _element_type_from_array_type(new_node_type)
+                        int_port_type = "IntegerNumber" if use_string_types else 2
+
+                        def set_port_type(port: Dict[str, Any], t: int | None, *, integer: bool = False) -> None:
+                            if integer:
+                                port['DataType'] = int_port_type
+                                return
+                            if t is None:
+                                return
+                            port['DataType'] = _coerce_gate_type_value(t, use_string_types=use_string_types)
+
+                        if op_name == "ArraysGet":
+                            ins = node_found.get("Inputs", []) or []
+                            outs = node_found.get("Outputs", []) or []
+                            if len(ins) > 0:
+                                set_port_type(ins[0], new_node_type)
+                            if len(ins) > 1:
+                                set_port_type(ins[1], None, integer=True)
+                            if len(outs) > 0:
+                                set_port_type(outs[0], elem_type)
+                            if len(outs) > 1:
+                                set_port_type(outs[1], None, integer=True)
+                            continue
+
+                        if op_name == "ArraysLength":
+                            ins = node_found.get("Inputs", []) or []
+                            outs = node_found.get("Outputs", []) or []
+                            if len(ins) > 0:
+                                set_port_type(ins[0], new_node_type)
+                            if len(outs) > 0:
+                                set_port_type(outs[0], None, integer=True)
+                            continue
+
+                        if op_name == "ArraysAdd":
+                            ins = node_found.get("Inputs", []) or []
+                            outs = node_found.get("Outputs", []) or []
+                            if len(ins) > 0:
+                                set_port_type(ins[0], new_node_type)
+                            if len(ins) > 1:
+                                set_port_type(ins[1], elem_type)
+                            if len(ins) > 2:
+                                set_port_type(ins[2], None, integer=True)
+                            if len(ins) > 3:
+                                set_port_type(ins[3], None, integer=True)
+                            if len(outs) > 0:
+                                set_port_type(outs[0], new_node_type)
+                            if len(outs) > 1:
+                                set_port_type(outs[1], None, integer=True)
+                            continue
+
+                        if op_name == "ArraysSet":
+                            ins = node_found.get("Inputs", []) or []
+                            outs = node_found.get("Outputs", []) or []
+                            if len(ins) > 0:
+                                set_port_type(ins[0], new_node_type)
+                            if len(ins) > 1:
+                                set_port_type(ins[1], None, integer=True)
+                            if len(ins) > 2:
+                                set_port_type(ins[2], elem_type)
+                            if len(ins) > 3:
+                                set_port_type(ins[3], None, integer=True)
+                            if len(outs) > 0:
+                                set_port_type(outs[0], new_node_type)
+                            continue
+
+                        if op_name == "ArraysRemoveAllByValue":
+                            ins = node_found.get("Inputs", []) or []
+                            outs = node_found.get("Outputs", []) or []
+                            if len(ins) > 0:
+                                set_port_type(ins[0], new_node_type)
+                            if len(ins) > 1:
+                                set_port_type(ins[1], elem_type)
+                            if len(ins) > 2:
+                                set_port_type(ins[2], None, integer=True)
+                            if len(outs) > 0:
+                                set_port_type(outs[0], new_node_type)
+                            continue
+
+                        if op_name == "ArraysRemoveByIndex":
+                            ins = node_found.get("Inputs", []) or []
+                            outs = node_found.get("Outputs", []) or []
+                            if len(ins) > 0:
+                                set_port_type(ins[0], new_node_type)
+                            if len(ins) > 1:
+                                set_port_type(ins[1], None, integer=True)
+                            if len(ins) > 2:
+                                set_port_type(ins[2], None, integer=True)
+                            if len(outs) > 0:
+                                set_port_type(outs[0], new_node_type)
+                            continue
+
+                        if op_name == "ArraysFind":
+                            ins = node_found.get("Inputs", []) or []
+                            outs = node_found.get("Outputs", []) or []
+                            if len(ins) > 0:
+                                set_port_type(ins[0], new_node_type)
+                            if len(ins) > 1:
+                                set_port_type(ins[1], elem_type)
+                            if len(ins) > 2:
+                                set_port_type(ins[2], None, integer=True)
+                            if len(ins) > 3:
+                                set_port_type(ins[3], None, integer=True)
+                            if len(outs) > 0:
+                                set_port_type(outs[0], None, integer=True)
+                            continue
+
+                        if op_name == "ArraysClear":
+                            ins = node_found.get("Inputs", []) or []
+                            outs = node_found.get("Outputs", []) or []
+                            if len(ins) > 0:
+                                set_port_type(ins[0], new_node_type)
+                            if len(ins) > 1:
+                                set_port_type(ins[1], None, integer=True)
+                            if len(outs) > 0:
+                                set_port_type(outs[0], new_node_type)
+                            continue
 
                     # --- 原有逻辑 (适用于普通模块) ---
                     print(f"     模块类型: '{module_name}' (OpType: {op_type}), 准备更新主类型为 {get_friendly_type_name(new_node_type)}")
 
                     # 更新节点本身的主数据类型和存档数据
-                    node_found['GateDataType'] = new_node_type
+                    node_found['GateDataType'] = new_gate_value
                     node_found['SaveData'] = get_default_save_data(new_node_type)
                     modification_made = True
 
                     # 根据规则更新端口
-                    rule = rules.get(str(op_type))
+                    rule = rules.get(op_key) if op_key is not None else None
                     if rule:
                         print(f"     应用 '{rule.get('module_name', '未知')}' 规则:")
+
+                        def resolve_rule_type(port_rule: Any) -> int | None:
+                            if port_rule is None or port_rule == "any":
+                                return None
+                            if port_rule == "same":
+                                return new_node_type
+                            if isinstance(port_rule, int):
+                                return port_rule
+                            if isinstance(port_rule, str):
+                                return TYPE_STR_TO_INT.get(port_rule)
+                            return None
+
                         # 更新输入端口
                         if 'Inputs' in node_found and 'inputs' in rule:
                             for i, port in enumerate(node_found['Inputs']):
                                 if i < len(rule['inputs']):
                                     port_rule = rule['inputs'][i]
-                                    final_type = new_node_type if port_rule == "same" else port_rule
-                                    port['DataType'] = final_type
-                                    print(f"       - 输入端口 {i}: 规则='{port_rule}', 更新为 -> {get_friendly_type_name(final_type)}")
+                                    final_type_int = resolve_rule_type(port_rule)
+                                    if final_type_int is None:
+                                        continue
+                                    port['DataType'] = _coerce_gate_type_value(final_type_int, use_string_types=use_string_types)
+                                    print(f"       - 输入端口 {i}: 规则='{port_rule}', 更新为 -> {get_friendly_type_name(final_type_int)}")
 
                         # 更新输出端口
                         if 'Outputs' in node_found and 'outputs' in rule:
                             for i, port in enumerate(node_found['Outputs']):
                                 if i < len(rule['outputs']):
                                     port_rule = rule['outputs'][i]
-                                    final_type = new_node_type if port_rule == "same" else port_rule
-                                    port['DataType'] = final_type
-                                    print(f"       - 输出端口 {i}: 规则='{port_rule}', 更新为 -> {get_friendly_type_name(final_type)}")
+                                    final_type_int = resolve_rule_type(port_rule)
+                                    if final_type_int is None:
+                                        continue
+                                    port['DataType'] = _coerce_gate_type_value(final_type_int, use_string_types=use_string_types)
+                                    print(f"       - 输出端口 {i}: 规则='{port_rule}', 更新为 -> {get_friendly_type_name(final_type_int)}")
                     else:
                         # 如果没有找到规则，执行旧的“全部统一”逻辑
                         print(f"     警告: 未找到 OpType {op_type} 的特定规则。将所有端口类型统一为 {get_friendly_type_name(new_node_type)}。")
                         for port in node_found.get('Inputs', []):
-                            port['DataType'] = new_node_type
+                            port['DataType'] = new_gate_value
                         for port in node_found.get('Outputs', []):
-                            port['DataType'] = new_node_type
+                            port['DataType'] = new_gate_value
                     
                     # (这部分逻辑已移到前面)
                     # conn_id = node_found.get('MechanicConnectionId') ...
@@ -214,7 +458,10 @@ def apply_data_type_modifications(
                     if item.get('Key') in connections_to_update:
                         new_type = connections_to_update[item.get('Key')]
                         print(f"  -> 在 {key_name} 中更新 '{item.get('Key')}' 的类型为 {get_friendly_type_name(new_type)}")
-                        item['GateDataType'] = new_type
+                        if isinstance(item.get("GateDataType"), str):
+                            item['GateDataType'] = TYPE_INT_TO_STR.get(new_type, new_type)
+                        else:
+                            item['GateDataType'] = new_type
                         item['SerializedValue'] = get_default_serialized_value(new_type)
                         updated = True
                 if updated:
@@ -233,7 +480,10 @@ def apply_data_type_modifications(
                 if item.get('Key') in connections_to_update:
                     new_type = connections_to_update[item.get('Key')]
                     print(f"  -> 在 mechanicSerializedInputs 中更新 '{item.get('Key')}' 的类型为 {get_friendly_type_name(new_type)}")
-                    item['DataType'] = new_type
+                    if isinstance(item.get("DataType"), str):
+                        item['DataType'] = TYPE_INT_TO_STR.get(new_type, new_type)
+                    else:
+                        item['DataType'] = new_type
                     item['GateData'] = get_default_gate_data(new_type)
                     updated = True
             if updated:
