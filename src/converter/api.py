@@ -5,7 +5,7 @@ import json
 import sys
 from pathlib import Path
 
-from src.converter.ast_converter import Converter
+from src.converter.dedup_converter import DedupConverter
 from src.error_handler import DSLError, FileIOError, ASTError, handle_error
 
 
@@ -25,7 +25,7 @@ def convert_dsl_to_graph(dsl_script_path: Path | str, output_path: Path | str) -
 
     try:
         tree = ast.parse(code, filename=str(dsl_script_path))
-        cvt = Converter()
+        cvt = DedupConverter()
         cvt.visit(tree)
         cvt.resolve_unresolved()
         cvt.finalize_outputs()

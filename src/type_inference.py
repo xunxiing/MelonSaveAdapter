@@ -90,7 +90,11 @@ def _infer_constant_type(attrs: Dict[str, Any]) -> int | None:
             return 128
         if all(isinstance(x, str) for x in v):
             return 256
+        # ArrayVector: 支持字典格式 {"x": ..., "y": ..., "z": ...} 和列表格式 [x, y, z, ...]
         if all(isinstance(x, dict) and all(k in x for k in ("x", "y", "z")) for x in v):
+            return 512
+        # 检查是否为向量列表（每个元素是包含至少3个数字的列表）
+        if all(isinstance(x, (list, tuple)) and len(x) >= 3 and all(isinstance(i, (int, float)) for i in x[:3]) for x in v):
             return 512
     return None
 

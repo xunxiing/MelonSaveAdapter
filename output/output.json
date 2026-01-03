@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "from_node_id": "ConstantNodeViewModel : 31855768-0639-4a00-aeb8-d5944322e548",
+    "from_port_index": 0,
+    "to_node_id": "ExitNodeViewModel : d235caa6-ee77-4c3a-94d8-4b069a892c9b",
+    "to_port_index": 0
+  }
+]

@@ -1,0 +1,522 @@
+{
+  "nodes": [
+    {
+      "id": "add_0",
+      "type": "Add",
+      "label": "Add",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "constant_0",
+      "type": "Constant",
+      "label": "Const 1",
+      "attrs": {
+        "value": 1
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_1",
+      "type": "Add",
+      "label": "Add",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "constant_1",
+      "type": "Constant",
+      "label": "Const 2",
+      "attrs": {
+        "value": 2
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_0",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "constant_2",
+      "type": "Constant",
+      "label": "Const 3",
+      "attrs": {
+        "value": 3
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_2",
+      "type": "Add",
+      "label": "Add",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "constant_3",
+      "type": "Constant",
+      "label": "Const hello",
+      "attrs": {
+        "value": "hello"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_4",
+      "type": "Constant",
+      "label": "Const world",
+      "attrs": {
+        "value": "world"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_1",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "constant_5",
+      "type": "Constant",
+      "label": "Const test",
+      "attrs": {
+        "value": "test"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_3",
+      "type": "Add",
+      "label": "Add",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "constant_6",
+      "type": "Constant",
+      "label": "Const {\"x\": 1, \"y\": 2, \"…",
+      "attrs": {
+        "value": {
+          "x": 1,
+          "y": 2,
+          "z": 3
+        }
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_7",
+      "type": "Constant",
+      "label": "Const {\"x\": 0, \"y\": 0, \"…",
+      "attrs": {
+        "value": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_2",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "constant_8",
+      "type": "Constant",
+      "label": "Const {\"x\": 2, \"y\": 2, \"…",
+      "attrs": {
+        "value": {
+          "x": 2,
+          "y": 2,
+          "z": 2
+        }
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_4",
+      "type": "Add",
+      "label": "Add",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "multiply_3",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "constant_9",
+      "type": "Constant",
+      "label": "Const {\"x\": 1, \"y\": 0, \"…",
+      "attrs": {
+        "value": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        }
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "add_5",
+      "type": "Add",
+      "label": "Add",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "constant_10",
+      "type": "Constant",
+      "label": "Const true",
+      "attrs": {
+        "value": true
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_11",
+      "type": "Constant",
+      "label": "Const false",
+      "attrs": {
+        "value": false
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "multiply_4",
+      "type": "Multiply",
+      "label": "Multiply",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "A",
+          "type": ""
+        },
+        {
+          "name": "B",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    }
+  ],
+  "edges": [
+    {
+      "from_node": "constant_0",
+      "from_port": "Output",
+      "to_node": "add_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "Output",
+      "to_node": "add_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "Output",
+      "to_node": "add_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_1",
+      "from_port": "Output",
+      "to_node": "add_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "Output",
+      "to_node": "multiply_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_2",
+      "from_port": "Output",
+      "to_node": "multiply_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_3",
+      "from_port": "Output",
+      "to_node": "add_2",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_4",
+      "from_port": "Output",
+      "to_node": "add_2",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_3",
+      "from_port": "Output",
+      "to_node": "multiply_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_5",
+      "from_port": "Output",
+      "to_node": "multiply_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_6",
+      "from_port": "Output",
+      "to_node": "add_3",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_7",
+      "from_port": "Output",
+      "to_node": "add_3",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_6",
+      "from_port": "Output",
+      "to_node": "multiply_2",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_8",
+      "from_port": "Output",
+      "to_node": "multiply_2",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "Output",
+      "to_node": "add_4",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_5",
+      "from_port": "Output",
+      "to_node": "add_4",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "Output",
+      "to_node": "multiply_3",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_9",
+      "from_port": "Output",
+      "to_node": "multiply_3",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_10",
+      "from_port": "Output",
+      "to_node": "add_5",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_11",
+      "from_port": "Output",
+      "to_node": "add_5",
+      "to_port": "B"
+    },
+    {
+      "from_node": "constant_10",
+      "from_port": "Output",
+      "to_node": "multiply_4",
+      "to_port": "A"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "Output",
+      "to_node": "multiply_4",
+      "to_port": "B"
+    }
+  ],
+  "variables": []
+}
