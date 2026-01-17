@@ -14,7 +14,7 @@
         "name": "Output"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "260": {
     "id": "260",
@@ -65,7 +65,7 @@
         "name": "A"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2324": {
     "id": "2324",
@@ -87,7 +87,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2304": {
     "id": "2304",
@@ -113,7 +113,7 @@
         "name": "A + B"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2309": {
     "id": "2309",
@@ -139,7 +139,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2310": {
     "id": "2310",
@@ -161,7 +161,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2311": {
     "id": "2311",
@@ -191,7 +191,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2312": {
     "id": "2312",
@@ -213,7 +213,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2307": {
     "id": "2307",
@@ -239,7 +239,7 @@
         "name": "A / B"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2308": {
     "id": "2308",
@@ -326,7 +326,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2316": {
     "id": "2316",
@@ -352,7 +352,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "258": {
     "id": "258",
@@ -395,7 +395,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2326": {
     "id": "2326",
@@ -417,7 +417,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2318": {
     "id": "2318",
@@ -439,7 +439,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2321": {
     "id": "2321",
@@ -461,7 +461,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2322": {
     "id": "2322",
@@ -483,7 +483,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2305": {
     "id": "2305",
@@ -509,7 +509,7 @@
         "name": "A - B"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2319": {
     "id": "2319",
@@ -531,7 +531,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2320": {
     "id": "2320",
@@ -553,7 +553,7 @@
         "name": "1 / A"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2328": {
     "id": "2328",
@@ -583,7 +583,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2323": {
     "id": "2323",
@@ -635,7 +635,7 @@
         "name": "Remainder"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2306": {
     "id": "2306",
@@ -661,7 +661,7 @@
         "name": "A × B"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2325": {
     "id": "2325",
@@ -687,7 +687,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2059": {
     "id": "2059",
@@ -3195,7 +3195,7 @@
         "name": "Input"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "255": {
     "id": "255",
@@ -3212,7 +3212,7 @@
       }
     ],
     "outputs": [],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2330": {
     "id": "2330",
