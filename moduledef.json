@@ -1101,7 +1101,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2561": {
     "id": "2561",
@@ -1279,7 +1279,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2817": {
     "id": "2817",
@@ -1305,7 +1305,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "2818": {
     "id": "2818",
@@ -2998,7 +2998,7 @@
         "name": "String"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "3596": {
     "id": "3596",
@@ -3178,7 +3178,7 @@
         "name": "Previous Value"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "256": {
     "id": "256",
@@ -3238,7 +3238,7 @@
         "name": "Result"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "3598": {
     "id": "3598",
@@ -3286,7 +3286,7 @@
         "name": "Value"
       }
     ],
-    "can_modify_data_type": false
+    "can_modify_data_type": true
   },
   "ArraysGet": {
     "id": "ArraysGet",
