@@ -30,6 +30,228 @@ class Converter(ast.NodeVisitor):
         self.unresolved: List[Tuple[str, str, str, str]] = []
         # 端口别名表： alias_var -> (up_var, up_port_str)
         self.alias_outputs: Dict[str, Tuple[str, str]] = {}
+        self._has_main_guard: bool = False
+        self._in_main_block: bool = False
+        self._set_targets: Set[str] = set()
+
+    # -------------------- DSL v2: main guard + static scope --------------------
+
+    @staticmethod
+    def _attr_chain_name(expr: ast.AST) -> str | None:
+        if isinstance(expr, ast.Name):
+            return expr.id
+        if isinstance(expr, ast.Attribute):
+            base = Converter._attr_chain_name(expr.value)
+            if base:
+                return f"{base}.{expr.attr}"
+            return expr.attr
+        return None
+
+    @staticmethod
+    def _is_main_guard_test(test: ast.AST) -> bool:
+        # __name__ == "__main__" / "__main__" == __name__
+        if not isinstance(test, ast.Compare):
+            return False
+        if len(test.ops) != 1 or len(test.comparators) != 1:
+            return False
+        if not isinstance(test.ops[0], ast.Eq):
+            return False
+
+        left = test.left
+        right = test.comparators[0]
+
+        def _is_name_main(a: ast.AST, b: ast.AST) -> bool:
+            return (
+                isinstance(a, ast.Name)
+                and a.id == "__name__"
+                and isinstance(b, ast.Constant)
+                and b.value == "__main__"
+            )
+
+        return _is_name_main(left, right) or _is_name_main(right, left)
+
+    @staticmethod
+    def _subscript_slice(expr: ast.Subscript) -> ast.AST:
+        sl = expr.slice
+        if isinstance(sl, ast.Index):  # type: ignore[attr-defined]
+            return sl.value  # type: ignore[attr-defined]
+        return sl
+
+    def _parse_decl_type(self, ann: ast.AST) -> tuple[str | None, bool]:
+        """
+        Parse typed declarations:
+        - Number/String/Vector/Entity
+        - ArrayNumber/ArrayString/ArrayVector/ArrayEntity
+        - List[T]
+        - Final[T]
+        """
+        is_final = False
+        cur = ann
+
+        while isinstance(cur, ast.Subscript):
+            base = (self._attr_chain_name(cur.value) or "").split(".")[-1].lower()
+            if base == "final":
+                is_final = True
+                cur = self._subscript_slice(cur)
+                continue
+            break
+
+        if isinstance(cur, ast.Subscript):
+            base = (self._attr_chain_name(cur.value) or "").split(".")[-1].lower()
+            if base == "list":
+                elem, _ = self._parse_decl_type(self._subscript_slice(cur))
+                mapping = {
+                    "Number": "ArrayNumber",
+                    "String": "ArrayString",
+                    "Vector": "ArrayVector",
+                    "Entity": "ArrayEntity",
+                }
+                return mapping.get(elem or ""), is_final
+
+        name = self._attr_chain_name(cur)
+        if not name:
+            return None, is_final
+        base = name.split(".")[-1]
+        allowed = {
+            "number": "Number",
+            "string": "String",
+            "vector": "Vector",
+            "entity": "Entity",
+            "arraynumber": "ArrayNumber",
+            "arraystring": "ArrayString",
+            "arrayvector": "ArrayVector",
+            "arrayentity": "ArrayEntity",
+        }
+        return allowed.get(base.lower()), is_final
+
+    @staticmethod
+    def _is_input_call(stmt: ast.Assign) -> bool:
+        if len(stmt.targets) != 1 or not isinstance(stmt.targets[0], ast.Name):
+            return False
+        if not isinstance(stmt.value, ast.Call):
+            return False
+        fn = Converter._canonical_type_name(_func_name(stmt.value.func))
+        return fn.lower() == "input"
+
+    @staticmethod
+    def _is_variable_def_dict_expr(stmt: ast.Expr) -> bool:
+        try:
+            lit = ast.literal_eval(stmt.value)
+        except Exception:
+            return False
+        return isinstance(lit, dict) and {"Key", "GateDataType", "Value"} <= set(lit.keys())
+
+    def visit_Module(self, node: ast.Module) -> None:  # noqa: N802
+        main_if: ast.If | None = None
+        for stmt in node.body:
+            if isinstance(stmt, ast.If) and self._is_main_guard_test(stmt.test):
+                if main_if is not None:
+                    raise ASTError(
+                        "Only one main block is allowed: if __name__ == \"__main__\":",
+                        context={"line": getattr(stmt, "lineno", None)},
+                    )
+                main_if = stmt
+
+        if main_if is None:
+            for stmt in node.body:
+                self.visit(stmt)
+            return
+
+        self._has_main_guard = True
+
+        for stmt in node.body:
+            if stmt is main_if:
+                continue
+
+            if (
+                isinstance(stmt, ast.Expr)
+                and isinstance(stmt.value, ast.Constant)
+                and isinstance(stmt.value.value, str)
+            ):
+                continue
+            if isinstance(stmt, (ast.Import, ast.ImportFrom, ast.Pass)):
+                continue
+            if isinstance(stmt, ast.AnnAssign):
+                self.visit(stmt)
+                continue
+            if isinstance(stmt, ast.Assign) and self._is_input_call(stmt):
+                self.visit(stmt)
+                continue
+            if isinstance(stmt, ast.Expr) and self._is_variable_def_dict_expr(stmt):
+                self.visit(stmt)
+                continue
+
+            raise ASTError(
+                "When a main block exists, only declarations and INPUT(...) are allowed at module scope.",
+                context={"line": getattr(stmt, "lineno", None)},
+            )
+
+        if main_if.orelse:
+            raise ASTError(
+                "main block does not support else:",
+                context={"line": getattr(main_if, "lineno", None)},
+            )
+
+        self._in_main_block = True
+        for stmt in main_if.body:
+            if isinstance(stmt, (ast.If, ast.For, ast.While, ast.Try, ast.With, ast.Match)):
+                raise ASTError(
+                    "Control flow is not supported inside main block; express logic via nodes/connections.",
+                    context={"line": getattr(stmt, "lineno", None)},
+                )
+            self.visit(stmt)
+        self._in_main_block = False
+
+    def visit_AnnAssign(self, node: ast.AnnAssign) -> None:  # noqa: N802
+        if not isinstance(node.target, ast.Name):
+            raise ASTError(
+                "Typed declarations must target a simple name, e.g. hp: Number = 100",
+                context={"line": getattr(node, "lineno", None)},
+            )
+
+        var_name = node.target.id
+        gate_type, is_final = self._parse_decl_type(node.annotation)
+        if gate_type is None:
+            raise ASTError(
+                f"Cannot parse type annotation for '{var_name}'",
+                context={"variable": var_name, "line": getattr(node, "lineno", None)},
+            )
+
+        value_lit: Any
+        if node.value is not None:
+            try:
+                value_lit = ast.literal_eval(node.value)
+            except Exception as e:  # noqa: BLE001
+                raise ASTError(
+                    f"Initial value for '{var_name}' must be a literal (number/string/vector-dict/array/None).",
+                    context={"variable": var_name, "line": getattr(node, "lineno", None)},
+                    original_error=e,
+                )
+        else:
+            value_lit = [] if gate_type.lower().startswith("array") else None
+
+        if is_final:
+            if node.value is None:
+                raise ASTError(
+                    f"Final constant '{var_name}' must have an initial value.",
+                    context={"variable": var_name, "line": getattr(node, "lineno", None)},
+                )
+            nid = self._emit_constant_node(value_lit)
+            if var_name not in self.var2node:
+                self.var2node[var_name] = nid
+            return
+
+        if any(vd.get("Key") == var_name for vd in self.g.variables):
+            raise ASTError(
+                f"Duplicate variable declaration: {var_name}",
+                context={"variable": var_name, "line": getattr(node, "lineno", None)},
+            )
+
+        self._register_variable_def(
+            {"Key": var_name, "GateDataType": gate_type, "Value": value_lit},
+            alias_var=var_name,
+            from_var_call=False,
+        )
 
     @staticmethod
     def _canonical_type_name(type_name: str) -> str:
@@ -104,9 +326,61 @@ class Converter(ast.NodeVisitor):
             return "string"
         if isinstance(lit, dict) and all(k in lit for k in ("x", "y", "z")):
             return "vector"
+        if isinstance(lit, (list, tuple)):
+            return "array"
         if lit is None:
             return "none"
         return "other"
+
+    def _emit_set_call(self, call: ast.Call) -> _ValueRef:
+        # SET(target_var, value, trigger=1.0)
+        if len(call.args) < 2:
+            raise ASTError("SET(...) requires at least 2 positional args: SET(var, value, [trigger])")
+        if len(call.args) > 3:
+            raise ASTError("SET(...) supports at most 3 positional args: SET(var, value, [trigger])")
+
+        target_expr = call.args[0]
+        value_expr = call.args[1]
+        trigger_expr: ast.AST | None = call.args[2] if len(call.args) == 3 else None
+
+        for kw in call.keywords or []:
+            if kw.arg is None:
+                continue
+            if kw.arg.lower() == "trigger":
+                trigger_expr = kw.value
+            else:
+                raise ASTError(f"SET(...) does not support keyword argument '{kw.arg}'")
+
+        if not isinstance(target_expr, ast.Name):
+            raise ASTError("SET(...) target must be a variable name, e.g. SET(hp, new_hp)")
+
+        var_name = target_expr.id
+        if var_name in self.alias_outputs:
+            raise ASTError(f"SET target '{var_name}' is an alias and cannot be written")
+
+        var_nid = self.var2node.get(var_name)
+        if not isinstance(var_nid, str):
+            raise ASTError(
+                f"SET target '{var_name}' is not declared; define it in static scope, e.g. {var_name}: Number = 0",
+                context={"variable": var_name},
+            )
+
+        if var_name in self._set_targets:
+            raise ASTError(
+                f"Multiple SET(...) calls for the same variable are not supported: {var_name}",
+                context={"variable": var_name},
+            )
+
+        value_ref = self._emit_expr_as_ref(value_expr)
+        self._add_edge_from_ref(value_ref, var_nid, "Value")
+
+        if trigger_expr is None:
+            trigger_expr = ast.Constant(value=1.0)
+        trigger_ref = self._emit_expr_as_ref(trigger_expr)
+        self._add_edge_from_ref(trigger_ref, var_nid, "Set")
+
+        self._set_targets.add(var_name)
+        return _ValueRef("node", var_nid, "__auto__")
 
     def _emit_expr_as_ref(self, expr: ast.AST) -> _ValueRef:
         if isinstance(expr, ast.Name):
@@ -153,8 +427,9 @@ class Converter(ast.NodeVisitor):
             lit = ast.literal_eval(expr)
         except Exception:
             lit = None
-        if isinstance(lit, (int, float, str)) or (
-            isinstance(lit, dict) and all(k in lit for k in ("x", "y", "z"))
+        if (
+            isinstance(lit, (int, float, str, list, tuple))
+            or (isinstance(lit, dict) and all(k in lit for k in ("x", "y", "z")))
         ):
             up_nid = self._emit_constant_node(lit)
             return _ValueRef("node", up_nid, "Output")
@@ -227,6 +502,9 @@ class Converter(ast.NodeVisitor):
             fn = self._canonical_type_name(_func_name(expr.func))
             fn_l = fn.lower()
 
+            if fn_l == "set":
+                return self._emit_set_call(expr)
+
             def _kw_map(keys: List[str]) -> Dict[str, ast.AST]:
                 out: Dict[str, ast.AST] = {}
                 for kw in expr.keywords or []:
@@ -238,6 +516,20 @@ class Converter(ast.NodeVisitor):
                     if i < len(args) and k not in out:
                         out[k] = args[i]
                 return out
+
+            # legacy sugar: MAGNITUDE(x) / TO_STRING(x)
+            if fn_l in ("magnitude", "to_string", "tostring"):
+                kw = _kw_map(["input"])
+                arg = kw.get("input") or kw.get("a") or kw.get("value")
+                if arg is None:
+                    raise ASTError(f"{fn} is missing argument", context={"node_type": fn})
+                call = ast.Call(
+                    func=ast.Name(id=fn, ctx=ast.Load()),
+                    args=[],
+                    keywords=[ast.keyword(arg="Input", value=arg)],
+                )
+                nid = self._emit_call_as_node(call)
+                return _ValueRef("node", nid, "__auto__")
 
             if fn_l in ("abs", "positive"):
                 kw = _kw_map(["input"])
@@ -585,6 +877,29 @@ class Converter(ast.NodeVisitor):
                 pass
 
     def visit_Assign(self, node: ast.Assign) -> None:
+        # DSL v2 sugar: in main block, assigning to a declared variable means "SET(variable, value)".
+        # Users often write: `hp = new_hp` expecting it to update the VARIABLE node.
+        if (
+            self._has_main_guard
+            and self._in_main_block
+            and len(node.targets) == 1
+            and isinstance(node.targets[0], ast.Name)
+        ):
+            target_name = node.targets[0].id
+            is_declared_var = any(
+                vd.get("Key") == target_name or vd.get("dsl_name") == target_name
+                for vd in (self.g.variables or [])
+                if isinstance(vd, dict)
+            )
+            if is_declared_var:
+                set_call = ast.Call(
+                    func=ast.Name(id="SET", ctx=ast.Load()),
+                    args=[ast.Name(id=target_name, ctx=ast.Load()), node.value],
+                    keywords=[],
+                )
+                self._emit_set_call(set_call)
+                return
+
         if (
             isinstance(node.value, ast.Call)
             and len(node.targets) == 1
@@ -594,6 +909,34 @@ class Converter(ast.NodeVisitor):
             call = node.value
             func_name = _func_name(call.func)
             ref = self._emit_expr_as_ref(call)
+
+            # DSL v2 compatibility:
+            # If a name is already declared as a VARIABLE node (via typed declaration / variable-def),
+            # then `x = INPUT(...)` should behave like "wire INPUT into the variable" instead of silently
+            # keeping the old mapping (which makes the new INPUT node unused and often confuses users).
+            call_type_l = self._canonical_type_name(func_name).lower()
+            if call_type_l == "input" and var in self.var2node and ref.kind == "node":
+                existing_nid = self.var2node.get(var)
+                existing_type_l = None
+                if isinstance(existing_nid, str):
+                    for node_rec in reversed(self.g.nodes):
+                        if node_rec.get("id") == existing_nid:
+                            existing_type_l = str(node_rec.get("type", "")).lower()
+                            break
+
+                if existing_type_l == "variable":
+                    # connect: INPUT -> VARIABLE.Value, and set always-on
+                    self._add_edge_from_ref(ref, existing_nid, "Value")
+                    one_nid = self._emit_constant_node(1.0)
+                    self._add_edge_from_ref(_ValueRef("node", one_nid, "Output"), existing_nid, "Set")
+                    self._set_targets.add(var)
+                    return
+
+                raise ASTError(
+                    f"'{var}' is already defined; cannot assign INPUT(...) to it",
+                    context={"variable": var, "line": getattr(node, "lineno", None)},
+                )
+
             if ref.kind == "node" and var not in self.var2node:
                 self.var2node[var] = ref.value
 
@@ -731,6 +1074,32 @@ class Converter(ast.NodeVisitor):
         label: str | None = None
         conns: List[Tuple[str, ast.AST]] = []
 
+        # DSL v2 I/O sugar:
+        # INPUT(name="Speed", data_type="Number")
+        # OUTPUT(INPUT=..., name="Result", data_type="Number")
+        io_attr_keys: set[str] = set()
+        if type_name.lower() in ("input", "output"):
+            io_attr_keys = {"name", "data_type", "datatype"}
+
+        def _literal_or_type_name(expr: ast.AST) -> Any:
+            try:
+                return ast.literal_eval(expr)
+            except Exception:
+                if isinstance(expr, ast.Name):
+                    # allow data_type=Number (without quotes) as a convenience
+                    if expr.id in (
+                        "Entity",
+                        "Number",
+                        "String",
+                        "Vector",
+                        "ArrayNumber",
+                        "ArrayString",
+                        "ArrayVector",
+                        "ArrayEntity",
+                    ):
+                        return expr.id
+                return None
+
         for kw in call.keywords or []:
             if kw.arg is None:
                 continue
@@ -747,6 +1116,19 @@ class Converter(ast.NodeVisitor):
             elif key == "label":
                 if isinstance(kw.value, ast.Constant) and isinstance(kw.value.value, str):
                     label = kw.value.value
+            elif key in io_attr_keys:
+                v = _literal_or_type_name(kw.value)
+                if v is None:
+                    raise ASTError(
+                        f"{type_name}.{key} must be a literal (e.g. name=\"...\", data_type=\"Number\")",
+                        context={"node_type": type_name},
+                    )
+                if key == "datatype":
+                    attrs["datatype"] = v
+                elif key == "data_type":
+                    attrs["data_type"] = v
+                else:
+                    attrs[key] = v
             else:
                 conns.append((key, kw.value))
 

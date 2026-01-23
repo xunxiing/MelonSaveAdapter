@@ -132,6 +132,54 @@ def build_serialized_value_for_variable(gate_type: str, value: Any) -> str | Non
 
     # 其他类型（包括 Entity / ArrayVector / ArrayEntity 等）保持默认模板
 
+    elif gate_type == "ArrayVector":
+        if isinstance(value, list):
+            vecs = []
+            for v in value:
+                if isinstance(v, dict) and all(k in v for k in ("x", "y", "z")):
+                    try:
+                        x = float(v.get("x", 0.0))
+                        y = float(v.get("y", 0.0))
+                        z = float(v.get("z", 0.0))
+                        w = float(v.get("w", 0.0)) if "w" in v else 0.0
+                    except Exception:
+                        continue
+                    vecs.append(
+                        {
+                            "x": x,
+                            "y": y,
+                            "z": z,
+                            "w": w,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0,
+                        }
+                    )
+                elif isinstance(v, (list, tuple)) and len(v) >= 3:
+                    try:
+                        x = float(v[0])
+                        y = float(v[1])
+                        z = float(v[2])
+                        w = float(v[3]) if len(v) >= 4 else 0.0
+                    except Exception:
+                        continue
+                    vecs.append(
+                        {
+                            "x": x,
+                            "y": y,
+                            "z": z,
+                            "w": w,
+                            "magnitude": 0.0,
+                            "sqrMagnitude": 0.0,
+                        }
+                    )
+            payload["Value"] = vecs
+            payload["Default"] = list(vecs)
+
+    elif gate_type == "ArrayEntity":
+        if isinstance(value, list):
+            payload["Value"] = list(value)
+            payload["Default"] = list(value)
+
     return json.dumps(payload, separators=(",", ":"))
 
 # ------------------------------------------------------------

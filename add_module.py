@@ -53,7 +53,14 @@ TYPE_STR_ALIASES = {
 
 def _uses_string_schema(existing_nodes: list) -> bool:
     for n in existing_nodes or []:
-        if isinstance(n.get("OperationType"), str):
+        op = n.get("OperationType")
+        # VariableNodeViewModel 在很多存档里天生就是字符串 OperationType="Variable"（且端口 DataType 也是字符串），
+        # 但这并不代表整个 chip_graph 需要切换到“字符串 schema”。
+        # 如果把它当作全局信号，会导致后续普通模块（如 Angle/Add 等）也被错误地用字符串 OperationType 生成，
+        # 进而出现 int/str 混合 schema，游戏侧往往直接加载失败。
+        if isinstance(op, str) and op.strip().lower() == "variable":
+            continue
+        if isinstance(op, str):
             return True
         if isinstance(n.get("GateDataType"), str):
             return True
