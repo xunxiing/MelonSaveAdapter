@@ -224,6 +224,25 @@
       ]
     },
     {
+      "id": "variable_2",
+      "type": "VARIABLE",
+      "label": "VARIABLE",
+      "attrs": {
+        "dsl_name": "integral_mem"
+      },
+      "inputs": [
+        {
+          "name": "Value",
+          "type": ""
+        },
+        {
+          "name": "Set",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
       "id": "constant_0",
       "type": "Constant",
       "label": "Const 1.0",
@@ -291,13 +310,13 @@
     {
       "from_node": "add_0",
       "from_port": "__auto__",
-      "to_node": "variable_0",
+      "to_node": "variable_2",
       "to_port": "Value"
     },
     {
       "from_node": "constant_0",
       "from_port": "Output",
-      "to_node": "variable_0",
+      "to_node": "variable_2",
       "to_port": "Set"
     }
   ],

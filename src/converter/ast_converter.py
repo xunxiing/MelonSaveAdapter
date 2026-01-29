@@ -358,8 +358,13 @@ class Converter(ast.NodeVisitor):
         if var_name in self.alias_outputs:
             raise ASTError(f"SET target '{var_name}' is an alias and cannot be written")
 
-        var_nid = self.var2node.get(var_name)
-        if not isinstance(var_nid, str):
+        # NOTE: a VARIABLE node created at declaration time acts as the "read handle" (value output).
+        # For SET, we intentionally create a *new* VARIABLE node instance as the "write handle"
+        # (value + trigger inputs), to avoid creating an invalid self-loop graph like:
+        #   VARIABLE.Value -> ... -> VARIABLE.Value
+        # The game/editor appears to reject such cycles; two VARIABLE nodes with the same key work.
+        declared_nid = self.var2node.get(var_name)
+        if not isinstance(declared_nid, str):
             raise ASTError(
                 f"SET target '{var_name}' is not declared; define it in static scope, e.g. {var_name}: Number = 0",
                 context={"variable": var_name},
@@ -371,16 +376,42 @@ class Converter(ast.NodeVisitor):
                 context={"variable": var_name},
             )
 
+        # create a fresh VARIABLE node for this SET (write)
+        try:
+            none_expr = ast.Constant(value=None)
+            write_call = ast.Call(
+                func=ast.Name(id="VARIABLE", ctx=ast.Load()),
+                args=[],
+                keywords=[
+                    ast.keyword(arg="Value", value=none_expr),
+                    ast.keyword(arg="Set", value=none_expr),
+                ],
+            )
+            write_nid = self._emit_call_as_node(write_call)
+            for node_rec in reversed(self.g.nodes):
+                if node_rec.get("id") == write_nid:
+                    attrs = node_rec.get("attrs") or {}
+                    if "dsl_name" not in attrs:
+                        attrs["dsl_name"] = var_name
+                    node_rec["attrs"] = attrs
+                    break
+        except Exception as e:  # noqa: BLE001
+            raise ASTError(
+                f"Failed to create VARIABLE node for SET({var_name}, ...)",
+                context={"variable": var_name},
+                original_error=e,
+            )
+
         value_ref = self._emit_expr_as_ref(value_expr)
-        self._add_edge_from_ref(value_ref, var_nid, "Value")
+        self._add_edge_from_ref(value_ref, write_nid, "Value")
 
         if trigger_expr is None:
             trigger_expr = ast.Constant(value=1.0)
         trigger_ref = self._emit_expr_as_ref(trigger_expr)
-        self._add_edge_from_ref(trigger_ref, var_nid, "Set")
+        self._add_edge_from_ref(trigger_ref, write_nid, "Set")
 
         self._set_targets.add(var_name)
-        return _ValueRef("node", var_nid, "__auto__")
+        return _ValueRef("node", write_nid, "__auto__")
 
     def _emit_expr_as_ref(self, expr: ast.AST) -> _ValueRef:
         if isinstance(expr, ast.Name):
