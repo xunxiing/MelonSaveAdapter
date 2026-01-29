@@ -88,31 +88,37 @@ def build_chip_index_from_moduledef(module_defs: Dict[str, Any]) -> Dict[str, di
             "can_modify_data_type": bool(mod_data.get("can_modify_data_type", True)),
         }
 
-    # 补充内置节点（输入 / 输出 / 常量）
-    chip_index[normalize("Input")] = {
-        "op_type": "256",
-        "friendly_name": "Input",
-        "game_name": "RootNodeViewModel",
-        "inputs": [],
-        "outputs": ["Number"],
-        "can_modify_data_type": True,
-    }
-    chip_index[normalize("Output")] = {
-        "op_type": "512",
-        "friendly_name": "Output",
-        "game_name": "ExitNodeViewModel",
-        "inputs": ["Number"],
-        "outputs": [],
-        "can_modify_data_type": True,
-    }
-    chip_index[normalize("Constant")] = {
-        "op_type": "257",
-        "friendly_name": "Constant",
-        "game_name": "ConstantNodeViewModel",
-        "inputs": [],
-        "outputs": ["Output"],
-        "can_modify_data_type": True,
-    }
+    # 补充内置节点（Input / Output / Constant）
+    # 说明：
+    # - 新版 moduledef.json 已包含这些模块（例如 Output 通常是 255，而不是旧版的 512）
+    # - 但为了兼容缺失/裁剪过的 moduledef，这里仅在缺失时才补充兜底定义
+    if normalize("Input") not in chip_index:
+        chip_index[normalize("Input")] = {
+            "op_type": "256",
+            "friendly_name": "Input",
+            "game_name": "RootNodeViewModel",
+            "inputs": [],
+            "outputs": ["Number"],
+            "can_modify_data_type": True,
+        }
+    if normalize("Output") not in chip_index:
+        chip_index[normalize("Output")] = {
+            "op_type": "255",
+            "friendly_name": "Output",
+            "game_name": "ExitNodeViewModel",
+            "inputs": ["Number"],
+            "outputs": [],
+            "can_modify_data_type": True,
+        }
+    if normalize("Constant") not in chip_index:
+        chip_index[normalize("Constant")] = {
+            "op_type": "257",
+            "friendly_name": "Constant",
+            "game_name": "ConstantNodeViewModel",
+            "inputs": [],
+            "outputs": ["Output"],
+            "can_modify_data_type": True,
+        }
     # 变量节点：不在 moduledef.json 中，手动补充
     # Inputs:  Value, Set
     # Outputs: Value（唯一输出端口，方便裸节点变量自动端口）

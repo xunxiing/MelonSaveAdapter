@@ -33,6 +33,10 @@ def _gate_type_label(data_type, *, use_string_schema: bool) -> str:
         if isinstance(data_type, str) and data_type.strip():
             return data_type.strip()
         return "Number"
+    if isinstance(data_type, int):
+        return TYPE_INT_TO_STR.get(data_type, "Number")
+    if isinstance(data_type, str) and data_type.strip() in TYPE_STR_TO_INT:
+        return data_type.strip()
     return "Number"
 
 # --- 辅助函数 ---
@@ -129,7 +133,8 @@ def create_output_node(name, data_type, *, use_string_schema: bool = False):
     # 2. chip_graph 的节点
     graph_node = {
       "Id": f"ExitNodeViewModel : {node_guid}",
-      "OperationType": "Exit" if use_string_schema else 512,
+      # moduledef.json 中 Output 模块常见为 255；旧版本可能使用 512，这里以新版为准
+      "OperationType": "Exit" if use_string_schema else 255,
       "Inputs": [
         {
           "Id": f"ExitNodeViewModel : {node_guid}\nInput : {label} {pin_guid}",

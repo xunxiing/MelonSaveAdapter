@@ -116,13 +116,16 @@ def _port_index(port_name: str, port_list: List[str]) -> int | None:
 class _PortTypeExpr:
     kind: str  # "fixed" | "var"
     value: int | str
+    # 当 kind=="fixed" 时，用于解决冲突：priority 越大越“强”（显式 data_type > 常量/变量 > 规则/端口类型推断）
+    priority: int = 0
 
 
 class _UnionFind:
     def __init__(self, items: Iterable[str]) -> None:
         self.parent: Dict[str, str] = {}
         self.rank: Dict[str, int] = {}
-        self.fixed: Dict[str, int] = {}
+        # root -> (priority, type)
+        self.fixed: Dict[str, Tuple[int, int]] = {}
         self.conflicts: List[Tuple[str, int, int]] = []
         for it in items:
             self.parent[it] = it
@@ -134,15 +137,25 @@ class _UnionFind:
             self.parent[x] = self.find(p)
         return self.parent.get(x, x)
 
-    def set_fixed(self, x: str, t: int) -> None:
+    def set_fixed(self, x: str, t: int, *, priority: int = 0) -> None:
         if t not in TYPE_DOMAIN:
             return
         r = self.find(x)
         cur = self.fixed.get(r)
         if cur is None:
-            self.fixed[r] = t
-        elif cur != t:
-            self.conflicts.append((r, cur, t))
+            self.fixed[r] = (priority, t)
+            return
+
+        cur_p, cur_t = cur
+        if cur_t == t:
+            if priority > cur_p:
+                self.fixed[r] = (priority, t)
+            return
+
+        # 冲突：保留更高优先级的类型（显式 > 推断/规则）
+        self.conflicts.append((r, cur_t, t))
+        if priority > cur_p:
+            self.fixed[r] = (priority, t)
 
     def union(self, a: str, b: str) -> None:
         ra, rb = self.find(a), self.find(b)
@@ -154,12 +167,35 @@ class _UnionFind:
         if self.rank[ra] == self.rank[rb]:
             self.rank[ra] += 1
 
-        ta = self.fixed.get(ra)
-        tb = self.fixed.get(rb)
-        if ta is None and tb is not None:
-            self.fixed[ra] = tb
-        elif ta is not None and tb is not None and ta != tb:
-            self.conflicts.append((ra, ta, tb))
+        fa = self.fixed.get(ra)
+        fb = self.fixed.get(rb)
+        if fb is None:
+            return
+        if fa is None:
+            self.fixed[ra] = fb
+            self.fixed.pop(rb, None)
+            return
+
+        pa, ta = fa
+        pb, tb = fb
+        if ta == tb:
+            self.fixed[ra] = (max(pa, pb), ta)
+            self.fixed.pop(rb, None)
+            return
+
+        self.conflicts.append((ra, ta, tb))
+        if pb > pa:
+            self.fixed[ra] = (pb, tb)
+        self.fixed.pop(rb, None)
+
+    def fixed_type(self, x: str) -> int | None:
+        r = self.find(x)
+        cur = self.fixed.get(r)
+        return cur[1] if cur is not None else None
+
+    def fixed_info(self, x: str) -> Tuple[int, int] | None:
+        r = self.find(x)
+        return self.fixed.get(r)
 
 
 def infer_gate_data_types(
@@ -196,7 +232,7 @@ def infer_gate_data_types(
 
         explicit = _parse_explicit_data_type(attrs)
         if explicit is not None:
-            uf.set_fixed(nid, explicit)
+            uf.set_fixed(nid, explicit, priority=100)
             node_default[nid] = explicit
             continue
 
@@ -206,7 +242,7 @@ def infer_gate_data_types(
         if friendly == "constant":
             t = _infer_constant_type(attrs)
             if t is not None:
-                uf.set_fixed(nid, t)
+                uf.set_fixed(nid, t, priority=90)
             node_default[nid] = t
             continue
 
@@ -214,7 +250,7 @@ def infer_gate_data_types(
             var_gate = meta.get("var_gate_type")
             t = _type_from_port_type_str(var_gate) if isinstance(var_gate, str) else None
             if t is not None:
-                uf.set_fixed(nid, t)
+                uf.set_fixed(nid, t, priority=90)
             node_default[nid] = t
             continue
 
@@ -260,13 +296,13 @@ def infer_gate_data_types(
             if direction == "inputs":
                 # inputs: ["Value", "Set"]
                 if idx == 1:
-                    return _PortTypeExpr("fixed", 1)
-                return _PortTypeExpr("fixed", t) if t is not None else None
+                    return _PortTypeExpr("fixed", 1, priority=90)
+                return _PortTypeExpr("fixed", t, priority=90) if t is not None else None
             # outputs: ["Value"]
-            return _PortTypeExpr("fixed", t) if t is not None else None
+            return _PortTypeExpr("fixed", t, priority=90) if t is not None else None
         if friendly == "constant":
             t = node_default.get(nid)
-            return _PortTypeExpr("fixed", t) if isinstance(t, int) else None
+            return _PortTypeExpr("fixed", t, priority=90) if isinstance(t, int) else None
 
         op_type = meta.get("op_type")
         op_key = str(op_type) if op_type is not None else None
@@ -280,7 +316,7 @@ def infer_gate_data_types(
                 if r == "same":
                     return _PortTypeExpr("var", nid)
                 if isinstance(r, int) and r in TYPE_DOMAIN:
-                    return _PortTypeExpr("fixed", r)
+                    return _PortTypeExpr("fixed", r, priority=60)
 
         # fallback: graph.json 节点实例端口 type（若提供）
         if isinstance(inst_ports, list) and idx < len(inst_ports):
@@ -288,7 +324,7 @@ def infer_gate_data_types(
             if isinstance(p, dict):
                 t = _type_from_port_type_str(p.get("type"))
                 if t is not None:
-                    return _PortTypeExpr("fixed", t)
+                    return _PortTypeExpr("fixed", t, priority=50)
 
         # fallback：无规则的模块，把 moduledef 里的端口 type 当做固定类型
         mod_def = module_defs.get(op_key) if op_key is not None else None
@@ -299,7 +335,7 @@ def infer_gate_data_types(
                 if isinstance(p, dict):
                     t = _type_from_port_type_str(p.get("type"))
                     if t is not None:
-                        return _PortTypeExpr("fixed", t)
+                        return _PortTypeExpr("fixed", t, priority=50)
 
         return None
 
@@ -330,16 +366,54 @@ def infer_gate_data_types(
             if int(right.value) == 8:
                 vector_hints[str(left.value)] = vector_hints.get(str(left.value), 0) + 1
                 continue
-            uf.set_fixed(str(left.value), int(right.value))
+            uf.set_fixed(str(left.value), int(right.value), priority=int(right.priority))
             continue
         if left.kind == "fixed" and right.kind == "var":
             if int(left.value) == 8:
                 vector_hints[str(right.value)] = vector_hints.get(str(right.value), 0) + 1
                 continue
-            uf.set_fixed(str(right.value), int(left.value))
+            uf.set_fixed(str(right.value), int(left.value), priority=int(left.priority))
             continue
         if left.kind == "var" and right.kind == "var":
-            uf.union(str(left.value), str(right.value))
+            l_id = str(left.value)
+            r_id = str(right.value)
+            l_fix = uf.fixed_info(l_id)
+            r_fix = uf.fixed_info(r_id)
+
+            def is_io(nid: str) -> bool:
+                m = node_map.get(nid) or {}
+                return str(m.get("friendly_name", "")).lower() in ("input", "output")
+
+            # 若其中一侧已经“强确定”，则不必 union；直接把信息向另一侧传播即可。
+            # 对 Vector(8) 依旧保持“软约束”，避免把整条链强制成 Vector，
+            # 但对 I/O 节点（Input/Output）允许传播以保证端口类型能自动匹配。
+            if l_fix is not None and r_fix is None:
+                lp, lt = l_fix
+                if int(lt) == 8 and not is_io(r_id):
+                    vector_hints[r_id] = vector_hints.get(r_id, 0) + 1
+                else:
+                    uf.set_fixed(r_id, int(lt), priority=int(lp))
+                continue
+            if r_fix is not None and l_fix is None:
+                rp, rt = r_fix
+                if int(rt) == 8 and not is_io(l_id):
+                    vector_hints[l_id] = vector_hints.get(l_id, 0) + 1
+                else:
+                    uf.set_fixed(l_id, int(rt), priority=int(rp))
+                continue
+
+            # 两边都有确定类型但不一致：Vector 视为软约束，避免强行合并产生“谁先谁赢”的结果
+            if l_fix is not None and r_fix is not None:
+                _lp, lt = l_fix
+                _rp, rt = r_fix
+                if int(lt) == 8 and int(rt) != 8:
+                    vector_hints[r_id] = vector_hints.get(r_id, 0) + 1
+                    continue
+                if int(rt) == 8 and int(lt) != 8:
+                    vector_hints[l_id] = vector_hints.get(l_id, 0) + 1
+                    continue
+
+            uf.union(l_id, r_id)
             continue
 
     # 2.5) ArraysGet 多态：若已能确定其 ArrayXxx 类型，则把 Output[0] 的元素类型回灌给下游节点
@@ -366,7 +440,7 @@ def infer_gate_data_types(
         if out_idx != 0:
             continue
 
-        arr_t = uf.fixed.get(uf.find(f_nid))
+        arr_t = uf.fixed_type(f_nid)
         if arr_t is None:
             arr_t = node_default.get(f_nid)
         if not isinstance(arr_t, int):
@@ -386,7 +460,7 @@ def infer_gate_data_types(
         if right is None:
             continue
         if right.kind == "var":
-            uf.set_fixed(str(right.value), int(elem_t))
+            uf.set_fixed(str(right.value), int(elem_t), priority=50)
 
     # 3) 给每个集合选择最终类型：fixed 优先，否则用集合内默认值投票
     groups: Dict[str, List[str]] = {}
@@ -395,7 +469,7 @@ def infer_gate_data_types(
 
     group_type: Dict[str, int] = {}
     for root, members in groups.items():
-        fixed = uf.fixed.get(uf.find(root))
+        fixed = uf.fixed_type(root)
         if fixed is not None:
             group_type[root] = fixed
             continue

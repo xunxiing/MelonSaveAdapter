@@ -56,8 +56,8 @@ def _element_type_from_array_type(t: int) -> int | None:
         return 1
     return None
 # 需要被忽略特殊处理的模块 OperationType
-# 256: Input, 257: Constant, 512: Output；新版也可能使用 "Root"/"Exit"
-IGNORED_OPERATION_TYPES = {256, 512, "Root", "Exit"}
+# 256: Input, 257: Constant, 255: Output（新版）；旧版也可能使用 512；新版字符串 schema 使用 "Root"/"Exit"
+IGNORED_OPERATION_TYPES = {256, 255, 512, "Root", "Exit"}
 
 
 # --- 默认值生成器 (无变化) ---
