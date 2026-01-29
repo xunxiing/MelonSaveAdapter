@@ -26,6 +26,7 @@ from layout_chip import run_layout_engine, find_and_update_chip_graph
 from batch_connect import apply_connections
 from archive_creator import run_archive_creation_stage
 from src.special_modules import build_special_module, append_unused_variable_definitions
+from src.data_types import GateDataType
 from src.type_inference import infer_gate_data_types
 from src.error_handler import (
     PipelineError,
@@ -268,7 +269,16 @@ def parse_graph_v2(graph: dict, chip_index: Dict[str, dict]) -> Tuple[List[Any],
 
         if node_type_lower == "variable" and isinstance(module_entry, dict):
             node_map[node["id"]]["var_key"] = module_entry.get("key")
-            node_map[node["id"]]["var_gate_type"] = module_entry.get("gateDataType")
+            # 确保 gateDataType 转换为整数
+            gdt = module_entry.get("gateDataType")
+            if gdt:
+                 # 尝试转换，如果是字符串
+                if isinstance(gdt, str):
+                    try:
+                        gdt = int(GateDataType.from_string(gdt))
+                    except ValueError:
+                        pass
+                node_map[node["id"]]["var_gate_type"] = gdt
 
     # 若存在变量定义但 DSL 中没有显式的 VARIABLE 节点：
     # 为每个“完全未被使用”的变量定义追加一个“孤立的”变量模块，

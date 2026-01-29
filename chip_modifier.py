@@ -133,8 +133,11 @@ def create_output_node(name, data_type, *, use_string_schema: bool = False):
     # 2. chip_graph 的节点
     graph_node = {
       "Id": f"ExitNodeViewModel : {node_guid}",
-      # moduledef.json 中 Output 模块常见为 255；旧版本可能使用 512，这里以新版为准
-      "OperationType": "Exit" if use_string_schema else 255,
+      # Output 的 OperationType 在不同版本里可能是：
+      # - string schema: "Exit"
+      # - int schema: 512（旧版常见；有些新版为 255）
+      # 为了兼容当前工具链内置的旧版存档模板，int schema 默认用 512。
+      "OperationType": "Exit" if use_string_schema else 512,
       "Inputs": [
         {
           "Id": f"ExitNodeViewModel : {node_guid}\nInput : {label} {pin_guid}",

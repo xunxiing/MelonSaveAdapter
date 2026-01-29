@@ -33,25 +33,29 @@ except ModuleNotFoundError:
     print(" 无法找到 chip_modifier.py，请确保它与本脚本位于同一目录。")
     sys.exit(1)
 
-# 变量模块：用于写入 chip_variables + 变量节点
+# 变量模块：使用新的 VariableManager
 try:
+    from src.variable_manager import VariableManager
+    # 兼容现有代码，仍使用 variable_mod.find_meta_data (它其实只是 chip_modifier.find_meta_data 的别名)
     variable_mod = importlib.import_module("variable")
-except ModuleNotFoundError:
-    print(" 无法找到 variable.py，请确保它与本脚本位于同一目录。")
-    sys.exit(1)
+    find_variable_meta_data = variable_mod.find_meta_data
+except (ImportError, ModuleNotFoundError):
+    # 尝试直接导入 variable.py 以兼容独立运行模式
+    try:
+        variable_mod = importlib.import_module("variable")
+        find_variable_meta_data = variable_mod.find_meta_data
+        print(" 提示: 使用旧版 variable.py 兼容模式 (未找到 src.variable_manager)")
+    except ModuleNotFoundError:
+        print(" 无法找到 variable.py，请确保它与本脚本位于同一目录。")
+        sys.exit(1)
 
 # 【修改】create_new_node 的调用方式将改变，但导入本身不变
-create_new_node = add_module.create_new_node 
+create_new_node = add_module.create_new_node
 find_meta_data = chip_modifier.find_meta_data
 create_input_node = chip_modifier.create_input_node
 create_output_node = chip_modifier.create_output_node
 create_constant_node = chip_modifier.create_constant_node
 add_node_to_graph = chip_modifier.add_node_to_graph
-
-create_variable_definition = variable_mod.create_variable_definition
-create_variable_node = variable_mod.create_graph_node
-find_variable_meta_data = variable_mod.find_meta_data
-DEFAULT_SERIALIZED_VALUES = variable_mod.DEFAULT_SERIALIZED_VALUES
 # ------------------------------------------------------------
 # 辅助函数 (无变化)
 # ------------------------------------------------------------
@@ -73,114 +77,7 @@ def fuzzy_best_match(name: str, candidates: List[str], cutoff: float = 0.5) -> s
     return match[0] if match else None
 
 
-def build_serialized_value_for_variable(gate_type: str, value: Any) -> str | None:
-    """
-    根据 GateDataType 和 DSL 中提供的 Value，构造 chip_variables 所需的 SerializedValue 字符串。
-
-    若无法识别类型或值不合法，则返回基于默认模板的序列化结果（不改动默认值）。
-    """
-    base = DEFAULT_SERIALIZED_VALUES.get(gate_type)
-    if base is None:
-        return None
-
-    payload = copy.deepcopy(base)
-
-    # 标量 Number
-    if gate_type == "Number":
-        try:
-            if value is not None:
-                v = float(value)
-                payload["Value"] = v
-                payload["Default"] = v
-        except Exception:
-            pass
-
-    # 字符串 String
-    elif gate_type == "String":
-        if value is not None:
-            s = str(value)
-            payload["Value"] = s
-            payload["Default"] = s
-
-    # 向量 Vector：期望 dict {x,y,z[,w]}
-    elif gate_type == "Vector":
-        if isinstance(value, dict):
-            for axis in ("x", "y", "z", "w"):
-                if axis in value:
-                    try:
-                        v = float(value[axis])
-                    except Exception:
-                        continue
-                    payload["Value"][axis] = v
-                    if isinstance(payload.get("Default"), dict):
-                        payload["Default"][axis] = v
-
-    # 数组类型：简单地把 Value/Default 替换为传入的列表
-    elif gate_type == "ArrayNumber":
-        if isinstance(value, list):
-            try:
-                arr = [float(v) for v in value]
-            except Exception:
-                arr = []
-            payload["Value"] = arr
-            payload["Default"] = list(arr)
-    elif gate_type == "ArrayString":
-        if isinstance(value, list):
-            arr = [str(v) for v in value]
-            payload["Value"] = arr
-            payload["Default"] = list(arr)
-
-    # 其他类型（包括 Entity / ArrayVector / ArrayEntity 等）保持默认模板
-
-    elif gate_type == "ArrayVector":
-        if isinstance(value, list):
-            vecs = []
-            for v in value:
-                if isinstance(v, dict) and all(k in v for k in ("x", "y", "z")):
-                    try:
-                        x = float(v.get("x", 0.0))
-                        y = float(v.get("y", 0.0))
-                        z = float(v.get("z", 0.0))
-                        w = float(v.get("w", 0.0)) if "w" in v else 0.0
-                    except Exception:
-                        continue
-                    vecs.append(
-                        {
-                            "x": x,
-                            "y": y,
-                            "z": z,
-                            "w": w,
-                            "magnitude": 0.0,
-                            "sqrMagnitude": 0.0,
-                        }
-                    )
-                elif isinstance(v, (list, tuple)) and len(v) >= 3:
-                    try:
-                        x = float(v[0])
-                        y = float(v[1])
-                        z = float(v[2])
-                        w = float(v[3]) if len(v) >= 4 else 0.0
-                    except Exception:
-                        continue
-                    vecs.append(
-                        {
-                            "x": x,
-                            "y": y,
-                            "z": z,
-                            "w": w,
-                            "magnitude": 0.0,
-                            "sqrMagnitude": 0.0,
-                        }
-                    )
-            payload["Value"] = vecs
-            payload["Default"] = list(vecs)
-
-    elif gate_type == "ArrayEntity":
-        if isinstance(value, list):
-            payload["Value"] = list(value)
-            payload["Default"] = list(value)
-
-    return json.dumps(payload, separators=(",", ":"))
+# build_serialized_value_for_variable 已移除，改用 VariableManager 内部逻辑
 
 # ------------------------------------------------------------
 # 主处理逻辑 (核心重构)
@@ -267,17 +164,25 @@ def add_modules(
     existing_nodes = chip_graph_data["Nodes"]
 
     # 新版存档：OperationType/GateDataType/DataType 可能为字符串
-    use_string_schema = False
-    for n in existing_nodes or []:
-        if isinstance(n.get("OperationType"), str) or isinstance(n.get("GateDataType"), str):
-            use_string_schema = True
-            break
-        for p in (n.get("Inputs") or []) + (n.get("Outputs") or []):
-            if isinstance(p.get("DataType"), str):
+    # 注意：VariableNodeViewModel 往往天然是 OperationType="Variable"(str)，但这不代表全图需要切换到 string schema。
+    # 这里复用 add_module._uses_string_schema 的判断逻辑，避免误判导致 int/str schema 混用而游戏加载失败。
+    try:
+        use_string_schema = bool(add_module._uses_string_schema(existing_nodes))
+    except Exception:
+        use_string_schema = False
+        for n in existing_nodes or []:
+            op = n.get("OperationType")
+            if isinstance(op, str) and op.strip().lower() == "variable":
+                continue
+            if isinstance(op, str) or isinstance(n.get("GateDataType"), str):
                 use_string_schema = True
                 break
-        if use_string_schema:
-            break
+            for p in (n.get("Inputs") or []) + (n.get("Outputs") or []):
+                if isinstance(p.get("DataType"), str):
+                    use_string_schema = True
+                    break
+            if use_string_schema:
+                break
     
     # ---------- 3. 【核心修改】从 moduledef.json 构建模块匹配映射 ----------
     candidate_map: Dict[str, str] = {}
@@ -410,32 +315,55 @@ def add_modules(
                 print(" 警告: 跳过一个变量节点，因为缺少合法的 key。")
                 continue
 
-            # 1) chip_variables 中追加 / 更新变量定义
-            existing_def = None
-            for vd in chip_variables_data:
-                if vd.get("Key") == var_key:
-                    existing_def = vd
-                    break
+            # 使用 VariableManager (如果可用)
+            if 'VariableManager' in globals():
+                # 1) chip_variables 中追加 / 更新变量定义
+                existing_def_idx = -1
+                for i, vd in enumerate(chip_variables_data):
+                    if vd.get("Key") == var_key:
+                        existing_def_idx = i
+                        break
 
-            if existing_def is None:
-                var_def = create_variable_definition(var_key, None, gate_type)
+                # 无论是否存在，都尝试生成一个新的定义（包含可能更新的 Value）
+                # 注意：VariableManager.create_definition 会自动处理类型转换(str->int)
+                # 注意：Variable 节点在很多存档里天然使用 string schema（OperationType="Variable"，且端口类型为字符串）。
+                # 即使整体 chip_graph 仍是旧版 int schema，我们也应当让变量相关结构保持 string schema，避免游戏侧解析失败。
+                var_string_schema = True
+                new_var_def = VariableManager.create_definition(
+                    var_key,
+                    gate_type,
+                    init_value,
+                    use_string_schema=var_string_schema,
+                )
+                
+                if existing_def_idx >= 0:
+                    # 如果已存在，仅在需要时更新值？
+                    # 原逻辑：同一个 Key 的第一个实例使用变量定义中的 Value 作为初始值，其余实例 value=None
+                    # 这里 req_item["value"] 已经在 build_variable_module 中处理过（只有第一次有值）
+                    if init_value is not None:
+                        # 覆盖旧定义的 SerializedValue
+                        chip_variables_data[existing_def_idx]["SerializedValue"] = new_var_def["SerializedValue"]
+                        # 确保 GateDataType 也更新 (特别是修复 bug 时)
+                        chip_variables_data[existing_def_idx]["GateDataType"] = new_var_def["GateDataType"]
+                else:
+                    chip_variables_data.append(new_var_def)
+
+                # 2) chip_graph 中生成 Variable 节点
+                # 需要 y_pos_counter
+                graph_node = VariableManager.create_node(
+                    var_key,
+                    gate_type,
+                    {"x": 0.0, "y": 0.0},  # 位置将在 add_node_to_graph 中被覆盖(y)
+                    use_string_schema=var_string_schema,
+                )
+                node_id = graph_node["Id"]
+                print(f"为新节点生成ID: {node_id}")
+                y_pos_counter = add_node_to_graph(chip_graph_data, graph_node, y_pos_counter)
+                print(" 已添加: VariableNodeViewModel (via Manager)")
+                created_nodes_info.append({"class_name": "VariableNodeViewModel", "full_id": node_id})
             else:
-                var_def = existing_def
-
-            serialized = build_serialized_value_for_variable(gate_type, init_value)
-            if serialized is not None:
-                var_def["SerializedValue"] = serialized
-
-            if existing_def is None:
-                chip_variables_data.append(var_def)
-
-            # 2) chip_graph 中生成 Variable 节点
-            graph_node = create_variable_node(var_key, gate_type)
-            node_id = graph_node["Id"]
-            print(f"为新节点生成ID: {node_id}")
-            y_pos_counter = add_node_to_graph(chip_graph_data, graph_node, y_pos_counter)
-            print(" 已添加: VariableNodeViewModel")
-            created_nodes_info.append({"class_name": "VariableNodeViewModel", "full_id": node_id})
+                # 严重错误：VariableManager 不可用
+                print("错误：VariableManager 未加载，无法创建变量模块。")
 
     # ---------- 5. 写回修改 (无变化) ----------
     if chip_inputs_meta:

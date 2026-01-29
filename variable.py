@@ -4,24 +4,22 @@ import os
 import sys
 import uuid # 必须引入 uuid 库来生成唯一的ID
 
+# 引入核心管理器
+try:
+    from src.variable_manager import VariableManager
+except ImportError:
+    # 尝试添加当前目录到 sys.path (用于独立运行时)
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    try:
+        from src.variable_manager import VariableManager
+    except ImportError:
+        print("[错误] 无法导入 src.variable_manager。请确保 src 目录完整。")
+        sys.exit(1)
+
 # === 配置区域 ===
 
-# 默认的变量属性
-DEFAULT_SERIALIZED_VALUES = {
-    "Number": {"Value": 0.0, "Default": 0.0, "Min": -3.40282347E+38, "Max": 3.40282347E+38, "IsCheckbox": False},
-    "String": {"IsMultiline": False, "Value": "", "Default": None, "MaxLength": 2147483647},
-    "Vector": {
-        "Value": {"x": 0.0, "y": 0.0, "z": 0.0, "w": 0.0, "magnitude": 0.0, "sqrMagnitude": 0.0},
-        "Default": {"x": 0.0, "y": 0.0, "z": 0.0, "w": 0.0, "magnitude": 0.0, "sqrMagnitude": 0.0},
-        "MinVector": {"x": -3.40282347E+38, "y": -3.40282347E+38, "z": -3.40282347E+38, "w": -3.40282347E+38},
-        "MaxVector": {"x": 3.40282347E+38, "y": 3.40282347E+38, "z": 3.40282347E+38, "w": 3.40282347E+38}
-    },
-    "Entity": None,
-    "ArrayNumber": {"Value": [], "Default": []},
-    "ArrayString": {"Value": [], "Default": []},
-    "ArrayVector": {"Value": [], "Default": []},
-    "ArrayEntity": {"Value": [], "Default": []}
-}
+# 为了兼容旧代码引用，保留引用但指向 Manager
+DEFAULT_SERIALIZED_VALUES = VariableManager.DEFAULT_SERIALIZED_VALUES
 
 def load_json(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -47,71 +45,62 @@ def find_meta_data(data, target_key):
     except Exception:
         return None, None
 
-def create_variable_definition(key, data_name, data_type):
-    """创建变量定义 (在 chip_variables 中使用)"""
-    default_val = DEFAULT_SERIALIZED_VALUES.get(data_type)
-    serialized_str = json.dumps(default_val) if default_val is not None else None
-        
-    return {
-        "Key": key,
-        "DataName": data_name if data_name else f"#{key.capitalize()}",
-        "SerializedValue": serialized_str,
-        "IsSaveBetweenSession": False,
-        "GateDataType": data_type
-    }
+def create_variable_definition(key, data_name, data_type, *, use_string_schema: bool):
+    """
+    创建变量定义 (在 chip_variables 中使用)。
+    现在委托给 VariableManager，并根据存档 schema 输出 GateDataType(int/str)。
+    """
+    return VariableManager.create_definition(
+        key,
+        data_type,
+        data_name=data_name,
+        use_string_schema=use_string_schema,
+    )
 
-def create_graph_node(var_key, data_type, pos_x=0.0, pos_y=0.0):
-    """创建可视化节点对象 (在 chip_graph 中使用)"""
-    
-    # 1. 生成各种 UUID
-    node_guid = str(uuid.uuid4())
-    input_val_guid = str(uuid.uuid4())
-    input_set_guid = str(uuid.uuid4())
-    output_guid = str(uuid.uuid4())
-    
-    # 2. 构造复杂的 ID 字符串 (这是游戏识别节点的关键格式)
-    # 格式通常是: VariableNodeViewModel : {GUID}
-    node_id = f"VariableNodeViewModel : {node_guid}"
-    
-    # 输入端口 ID 格式: {NodeID}\nInput : {Type} {GUID}
-    input_val_id = f"{node_id}\nInput : {data_type} {input_val_guid}"
-    input_set_id = f"{node_id}\nInput : Number {input_set_guid}" # 第二个输入总是 Number (用于激活)
-    
-    # 输出端口 ID 格式: {NodeID}\nOutput : {Type} {GUID}
-    output_id = f"{node_id}\nOutput : {data_type} {output_guid}"
-    
-    # 3. 组装节点对象
-    new_node = {
-        "Id": node_id,
-        "ModelVersion": 2,
-        "Version": "0.1",
-        "OperationType": "Variable",
-        "Inputs": [
-            {
-                "Id": input_val_id,
-                "DataType": data_type,
-                "connectedOutputIdModel": None
-            },
-            {
-                "Id": input_set_id,
-                "DataType": "Number", # Set 端口总是 Number
-                "connectedOutputIdModel": None
-            }
-        ],
-        "Outputs": [
-            {
-                "Id": output_id,
-                "DataType": data_type,
-                "ConnectedInputsIds": []
-            }
-        ],
-        "VisualPosition": {"x": pos_x, "y": pos_y}, # 放置在画布的位置
-        "VisualCollapsed": False,
-        "MechanicConnectionId": var_key, # 关键：这里连接到变量定义
-        "GateDataType": data_type,
-        "SaveData": None
-    }
-    return new_node
+def create_graph_node(var_key, data_type, pos_x=0.0, pos_y=0.0, *, use_string_schema: bool):
+    """
+    创建可视化节点对象 (在 chip_graph 中使用)。
+    现在委托给 VariableManager，并根据存档 schema 输出 DataType(int/str)。
+    """
+    return VariableManager.create_node(
+        var_key,
+        data_type,
+        {"x": pos_x, "y": pos_y},
+        use_string_schema=use_string_schema,
+    )
+
+
+def detect_string_schema(nodes: list) -> bool:
+    """
+    判断当前 chip_graph 使用的 schema：
+    - 旧版：OperationType/GateDataType/DataType 多为 int
+    - 新版：以上字段可能为 str
+
+    注意：VariableNodeViewModel 往往天然是 OperationType="Variable"(str)，单靠它可能误判。
+    """
+    # 第一轮：忽略 Variable 节点（避免误判）
+    saw_non_variable = False
+    for n in nodes or []:
+        op = n.get("OperationType")
+        if isinstance(op, str) and op.strip().lower() == "variable":
+            continue
+        saw_non_variable = True
+        if isinstance(op, str) or isinstance(n.get("GateDataType"), str):
+            return True
+        for p in (n.get("Inputs") or []) + (n.get("Outputs") or []):
+            if isinstance(p.get("DataType"), str):
+                return True
+
+    # 第二轮：如果图里只有 Variable 节点，则用它作为兜底判断
+    if not saw_non_variable:
+        for n in nodes or []:
+            if isinstance(n.get("GateDataType"), str):
+                return True
+            for p in (n.get("Inputs") or []) + (n.get("Outputs") or []):
+                if isinstance(p.get("DataType"), str):
+                    return True
+
+    return False
 
 def main():
     parser = argparse.ArgumentParser(description="自动添加变量并生成节点到画布")
@@ -130,6 +119,23 @@ def main():
 
     data = load_json(args.file)
     
+    # === 第二步：在画布上生成节点 (chip_graph) ===
+    meta_datas_graph, graph_index = find_meta_data(data, "chip_graph")
+    if meta_datas_graph is None:
+        print("[错误] 找不到 chip_graph")
+        sys.exit(1)
+        
+    # 解析当前的图表数据
+    raw_graph_str = meta_datas_graph[graph_index]["stringValue"]
+    if not raw_graph_str:
+        print("[错误] chip_graph 为空，无法添加节点")
+        sys.exit(1)
+        
+    graph_data = json.loads(raw_graph_str)
+    # Variable 节点/定义在很多存档里天然使用 string schema（即使整体 chip_graph 仍是旧版 int schema）。
+    # 这里固定用 string schema，避免插入变量后游戏侧解析失败。
+    use_string_schema = True
+
     # === 第一步：添加变量定义 (chip_variables) ===
     meta_datas, var_index = find_meta_data(data, "chip_variables")
     if meta_datas is None:
@@ -145,28 +151,25 @@ def main():
         print(f"[警告] 变量定义的 Key '{args.key}' 已存在。")
         # 即使存在，我们也可以继续尝试添加节点(如果用户想补全节点的话)
     else:
-        new_var_def = create_variable_definition(args.key, args.name, args.type)
+        new_var_def = create_variable_definition(
+            args.key,
+            args.name,
+            args.type,
+            use_string_schema=use_string_schema,
+        )
         variables_list.append(new_var_def)
         # 保存回 stringValue
         meta_datas[var_index]["stringValue"] = json.dumps(variables_list)
         print(f"[1/2] 变量定义已添加: {args.key}")
 
-    # === 第二步：在画布上生成节点 (chip_graph) ===
-    meta_datas_graph, graph_index = find_meta_data(data, "chip_graph")
-    if meta_datas_graph is None:
-        print("[错误] 找不到 chip_graph")
-        sys.exit(1)
-        
-    # 解析当前的图表数据
-    raw_graph_str = meta_datas_graph[graph_index]["stringValue"]
-    if not raw_graph_str:
-        print("[错误] chip_graph 为空，无法添加节点")
-        sys.exit(1)
-        
-    graph_data = json.loads(raw_graph_str)
-    
     # 创建新节点
-    new_node = create_graph_node(args.key, args.type, args.x, args.y)
+    new_node = create_graph_node(
+        args.key,
+        args.type,
+        args.x,
+        args.y,
+        use_string_schema=use_string_schema,
+    )
     
     # 添加到 Nodes 列表
     if "Nodes" not in graph_data:

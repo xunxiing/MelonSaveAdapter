@@ -216,7 +216,27 @@
           "type": ""
         }
       ],
-      "outputs": []
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_0",
+      "type": "Constant",
+      "label": "Const 1.0",
+      "attrs": {
+        "value": 1.0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
     }
   ],
   "edges": [
@@ -267,6 +287,18 @@
       "from_port": "__auto__",
       "to_node": "add_0",
       "to_port": "B"
+    },
+    {
+      "from_node": "add_0",
+      "from_port": "__auto__",
+      "to_node": "variable_0",
+      "to_port": "Value"
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "Output",
+      "to_node": "variable_0",
+      "to_port": "Set"
     }
   ],
   "variables": [

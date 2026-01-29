@@ -28,6 +28,7 @@ if __name__ == "__main__":
     
     # 调试输出
     OUTPUT(INPUT=error, attrs={"name": "ErrorDebug"})
+    
 
     # --- 2. P (比例项) ---
     P_Term = error * Kp
