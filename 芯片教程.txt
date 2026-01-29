@@ -13,10 +13,10 @@
 1.4 INPUT (输入参数) 
 
  核心功能: 定义芯片的一个输入参数，允许从芯片外部或芯片内部的其他模块连接一个值到此参数。
- 输入端口: 无 (其值由外部设定、直接调整或连接)。
+ 输入端口: 无。
  输出端口:
     * `OUTPUT (NULL)` :输出一个数据。
- 参数设置: 每个 INPUT 模块可以在其属性中定义一个名称(例如 `#INPUT 1`)，用于在芯片逻辑中识别和引用。同时，可以设置其数据类型(如图片所示，可以是实体、数值、字符串、向量，数组）本模块必须规定datatype
+ 参数设置: 每个 INPUT 模块可以在其属性中定义一个名称(例如 `#INPUT 1`)，用于在芯片逻辑中识别和引用。本模块必须规定datatype
  使用方法:a = INPUT(attrs={"name":"NumberA", "data_type":2})
 b = INPUT(attrs={"name":"NumberB", "data_type":2})
 
@@ -28,17 +28,15 @@ b = INPUT(attrs={"name":"NumberB", "data_type":2})
  输出端口 (面向芯片外部): 此模块本身不产生新的数据输出到芯片内部的其他模块；它的“输出”是定义了一个可供芯片外部读取的数据点。
  参数设置: 每个 OUTPUT 模块可以在其属性中定义一个名称(例如 `#OUTPUT 0` 或自定义如 `CurrentSpeed`)，这个名称非常重要，因为它是在芯片外部(如通过脚本查询、在其他芯片中引用此芯片的输出，或在游戏编辑器的属性检查器中查看)识别和获取这个特定输出值的关键。
  使用方法:此模块有多种类型，一般情况下不需要规定datatype，对于这个模块的name务必不要使用中文，请使用英文
-执行基础及高等数学运算。
-2.1 变量 (Variables)
-1. 定义规则 (Definition) 必须先用字典定义变量属性，格式如下：
-
-config = {"Key":"变量名", "GateDataType":"类型", "Value":初始值}
-类型支持:Number, String, Vector, Entity
-2. 节点使用 (Usage)
-构造:v = VARIABLE(Value=..., Set=...)
-Value:要写入的数值（数字、字符串或 {"x":0,"y":0,"z":0} 字典）。
-Set:1 代表写入/更新变量，0 代表仅读取/保持。
-引用:变量变量 v 可直接作为输入参数传递给其他模块（例如 Add(A=v)）。
+2.1 全局变量
+核心功能: 变量用于在不同帧之间存储数据
+1. 声明规则 (Declaration - 全局区) 必须在文件顶部使用 Python 的类型注解语法声明变量。系统会自动将其识别为芯片内部的 Variable 节点。
+格式: 变量名: 类型 = 初始值
+支持类型: Number, String, Vector, Entity 以及对应的 Array 类型。
+2. 读取规则 (Read - 逻辑区) 在 if __name__ == "__main__": 内部，直接使用变量名即可读取其当前存储的值。
+3. 写入/更新规则 (Write - 逻辑区) 使用 SET 函数来更新变量的值。
+格式: SET(变量名, 新值, [trigger=1.0])
+逻辑: 当 SET 被执行时，变量的值会在下一帧变为新值。。
  3.1.数学运算，本部分支持python的部分原生语法
 +, -, *, /, %, **, -a, abs(a), sqrt(a), round(a), floor(a), ceil(a), sign(a), exp(a), inverse(a), clamp01(a), sqr(a), min(a, b), max(a, b), average(a, b), log(Value, Base), random(Min, Max), pow(Value, Power), clamp(Input, Min, Max), lerp(A, B, T)
 
@@ -145,11 +143,8 @@ result = a and b or c  # 组合使用
 输入：
 Index：要选择的索引位置,一索引
 Array 1 ~ Array 10：参与选择的数组（任意类型均可，array也可以）。
-
 输出：
-
 Result：根据 Index 从对应数组中选取的元素（类型与输入端口保持一致）
-
 说明：
 Select 节点根据 Index，从多个输入数组中选择对应位置的数据并输出。
 

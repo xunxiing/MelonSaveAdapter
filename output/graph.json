@@ -3,15 +3,15 @@
     {
       "id": "input_0",
       "type": "INPUT",
-      "label": "Object A",
+      "label": "Kp",
       "attrs": {
-        "name": "Object A",
-        "data_type": 1
+        "name": "Kp",
+        "data_type": 2
       },
       "inputs": [],
       "outputs": [
         {
-          "name": "OUTPUT",
+          "name": "__auto__",
           "type": ""
         }
       ]
@@ -19,166 +19,148 @@
     {
       "id": "input_1",
       "type": "INPUT",
-      "label": "Object B",
+      "label": "Ki",
       "attrs": {
-        "name": "Object B",
+        "name": "Ki",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "id": "input_2",
+      "type": "INPUT",
+      "label": "Kd",
+      "attrs": {
+        "name": "Kd",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "id": "input_3",
+      "type": "INPUT",
+      "label": "TargetAngle",
+      "attrs": {
+        "name": "TargetAngle",
+        "data_type": 2
+      },
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "id": "input_4",
+      "type": "INPUT",
+      "label": "Entity",
+      "attrs": {
+        "name": "Entity",
         "data_type": 1
       },
       "inputs": [],
       "outputs": [
         {
-          "name": "OUTPUT",
+          "name": "__auto__",
           "type": ""
         }
       ]
     },
     {
-      "id": "input_2",
-      "type": "INPUT",
-      "label": "G Constant",
+      "id": "variable_0",
+      "type": "VARIABLE",
+      "label": "VARIABLE",
       "attrs": {
-        "name": "G Constant",
-        "data_type": 2
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "position_0",
-      "type": "Position",
-      "label": "Position",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "object",
-          "type": ""
-        }
-      ],
-      "outputs": [
-        {
-          "name": "Position",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "position_1",
-      "type": "Position",
-      "label": "Position",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "object",
-          "type": ""
-        }
-      ],
-      "outputs": [
-        {
-          "name": "Position",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "mass_0",
-      "type": "MASS",
-      "label": "MASS",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "Entity",
-          "type": ""
-        }
-      ],
-      "outputs": [
-        {
-          "name": "Mass",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "mass_1",
-      "type": "MASS",
-      "label": "MASS",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "Entity",
-          "type": ""
-        }
-      ],
-      "outputs": [
-        {
-          "name": "Mass",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "subtract_0",
-      "type": "Subtract",
-      "label": "Subtract",
-      "attrs": {
-        "datatype": 8
+        "dsl_name": "integral_mem"
       },
       "inputs": [
         {
-          "name": "A",
+          "name": "Value",
           "type": ""
         },
         {
-          "name": "B",
+          "name": "Set",
           "type": ""
         }
       ],
       "outputs": [
         {
-          "name": "A-B",
+          "name": "__auto__",
           "type": ""
         }
       ]
     },
     {
-      "id": "sqr_magnitude_0",
-      "type": "SQR_MAGNITUDE",
-      "label": "SQR_MAGNITUDE",
+      "id": "variable_1",
+      "type": "VARIABLE",
+      "label": "VARIABLE",
+      "attrs": {
+        "dsl_name": "prev_error_mem"
+      },
+      "inputs": [
+        {
+          "name": "Value",
+          "type": ""
+        },
+        {
+          "name": "Set",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "time_0",
+      "type": "TIME",
+      "label": "TIME",
       "attrs": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DELTA TIME",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "angle_0",
+      "type": "Angle",
+      "label": "Angle",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "object",
+          "type": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "deltaangle_0",
+      "type": "DeltaAngle",
+      "label": "DeltaAngle",
+      "attrs": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "__auto__",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "output_0",
+      "type": "OUTPUT",
+      "label": "ErrorDebug",
+      "attrs": {
+        "name": "ErrorDebug"
+      },
       "inputs": [
         {
           "name": "INPUT",
           "type": ""
         }
       ],
-      "outputs": [
-        {
-          "name": "RESULT",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "normalize_0",
-      "type": "NORMALIZE",
-      "label": "NORMALIZE",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "input",
-          "type": ""
-        }
-      ],
-      "outputs": [
-        {
-          "name": "result",
-          "type": ""
-        }
-      ]
+      "outputs": []
     },
     {
       "id": "multiply_0",
@@ -195,12 +177,7 @@
           "type": ""
         }
       ],
-      "outputs": [
-        {
-          "name": "A*B",
-          "type": ""
-        }
-      ]
+      "outputs": []
     },
     {
       "id": "multiply_1",
@@ -219,15 +196,15 @@
       ],
       "outputs": [
         {
-          "name": "A*B",
+          "name": "__auto__",
           "type": ""
         }
       ]
     },
     {
-      "id": "divide_0",
-      "type": "Divide",
-      "label": "Divide",
+      "id": "add_0",
+      "type": "Add",
+      "label": "Add",
       "attrs": {},
       "inputs": [
         {
@@ -236,138 +213,6 @@
         },
         {
           "name": "B",
-          "type": ""
-        }
-      ],
-      "outputs": [
-        {
-          "name": "A / B",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "multiply_2",
-      "type": "Multiply",
-      "label": "Multiply",
-      "attrs": {
-        "datatype": 8
-      },
-      "inputs": [
-        {
-          "name": "A",
-          "type": ""
-        },
-        {
-          "name": "B",
-          "type": ""
-        }
-      ],
-      "outputs": [
-        {
-          "name": "A*B",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "add_force_0",
-      "type": "ADD_FORCE",
-      "label": "ADD_FORCE",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "object",
-          "type": ""
-        },
-        {
-          "name": "Force",
-          "type": ""
-        }
-      ],
-      "outputs": []
-    },
-    {
-      "id": "constant_0",
-      "type": "Constant",
-      "label": "Const -1.0",
-      "attrs": {
-        "value": -1.0
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OUT",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "multiply_3",
-      "type": "Multiply",
-      "label": "Multiply",
-      "attrs": {
-        "datatype": 8
-      },
-      "inputs": [
-        {
-          "name": "A",
-          "type": ""
-        },
-        {
-          "name": "B",
-          "type": ""
-        }
-      ],
-      "outputs": [
-        {
-          "name": "A*B",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "add_force_1",
-      "type": "ADD_FORCE",
-      "label": "ADD_FORCE",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "object",
-          "type": ""
-        },
-        {
-          "name": "Force",
-          "type": ""
-        }
-      ],
-      "outputs": []
-    },
-    {
-      "id": "output_0",
-      "type": "OUTPUT",
-      "label": "Gravity_Force_Magnitude",
-      "attrs": {
-        "name": "Gravity_Force_Magnitude"
-      },
-      "inputs": [
-        {
-          "name": "INPUT",
-          "type": ""
-        }
-      ],
-      "outputs": []
-    },
-    {
-      "id": "output_1",
-      "type": "OUTPUT",
-      "label": "Gravity_Vector_A",
-      "attrs": {
-        "name": "Gravity_Vector_A"
-      },
-      "inputs": [
-        {
-          "name": "INPUT",
           "type": ""
         }
       ],
@@ -376,149 +221,66 @@
   ],
   "edges": [
     {
-      "from_node": "input_0",
-      "from_port": "OUTPUT",
-      "to_node": "position_0",
+      "from_node": "input_4",
+      "from_port": "__auto__",
+      "to_node": "angle_0",
       "to_port": "object"
     },
     {
-      "from_node": "input_1",
-      "from_port": "OUTPUT",
-      "to_node": "position_1",
-      "to_port": "object"
-    },
-    {
-      "from_node": "input_0",
-      "from_port": "OUTPUT",
-      "to_node": "mass_0",
-      "to_port": "Entity"
-    },
-    {
-      "from_node": "input_1",
-      "from_port": "OUTPUT",
-      "to_node": "mass_1",
-      "to_port": "Entity"
-    },
-    {
-      "from_node": "position_1",
-      "from_port": "Position",
-      "to_node": "subtract_0",
-      "to_port": "A"
-    },
-    {
-      "from_node": "position_0",
-      "from_port": "Position",
-      "to_node": "subtract_0",
-      "to_port": "B"
-    },
-    {
-      "from_node": "subtract_0",
-      "from_port": "A-B",
-      "to_node": "sqr_magnitude_0",
-      "to_port": "INPUT"
-    },
-    {
-      "from_node": "subtract_0",
-      "from_port": "A-B",
-      "to_node": "normalize_0",
-      "to_port": "input"
-    },
-    {
-      "from_node": "mass_0",
-      "from_port": "Mass",
-      "to_node": "multiply_0",
-      "to_port": "A"
-    },
-    {
-      "from_node": "mass_1",
-      "from_port": "Mass",
-      "to_node": "multiply_0",
-      "to_port": "B"
-    },
-    {
-      "from_node": "input_2",
-      "from_port": "OUTPUT",
-      "to_node": "multiply_1",
-      "to_port": "A"
-    },
-    {
-      "from_node": "multiply_0",
-      "from_port": "A*B",
-      "to_node": "multiply_1",
-      "to_port": "B"
-    },
-    {
-      "from_node": "multiply_1",
-      "from_port": "A*B",
-      "to_node": "divide_0",
-      "to_port": "A"
-    },
-    {
-      "from_node": "sqr_magnitude_0",
-      "from_port": "RESULT",
-      "to_node": "divide_0",
-      "to_port": "B"
-    },
-    {
-      "from_node": "normalize_0",
-      "from_port": "result",
-      "to_node": "multiply_2",
-      "to_port": "A"
-    },
-    {
-      "from_node": "divide_0",
-      "from_port": "A / B",
-      "to_node": "multiply_2",
-      "to_port": "B"
-    },
-    {
-      "from_node": "input_0",
-      "from_port": "OUTPUT",
-      "to_node": "add_force_0",
-      "to_port": "object"
-    },
-    {
-      "from_node": "multiply_2",
-      "from_port": "A*B",
-      "to_node": "add_force_0",
-      "to_port": "Force"
-    },
-    {
-      "from_node": "multiply_2",
-      "from_port": "A*B",
-      "to_node": "multiply_3",
-      "to_port": "A"
-    },
-    {
-      "from_node": "constant_0",
-      "from_port": "OUT",
-      "to_node": "multiply_3",
-      "to_port": "B"
-    },
-    {
-      "from_node": "input_1",
-      "from_port": "OUTPUT",
-      "to_node": "add_force_1",
-      "to_port": "object"
-    },
-    {
-      "from_node": "multiply_3",
-      "from_port": "A*B",
-      "to_node": "add_force_1",
-      "to_port": "Force"
-    },
-    {
-      "from_node": "divide_0",
-      "from_port": "A / B",
+      "from_node": "deltaangle_0",
+      "from_port": "__auto__",
       "to_node": "output_0",
       "to_port": "INPUT"
     },
     {
-      "from_node": "multiply_2",
-      "from_port": "A*B",
-      "to_node": "output_1",
-      "to_port": "INPUT"
+      "from_node": "deltaangle_0",
+      "from_port": "__auto__",
+      "to_node": "multiply_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "input_0",
+      "from_port": "__auto__",
+      "to_node": "multiply_0",
+      "to_port": "B"
+    },
+    {
+      "from_node": "deltaangle_0",
+      "from_port": "__auto__",
+      "to_node": "multiply_1",
+      "to_port": "A"
+    },
+    {
+      "from_node": "time_0",
+      "from_port": "DELTA TIME",
+      "to_node": "multiply_1",
+      "to_port": "B"
+    },
+    {
+      "from_node": "variable_0",
+      "from_port": "__auto__",
+      "to_node": "add_0",
+      "to_port": "A"
+    },
+    {
+      "from_node": "multiply_1",
+      "from_port": "__auto__",
+      "to_node": "add_0",
+      "to_port": "B"
     }
   ],
-  "variables": []
+  "variables": [
+    {
+      "Key": "integral_mem",
+      "GateDataType": "Number",
+      "Value": 0.0,
+      "dsl_name": "integral_mem"
+    },
+    {
+      "Key": "prev_error_mem",
+      "GateDataType": "Number",
+      "Value": 0.0,
+      "dsl_name": "prev_error_mem"
+    }
+  ]
 }
