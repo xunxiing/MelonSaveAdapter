@@ -36,7 +36,7 @@ b = INPUT(attrs={"name":"NumberB", "data_type":2})
 2. 读取规则 (Read - 逻辑区) 在 if __name__ == "__main__": 内部，直接使用变量名即可读取其当前存储的值。
 3. 写入/更新规则 (Write - 逻辑区) 使用 SET 函数来更新变量的值。
 格式: SET(变量名, 新值, [trigger=1.0])
-逻辑: 当 SET 被执行时，变量的值会在下一帧变为新值。。
+逻辑: 当 SET 被执行时，变量的值会在下一帧变为新值。
  3.1.数学运算，本部分支持python的部分原生语法
 +, -, *, /, %, **, -a, abs(a), sqrt(a), round(a), floor(a), ceil(a), sign(a), exp(a), inverse(a), clamp01(a), sqr(a), min(a, b), max(a, b), average(a, b), log(Value, Base), random(Min, Max), pow(Value, Power), clamp(Input, Min, Max), lerp(A, B, T)
 

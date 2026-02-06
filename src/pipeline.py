@@ -79,8 +79,8 @@ def build_chip_index_from_moduledef(module_defs: Dict[str, Any]) -> Dict[str, di
         game_name = source_info.get("allmod_viewmodel")
         if not friendly_name or not game_name:
             continue
-        key = normalize(friendly_name)
-        chip_index[key] = {
+            
+        entry = {
             "op_type": _mod_id,
             "friendly_name": friendly_name,
             "game_name": game_name,
@@ -88,6 +88,17 @@ def build_chip_index_from_moduledef(module_defs: Dict[str, Any]) -> Dict[str, di
             "outputs": [p.get("name", "Output") for p in mod_data.get("outputs", [])],
             "can_modify_data_type": bool(mod_data.get("can_modify_data_type", True)),
         }
+        
+        # 1. 优先使用友好名作为索引
+        chip_index[normalize(friendly_name)] = entry
+        # Compatibility alias: some game versions expect modulo op name.
+        if normalize(friendly_name) == normalize("Remainder"):
+            chip_index.setdefault(normalize("Modulo"), entry)
+            chip_index.setdefault(normalize("Mod"), entry)
+        
+        # 2. 如果 ID 不是纯数字（如 "ArraysGet"），也将其作为一种有效的查找方式
+        if not _mod_id.isdigit():
+            chip_index[normalize(_mod_id)] = entry
 
     # 补充内置节点（Input / Output / Constant）
     # 说明：
@@ -477,18 +488,36 @@ def build_connections(graph: dict, node_map: Dict[str, dict], chip_index: Dict[s
         if f_chip_key not in chip_index or t_chip_key not in chip_index:
             raise ConnectionError(
                 f"无法在 chip_index 中找到 \"{f_meta['friendly_name']}\" 或 \"{t_meta['friendly_name']}\"",
-                context={"from_node": f_meta["friendly_name"], "to_node": t_meta["friendly_name"]}
+                context={
+                    "from_node": f_meta["friendly_name"],
+                    "to_node": t_meta["friendly_name"],
+                    "line": e.get("line")
+                }
             )
 
         f_chip = chip_index[f_chip_key]
         t_chip = chip_index[t_chip_key]
 
+        try:
+            from_idx = port_index(e["from_port"], f_chip["outputs"])
+        except ConnectionError as err:
+            err.context["line"] = e.get("line")
+            err.context["node_type"] = f_meta["friendly_name"]
+            raise
+
+        try:
+            to_idx = port_index(e["to_port"], t_chip["inputs"])
+        except ConnectionError as err:
+            err.context["line"] = e.get("line")
+            err.context["node_type"] = t_meta["friendly_name"]
+            raise
+
         conns.append(
             {
                 "from_node_id": f_meta["new_full_id"],
-                "from_port_index": port_index(e["from_port"], f_chip["outputs"]),
+                "from_port_index": from_idx,
                 "to_node_id": t_meta["new_full_id"],
-                "to_port_index": port_index(e["to_port"], t_chip["inputs"]),
+                "to_port_index": to_idx,
             }
         )
     return conns

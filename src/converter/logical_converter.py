@@ -57,7 +57,7 @@ class LogicalConverter(Converter):
 
         for value in values[1:]:
             right_ref = self._emit_expr_as_ref(value)
-            result_ref = self._create_binary_logic_node("AND", result_ref, right_ref)
+            result_ref = self._create_binary_logic_node("AND", result_ref, right_ref, line=getattr(expr, "lineno", None))
 
         return result_ref
 
@@ -76,7 +76,7 @@ class LogicalConverter(Converter):
 
         for value in values[1:]:
             right_ref = self._emit_expr_as_ref(value)
-            result_ref = self._create_binary_logic_node("OR", result_ref, right_ref)
+            result_ref = self._create_binary_logic_node("OR", result_ref, right_ref, line=getattr(expr, "lineno", None))
 
         return result_ref
 
@@ -96,7 +96,7 @@ class LogicalConverter(Converter):
         nid = self._emit_call_as_node(call)
 
         # 手动添加边
-        self._add_edge_from_ref(operand_ref, nid, "A")
+        self._add_edge_from_ref(operand_ref, nid, "A", line=getattr(expr, "lineno", None))
 
         return _ValueRef("node", nid, "__auto__")
 
@@ -117,17 +117,17 @@ class LogicalConverter(Converter):
         right_ref = self._emit_expr_as_ref(right)
 
         if isinstance(op, ast.Gt):
-            return self._create_compare_node("GREATER THAN", left_ref, right_ref)
+            return self._create_compare_node("GREATER THAN", left_ref, right_ref, line=getattr(expr, "lineno", None))
         elif isinstance(op, ast.Lt):
-            return self._create_compare_node("LESS THAN", left_ref, right_ref)
+            return self._create_compare_node("LESS THAN", left_ref, right_ref, line=getattr(expr, "lineno", None))
         elif isinstance(op, ast.GtE):
-            return self._create_compare_node("GREATER OR EQUAL", left_ref, right_ref)
+            return self._create_compare_node("GREATER OR EQUAL", left_ref, right_ref, line=getattr(expr, "lineno", None))
         elif isinstance(op, ast.LtE):
-            return self._create_compare_node("LESS OR EQUAL", left_ref, right_ref)
+            return self._create_compare_node("LESS OR EQUAL", left_ref, right_ref, line=getattr(expr, "lineno", None))
         elif isinstance(op, ast.Eq):
-            return self._create_compare_node("EQUAL", left_ref, right_ref)
+            return self._create_compare_node("EQUAL", left_ref, right_ref, line=getattr(expr, "lineno", None))
         elif isinstance(op, ast.NotEq):
-            return self._create_compare_node("NOT EQUAL", left_ref, right_ref)
+            return self._create_compare_node("NOT EQUAL", left_ref, right_ref, line=getattr(expr, "lineno", None))
         else:
             raise ASTError(f"不支持的比较运算符: {type(op).__name__}")
 
@@ -147,17 +147,17 @@ class LogicalConverter(Converter):
             right_ref = self._emit_expr_as_ref(right)
 
             if isinstance(op, ast.Gt):
-                comp_ref = self._create_compare_node("GREATER THAN", left_ref, right_ref)
+                comp_ref = self._create_compare_node("GREATER THAN", left_ref, right_ref, line=getattr(expr, "lineno", None))
             elif isinstance(op, ast.Lt):
-                comp_ref = self._create_compare_node("LESS THAN", left_ref, right_ref)
+                comp_ref = self._create_compare_node("LESS THAN", left_ref, right_ref, line=getattr(expr, "lineno", None))
             elif isinstance(op, ast.GtE):
-                comp_ref = self._create_compare_node("GREATER OR EQUAL", left_ref, right_ref)
+                comp_ref = self._create_compare_node("GREATER OR EQUAL", left_ref, right_ref, line=getattr(expr, "lineno", None))
             elif isinstance(op, ast.LtE):
-                comp_ref = self._create_compare_node("LESS OR EQUAL", left_ref, right_ref)
+                comp_ref = self._create_compare_node("LESS OR EQUAL", left_ref, right_ref, line=getattr(expr, "lineno", None))
             elif isinstance(op, ast.Eq):
-                comp_ref = self._create_compare_node("EQUAL", left_ref, right_ref)
+                comp_ref = self._create_compare_node("EQUAL", left_ref, right_ref, line=getattr(expr, "lineno", None))
             elif isinstance(op, ast.NotEq):
-                comp_ref = self._create_compare_node("NOT EQUAL", left_ref, right_ref)
+                comp_ref = self._create_compare_node("NOT EQUAL", left_ref, right_ref, line=getattr(expr, "lineno", None))
             else:
                 raise ASTError(f"不支持的比较运算符: {type(op).__name__}")
 
@@ -167,11 +167,11 @@ class LogicalConverter(Converter):
         # 将所有比较结果用 AND 连接
         result_ref = comparisons[0]
         for comp_ref in comparisons[1:]:
-            result_ref = self._create_binary_logic_node("AND", result_ref, comp_ref)
+            result_ref = self._create_binary_logic_node("AND", result_ref, comp_ref, line=getattr(expr, "lineno", None))
 
         return result_ref
 
-    def _create_binary_logic_node(self, op_type: str, left_ref: _ValueRef, right_ref: _ValueRef) -> _ValueRef:
+    def _create_binary_logic_node(self, op_type: str, left_ref: _ValueRef, right_ref: _ValueRef, line: int | None = None) -> _ValueRef:
         """
         创建二元逻辑运算节点（AND, OR, XOR, NAND, NOR, NXOR）
         """
@@ -187,12 +187,12 @@ class LogicalConverter(Converter):
         nid = self._emit_call_as_node(call)
 
         # 手动添加边
-        self._add_edge_from_ref(left_ref, nid, "A")
-        self._add_edge_from_ref(right_ref, nid, "B")
+        self._add_edge_from_ref(left_ref, nid, "A", line=line)
+        self._add_edge_from_ref(right_ref, nid, "B", line=line)
 
         return _ValueRef("node", nid, "__auto__")
 
-    def _create_compare_node(self, op_type: str, left_ref: _ValueRef, right_ref: _ValueRef) -> _ValueRef:
+    def _create_compare_node(self, op_type: str, left_ref: _ValueRef, right_ref: _ValueRef, line: int | None = None) -> _ValueRef:
         """
         创建比较运算节点（GREATER THAN, LESS THAN, EQUAL 等）
         """
@@ -208,8 +208,8 @@ class LogicalConverter(Converter):
         nid = self._emit_call_as_node(call)
 
         # 手动添加边
-        self._add_edge_from_ref(left_ref, nid, "A")
-        self._add_edge_from_ref(right_ref, nid, "B")
+        self._add_edge_from_ref(left_ref, nid, "A", line=line)
+        self._add_edge_from_ref(right_ref, nid, "B", line=line)
 
         return _ValueRef("node", nid, "__auto__")
 

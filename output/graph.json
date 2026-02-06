@@ -1,76 +1,11 @@
 {
   "nodes": [
     {
-      "id": "input_0",
-      "type": "INPUT",
-      "label": "Kp",
-      "attrs": {
-        "name": "Kp",
-        "data_type": 2
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "__auto__",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "input_1",
-      "type": "INPUT",
-      "label": "Ki",
-      "attrs": {
-        "name": "Ki",
-        "data_type": 2
-      },
-      "inputs": [],
-      "outputs": []
-    },
-    {
-      "id": "input_2",
-      "type": "INPUT",
-      "label": "Kd",
-      "attrs": {
-        "name": "Kd",
-        "data_type": 2
-      },
-      "inputs": [],
-      "outputs": []
-    },
-    {
-      "id": "input_3",
-      "type": "INPUT",
-      "label": "TargetAngle",
-      "attrs": {
-        "name": "TargetAngle",
-        "data_type": 2
-      },
-      "inputs": [],
-      "outputs": []
-    },
-    {
-      "id": "input_4",
-      "type": "INPUT",
-      "label": "Entity",
-      "attrs": {
-        "name": "Entity",
-        "data_type": 1
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "__auto__",
-          "type": ""
-        }
-      ]
-    },
-    {
       "id": "variable_0",
       "type": "VARIABLE",
       "label": "VARIABLE",
       "attrs": {
-        "dsl_name": "integral_mem"
+        "dsl_name": "arr_strings"
       },
       "inputs": [
         {
@@ -94,7 +29,7 @@
       "type": "VARIABLE",
       "label": "VARIABLE",
       "attrs": {
-        "dsl_name": "prev_error_mem"
+        "dsl_name": "arr_vectors"
       },
       "inputs": [
         {
@@ -106,40 +41,6 @@
           "type": ""
         }
       ],
-      "outputs": []
-    },
-    {
-      "id": "time_0",
-      "type": "TIME",
-      "label": "TIME",
-      "attrs": {},
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "DELTA TIME",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "angle_0",
-      "type": "Angle",
-      "label": "Angle",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "object",
-          "type": ""
-        }
-      ],
-      "outputs": []
-    },
-    {
-      "id": "deltaangle_0",
-      "type": "DeltaAngle",
-      "label": "DeltaAngle",
-      "attrs": {},
-      "inputs": [],
       "outputs": [
         {
           "name": "__auto__",
@@ -148,11 +49,48 @@
       ]
     },
     {
+      "id": "arraysget_0",
+      "type": "ArraysGet",
+      "label": "ArraysGet",
+      "attrs": {},
+      "inputs": [
+        {
+          "name": "Array",
+          "type": ""
+        },
+        {
+          "name": "Index",
+          "type": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "0",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "constant_0",
+      "type": "Constant",
+      "label": "Const 0",
+      "attrs": {
+        "value": 0
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Output",
+          "type": ""
+        }
+      ]
+    },
+    {
       "id": "output_0",
       "type": "OUTPUT",
-      "label": "ErrorDebug",
+      "label": "Out_Str_Auto",
       "attrs": {
-        "name": "ErrorDebug"
+        "name": "Out_Str_Auto"
       },
       "inputs": [
         {
@@ -163,175 +101,158 @@
       "outputs": []
     },
     {
-      "id": "multiply_0",
-      "type": "Multiply",
-      "label": "Multiply",
-      "attrs": {},
+      "id": "output_1",
+      "type": "OUTPUT",
+      "label": "OUTPUT",
+      "attrs": {
+        "data_type": 4
+      },
       "inputs": [
         {
-          "name": "A",
-          "type": ""
-        },
-        {
-          "name": "B",
+          "name": "INPUT",
           "type": ""
         }
       ],
       "outputs": []
     },
     {
-      "id": "multiply_1",
-      "type": "Multiply",
-      "label": "Multiply",
+      "id": "arraysget_1",
+      "type": "ArraysGet",
+      "label": "ArraysGet",
       "attrs": {},
       "inputs": [
         {
-          "name": "A",
+          "name": "Array",
           "type": ""
         },
         {
-          "name": "B",
+          "name": "Index",
           "type": ""
         }
       ],
       "outputs": [
         {
-          "name": "__auto__",
+          "name": "0",
           "type": ""
         }
       ]
     },
     {
-      "id": "add_0",
-      "type": "Add",
-      "label": "Add",
-      "attrs": {},
-      "inputs": [
-        {
-          "name": "A",
-          "type": ""
-        },
-        {
-          "name": "B",
-          "type": ""
-        }
-      ],
-      "outputs": [
-        {
-          "name": "__auto__",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "id": "variable_2",
-      "type": "VARIABLE",
-      "label": "VARIABLE",
+      "id": "output_2",
+      "type": "OUTPUT",
+      "label": "Out_Vec_Auto",
       "attrs": {
-        "dsl_name": "integral_mem"
+        "name": "Out_Vec_Auto"
       },
       "inputs": [
         {
-          "name": "Value",
-          "type": ""
-        },
-        {
-          "name": "Set",
+          "name": "INPUT",
           "type": ""
         }
       ],
       "outputs": []
     },
     {
-      "id": "constant_0",
-      "type": "Constant",
-      "label": "Const 1.0",
+      "id": "output_3",
+      "type": "OUTPUT",
+      "label": "OUTPUT",
       "attrs": {
-        "value": 1.0
+        "data_type": 8
       },
-      "inputs": [],
-      "outputs": [
+      "inputs": [
         {
-          "name": "Output",
+          "name": "INPUT",
           "type": ""
         }
-      ]
+      ],
+      "outputs": []
     }
   ],
   "edges": [
     {
-      "from_node": "input_4",
-      "from_port": "__auto__",
-      "to_node": "angle_0",
-      "to_port": "object"
-    },
-    {
-      "from_node": "deltaangle_0",
-      "from_port": "__auto__",
-      "to_node": "output_0",
-      "to_port": "INPUT"
-    },
-    {
-      "from_node": "deltaangle_0",
-      "from_port": "__auto__",
-      "to_node": "multiply_0",
-      "to_port": "A"
-    },
-    {
-      "from_node": "input_0",
-      "from_port": "__auto__",
-      "to_node": "multiply_0",
-      "to_port": "B"
-    },
-    {
-      "from_node": "deltaangle_0",
-      "from_port": "__auto__",
-      "to_node": "multiply_1",
-      "to_port": "A"
-    },
-    {
-      "from_node": "time_0",
-      "from_port": "DELTA TIME",
-      "to_node": "multiply_1",
-      "to_port": "B"
-    },
-    {
       "from_node": "variable_0",
       "from_port": "__auto__",
-      "to_node": "add_0",
-      "to_port": "A"
-    },
-    {
-      "from_node": "multiply_1",
-      "from_port": "__auto__",
-      "to_node": "add_0",
-      "to_port": "B"
-    },
-    {
-      "from_node": "add_0",
-      "from_port": "__auto__",
-      "to_node": "variable_2",
-      "to_port": "Value"
+      "to_node": "arraysget_0",
+      "to_port": "Array",
+      "line": 18
     },
     {
       "from_node": "constant_0",
       "from_port": "Output",
-      "to_node": "variable_2",
-      "to_port": "Set"
+      "to_node": "arraysget_0",
+      "to_port": "Index",
+      "line": 18
+    },
+    {
+      "from_node": "arraysget_0",
+      "from_port": "0",
+      "to_node": "output_0",
+      "to_port": "INPUT",
+      "line": 21
+    },
+    {
+      "from_node": "arraysget_0",
+      "from_port": "0",
+      "to_node": "output_1",
+      "to_port": "INPUT",
+      "line": 24
+    },
+    {
+      "from_node": "variable_1",
+      "from_port": "__auto__",
+      "to_node": "arraysget_1",
+      "to_port": "Array",
+      "line": 29
+    },
+    {
+      "from_node": "constant_0",
+      "from_port": "Output",
+      "to_node": "arraysget_1",
+      "to_port": "Index",
+      "line": 29
+    },
+    {
+      "from_node": "arraysget_1",
+      "from_port": "0",
+      "to_node": "output_2",
+      "to_port": "INPUT",
+      "line": 33
+    },
+    {
+      "from_node": "arraysget_1",
+      "from_port": "0",
+      "to_node": "output_3",
+      "to_port": "INPUT",
+      "line": 36
     }
   ],
   "variables": [
     {
-      "Key": "integral_mem",
-      "GateDataType": "Number",
-      "Value": 0.0,
-      "dsl_name": "integral_mem"
+      "Key": "arr_strings",
+      "GateDataType": "ArrayString",
+      "Value": [
+        "Hello",
+        "World",
+        "Melon"
+      ],
+      "dsl_name": "arr_strings"
     },
     {
-      "Key": "prev_error_mem",
-      "GateDataType": "Number",
-      "Value": 0.0,
-      "dsl_name": "prev_error_mem"
+      "Key": "arr_vectors",
+      "GateDataType": "ArrayVector",
+      "Value": [
+        {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        }
+      ],
+      "dsl_name": "arr_vectors"
     }
   ]
 }

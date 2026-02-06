@@ -28,15 +28,16 @@ class Graph:
     def add_node(self, node: Dict[str, Any]) -> None:
         self.nodes.append(node)
 
-    def add_edge(self, from_node: str, from_port: str, to_node: str, to_port: str) -> None:
-        self.edges.append(
-            {
-                "from_node": from_node,
-                "from_port": from_port,
-                "to_node": to_node,
-                "to_port": to_port,
-            }
-        )
+    def add_edge(self, from_node: str, from_port: str, to_node: str, to_port: str, line: int | None = None) -> None:
+        edge = {
+            "from_node": from_node,
+            "from_port": from_port,
+            "to_node": to_node,
+            "to_port": to_port,
+        }
+        if line is not None:
+            edge["line"] = line
+        self.edges.append(edge)
 
     def to_dict(self) -> Dict[str, Any]:
         # 保持向后兼容：原有字段 nodes / edges 不变，新增加可选字段 variables

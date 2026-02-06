@@ -27,7 +27,7 @@ class Converter(ast.NodeVisitor):
         self.inputs_seen: Dict[str, List[str]] = {}  # 节点ID -> 输入端口顺序
         self.outputs_seen: Dict[str, Set[str]] = {}  # 节点ID -> 被引用到的输出端口名集合
         # unresolved: (上游变量名, 上游端口标识, 下游节点ID, 下游端口名)
-        self.unresolved: List[Tuple[str, str, str, str]] = []
+        self.unresolved: List[Tuple[str, str, str, str, int | None]] = []
         # 端口别名表： alias_var -> (up_var, up_port_str)
         self.alias_outputs: Dict[str, Tuple[str, str]] = {}
         self._has_main_guard: bool = False
@@ -276,7 +276,10 @@ class Converter(ast.NodeVisitor):
             "log": "Logarithm",
             "logarithm": "Logarithm",
             "random": "Random",
-            "remainder": "Remainder",
+            # Game runtime enum uses "Modulo" (not "Remainder")
+            "remainder": "Modulo",
+            "modulo": "Modulo",
+            "mod": "Modulo",
             "round": "Round",
             "floor": "Floor",
             "clamp": "Clamp",
@@ -307,12 +310,12 @@ class Converter(ast.NodeVisitor):
             return _ValueRef("node", self.var2node[name], default_port)
         return _ValueRef("var", name, default_port)
 
-    def _add_edge_from_ref(self, ref: _ValueRef, to_nid: str, to_port: str) -> None:
+    def _add_edge_from_ref(self, ref: _ValueRef, to_nid: str, to_port: str, line: int | None = None) -> None:
         if ref.kind == "node":
-            self.g.add_edge(ref.value, ref.port, to_nid, to_port)
+            self.g.add_edge(ref.value, ref.port, to_nid, to_port, line=line)
             self.outputs_seen.setdefault(ref.value, set()).add(ref.port)
             return
-        self.unresolved.append((ref.value, ref.port, to_nid, to_port))
+        self.unresolved.append((ref.value, ref.port, to_nid, to_port, line))
 
     @staticmethod
     def _literal_kind(expr: ast.AST) -> str | None:
@@ -403,12 +406,12 @@ class Converter(ast.NodeVisitor):
             )
 
         value_ref = self._emit_expr_as_ref(value_expr)
-        self._add_edge_from_ref(value_ref, write_nid, "Value")
+        self._add_edge_from_ref(value_ref, write_nid, "Value", line=getattr(call, "lineno", None))
 
         if trigger_expr is None:
             trigger_expr = ast.Constant(value=1.0)
         trigger_ref = self._emit_expr_as_ref(trigger_expr)
-        self._add_edge_from_ref(trigger_ref, write_nid, "Set")
+        self._add_edge_from_ref(trigger_ref, write_nid, "Set", line=getattr(call, "lineno", None))
 
         self._set_targets.add(var_name)
         return _ValueRef("node", write_nid, "__auto__")
@@ -496,8 +499,8 @@ class Converter(ast.NodeVisitor):
                 type_name, a_name, b_name = "Divide", "A", "B"
             elif isinstance(expr.op, ast.Mod):
                 if k_left in ("vector", "string") or k_right in ("vector", "string"):
-                    raise TypeError("Remainder 只支持 DECIMAL % DECIMAL")
-                type_name, a_name, b_name = "Remainder", "Dividend", "Divider"
+                    raise TypeError("Modulo 只支持 DECIMAL % DECIMAL")
+                type_name, a_name, b_name = "Modulo", "Dividend", "Divider"
             elif isinstance(expr.op, ast.Pow):
                 if k_left in ("vector", "string") or k_right in ("vector", "string"):
                     raise TypeError("Power 只支持 DECIMAL ** DECIMAL")
@@ -813,16 +816,16 @@ class Converter(ast.NodeVisitor):
                 nid = self._emit_call_as_node(call)
                 return _ValueRef("node", nid, "__auto__")
 
-            if fn_l == "remainder":
+            if fn_l in ("remainder", "modulo", "mod"):
                 kw = _kw_map(["dividend", "divider"])
                 dv = kw.get("dividend") or kw.get("a")
                 dr = kw.get("divider") or kw.get("b")
                 if dv is None or dr is None:
-                    raise TypeError("remainder 需要 2 个参数")
+                    raise TypeError("modulo 需要 2 个参数")
                 if self._literal_kind(dv) in ("vector", "string") or self._literal_kind(dr) in ("vector", "string"):
-                    raise TypeError("Remainder 只支持 DECIMAL 输入")
+                    raise TypeError("Modulo 只支持 DECIMAL 输入")
                 call = ast.Call(
-                    func=ast.Name(id="Remainder", ctx=ast.Load()),
+                    func=ast.Name(id="Modulo", ctx=ast.Load()),
                     args=[],
                     keywords=[ast.keyword(arg="Dividend", value=dv), ast.keyword(arg="Divider", value=dr)],
                 )
@@ -957,9 +960,9 @@ class Converter(ast.NodeVisitor):
 
                 if existing_type_l == "variable":
                     # connect: INPUT -> VARIABLE.Value, and set always-on
-                    self._add_edge_from_ref(ref, existing_nid, "Value")
+                    self._add_edge_from_ref(ref, existing_nid, "Value", line=getattr(node, "lineno", None))
                     one_nid = self._emit_constant_node(1.0)
-                    self._add_edge_from_ref(_ValueRef("node", one_nid, "Output"), existing_nid, "Set")
+                    self._add_edge_from_ref(_ValueRef("node", one_nid, "Output"), existing_nid, "Set", line=getattr(node, "lineno", None))
                     self._set_targets.add(var)
                     return
 
@@ -1187,21 +1190,21 @@ class Converter(ast.NodeVisitor):
                 seen_inputs.append(port_name)
                 continue
             ref = self._emit_expr_as_ref(expr)
-            self._add_edge_from_ref(ref, nid, port_name)
+            self._add_edge_from_ref(ref, nid, port_name, line=getattr(call, "lineno", None))
             seen_inputs.append(port_name)
 
         node_rec["inputs"] = [{"name": p, "type": ""} for p in seen_inputs]
         return nid
 
     def resolve_unresolved(self) -> None:
-        for up_var, up_port, to_nid, to_port in self.unresolved:
+        for up_var, up_port, to_nid, to_port, line in self.unresolved:
             if up_var not in self.var2node:
                 raise ASTError(
                     f"引用了未定义变量 '{up_var}'（前向引用失败）",
-                    context={"node_id": to_nid, "port": to_port, "variable": up_var}
+                    context={"node_id": to_nid, "port": to_port, "variable": up_var, "line": line}
                 )
             up_nid = self.var2node[up_var]
-            self.g.add_edge(up_nid, up_port, to_nid, to_port)
+            self.g.add_edge(up_nid, up_port, to_nid, to_port, line=line)
             self.outputs_seen.setdefault(up_nid, set()).add(up_port)
         self.unresolved.clear()
 

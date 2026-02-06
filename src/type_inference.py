@@ -72,6 +72,20 @@ def _parse_explicit_data_type(attrs: Dict[str, Any]) -> int | None:
     return None
 
 
+def _parse_type_value(v: Any) -> int | None:
+    if isinstance(v, bool):
+        return None
+    if isinstance(v, int) and v in TYPE_DOMAIN:
+        return v
+    if isinstance(v, str) and v.strip().isdigit():
+        iv = int(v.strip())
+        return iv if iv in TYPE_DOMAIN else None
+    if isinstance(v, str):
+        t = _type_from_port_type_str(v)
+        return t if t in TYPE_DOMAIN else None
+    return None
+
+
 def _infer_constant_type(attrs: Dict[str, Any]) -> int | None:
     if "value" not in attrs:
         return None
@@ -248,7 +262,7 @@ def infer_gate_data_types(
 
         if friendly == "variable":
             var_gate = meta.get("var_gate_type")
-            t = _type_from_port_type_str(var_gate) if isinstance(var_gate, str) else None
+            t = _parse_type_value(var_gate)
             if t is not None:
                 uf.set_fixed(nid, t, priority=90)
             node_default[nid] = t
@@ -292,7 +306,7 @@ def infer_gate_data_types(
             return _PortTypeExpr("var", nid)
         if friendly == "variable":
             var_gate = meta.get("var_gate_type")
-            t = _type_from_port_type_str(var_gate) if isinstance(var_gate, str) else None
+            t = _parse_type_value(var_gate)
             if direction == "inputs":
                 # inputs: ["Value", "Set"]
                 if idx == 1:

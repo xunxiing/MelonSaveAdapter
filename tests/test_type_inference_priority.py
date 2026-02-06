@@ -56,7 +56,42 @@ class TestTypeInferencePriority(unittest.TestCase):
         self.assertEqual(inferred.get("m0"), 8)
         self.assertEqual(inferred.get("o0"), 8)
 
+    def test_variable_int_gate_type_propagates_to_output(self) -> None:
+        """
+        回归：parse_graph_v2 会把 variable.gateDataType 规整成 int，
+        推断阶段必须能识别这个 int 并传播到 Output。
+        """
+        graph = {
+            "nodes": [
+                {"id": "v0", "type": "Variable", "attrs": {}},
+                {"id": "o0", "type": "Output", "attrs": {}},
+            ],
+            "edges": [
+                {"from_node": "v0", "from_port": "Value", "to_node": "o0", "to_port": "INPUT"},
+            ],
+        }
+
+        node_map = {
+            "v0": {"friendly_name": "Variable", "op_type": None, "var_gate_type": 4},
+            "o0": {"friendly_name": "Output", "op_type": "255"},
+        }
+
+        chip_index = {
+            normalize("Variable"): {"inputs": ["Value", "Set"], "outputs": ["Value"], "can_modify_data_type": True},
+            normalize("Output"): {"inputs": ["INPUT"], "outputs": [], "can_modify_data_type": True},
+        }
+
+        inferred = infer_gate_data_types(
+            graph,
+            node_map=node_map,
+            chip_index=chip_index,
+            rules={},
+            module_defs={},
+        )
+
+        self.assertEqual(inferred.get("v0"), 4)
+        self.assertEqual(inferred.get("o0"), 4)
+
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -328,6 +328,8 @@ def handle_error(error: Exception, exit_code: int = 1) -> None:
                     context_items.append(f"文件: {value}")
                 elif key == "line":
                     context_items.append(f"行号: {value}")
+                elif key == "candidates":
+                    context_items.append(f"可选端口: {value}")
             
             if context_items:
                 error_lines.append(f"   上下文: {' | '.join(context_items)}")

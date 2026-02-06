@@ -50,6 +50,11 @@ TYPE_STR_ALIASES = {
     "any": "Any",
 }
 
+OP_TYPE_STR_ALIASES = {
+    # Runtime enum compatibility: modulo op is named "Modulo" in game enum.
+    "remainder": "Modulo",
+}
+
 
 def _uses_string_schema(existing_nodes: list) -> bool:
     for n in existing_nodes or []:
@@ -95,6 +100,15 @@ def _coerce_type_value(t: object, *, use_string_types: bool) -> object:
     if canon == "IntegerNumber":
         return 2
     return TYPE_STR_TO_INT.get(canon, 0)
+
+
+def _coerce_operation_type_value(op: object) -> object:
+    if not isinstance(op, str):
+        return op
+    s = op.strip()
+    if not s:
+        return op
+    return OP_TYPE_STR_ALIASES.get(s.lower(), s)
 
 # --- 核心功能 ---
 
@@ -147,6 +161,8 @@ def create_new_node(module_name, module_info, existing_nodes):
                     or module_info.get("source_info", {}).get("chip_names_friendly_name")
                     or str(module_id)
                 )
+
+    op_type_code = _coerce_operation_type_value(op_type_code)
 
     # 2. 生成唯一的节点ID
     node_id = f"{module_name} : {uuid.uuid4()}"
