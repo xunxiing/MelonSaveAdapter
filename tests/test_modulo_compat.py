@@ -5,7 +5,7 @@ from src.utils import normalize
 
 
 class TestModuloCompat(unittest.TestCase):
-    def test_ast_percent_emits_modulo_node(self) -> None:
+    def test_ast_percent_emits_mod_node(self) -> None:
         from src.converter.dedup_converter import DedupConverter
 
         code = """\
@@ -19,10 +19,10 @@ if __name__ == "__main__":
         cvt.finalize_outputs()
 
         types = [str((n.get("type") or "")).lower() for n in (cvt.g.to_dict().get("nodes") or [])]
-        self.assertIn("modulo", types)
+        self.assertIn("mod", types)
         self.assertNotIn("remainder", types)
 
-    def test_add_module_coerces_remainder_operation_type_to_modulo(self) -> None:
+    def test_add_module_coerces_remainder_operation_type_to_mod(self) -> None:
         import add_module
 
         module_info = {
@@ -46,9 +46,9 @@ if __name__ == "__main__":
 
         node = add_module.create_new_node("RemainderNumberNodeViewModel", module_info, existing_nodes)
         self.assertIsNotNone(node)
-        self.assertEqual(node.get("OperationType"), "Modulo")
+        self.assertEqual(node.get("OperationType"), "Mod")
 
-    def test_pipeline_chip_index_has_modulo_alias(self) -> None:
+    def test_pipeline_chip_index_has_mod_alias(self) -> None:
         from src.pipeline import build_chip_index_from_moduledef
 
         module_defs = {
@@ -63,8 +63,8 @@ if __name__ == "__main__":
             }
         }
         chip_index = build_chip_index_from_moduledef(module_defs)
-        self.assertIn(normalize("Modulo"), chip_index)
-        self.assertEqual(chip_index[normalize("Modulo")]["friendly_name"], "Remainder")
+        self.assertIn(normalize("Mod"), chip_index)
+        self.assertEqual(chip_index[normalize("Mod")]["friendly_name"], "Remainder")
 
 
 if __name__ == "__main__":

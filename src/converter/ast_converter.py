@@ -276,10 +276,10 @@ class Converter(ast.NodeVisitor):
             "log": "Logarithm",
             "logarithm": "Logarithm",
             "random": "Random",
-            # Game runtime enum uses "Modulo" (not "Remainder")
-            "remainder": "Modulo",
-            "modulo": "Modulo",
-            "mod": "Modulo",
+            # Game runtime enum uses "Mod" (not "Remainder"/"Modulo")
+            "remainder": "Mod",
+            "modulo": "Mod",
+            "mod": "Mod",
             "round": "Round",
             "floor": "Floor",
             "clamp": "Clamp",
@@ -499,8 +499,8 @@ class Converter(ast.NodeVisitor):
                 type_name, a_name, b_name = "Divide", "A", "B"
             elif isinstance(expr.op, ast.Mod):
                 if k_left in ("vector", "string") or k_right in ("vector", "string"):
-                    raise TypeError("Modulo 只支持 DECIMAL % DECIMAL")
-                type_name, a_name, b_name = "Modulo", "Dividend", "Divider"
+                    raise TypeError("Mod 只支持 DECIMAL % DECIMAL")
+                type_name, a_name, b_name = "Mod", "Dividend", "Divider"
             elif isinstance(expr.op, ast.Pow):
                 if k_left in ("vector", "string") or k_right in ("vector", "string"):
                     raise TypeError("Power 只支持 DECIMAL ** DECIMAL")
@@ -821,11 +821,11 @@ class Converter(ast.NodeVisitor):
                 dv = kw.get("dividend") or kw.get("a")
                 dr = kw.get("divider") or kw.get("b")
                 if dv is None or dr is None:
-                    raise TypeError("modulo 需要 2 个参数")
+                    raise TypeError("mod 需要 2 个参数")
                 if self._literal_kind(dv) in ("vector", "string") or self._literal_kind(dr) in ("vector", "string"):
-                    raise TypeError("Modulo 只支持 DECIMAL 输入")
+                    raise TypeError("Mod 只支持 DECIMAL 输入")
                 call = ast.Call(
-                    func=ast.Name(id="Modulo", ctx=ast.Load()),
+                    func=ast.Name(id="Mod", ctx=ast.Load()),
                     args=[],
                     keywords=[ast.keyword(arg="Dividend", value=dv), ast.keyword(arg="Divider", value=dr)],
                 )

@@ -51,8 +51,9 @@ TYPE_STR_ALIASES = {
 }
 
 OP_TYPE_STR_ALIASES = {
-    # Runtime enum compatibility: modulo op is named "Modulo" in game enum.
-    "remainder": "Modulo",
+    # Runtime enum compatibility: modulo op is named "Mod" in game enum.
+    "remainder": "Mod",
+    "modulo": "Mod",
 }
 
 
