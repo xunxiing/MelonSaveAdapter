@@ -125,13 +125,17 @@ class Converter(ast.NodeVisitor):
         return allowed.get(base.lower()), is_final
 
     @staticmethod
+    def _is_input_call_expr(expr: ast.AST) -> bool:
+        if not isinstance(expr, ast.Call):
+            return False
+        fn = Converter._canonical_type_name(_func_name(expr.func))
+        return fn.lower() == "input"
+
+    @staticmethod
     def _is_input_call(stmt: ast.Assign) -> bool:
         if len(stmt.targets) != 1 or not isinstance(stmt.targets[0], ast.Name):
             return False
-        if not isinstance(stmt.value, ast.Call):
-            return False
-        fn = Converter._canonical_type_name(_func_name(stmt.value.func))
-        return fn.lower() == "input"
+        return Converter._is_input_call_expr(stmt.value)
 
     @staticmethod
     def _is_variable_def_dict_expr(stmt: ast.Expr) -> bool:
@@ -210,6 +214,20 @@ class Converter(ast.NodeVisitor):
             )
 
         var_name = node.target.id
+
+        # 兼容声明式 I/O 写法：obj: Entity = INPUT(...)
+        # 这种语法本质是“输入节点别名”，不应落到变量定义（chip_variables）。
+        if node.value is not None and self._is_input_call_expr(node.value):
+            ref = self._emit_expr_as_ref(node.value)
+            if ref.kind != "node":
+                raise ASTError(
+                    f"Failed to create INPUT node for '{var_name}'",
+                    context={"variable": var_name, "line": getattr(node, "lineno", None)},
+                )
+            if var_name not in self.var2node:
+                self.var2node[var_name] = ref.value
+            return
+
         gate_type, is_final = self._parse_decl_type(node.annotation)
         if gate_type is None:
             raise ASTError(
