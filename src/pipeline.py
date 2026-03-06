@@ -56,6 +56,22 @@ from src.utils import load_json, normalize, fuzzy_match
 
 # =========================== 阶段 0：DSL -> graph.json ===========================
 
+
+def _as_bool_flag(value: Any, default: bool = True) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return default
+    if isinstance(value, (int, float)):
+        return bool(value)
+    if isinstance(value, str):
+        v = value.strip().lower()
+        if v in {"true", "1", "yes", "y", "on"}:
+            return True
+        if v in {"false", "0", "no", "n", "off", ""}:
+            return False
+    return default
+
 def run_stage0_convert_dsl_to_graph(dsl_path: Path, out_graph_path: Path) -> None:
     """
     使用 converter_v2.convert_dsl_to_graph 将 DSL 脚本转为 graph.json。
@@ -86,7 +102,7 @@ def build_chip_index_from_moduledef(module_defs: Dict[str, Any]) -> Dict[str, di
             "game_name": game_name,
             "inputs": [p.get("name", "Input") for p in mod_data.get("inputs", [])],
             "outputs": [p.get("name", "Output") for p in mod_data.get("outputs", [])],
-            "can_modify_data_type": bool(mod_data.get("can_modify_data_type", True)),
+            "can_modify_data_type": _as_bool_flag(mod_data.get("can_modify_data_type", True), True),
         }
         
         # 1. 优先使用友好名作为索引
@@ -402,14 +418,21 @@ def generate_modify_instructions(
         if node_type_clean in ("constant", "variable"):
             continue
         original_id = node["id"]
+        node_meta = node_map.get(original_id, {})
+        can_modify = bool(node_meta.get("can_modify_data_type", True))
+        op_key = str(node_meta.get("op_type")) if node_meta.get("op_type") is not None else None
+        if op_key is not None:
+            mod_def = module_definitions.get(op_key)
+            if isinstance(mod_def, dict):
+                can_modify = can_modify and _as_bool_flag(mod_def.get("can_modify_data_type", True), True)
         if (
             original_id in node_map
-            and node_map[original_id].get("new_full_id")
-            and node_map[original_id].get("can_modify_data_type", True)
+            and node_meta.get("new_full_id")
+            and can_modify
         ):
             instructions.append(
                 {
-                    "node_id": node_map[original_id]["new_full_id"],
+                    "node_id": node_meta["new_full_id"],
                     "new_data_type": dt,
                 }
             )

@@ -26,6 +26,22 @@ from src.config import FUZZY_CUTOFF_PORT
 TYPE_DOMAIN = {1, 2, 4, 8, 128, 256, 512, 1024}
 
 
+def _as_bool_flag(value: Any, default: bool = True) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return default
+    if isinstance(value, (int, float)):
+        return bool(value)
+    if isinstance(value, str):
+        v = value.strip().lower()
+        if v in {"true", "1", "yes", "y", "on"}:
+            return True
+        if v in {"false", "0", "no", "n", "off", ""}:
+            return False
+    return default
+
+
 def _type_from_port_type_str(s: str | None) -> int | None:
     if not isinstance(s, str):
         return None
@@ -275,6 +291,9 @@ def infer_gate_data_types(
             gd = mod_def.get("gate_data_type")
             if isinstance(gd, int) and gd in TYPE_DOMAIN:
                 gate_default = gd
+            # 非可修改模块作为“类型锚点”：避免后续推断把它们拖到其它类型。
+            if not _as_bool_flag(mod_def.get("can_modify_data_type", True), True) and gate_default is not None:
+                uf.set_fixed(nid, gate_default, priority=95)
         node_default[nid] = gate_default
 
     def port_expr(nid: str, *, direction: str, port_name: str) -> _PortTypeExpr | None:
@@ -353,6 +372,22 @@ def infer_gate_data_types(
 
         return None
 
+    def is_same_rule_node(nid: str) -> bool:
+        meta = node_map.get(nid) or {}
+        friendly = str(meta.get("friendly_name", "")).lower()
+        if friendly in ("input", "output", "variable", "constant"):
+            return False
+        op_type = meta.get("op_type")
+        op_key = str(op_type) if op_type is not None else None
+        rule = rules.get(op_key) if op_key is not None else None
+        if not isinstance(rule, dict):
+            return False
+        for key in ("inputs", "outputs"):
+            arr = rule.get(key) or []
+            if isinstance(arr, list) and any(x == "same" for x in arr):
+                return True
+        return False
+
     # 2) 根据每条边做类型约束（端口类型相等）
     for e in edges:
         if not isinstance(e, dict):
@@ -378,13 +413,23 @@ def infer_gate_data_types(
             # 兼容规则：Number(Decimal) 可以直接连 Vector。
             # 这里把 Vector 视为“软约束”：不强制回推到上游节点类型，只做一个偏好提示。
             if int(right.value) == 8:
-                vector_hints[str(left.value)] = vector_hints.get(str(left.value), 0) + 1
+                left_id = str(left.value)
+                # 对 same-rule 节点（如 Multiply/Add/Subtract 等）应优先遵循 Vector 约束，
+                # 避免被另一侧 Number 输入“锁死”为 Number。
+                if is_same_rule_node(left_id):
+                    uf.set_fixed(left_id, 8, priority=95)
+                else:
+                    vector_hints[left_id] = vector_hints.get(left_id, 0) + 1
                 continue
             uf.set_fixed(str(left.value), int(right.value), priority=int(right.priority))
             continue
         if left.kind == "fixed" and right.kind == "var":
             if int(left.value) == 8:
-                vector_hints[str(right.value)] = vector_hints.get(str(right.value), 0) + 1
+                right_id = str(right.value)
+                if is_same_rule_node(right_id):
+                    uf.set_fixed(right_id, 8, priority=95)
+                else:
+                    vector_hints[right_id] = vector_hints.get(right_id, 0) + 1
                 continue
             uf.set_fixed(str(right.value), int(left.value), priority=int(left.priority))
             continue
@@ -404,14 +449,20 @@ def infer_gate_data_types(
             if l_fix is not None and r_fix is None:
                 lp, lt = l_fix
                 if int(lt) == 8 and not is_io(r_id):
-                    vector_hints[r_id] = vector_hints.get(r_id, 0) + 1
+                    if is_same_rule_node(r_id):
+                        uf.set_fixed(r_id, 8, priority=max(int(lp), 95))
+                    else:
+                        vector_hints[r_id] = vector_hints.get(r_id, 0) + 1
                 else:
                     uf.set_fixed(r_id, int(lt), priority=int(lp))
                 continue
             if r_fix is not None and l_fix is None:
                 rp, rt = r_fix
                 if int(rt) == 8 and not is_io(l_id):
-                    vector_hints[l_id] = vector_hints.get(l_id, 0) + 1
+                    if is_same_rule_node(l_id):
+                        uf.set_fixed(l_id, 8, priority=max(int(rp), 95))
+                    else:
+                        vector_hints[l_id] = vector_hints.get(l_id, 0) + 1
                 else:
                     uf.set_fixed(l_id, int(rt), priority=int(rp))
                 continue

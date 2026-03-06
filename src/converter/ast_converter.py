@@ -850,12 +850,6 @@ class Converter(ast.NodeVisitor):
                 nid = self._emit_call_as_node(call)
                 return _ValueRef("node", nid, "__auto__")
 
-            if expr.args:
-                raise ASTError(
-                    f"DSL 节点调用不支持位置参数，请使用关键字端口如 A=..., B=...",
-                    context={"node_type": fn}
-                )
-
             nid = self._emit_call_as_node(expr)
             return _ValueRef("node", nid, "__auto__")
 
@@ -1125,6 +1119,7 @@ class Converter(ast.NodeVisitor):
         fixed_id: str | None = None
         label: str | None = None
         conns: List[Tuple[str, ast.AST]] = []
+        has_keyword_input = any((kw.arg or "").lower() == "input" for kw in (call.keywords or []))
 
         # DSL v2 I/O sugar:
         # INPUT(name="Speed", data_type="Number")
@@ -1151,6 +1146,64 @@ class Converter(ast.NodeVisitor):
                     ):
                         return expr.id
                 return None
+
+        call_type_l = type_name.lower()
+        pos_args = list(call.args or [])
+
+        if call_type_l == "input":
+            if len(pos_args) > 2:
+                raise ASTError(
+                    "INPUT(...) supports at most 2 positional args: INPUT(name, [data_type])",
+                    context={"node_type": type_name},
+                )
+            if len(pos_args) >= 1:
+                v = _literal_or_type_name(pos_args[0])
+                if v is None:
+                    raise ASTError(
+                        "INPUT positional arg #1 (name) must be a literal",
+                        context={"node_type": type_name},
+                    )
+                attrs["name"] = v
+            if len(pos_args) >= 2:
+                v = _literal_or_type_name(pos_args[1])
+                if v is None:
+                    raise ASTError(
+                        "INPUT positional arg #2 (data_type) must be a literal",
+                        context={"node_type": type_name},
+                    )
+                attrs["data_type"] = v
+        elif call_type_l == "output":
+            if len(pos_args) > 3:
+                raise ASTError(
+                    "OUTPUT(...) supports at most 3 positional args: OUTPUT(value, [name], [data_type])",
+                    context={"node_type": type_name},
+                )
+            if len(pos_args) >= 1:
+                if has_keyword_input:
+                    raise ASTError(
+                        "OUTPUT input cannot be provided both positionally and via INPUT=...",
+                        context={"node_type": type_name},
+                    )
+                conns.append(("0", pos_args[0]))
+            if len(pos_args) >= 2:
+                v = _literal_or_type_name(pos_args[1])
+                if v is None:
+                    raise ASTError(
+                        "OUTPUT positional arg #2 (name) must be a literal",
+                        context={"node_type": type_name},
+                    )
+                attrs["name"] = v
+            if len(pos_args) >= 3:
+                v = _literal_or_type_name(pos_args[2])
+                if v is None:
+                    raise ASTError(
+                        "OUTPUT positional arg #3 (data_type) must be a literal",
+                        context={"node_type": type_name},
+                    )
+                attrs["data_type"] = v
+        else:
+            for idx, expr in enumerate(pos_args):
+                conns.append((str(idx), expr))
 
         for kw in call.keywords or []:
             if kw.arg is None:

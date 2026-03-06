@@ -28,6 +28,22 @@ TYPE_INT_TO_STR = {
 TYPE_STR_TO_INT = {v: k for k, v in TYPE_INT_TO_STR.items()}
 
 
+def _as_bool_flag(value: Any, default: bool = True) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return default
+    if isinstance(value, (int, float)):
+        return bool(value)
+    if isinstance(value, str):
+        v = value.strip().lower()
+        if v in {"true", "1", "yes", "y", "on"}:
+            return True
+        if v in {"false", "0", "no", "n", "off", ""}:
+            return False
+    return default
+
+
 def _node_uses_string_schema(node: Dict[str, Any]) -> bool:
     if isinstance(node.get("OperationType"), str):
         return True
@@ -235,7 +251,7 @@ def apply_data_type_modifications(
 
                     # moduledef.json 中可通过 can_modify_data_type 控制该模块是否允许类型修改
                     mod_def = module_defs.get(op_key, {}) if op_key is not None else {}
-                    if isinstance(mod_def, dict) and mod_def.get("can_modify_data_type") is False:
+                    if isinstance(mod_def, dict) and not _as_bool_flag(mod_def.get("can_modify_data_type", True), True):
                         print(f"     skip: module '{module_name}' (OpType: {op_type}) is marked as non-modifiable")
                         continue
 

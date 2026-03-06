@@ -1,66 +1,62 @@
-﻿# --- 1.1 全局声明区 (Static Scope) ---
+﻿# ==========================================
+# 1. 静态声明区 (Static Scope)
+# ==========================================
+# 接收外部传来的 3 个核心数值
+rpm_input = INPUT("RPM_Input", 2)             # 当前真实转速
+up_target_input = INPUT("Up_Target", 2)       # 升档红线 (例如外部传来的 4300)
+down_target_input = INPUT("Down_Target", 2)   # 降档底线 (例如外部传来的 900)
 
-# 定义 INPUT (输入端口) - 注意：这里不使用 :Type 语法，避免被识别为全局变量
-obj = INPUT(attrs={"name": "obj", "data_type": 1})
-switch_1 = INPUT(attrs={"name": "1", "data_type": 2})
-angle_A = INPUT(attrs={"name": "A", "data_type": 2})
-angle_B = INPUT(attrs={"name": "B", "data_type": 2})
-I = INPUT(attrs={"name": "I", "data_type": 2})
+# 芯片内部维持的 2 个核心状态
+current_gear: Number = 1.0                    # 当前停留在几档 (初始为1档)
+shift_timer: Number = 0.6                     # 冷却计时器 (初始满值，保证起步就能换档)
 
-# 定义 显式常量 (Constants) - 这里可以使用 :Final 语法
-LAMBDA: Final[Number] = 12.0
-ETA: Final[Number] = 15.0
-Q_GAIN: Final[Number] = 10.0
-ZERO: Final[Number] = 0.0
-
-# --- 1.2 逻辑执行区 (Main Block) ---
-
+# ==========================================
+# 2. 主逻辑区 (Main Block)
+# ==========================================
 if __name__ == "__main__":
-    # 1. 目标角度切换逻辑
-    # 注意：INPUT 模块只有一个输出，可以直接使用变量名引用
-    target_angle = branch(IF=switch_1, A=angle_B, B=angle_A, attrs={"data_type": "Number"})
-
-    # 2. 读取传感器数据
-    current_angle_node = Angle(object=obj)
-    current_ang_vel_node = AngularVelocity(object=obj)
-
-    # 3. 误差计算 (DeltaAngle 处理 360 度回绕)
-    # 使用端口引用方式：node["端口名"]
-    error_node = DeltaAngle(**{
-        "Angle (Deg) 1": target_angle, 
-        "Angle (Deg) 2": current_angle_node["Angle"]
-    })
     
-    # 误差变化率 (目标角度 A/B 是静态的，所以 dot_e = 0 - 当前角速度)
-    dot_error = SUBTRACT(A=ZERO, B=current_ang_vel_node["Angular Velocity"])
+    # 1. 读取输入与流逝的时间
+    rpm = rpm_input["OUTPUT"]
+    up_target = up_target_input["OUTPUT"]
+    down_target = down_target_input["OUTPUT"]
+    dt = Time()["DELTA TIME"]
 
-    # 4. 滑模面 s = lambda * e + dot_e
-    term_s1 = MULTIPLY(A=LAMBDA, B=error_node["角度差"])
-    s = ADD(A=term_s1, B=dot_error)
+    # 2. 冷却时间判定 (0.6秒)
+    can_shift = shift_timer >= 0.6
 
-    # 5. 趋近律计算
-    # sign(s)
-    s_sign = sign(a=s)
+    # 3. 升降档意图判定 (包含撞南墙保护)
+    # 突破红线 + 冷却完毕 + 小于5档 (防撞最高档南墙)
+    want_up = (rpm > up_target) and can_shift and (current_gear < 5.0)
     
-    # eta * sign(s)
-    reach_sign = MULTIPLY(A=ETA, B=s_sign)
-    
-    # q * s
-    reach_linear = MULTIPLY(A=Q_GAIN, B=s)
-    
-    # lambda * dot_e (等效控制项)
-    equiv_control = MULTIPLY(A=LAMBDA, B=dot_error)
+    # 跌破底线 + 冷却完毕 + 大于1档 (防撞最低档南墙)
+    want_down = (rpm < down_target) and can_shift and (current_gear > 1.0)
 
-    # 6. 合成控制指令
-    sum1 = ADD(A=equiv_control, B=reach_sign)
-    sum2 = ADD(A=sum1, B=reach_linear)
+    # 4. 互锁保护 (防止万一数据异常导致同时要求升降档)
+    actual_up = want_up and (want_down == 0.0)
+    actual_down = want_down
+
+    # 5. 核心阶梯加减法与钳位
+    # 如果 actual_up 是 1，actual_down 是 0，则 shift_val = 1 (加一档)
+    # 如果 actual_up 是 0，actual_down 是 1，则 shift_val = -1 (减一档)
+    shift_val = actual_up - actual_down       
+    raw_gear = current_gear + shift_val
+    new_gear = clamp(raw_gear, 1.0, 5.0)      # 物理极限钳位：死死锁在 1~5 之间
+
+    # 6. 状态回写 (更新档位和计时器)
+    SET(current_gear, new_gear)
     
-    # 最终扭矩 = I * (sum)
-    final_torque = MULTIPLY(A=I, B=sum2)
+    # 纯数学计时器刷新：只要换档了，乘数变 0，计时器瞬间清零；没换档就继续加时间
+    is_shifting = actual_up or actual_down
+    not_shifting = is_shifting == 0.0
+    new_timer = (shift_timer + dt) * not_shifting
+    SET(shift_timer, new_timer)
 
-    # 7. 物理输出
-    ADD_ANGULAR_FORCE(OBJECT=obj, ANGULAR_FORCE=final_torque)
-
-    # 调试输出（可选）：将误差转为字符串输出到名为 DebugError 的端口
-    error_str = TO_STRING(input=error_node["角度差"])
-    OUTPUT(INPUT=error_str, name="DebugError")
+    # 7. 最终信号输出
+    OUTPUT(current_gear, "Current_Gear")      # 输出当前数字档位 (1-5)
+    
+    # 顺便帮你拆解出 5 个互斥的布尔信号，你可以直接连到游戏里变速箱的 5 个齿轮离合器上
+    OUTPUT(current_gear == 1.0, "Gear_1")
+    OUTPUT(current_gear == 2.0, "Gear_2")
+    OUTPUT(current_gear == 3.0, "Gear_3")
+    OUTPUT(current_gear == 4.0, "Gear_4")
+    OUTPUT(current_gear == 5.0, "Gear_5")

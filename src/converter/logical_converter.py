@@ -89,7 +89,7 @@ class LogicalConverter(Converter):
         call = ast.Call(
             func=ast.Name(id="NOT", ctx=ast.Load()),
             args=[],
-            keywords=[ast.keyword(arg="A", value=ast.Constant(value=1))],  # 占位符
+            keywords=[ast.keyword(arg="A", value=ast.Constant(value=None))],  # 占位符
         )
 
         # 创建节点
@@ -179,8 +179,8 @@ class LogicalConverter(Converter):
             func=ast.Name(id=op_type, ctx=ast.Load()),
             args=[],
             keywords=[
-                ast.keyword(arg="A", value=ast.Constant(value=1)),  # 占位符
-                ast.keyword(arg="B", value=ast.Constant(value=1)),  # 占位符
+                ast.keyword(arg="A", value=ast.Constant(value=None)),  # 占位符
+                ast.keyword(arg="B", value=ast.Constant(value=None)),  # 占位符
             ],
         )
 
@@ -200,8 +200,8 @@ class LogicalConverter(Converter):
             func=ast.Name(id=op_type, ctx=ast.Load()),
             args=[],
             keywords=[
-                ast.keyword(arg="A", value=ast.Constant(value=1)),  # 占位符
-                ast.keyword(arg="B", value=ast.Constant(value=1)),  # 占位符
+                ast.keyword(arg="A", value=ast.Constant(value=None)),  # 占位符
+                ast.keyword(arg="B", value=ast.Constant(value=None)),  # 占位符
             ],
         )
 

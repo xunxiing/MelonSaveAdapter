@@ -48,21 +48,13 @@
 
     *`input.py` 示例:*
     ```python
-    # 节点定义：
-    #   变量名 = 模块类型("友好名称")
-    #   例如: a = Constant("常量A")
-    #
-    # 节点属性设置 (可选):
-    #   变量名.set(属性名=值)
-    #   例如: a.set(value=10)
-    #
-    # 连接定义：
-    #   节点A["输出端口"] >> 节点B["输入端口"]
+    # 输入与节点定义（位置参数）
+    speed = INPUT("Speed", "Number")
+    gain = INPUT("Gain", "Number")
 
-    # 定义两个常量节点和一个加法器节点
-    input_A = Constant("常量A").set(value=5)
-    input_B = Constant("常量B").set(value=10)
-    adder = Add("加法器")
+    if __name__ == "__main__":
+        force = MULTIPLY(speed, gain)
+        OUTPUT(force, "ForceOut")
 
 
 
