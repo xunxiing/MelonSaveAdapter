@@ -138,7 +138,9 @@ dmypy.json
 # OS
 .DS_Store
 Thumbs.db
-
+# Output directory
+output/
+output/**
 # Custom
 *.melsave
 
