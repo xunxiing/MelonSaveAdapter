@@ -1,0 +1,16 @@
+{
+  "None": 0,
+  "Entity": 1,
+  "Number": 2,
+  "String": 4,
+  "Vector": 8,
+  "Color": 24,
+  "IntegerNumber": 32,
+  "Dynamic": 64,
+  "ArrayNumber": 128,
+  "ArrayString": 256,
+  "ArrayVector": 512,
+  "ArrayEntity": 1024,
+  "Array": 2048,
+  "Any": 4095
+}

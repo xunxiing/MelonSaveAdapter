@@ -125,6 +125,11 @@
   "inputs": ["same"],
   "outputs": ["same"]
  },
+  "3595": {
+    "module_name": "ToString",
+    "inputs": ["same"],
+    "outputs": [4]
+  },
   "257": {
     "module_name": "Constant",
     "inputs": [],

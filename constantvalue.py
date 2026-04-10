@@ -6,6 +6,10 @@ from typing import Dict, List, Any, Union, Tuple
 
 # --- 辅助函数 (无变化) ---
 
+
+def _compact_json(data: Any) -> str:
+    return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+
 def create_vector_json_string(x: float, y: float, z: float) -> str:
     """
     根据x, y, z坐标创建一个符合游戏格式的复杂向量JSON字符串。
@@ -118,7 +122,7 @@ def _modify_single_node(
             save_data_obj["DataValue"] = str(float(new_value))
 
         elif value_type == "vector":
-            save_data_obj["DataValue"] = json.dumps({
+            save_data_obj["DataValue"] = _compact_json({
                 "x": new_value[0],
                 "y": new_value[1],
                 "z": new_value[2],
@@ -131,7 +135,7 @@ def _modify_single_node(
         #     ArrayString
         # ==========================
         elif value_type == "array_string":
-            save_data_obj["DataValue"] = json.dumps(new_value, ensure_ascii=False, indent=2)
+            save_data_obj["DataValue"] = _compact_json(new_value)
             save_data_obj["IsMultiline"] = None
 
         # ==========================
@@ -139,7 +143,7 @@ def _modify_single_node(
         # ==========================
         elif value_type == "array_number":
             arr = [float(v) for v in new_value]
-            save_data_obj["DataValue"] = json.dumps(arr, ensure_ascii=False, indent=2)
+            save_data_obj["DataValue"] = _compact_json(arr)
             save_data_obj["IsMultiline"] = None
 
         # ==========================
@@ -163,12 +167,12 @@ def _modify_single_node(
                     "magnitude": 0.0,
                     "sqrMagnitude": 0.0
                 })
-            save_data_obj["DataValue"] = json.dumps(vecs, ensure_ascii=False, indent=2)
+            save_data_obj["DataValue"] = _compact_json(vecs)
             save_data_obj["IsMultiline"] = None
 
         # ---------------- 更新 SaveData ----------------
-        target_node["SaveData"] = json.dumps(save_data_obj)
-        chip_graph_meta["stringValue"] = json.dumps(graph_data, indent=2)
+        target_node["SaveData"] = _compact_json(save_data_obj)
+        chip_graph_meta["stringValue"] = _compact_json(graph_data)
 
         return True
 

@@ -1,0 +1,6012 @@
+[
+  {
+    "class_name": "AbsNodeViewModel",
+    "module": "Base",
+    "operation_name": "Abs",
+    "operation_value": 2324,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4079,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "AccumulateNodeViewModel",
+    "module": "Memory",
+    "operation_name": "Accumulate",
+    "operation_value": 4100,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4185,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "reset",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "AcosNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "Acos",
+    "operation_value": 2052,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4196,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "ActivateEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Activate",
+    "operation_value": 1562,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4032,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "AddAngularForceEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "AddAngularForce",
+    "operation_value": 1545,
+    "base_kind": "NoOutputsNodeViewModel",
+    "typedef_index": 4033,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": []
+  },
+  {
+    "class_name": "AddForceEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "AddForce",
+    "operation_value": 1542,
+    "base_kind": "NoOutputsNodeViewModel",
+    "typedef_index": 4034,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [],
+    "input_data_types": [
+      "Entity",
+      "Vector"
+    ],
+    "output_data_types": [],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": []
+  },
+  {
+    "class_name": "AddNumbersNodeViewModel",
+    "module": "Base",
+    "operation_name": "Add",
+    "operation_value": 2304,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4080,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "AddOffsetForceEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "AddForceAtPosition",
+    "operation_value": 1546,
+    "base_kind": "NoOutputsNodeViewModel",
+    "typedef_index": 4035,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateVectorData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [],
+    "input_data_types": [
+      "Entity",
+      "Vector",
+      "Vector"
+    ],
+    "output_data_types": [],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": []
+  },
+  {
+    "class_name": "AndNodeViewModel",
+    "module": "Base",
+    "operation_name": "And",
+    "operation_value": 2560,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4071,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "AngleEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "EntityAngle",
+    "operation_value": 1540,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4037,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "AngularVelocityEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "AngularVelocity",
+    "operation_value": 1539,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4038,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "ArcCTanNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "Actan",
+    "operation_value": 2056,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4197,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "ArraysAddNodeViewModel",
+    "module": "Arrays",
+    "operation_name": "ArraysAdd",
+    "operation_value": 3803,
+    "base_kind": "TwoOutputNodeViewModel",
+    "typedef_index": 4239,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData",
+      "GateIntegerNumberData",
+      "GateIntegerNumberData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData",
+      "GateIntegerNumberData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic",
+      "IntegerNumber",
+      "IntegerNumber"
+    ],
+    "output_data_types": [
+      "Dynamic",
+      "IntegerNumber"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      },
+      {
+        "name": "input4",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "output2",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      }
+    ]
+  },
+  {
+    "class_name": "ArraysClearNodeViewModel",
+    "module": "Arrays",
+    "operation_name": "ArraysClear",
+    "operation_value": 3808,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4240,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateIntegerNumberData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "IntegerNumber"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "ArraysFindNodeViewModel",
+    "module": "Arrays",
+    "operation_name": "ArraysFind",
+    "operation_value": 3807,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4241,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData",
+      "GateIntegerNumberData",
+      "GateIntegerNumberData"
+    ],
+    "output_gate_classes": [
+      "GateIntegerNumberData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic",
+      "IntegerNumber",
+      "IntegerNumber"
+    ],
+    "output_data_types": [
+      "IntegerNumber"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      },
+      {
+        "name": "input4",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      }
+    ]
+  },
+  {
+    "class_name": "ArraysGetNodeViewModel",
+    "module": "Arrays",
+    "operation_name": "ArraysGet",
+    "operation_value": 3801,
+    "base_kind": "TwoOutputNodeViewModel",
+    "typedef_index": 4242,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateIntegerNumberData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData",
+      "GateIntegerNumberData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "IntegerNumber"
+    ],
+    "output_data_types": [
+      "Dynamic",
+      "IntegerNumber"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "output2",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      }
+    ]
+  },
+  {
+    "class_name": "ArraysLengthNodeViewModel",
+    "module": "Arrays",
+    "operation_name": "ArraysLength",
+    "operation_value": 3804,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4243,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateIntegerNumberData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "IntegerNumber"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      }
+    ]
+  },
+  {
+    "class_name": "ArraysRemoveAllByValueNodeViewModel",
+    "module": "Arrays",
+    "operation_name": "ArraysRemoveAllByValue",
+    "operation_value": 3805,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4244,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData",
+      "GateIntegerNumberData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic",
+      "IntegerNumber"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "ArraysRemoveByIndexNodeViewModel",
+    "module": "Arrays",
+    "operation_name": "ArraysRemoveByIndex",
+    "operation_value": 3806,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4245,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateIntegerNumberData",
+      "GateIntegerNumberData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "IntegerNumber",
+      "IntegerNumber"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "ArraysSetNodeViewModel",
+    "module": "Arrays",
+    "operation_name": "ArraysSet",
+    "operation_value": 3802,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4246,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateIntegerNumberData",
+      "GateDynamicTypeData",
+      "GateIntegerNumberData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "IntegerNumber",
+      "Dynamic",
+      "IntegerNumber"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input4",
+        "gate_class": "GateIntegerNumberData",
+        "data_type": "IntegerNumber"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "AsinNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "Asin",
+    "operation_value": 2051,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4198,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "AtanNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "Atan",
+    "operation_value": 2054,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4199,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "AverageNumberNodeViewModel",
+    "module": "Base",
+    "operation_name": "Average",
+    "operation_value": 2309,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4081,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "BitAndNodeViewModel",
+    "module": "Base",
+    "operation_name": "BitAnd",
+    "operation_value": 3073,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4019,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "BitNotNodeViewModel",
+    "module": "Base",
+    "operation_name": "BitNot",
+    "operation_value": 3074,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4020,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "BitOrNodeViewModel",
+    "module": "Base",
+    "operation_name": "BitOr",
+    "operation_value": 3075,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4021,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "BitShiftLeftNodeViewModel",
+    "module": "Base",
+    "operation_name": "BitShiftLeft",
+    "operation_value": 3077,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4022,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "BitShiftRightNodeViewModel",
+    "module": "Base",
+    "operation_name": "BitShiftRight",
+    "operation_value": 3078,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4023,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "BitXorNodeViewModel",
+    "module": "Base",
+    "operation_name": "BitXor",
+    "operation_value": 3076,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4024,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "BranchNodeViewModel",
+    "module": "Base",
+    "operation_name": "Branch",
+    "operation_value": 2567,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4072,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateDynamicTypeData",
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Dynamic",
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "CTanNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": null,
+    "operation_value": null,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4200,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "CanBeActivatedEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "CanBeActivated",
+    "operation_value": 1561,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4039,
+    "input_gate_classes": [
+      "GateEntityData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "CeilNodeViewModel",
+    "module": "Base",
+    "operation_name": "Ceil",
+    "operation_value": 2310,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4082,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "Clamp01NodeViewModel",
+    "module": "Base",
+    "operation_name": "Clamp01",
+    "operation_value": 2312,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4083,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "ClampValueNodeViewModel",
+    "module": "Base",
+    "operation_name": "Clamp",
+    "operation_value": 2311,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4084,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "ClearNodeViewModel",
+    "module": "WorldSession",
+    "operation_name": null,
+    "operation_value": null,
+    "base_kind": "NoOutputsNodeViewModel",
+    "typedef_index": 4180,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [],
+    "signature_inputs": [
+      {
+        "name": "trigger",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": []
+  },
+  {
+    "class_name": "CollisionEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": null,
+    "operation_value": null,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4040,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "ColorEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Color",
+    "operation_value": 1543,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4041,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "CombineVectorNodeViewModel",
+    "module": "Base",
+    "operation_name": null,
+    "operation_value": null,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4108,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "x",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "y",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "z",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "w",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "CosNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "Cos",
+    "operation_value": 2050,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4201,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "CosineFormulaAngleNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "CosineFormulaAngle",
+    "operation_value": 2061,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4202,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "CosineFormulaSideNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "CosineFormulaSide",
+    "operation_value": 2060,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4203,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "CounterNodeViewModel",
+    "module": "Memory",
+    "operation_name": "Counter",
+    "operation_value": 4098,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4186,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "number",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "increment",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "decrement",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "reset",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "DegToRadSameNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": null,
+    "operation_value": null,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4204,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "DelayNodeViewModel",
+    "module": "Memory",
+    "operation_name": "Delay",
+    "operation_value": 4099,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4187,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number",
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "number",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "delay",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "enable",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "reset",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "hold",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "result",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "DeleteEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Delete",
+    "operation_value": 1577,
+    "base_kind": "NoOutputsNodeViewModel",
+    "typedef_index": 4042,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": []
+  },
+  {
+    "class_name": "DeltaAngleNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "DeltaAngle",
+    "operation_value": 2059,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4205,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "DeltaPreviousCurrentNodeViewModel",
+    "module": "Memory",
+    "operation_name": "DeltaPreviousCurrent",
+    "operation_value": 4097,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4188,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "DivideNodeViewModel",
+    "module": "Base",
+    "operation_name": "Divide",
+    "operation_value": 2307,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4085,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "DraggableEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Draggable",
+    "operation_value": 1583,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4043,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "ENodeViewModel",
+    "module": "Base",
+    "operation_name": "E",
+    "operation_value": 259,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4026,
+    "input_gate_classes": [],
+    "output_gate_classes": [],
+    "input_data_types": [],
+    "output_data_types": [],
+    "signature_inputs": [],
+    "signature_outputs": [
+      {
+        "name": "r",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "ElevationEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": null,
+    "operation_value": null,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4044,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Vector"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "EntityIDNodeViewModel",
+    "module": "Base",
+    "operation_name": "EntityID",
+    "operation_value": 1549,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4045,
+    "input_gate_classes": [
+      "GateEntityData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "EqualNodeViewModel",
+    "module": "Comparisons",
+    "operation_name": "Equal",
+    "operation_value": 2816,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4230,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "ExpNodeViewModel",
+    "module": "Base",
+    "operation_name": "Exp",
+    "operation_value": 2308,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4086,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "ExpPowNumberNodeViewModel",
+    "module": "Base",
+    "operation_name": "ExpPow",
+    "operation_value": 2314,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4087,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "ExtinguishEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Extinguish",
+    "operation_value": 1570,
+    "base_kind": "NoOutputsNodeViewModel",
+    "typedef_index": 4048,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": []
+  },
+  {
+    "class_name": "FindStringNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "StringFind",
+    "operation_value": 3586,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4211,
+    "input_gate_classes": [
+      "GateStringData",
+      "GateStringData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "String",
+      "String"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "FloorNodeViewModel",
+    "module": "Base",
+    "operation_name": "Floor",
+    "operation_value": 2319,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4088,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "FollowEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Follow",
+    "operation_value": 1571,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4049,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "FreezeEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Freeze",
+    "operation_value": 1566,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4050,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "FromAsciiNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "FromAscii",
+    "operation_value": 3597,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4212,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateStringData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "String"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ]
+  },
+  {
+    "class_name": "GameTimerNodeViewModel",
+    "module": "Memory",
+    "operation_name": "GameTimer",
+    "operation_value": 5004,
+    "base_kind": "TwoOutputNodeViewModel",
+    "typedef_index": 4189,
+    "input_gate_classes": [],
+    "output_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "input_data_types": [],
+    "output_data_types": [
+      "Number",
+      "Number"
+    ],
+    "signature_inputs": [],
+    "signature_outputs": [
+      {
+        "name": "scaledTime",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "unscaledTime",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "GravityEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Gravity",
+    "operation_value": 1563,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4051,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "GreaterNodeViewModel",
+    "module": "Comparisons",
+    "operation_name": "Greater",
+    "operation_value": 2820,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4231,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "GreaterOrEqualNodeViewModel",
+    "module": "Comparisons",
+    "operation_name": "GreaterOrEqual",
+    "operation_value": 2818,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4232,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "IDIsValidNodeViewModel",
+    "module": "Base",
+    "operation_name": "IDIsValid",
+    "operation_value": 1552,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4052,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "IDToEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "IDToEntity",
+    "operation_value": 1550,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4053,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateEntityData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Entity"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      }
+    ]
+  },
+  {
+    "class_name": "IdentityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Identity",
+    "operation_value": 1,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4089,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "IgniteEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Ignite",
+    "operation_value": 1569,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4054,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "InRangeExclusiveNodeViewModel",
+    "module": "Comparisons",
+    "operation_name": "InRangeExclusive",
+    "operation_value": 2823,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4233,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "InRangeInclusiveNodeViewModel",
+    "module": "Comparisons",
+    "operation_name": "InRangeInclusive",
+    "operation_value": 2822,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4234,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "InverseNodeViewModel",
+    "module": "Base",
+    "operation_name": "Inverse",
+    "operation_value": 2320,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4090,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "LengthStringNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "StringLength",
+    "operation_value": 3587,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4213,
+    "input_gate_classes": [
+      "GateStringData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "String"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "LerpNodeViewModel",
+    "module": "Base",
+    "operation_name": "Lerp",
+    "operation_value": 2328,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4091,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic",
+      "Number"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "LessNodeViewModel",
+    "module": "Comparisons",
+    "operation_name": "Less",
+    "operation_value": 2821,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4235,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "LessOrEqualNodeViewModel",
+    "module": "Comparisons",
+    "operation_name": "LessOrEqual",
+    "operation_value": 2819,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4236,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "LoadLastSaveSessionStateNodeViewModel",
+    "module": "WorldSession",
+    "operation_name": "LoadWorldSessionState",
+    "operation_value": 5002,
+    "base_kind": "NoOutputsNodeViewModel",
+    "typedef_index": 4181,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": []
+  },
+  {
+    "class_name": "LocalAngleToWorldEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "LocalAngleToWorld",
+    "operation_value": 1556,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4055,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "LocalPositionToWorldEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "LocalPositionToWorld",
+    "operation_value": 1555,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4056,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "LogNumberNodeViewModel",
+    "module": "Base",
+    "operation_name": null,
+    "operation_value": null,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4092,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "LookAtEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": null,
+    "operation_value": null,
+    "base_kind": "NoOutputsNodeViewModel",
+    "typedef_index": 4057,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [],
+    "input_data_types": [
+      "Entity",
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": []
+  },
+  {
+    "class_name": "LowercaseStringNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "StringLowercase",
+    "operation_value": 3588,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4214,
+    "input_gate_classes": [
+      "GateStringData"
+    ],
+    "output_gate_classes": [
+      "GateStringData"
+    ],
+    "input_data_types": [
+      "String"
+    ],
+    "output_data_types": [
+      "String"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ]
+  },
+  {
+    "class_name": "MagnitudeVectorNodeViewModel",
+    "module": "Base",
+    "operation_name": "Magnitude",
+    "operation_value": 1283,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4109,
+    "input_gate_classes": [
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Vector"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "MassCenterEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "MassCenter",
+    "operation_value": 1558,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4058,
+    "input_gate_classes": [
+      "GateEntityData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Entity"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "MassEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Mass",
+    "operation_value": 1557,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4059,
+    "input_gate_classes": [
+      "GateEntityData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "MaxValueNodeViewModel",
+    "module": "Base",
+    "operation_name": "Max",
+    "operation_value": 2330,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4093,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "MinValueNodeViewModel",
+    "module": "Base",
+    "operation_name": "Min",
+    "operation_value": 2329,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4094,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "MultiplyNumbersNodeViewModel",
+    "module": "Base",
+    "operation_name": "Multiply",
+    "operation_value": 2306,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4095,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "NegateNodeViewModel",
+    "module": "Base",
+    "operation_name": "Negate",
+    "operation_value": 2315,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4096,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "NormalEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "EntityNormal",
+    "operation_value": 1537,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4060,
+    "input_gate_classes": [
+      "GateEntityData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Entity"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "NormalizeVectorNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "Normalize",
+    "operation_value": 1282,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4224,
+    "input_gate_classes": [
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "NotAndNodeViewModel",
+    "module": "Base",
+    "operation_name": "Nand",
+    "operation_value": 2562,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4073,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "NotEqualNodeViewModel",
+    "module": "Comparisons",
+    "operation_name": "NotEqual",
+    "operation_value": 2817,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4238,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "NotOrNodeViewModel",
+    "module": "Base",
+    "operation_name": "Nor",
+    "operation_value": 2563,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4075,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "NotSameNodeViewModel",
+    "module": "Base",
+    "operation_name": "Not",
+    "operation_value": 2564,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4074,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "NotXorNodeViewModel",
+    "module": "Base",
+    "operation_name": "Nxor",
+    "operation_value": 2566,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4076,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "OrNodeViewModel",
+    "module": "Base",
+    "operation_name": "Or",
+    "operation_value": 2561,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4077,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "PercentNumberNodeViewModel",
+    "module": "Base",
+    "operation_name": "Percent",
+    "operation_value": 2316,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4097,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "PiNodeViewModel",
+    "module": "Base",
+    "operation_name": "Pi",
+    "operation_value": 258,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4027,
+    "input_gate_classes": [],
+    "output_gate_classes": [],
+    "input_data_types": [],
+    "output_data_types": [],
+    "signature_inputs": [],
+    "signature_outputs": [
+      {
+        "name": "r",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "PositionEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Position",
+    "operation_value": 1559,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4062,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "PowNumberNodeViewModel",
+    "module": "Base",
+    "operation_name": "Pow",
+    "operation_value": 2325,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4098,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Number"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "PythagoreanCathetusNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "PythagoreanCathetus",
+    "operation_value": 2062,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4206,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "PythagoreanSideNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "PythagoreanSide",
+    "operation_value": 2063,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4207,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "RadToDegSameNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": null,
+    "operation_value": null,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4208,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "RandomNodeViewModel",
+    "module": "Base",
+    "operation_name": "Random",
+    "operation_value": 261,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4028,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "RemainderNumberNodeViewModel",
+    "module": "Base",
+    "operation_name": "Mod",
+    "operation_value": 2327,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4099,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Number"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "RepeatStringNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "StringRepeat",
+    "operation_value": 3591,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4215,
+    "input_gate_classes": [
+      "GateStringData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateStringData"
+    ],
+    "input_data_types": [
+      "String",
+      "Number"
+    ],
+    "output_data_types": [
+      "String"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ]
+  },
+  {
+    "class_name": "ReplaceStringNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "StringReplace",
+    "operation_value": 3592,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4216,
+    "input_gate_classes": [
+      "GateStringData",
+      "GateStringData",
+      "GateStringData"
+    ],
+    "output_gate_classes": [
+      "GateStringData"
+    ],
+    "input_data_types": [
+      "String",
+      "String",
+      "String"
+    ],
+    "output_data_types": [
+      "String"
+    ],
+    "signature_inputs": [
+      {
+        "name": "inputString",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      },
+      {
+        "name": "oldValue",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      },
+      {
+        "name": "newValue",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "result",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ]
+  },
+  {
+    "class_name": "ResetSessionStateNodeViewModel",
+    "module": "WorldSession",
+    "operation_name": "ResetWorldSessionState",
+    "operation_value": 5010,
+    "base_kind": "NoOutputsNodeViewModel",
+    "typedef_index": 4182,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": []
+  },
+  {
+    "class_name": "ReverseStringNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "StringReverse",
+    "operation_value": 3590,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4217,
+    "input_gate_classes": [
+      "GateStringData"
+    ],
+    "output_gate_classes": [
+      "GateStringData"
+    ],
+    "input_data_types": [
+      "String"
+    ],
+    "output_data_types": [
+      "String"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ]
+  },
+  {
+    "class_name": "RoundNodeViewModel",
+    "module": "Base",
+    "operation_name": "Round",
+    "operation_value": 2326,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4100,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "SaveSessionStateNodeViewModel",
+    "module": "WorldSession",
+    "operation_name": "SaveWorldSessionState",
+    "operation_value": 5009,
+    "base_kind": "NoOutputsNodeViewModel",
+    "typedef_index": 4183,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": []
+  },
+  {
+    "class_name": "SelectNodeViewModel",
+    "module": "Base",
+    "operation_name": "Select",
+    "operation_value": 2568,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4101,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateDynamicTypeData",
+      "GateDynamicTypeData",
+      "GateDynamicTypeData",
+      "GateDynamicTypeData",
+      "GateDynamicTypeData",
+      "GateDynamicTypeData",
+      "GateDynamicTypeData",
+      "GateDynamicTypeData",
+      "GateDynamicTypeData",
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Dynamic",
+      "Dynamic",
+      "Dynamic",
+      "Dynamic",
+      "Dynamic",
+      "Dynamic",
+      "Dynamic",
+      "Dynamic",
+      "Dynamic",
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input4",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input5",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input6",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input7",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input8",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input9",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input10",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input11",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "SessionStateNodeViewModel",
+    "module": "WorldSession",
+    "operation_name": "WorldSessionState",
+    "operation_value": 5001,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4184,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "inputStart",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "inputEnd",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "SignNodeViewModel",
+    "module": "Base",
+    "operation_name": "Sign",
+    "operation_value": 2318,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4102,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "SinNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "Sin",
+    "operation_value": 2049,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4209,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "SizeEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Size",
+    "operation_value": 1567,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4063,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "SplitVectorNodeViewModel",
+    "module": "Base",
+    "operation_name": null,
+    "operation_value": null,
+    "base_kind": "FourOutputNodeViewModel",
+    "typedef_index": 4110,
+    "input_gate_classes": [
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Vector"
+    ],
+    "output_data_types": [
+      "Number",
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "output2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "output3",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "output4",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "SqrMagnitudeVectorNodeViewModel",
+    "module": "Base",
+    "operation_name": "SqrMagnitude",
+    "operation_value": 1284,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4111,
+    "input_gate_classes": [
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Vector"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "SqrNodeViewModel",
+    "module": "Base",
+    "operation_name": "Sqr",
+    "operation_value": 2321,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4103,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "SqrtNodeViewModel",
+    "module": "Base",
+    "operation_name": "Sqrt",
+    "operation_value": 2322,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4104,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "StringToNumberNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "ToNumber",
+    "operation_value": 3598,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4218,
+    "input_gate_classes": [
+      "GateStringData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "String"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "SubstringNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "Substring",
+    "operation_value": 3593,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4219,
+    "input_gate_classes": [
+      "GateStringData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateStringData"
+    ],
+    "input_data_types": [
+      "String",
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "String"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input3",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ]
+  },
+  {
+    "class_name": "SubtractNumbersNodeViewModel",
+    "module": "Base",
+    "operation_name": "Subtract",
+    "operation_value": 2305,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4105,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "SymbolToAsciiNumberNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "ToAscii",
+    "operation_value": 3596,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4220,
+    "input_gate_classes": [
+      "GateStringData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "String",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "SystemTimeNodeViewModel",
+    "module": "Memory",
+    "operation_name": "SystemTime",
+    "operation_value": 5003,
+    "base_kind": "TwoOutputNodeViewModel",
+    "typedef_index": 4191,
+    "input_gate_classes": [],
+    "output_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "input_data_types": [],
+    "output_data_types": [
+      "Number",
+      "Number"
+    ],
+    "signature_inputs": [],
+    "signature_outputs": [
+      {
+        "name": "time",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "dateTime",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "TanNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "Tan",
+    "operation_value": 2053,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4210,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "TemperatureEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Temperature",
+    "operation_value": 1541,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4064,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "TimeNodeViewModel",
+    "module": "Base",
+    "operation_name": "Time",
+    "operation_value": 260,
+    "base_kind": "FourOutputNodeViewModel",
+    "typedef_index": 4031,
+    "input_gate_classes": [],
+    "output_gate_classes": [
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "input_data_types": [],
+    "output_data_types": [
+      "Number",
+      "Number",
+      "Number",
+      "Number"
+    ],
+    "signature_inputs": [],
+    "signature_outputs": [
+      {
+        "name": "output1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "output2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "output3",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "output4",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "TimerNodeViewModel",
+    "module": "Memory",
+    "operation_name": "Timer",
+    "operation_value": 5008,
+    "base_kind": "TwoOutputNodeViewModel",
+    "typedef_index": 4192,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number",
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "trigger",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "reset",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "scaledTime",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "unscaledTime",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "ToDateNodeViewModel",
+    "module": "Memory",
+    "operation_name": "ToDate",
+    "operation_value": 3600,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4193,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateStringData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "String"
+    ],
+    "signature_inputs": [
+      {
+        "name": "days",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ]
+  },
+  {
+    "class_name": "ToStringNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "ToString",
+    "operation_value": 3595,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4221,
+    "input_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "output_gate_classes": [
+      "GateStringData"
+    ],
+    "input_data_types": [
+      "Dynamic"
+    ],
+    "output_data_types": [
+      "String"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ]
+  },
+  {
+    "class_name": "ToTimeFormatNodeViewModel",
+    "module": "Memory",
+    "operation_name": "ToTime",
+    "operation_value": 3599,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4194,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateStringData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "String"
+    ],
+    "signature_inputs": [
+      {
+        "name": "seconds",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "time",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ]
+  },
+  {
+    "class_name": "TriggerNodeViewModel",
+    "module": "Memory",
+    "operation_name": "Trigger",
+    "operation_value": 4102,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4195,
+    "input_gate_classes": [
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "TrimStringNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "StringTrim",
+    "operation_value": 3594,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4222,
+    "input_gate_classes": [
+      "GateStringData"
+    ],
+    "output_gate_classes": [
+      "GateStringData"
+    ],
+    "input_data_types": [
+      "String"
+    ],
+    "output_data_types": [
+      "String"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ]
+  },
+  {
+    "class_name": "UppercaseStringNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "StringUppercase",
+    "operation_value": 3589,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4223,
+    "input_gate_classes": [
+      "GateStringData"
+    ],
+    "output_gate_classes": [
+      "GateStringData"
+    ],
+    "input_data_types": [
+      "String"
+    ],
+    "output_data_types": [
+      "String"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateStringData",
+        "data_type": "String"
+      }
+    ]
+  },
+  {
+    "class_name": "VariableNodeViewModel",
+    "module": "Base",
+    "operation_name": "Variable",
+    "operation_value": 768,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4107,
+    "input_gate_classes": [
+      "GateDynamicTypeData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateDynamicTypeData"
+    ],
+    "input_data_types": [
+      "Dynamic",
+      "Number"
+    ],
+    "output_data_types": [
+      "Dynamic"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      },
+      {
+        "name": "writeInput",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateDynamicTypeData",
+        "data_type": "Dynamic"
+      }
+    ]
+  },
+  {
+    "class_name": "VectorAngleBetweenNodeViewModel",
+    "module": "Base",
+    "operation_name": "VectorAngleBetween",
+    "operation_value": 1296,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4112,
+    "input_gate_classes": [
+      "GateVectorData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Vector",
+      "Vector"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "VectorCrossProductNodeViewModel",
+    "module": "Base",
+    "operation_name": "VectorCross",
+    "operation_value": 1286,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4113,
+    "input_gate_classes": [
+      "GateVectorData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Vector",
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "VectorDotProductNodeViewModel",
+    "module": "Base",
+    "operation_name": "VectorDot",
+    "operation_value": 1288,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4114,
+    "input_gate_classes": [
+      "GateVectorData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Vector",
+      "Vector"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "VectorHsvToRgbNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "HsvToRgb",
+    "operation_value": 1298,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4225,
+    "input_gate_classes": [
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "VectorPositiveNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "VectorPositive",
+    "operation_value": 1290,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4226,
+    "input_gate_classes": [
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "VectorRgbToHsvNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "RgbToHsv",
+    "operation_value": 1297,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4227,
+    "input_gate_classes": [
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "VectorRotateNodeViewModel",
+    "module": "Base",
+    "operation_name": "VectorRotate",
+    "operation_value": 1292,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4115,
+    "input_gate_classes": [
+      "GateVectorData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Vector",
+      "Number"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "VectorShiftLeftNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "VectorShiftLeft",
+    "operation_value": 1294,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4228,
+    "input_gate_classes": [
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "VectorShiftRightNodeViewModel",
+    "module": "Trigonometry",
+    "operation_name": "VectorShiftRight",
+    "operation_value": 1295,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4229,
+    "input_gate_classes": [
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "VelocityAtPositionEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "VelocityAtPosition",
+    "operation_value": 1560,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4065,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "VelocityEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "Velocity",
+    "operation_value": 1538,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4066,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "VoltageEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": null,
+    "operation_value": null,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4067,
+    "input_gate_classes": [
+      "GateEntityData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "WorldAngleToLocalEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "WorldAngleToLocal",
+    "operation_value": 1554,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4068,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  },
+  {
+    "class_name": "WorldPositionToLocalEntityNodeViewModel",
+    "module": "Base",
+    "operation_name": "WorldPositionToLocal",
+    "operation_value": 1553,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4069,
+    "input_gate_classes": [
+      "GateEntityData",
+      "GateVectorData"
+    ],
+    "output_gate_classes": [
+      "GateVectorData"
+    ],
+    "input_data_types": [
+      "Entity",
+      "Vector"
+    ],
+    "output_data_types": [
+      "Vector"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateEntityData",
+        "data_type": "Entity"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateVectorData",
+        "data_type": "Vector"
+      }
+    ]
+  },
+  {
+    "class_name": "XorNodeViewModel",
+    "module": "Base",
+    "operation_name": "Xor",
+    "operation_value": 2565,
+    "base_kind": "OneOutputNodeViewModel",
+    "typedef_index": 4078,
+    "input_gate_classes": [
+      "GateNumberData",
+      "GateNumberData"
+    ],
+    "output_gate_classes": [
+      "GateNumberData"
+    ],
+    "input_data_types": [
+      "Number",
+      "Number"
+    ],
+    "output_data_types": [
+      "Number"
+    ],
+    "signature_inputs": [
+      {
+        "name": "input1",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      },
+      {
+        "name": "input2",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ],
+    "signature_outputs": [
+      {
+        "name": "output",
+        "gate_class": "GateNumberData",
+        "data_type": "Number"
+      }
+    ]
+  }
+]

@@ -61,6 +61,33 @@ def _coerce_gate_type_value(t: int, *, use_string_types: bool) -> Any:
     return t
 
 
+def _type_from_moduledef_port(port: Dict[str, Any]) -> int | None:
+    if not isinstance(port, dict):
+        return None
+    raw = port.get("type")
+    if not isinstance(raw, str):
+        return None
+
+    key = raw.strip().lower()
+    if key in {"decimal", "number"}:
+        return 2
+    if key == "string":
+        return 4
+    if key == "vector":
+        return 8
+    if key in {"entity", "signal"}:
+        return 1
+    if key == "arraynumber":
+        return 128
+    if key == "arraystring":
+        return 256
+    if key == "arrayvector":
+        return 512
+    if key == "arrayentity":
+        return 1024
+    return None
+
+
 def _element_type_from_array_type(t: int) -> int | None:
     if t == 128:
         return 2
@@ -443,12 +470,30 @@ def apply_data_type_modifications(
                                     port['DataType'] = _coerce_gate_type_value(final_type_int, use_string_types=use_string_types)
                                     print(f"       - 输出端口 {i}: 规则='{port_rule}', 更新为 -> {get_friendly_type_name(final_type_int)}")
                     else:
-                        # 如果没有找到规则，执行旧的“全部统一”逻辑
-                        print(f"     警告: 未找到 OpType {op_type} 的特定规则。将所有端口类型统一为 {get_friendly_type_name(new_node_type)}。")
-                        for port in node_found.get('Inputs', []):
-                            port['DataType'] = new_gate_value
-                        for port in node_found.get('Outputs', []):
-                            port['DataType'] = new_gate_value
+                        # 如果没有找到规则，优先尊重 moduledef 中的固定端口类型。
+                        print(
+                            f"     警告: 未找到 OpType {op_type} 的特定规则。将优先使用 moduledef 端口定义，Dynamic/未知端口才回退到 {get_friendly_type_name(new_node_type)}。"
+                        )
+                        mod_def_inputs = mod_def.get("inputs", []) if isinstance(mod_def, dict) else []
+                        mod_def_outputs = mod_def.get("outputs", []) if isinstance(mod_def, dict) else []
+
+                        for i, port in enumerate(node_found.get('Inputs', [])):
+                            declared_type = None
+                            if i < len(mod_def_inputs):
+                                declared_type = _type_from_moduledef_port(mod_def_inputs[i])
+                            port['DataType'] = _coerce_gate_type_value(
+                                declared_type if declared_type is not None else new_node_type,
+                                use_string_types=use_string_types,
+                            )
+
+                        for i, port in enumerate(node_found.get('Outputs', [])):
+                            declared_type = None
+                            if i < len(mod_def_outputs):
+                                declared_type = _type_from_moduledef_port(mod_def_outputs[i])
+                            port['DataType'] = _coerce_gate_type_value(
+                                declared_type if declared_type is not None else new_node_type,
+                                use_string_types=use_string_types,
+                            )
                     
                     # (这部分逻辑已移到前面)
                     # conn_id = node_found.get('MechanicConnectionId') ...
