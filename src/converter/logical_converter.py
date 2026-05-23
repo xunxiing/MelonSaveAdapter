@@ -3,11 +3,12 @@ from __future__ import annotations
 import ast
 from typing import Any, Dict
 
-from src.converter.ast_converter import Converter, _ValueRef
+from src.converter.ast_converter import _ValueRef
+from src.converter.if_else_converter import IfElseConverter
 from src.error_handler import ASTError
 
 
-class LogicalConverter(Converter):
+class LogicalConverter(IfElseConverter):
     """
     扩展 Converter 类，添加布尔逻辑和数值比较运算符的语法糖支持。
     """

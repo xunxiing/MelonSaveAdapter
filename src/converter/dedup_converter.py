@@ -23,7 +23,7 @@ class DedupConverter(LogicalConverter):
         # 使用 JSON 序列化作为 key，确保不同类型的值不会冲突
         self._constant_cache: Dict[str, str] = {}
 
-    def _emit_constant_node(self, lit: Any) -> str:
+    def _emit_constant_node(self, lit: Any, data_type: str | None = None) -> str:
         """
         创建常量节点，如果相同值的常量已存在则复用。
 
@@ -37,10 +37,14 @@ class DedupConverter(LogicalConverter):
         # 使用 JSON 序列化确保不同类型的值不会冲突
         # 例如：1 (int) vs "1" (str) vs True (bool)
         try:
-            cache_key = json.dumps(lit, sort_keys=True, ensure_ascii=False)
+            cache_key = json.dumps(
+                {"value": lit, "data_type": data_type},
+                sort_keys=True,
+                ensure_ascii=False,
+            )
         except Exception:
             # 如果序列化失败，使用字符串表示作为 fallback
-            cache_key = str(lit)
+            cache_key = f"{data_type}:{lit}"
 
         # 检查缓存中是否已存在相同值的常量
         if cache_key in self._constant_cache:
@@ -50,7 +54,7 @@ class DedupConverter(LogicalConverter):
                 return existing_nid
 
         # 创建新的常量节点
-        nid = super()._emit_constant_node(lit)
+        nid = super()._emit_constant_node(lit, data_type=data_type)
 
         # 将新节点加入缓存
         self._constant_cache[cache_key] = nid

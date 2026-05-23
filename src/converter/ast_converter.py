@@ -30,6 +30,8 @@ class Converter(ast.NodeVisitor):
         self.unresolved: List[Tuple[str, str, str, str, int | None]] = []
         # 端口别名表： alias_var -> (up_var, up_port_str)
         self.alias_outputs: Dict[str, Tuple[str, str]] = {}
+        self.name_types: Dict[str, str] = {}
+        self.node_types: Dict[str, str] = {}
         self._has_main_guard: bool = False
         self._in_main_block: bool = False
         self._set_targets: Set[str] = set()
@@ -198,7 +200,7 @@ class Converter(ast.NodeVisitor):
 
         self._in_main_block = True
         for stmt in main_if.body:
-            if isinstance(stmt, (ast.If, ast.For, ast.While, ast.Try, ast.With, ast.Match)):
+            if isinstance(stmt, (ast.For, ast.While, ast.Try, ast.With, ast.Match)):
                 raise ASTError(
                     "Control flow is not supported inside main block; express logic via nodes/connections.",
                     context={"line": getattr(stmt, "lineno", None)},
@@ -217,23 +219,25 @@ class Converter(ast.NodeVisitor):
 
         # 兼容声明式 I/O 写法：obj: Entity = INPUT(...)
         # 这种语法本质是“输入节点别名”，不应落到变量定义（chip_variables）。
-        if node.value is not None and self._is_input_call_expr(node.value):
-            ref = self._emit_expr_as_ref(node.value)
-            if ref.kind != "node":
-                raise ASTError(
-                    f"Failed to create INPUT node for '{var_name}'",
-                    context={"variable": var_name, "line": getattr(node, "lineno", None)},
-                )
-            if var_name not in self.var2node:
-                self.var2node[var_name] = ref.value
-            return
-
         gate_type, is_final = self._parse_decl_type(node.annotation)
         if gate_type is None:
             raise ASTError(
                 f"Cannot parse type annotation for '{var_name}'",
                 context={"variable": var_name, "line": getattr(node, "lineno", None)},
             )
+
+        if node.value is not None and self._is_input_call_expr(node.value):
+            ref = self._emit_expr_as_ref(node.value)
+            if ref.kind != "node":
+                raise ASTError(
+                    f"Failed to create INPUT node for '{var_name}'",
+                    context={"variable": var_name, "line": getattr(node, "lineno", None)},
+            )
+            if var_name not in self.var2node:
+                self.var2node[var_name] = ref.value
+            self.name_types[var_name] = gate_type
+            self.node_types[ref.value] = gate_type
+            return
 
         value_lit: Any
         if node.value is not None:
@@ -257,6 +261,8 @@ class Converter(ast.NodeVisitor):
             nid = self._emit_constant_node(value_lit)
             if var_name not in self.var2node:
                 self.var2node[var_name] = nid
+            self.name_types[var_name] = gate_type
+            self.node_types[nid] = gate_type
             return
 
         if any(vd.get("Key") == var_name for vd in self.g.variables):
@@ -270,6 +276,7 @@ class Converter(ast.NodeVisitor):
             alias_var=var_name,
             from_var_call=False,
         )
+        self.name_types[var_name] = gate_type
 
     @staticmethod
     def _canonical_type_name(type_name: str) -> str:
@@ -334,6 +341,29 @@ class Converter(ast.NodeVisitor):
             self.outputs_seen.setdefault(ref.value, set()).add(ref.port)
             return
         self.unresolved.append((ref.value, ref.port, to_nid, to_port, line))
+
+    def _maybe_infer_expr_type(self, expr: ast.AST) -> str | None:
+        infer = getattr(self, "_infer_expr_type", None)
+        if not callable(infer):
+            return None
+        try:
+            return infer(expr)
+        except Exception:
+            return None
+
+    def _remember_name_type(self, name: str, type_name: str | None, nid: str | None = None) -> None:
+        if type_name:
+            self.name_types[name] = type_name
+            if nid:
+                self.node_types[nid] = type_name
+
+    def _set_node_data_type_attr(self, nid: str, type_name: str) -> None:
+        for node_rec in reversed(self.g.nodes):
+            if node_rec.get("id") == nid:
+                attrs = node_rec.get("attrs") or {}
+                attrs["data_type"] = type_name
+                node_rec["attrs"] = attrs
+                break
 
     @staticmethod
     def _literal_kind(expr: ast.AST) -> str | None:
@@ -430,6 +460,55 @@ class Converter(ast.NodeVisitor):
             trigger_expr = ast.Constant(value=1.0)
         trigger_ref = self._emit_expr_as_ref(trigger_expr)
         self._add_edge_from_ref(trigger_ref, write_nid, "Set", line=getattr(call, "lineno", None))
+
+        self._set_targets.add(var_name)
+        return _ValueRef("node", write_nid, "__auto__")
+
+    def _emit_set_from_ref(
+        self,
+        var_name: str,
+        value_ref: _ValueRef,
+        trigger_ref: _ValueRef | None,
+        line: int | None,
+    ) -> _ValueRef:
+        if var_name in self.alias_outputs:
+            raise ASTError(f"SET target '{var_name}' is an alias and cannot be written")
+
+        declared_nid = self.var2node.get(var_name)
+        if not isinstance(declared_nid, str):
+            raise ASTError(
+                f"SET target '{var_name}' is not declared; define it in static scope, e.g. {var_name}: Number = 0",
+                context={"variable": var_name, "line": line},
+            )
+
+        if var_name in self._set_targets:
+            raise ASTError(
+                f"Multiple SET(...) calls for the same variable are not supported: {var_name}",
+                context={"variable": var_name, "line": line},
+            )
+
+        none_expr = ast.Constant(value=None)
+        write_call = ast.Call(
+            func=ast.Name(id="VARIABLE", ctx=ast.Load()),
+            args=[],
+            keywords=[
+                ast.keyword(arg="Value", value=none_expr),
+                ast.keyword(arg="Set", value=none_expr),
+            ],
+        )
+        write_nid = self._emit_call_as_node(write_call)
+        for node_rec in reversed(self.g.nodes):
+            if node_rec.get("id") == write_nid:
+                attrs = node_rec.get("attrs") or {}
+                attrs.setdefault("dsl_name", var_name)
+                node_rec["attrs"] = attrs
+                break
+
+        self._add_edge_from_ref(value_ref, write_nid, "Value", line=line)
+        if trigger_ref is None:
+            one_nid = self._emit_constant_node(1.0)
+            trigger_ref = _ValueRef("node", one_nid, "Output")
+        self._add_edge_from_ref(trigger_ref, write_nid, "Set", line=line)
 
         self._set_targets.add(var_name)
         return _ValueRef("node", write_nid, "__auto__")
@@ -859,9 +938,11 @@ class Converter(ast.NodeVisitor):
             expr_s = str(expr)
         raise ASTError(f"不支持的表达式: {expr_s}")
 
-    def _emit_constant_node(self, lit: Any) -> str:
+    def _emit_constant_node(self, lit: Any, data_type: str | None = None) -> str:
         nid = self.g.next_id("Constant")
         attrs = {"value": lit}
+        if data_type:
+            attrs["data_type"] = data_type
         node_rec = {
             "id": nid,
             "type": "Constant",
@@ -873,6 +954,8 @@ class Converter(ast.NodeVisitor):
         self.g.add_node(node_rec)
         self.inputs_seen.setdefault(nid, [])
         self.outputs_seen.setdefault(nid, set())
+        if data_type:
+            self.node_types[nid] = data_type
         return nid
 
     def _register_variable_def(
@@ -955,6 +1038,7 @@ class Converter(ast.NodeVisitor):
             call = node.value
             func_name = _func_name(call.func)
             ref = self._emit_expr_as_ref(call)
+            expr_type = self._maybe_infer_expr_type(call)
 
             # DSL v2 compatibility:
             # If a name is already declared as a VARIABLE node (via typed declaration / variable-def),
@@ -985,6 +1069,8 @@ class Converter(ast.NodeVisitor):
 
             if ref.kind == "node" and var not in self.var2node:
                 self.var2node[var] = ref.value
+            if ref.kind == "node":
+                self._remember_name_type(var, expr_type, ref.value)
 
             if func_name.upper() == "VARIABLE":
                 has_existing = any(vd.get("Key") == var for vd in self.g.variables)
@@ -1081,6 +1167,7 @@ class Converter(ast.NodeVisitor):
                     nid = self._emit_constant_node(lit)
                     if var not in self.var2node:
                         self.var2node[var] = nid
+                    self._remember_name_type(var, self._maybe_infer_expr_type(node.value), nid)
                 else:
                     # 一般表达式赋值：a = (b + c) * 2 / a = abs(x) ...
                     var = node.targets[0].id
@@ -1092,10 +1179,12 @@ class Converter(ast.NodeVisitor):
                         if ref.kind == "node":
                             if var not in self.var2node:
                                 self.var2node[var] = ref.value
+                            self._remember_name_type(var, self._maybe_infer_expr_type(node.value), ref.value)
                         else:
                             self.alias_outputs[var] = (ref.value, ref.port)
                             if ref.value in self.var2node and var not in self.var2node:
                                 self.var2node[var] = self.var2node[ref.value]
+                            self._remember_name_type(var, self.name_types.get(ref.value), self.var2node.get(var))
 
         self.generic_visit(node)
 
