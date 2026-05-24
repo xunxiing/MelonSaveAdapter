@@ -1209,6 +1209,7 @@ class Converter(ast.NodeVisitor):
         label: str | None = None
         conns: List[Tuple[str, ast.AST]] = []
         has_keyword_input = any((kw.arg or "").lower() == "input" for kw in (call.keywords or []))
+        output_value_expr: ast.AST | None = None
 
         # DSL v2 I/O sugar:
         # INPUT(name="Speed", data_type="Number")
@@ -1273,6 +1274,7 @@ class Converter(ast.NodeVisitor):
                         "OUTPUT input cannot be provided both positionally and via INPUT=...",
                         context={"node_type": type_name},
                     )
+                output_value_expr = pos_args[0]
                 conns.append(("0", pos_args[0]))
             if len(pos_args) >= 2:
                 v = _literal_or_type_name(pos_args[1])
@@ -1324,7 +1326,19 @@ class Converter(ast.NodeVisitor):
                 else:
                     attrs[key] = v
             else:
+                if call_type_l == "output" and key.lower() == "input":
+                    output_value_expr = kw.value
                 conns.append((key, kw.value))
+
+        if (
+            call_type_l == "output"
+            and output_value_expr is not None
+            and "data_type" not in attrs
+            and "datatype" not in attrs
+        ):
+            inferred_type = self._maybe_infer_expr_type(output_value_expr)
+            if inferred_type:
+                attrs["data_type"] = inferred_type
 
         nid = fixed_id or self.g.next_id(type_name)
         if fixed_id and nid in self.g._used:

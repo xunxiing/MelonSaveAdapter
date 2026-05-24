@@ -3,11 +3,26 @@ from __future__ import annotations
 import ast
 import json
 from pathlib import Path
-from typing import Any, Dict, List
+from dataclasses import dataclass
+from typing import Any, Dict, List, Set
 
 from src.converter.ast_converter import Converter, _ValueRef
 from src.converter.utils import _func_name
 from src.error_handler import ASTError
+
+
+@dataclass
+class _BranchAssignment:
+    name: str
+    ref: _ValueRef
+    type_name: str | None
+    line: int | None
+
+
+@dataclass
+class _BranchState:
+    assignments: Dict[str, _BranchAssignment]
+    assigned_order: List[str]
 
 
 class IfElseConverter(Converter):
@@ -268,8 +283,9 @@ class IfElseConverter(Converter):
         return _ValueRef("node", nid, "__auto__")
 
     @staticmethod
-    def _simple_branch_assignments(stmts: List[ast.stmt], line: int | None) -> Dict[str, ast.AST]:
-        assignments: Dict[str, ast.AST] = {}
+    def _branch_assignment_stmts(stmts: List[ast.stmt], line: int | None) -> List[ast.Assign]:
+        assignments: List[ast.Assign] = []
+        seen: Set[str] = set()
         for stmt in stmts:
             if isinstance(stmt, ast.Pass):
                 continue
@@ -283,13 +299,74 @@ class IfElseConverter(Converter):
                     context={"line": getattr(stmt, "lineno", line)},
                 )
             name = stmt.targets[0].id
-            if name in assignments:
+            if name in seen:
                 raise ASTError(
                     f"Duplicate assignment to '{name}' in the same if/else branch",
                     context={"variable": name, "line": getattr(stmt, "lineno", line)},
                 )
-            assignments[name] = stmt.value
+            seen.add(name)
+            assignments.append(stmt)
         return assignments
+
+    def _snapshot_branch_env(self) -> tuple[Dict[str, str], Dict[str, tuple[str, str]], Dict[str, str]]:
+        return dict(self.var2node), dict(self.alias_outputs), dict(self.name_types)
+
+    def _restore_branch_env(
+        self,
+        snapshot: tuple[Dict[str, str], Dict[str, tuple[str, str]], Dict[str, str]],
+    ) -> None:
+        self.var2node, self.alias_outputs, self.name_types = (
+            dict(snapshot[0]),
+            dict(snapshot[1]),
+            dict(snapshot[2]),
+        )
+
+    def _bind_branch_assignment(self, name: str, ref: _ValueRef, type_name: str | None) -> None:
+        if ref.kind == "node":
+            self.var2node[name] = ref.value
+            self.alias_outputs.pop(name, None)
+            if type_name:
+                self.name_types[name] = type_name
+                self.node_types[ref.value] = type_name
+            return
+
+        self.alias_outputs[name] = (ref.value, ref.port)
+        if ref.value in self.var2node:
+            self.var2node[name] = self.var2node[ref.value]
+        else:
+            self.var2node.pop(name, None)
+        inferred_type = type_name or self.name_types.get(ref.value)
+        if inferred_type:
+            self.name_types[name] = inferred_type
+            nid = self.var2node.get(name)
+            if nid:
+                self.node_types[nid] = inferred_type
+
+    def _compile_branch_state(
+        self,
+        stmts: List[ast.stmt],
+        base_snapshot: tuple[Dict[str, str], Dict[str, tuple[str, str]], Dict[str, str]],
+        line: int | None,
+    ) -> _BranchState:
+        self._restore_branch_env(base_snapshot)
+        assignments: Dict[str, _BranchAssignment] = {}
+        assigned_order: List[str] = []
+
+        for stmt in self._branch_assignment_stmts(stmts, line):
+            name = stmt.targets[0].id
+            expr = stmt.value
+            expr_type = self._infer_expr_type(expr)
+            ref = self._emit_expr_as_ref(expr)
+            self._bind_branch_assignment(name, ref, expr_type)
+            assignments[name] = _BranchAssignment(
+                name=name,
+                ref=ref,
+                type_name=expr_type,
+                line=getattr(stmt, "lineno", line),
+            )
+            assigned_order.append(name)
+
+        return _BranchState(assignments=assignments, assigned_order=assigned_order)
 
     def _emit_if_expression(self, expr: ast.IfExp) -> _ValueRef:
         cond_ref = self._emit_expr_as_ref(expr.test)
@@ -330,43 +407,45 @@ class IfElseConverter(Converter):
                 context={"line": getattr(node, "lineno", None)},
             )
 
-        true_assigns = self._simple_branch_assignments(
-            node.body,
-            getattr(node, "lineno", None),
-        )
-        false_assigns = self._simple_branch_assignments(
-            node.orelse,
-            getattr(node, "lineno", None),
-        )
+        line = getattr(node, "lineno", None)
+        base_snapshot = self._snapshot_branch_env()
+        true_state = self._compile_branch_state(node.body, base_snapshot, line)
+        false_state = self._compile_branch_state(node.orelse, base_snapshot, line)
+        self._restore_branch_env(base_snapshot)
 
-        if not true_assigns and not false_assigns:
+        if not true_state.assignments and not false_state.assignments:
             return
 
         cond_ref = self._emit_expr_as_ref(node.test)
-        for name in sorted(set(true_assigns) | set(false_assigns)):
-            true_expr = true_assigns.get(name)
-            false_expr = false_assigns.get(name)
+        merge_order: List[str] = []
+        for name in [*true_state.assigned_order, *false_state.assigned_order]:
+            if name not in merge_order:
+                merge_order.append(name)
+
+        for name in merge_order:
+            true_assignment = true_state.assignments.get(name)
+            false_assignment = false_state.assignments.get(name)
 
             merged_type = self._merge_type(
-                self._infer_expr_type(true_expr),
-                self._infer_expr_type(false_expr),
+                true_assignment.type_name if true_assignment else None,
+                false_assignment.type_name if false_assignment else None,
                 self.name_types.get(name),
-                getattr(node, "lineno", None),
+                line,
             )
             if merged_type is None:
                 raise ASTError(
                     f"Cannot infer if/else merge type for '{name}'",
-                    context={"variable": name, "line": getattr(node, "lineno", None)},
+                    context={"variable": name, "line": line},
                 )
 
             true_ref = (
-                self._emit_expr_as_ref(true_expr)
-                if true_expr is not None
+                true_assignment.ref
+                if true_assignment is not None
                 else self._emit_typed_empty_ref(merged_type)
             )
             false_ref = (
-                self._emit_expr_as_ref(false_expr)
-                if false_expr is not None
+                false_assignment.ref
+                if false_assignment is not None
                 else self._emit_typed_empty_ref(merged_type)
             )
             merged_ref = self._emit_branch_from_refs(
@@ -374,7 +453,7 @@ class IfElseConverter(Converter):
                 true_ref,
                 false_ref,
                 merged_type,
-                getattr(node, "lineno", None),
+                line,
             )
 
             is_declared_var = any(
@@ -383,7 +462,7 @@ class IfElseConverter(Converter):
                 if isinstance(vd, dict)
             )
             if is_declared_var and self._has_main_guard and self._in_main_block:
-                self._emit_set_from_ref(name, merged_ref, None, getattr(node, "lineno", None))
+                self._emit_set_from_ref(name, merged_ref, None, line)
             else:
                 self.var2node[name] = merged_ref.value
                 self.name_types[name] = merged_type

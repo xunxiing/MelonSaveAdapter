@@ -91,6 +91,57 @@ if __name__ == "__main__":
         with self.assertRaises(ASTError):
             convert(code)
 
+    def test_branch_assignments_use_branch_local_updated_values(self) -> None:
+        graph = convert(
+            """\
+z = INPUT("Z", "Number")
+cond = INPUT("Cond", "Number")
+
+if __name__ == "__main__":
+    if cond:
+        z = z + 3
+        label = ToString(z)
+    else:
+        z = z + 5
+        label = ToString(z)
+    after = z + 10
+    OUTPUT(z, "Z Out")
+    OUTPUT(label, "Label Out")
+    OUTPUT(after, "After Out")
+"""
+        )
+
+        branches = [n for n in graph["nodes"] if n.get("type") == "Branch"]
+        self.assertEqual(
+            [n.get("attrs", {}).get("data_type") for n in branches],
+            ["Number", "String"],
+        )
+
+        node_types = {n["id"]: n["type"] for n in graph["nodes"]}
+        tostring_inputs = [
+            e
+            for e in graph["edges"]
+            if node_types.get(e["to_node"]) == "ToString" and e["to_port"] == "Input"
+        ]
+        self.assertEqual(len(tostring_inputs), 2)
+        self.assertEqual(
+            [node_types[e["from_node"]] for e in tostring_inputs],
+            ["Add", "Add"],
+        )
+
+        add_after = [
+            n
+            for n in graph["nodes"]
+            if n.get("type") == "Add"
+            and any(
+                e["to_node"] == n["id"]
+                and e["to_port"] == "A"
+                and node_types.get(e["from_node"]) == "Branch"
+                for e in graph["edges"]
+            )
+        ]
+        self.assertEqual(len(add_after), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

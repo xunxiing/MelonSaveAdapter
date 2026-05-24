@@ -100,6 +100,39 @@ if __name__ == "__main__":
         with self.assertRaises(ASTError):
             cvt.visit(tree)
 
+    def test_output_infers_array_type_from_positional_value(self) -> None:
+        code = '''\
+if __name__ == "__main__":
+    values = [1.0, 2.0, 3.0]
+    OUTPUT(values, "Values")
+'''
+
+        graph = self._convert(code)
+        out = next(n for n in graph["nodes"] if str(n.get("type", "")).lower() == "output")
+        self.assertEqual(out.get("attrs", {}).get("data_type"), "ArrayNumber")
+
+    def test_output_infers_array_type_from_keyword_input(self) -> None:
+        code = '''\
+if __name__ == "__main__":
+    names = ["A", "B"]
+    OUTPUT(INPUT=names, name="Names")
+'''
+
+        graph = self._convert(code)
+        out = next(n for n in graph["nodes"] if str(n.get("type", "")).lower() == "output")
+        self.assertEqual(out.get("attrs", {}).get("data_type"), "ArrayString")
+
+    def test_output_infers_array_vector_type(self) -> None:
+        code = '''\
+if __name__ == "__main__":
+    points = [{"x": 1.0, "y": 2.0, "z": 3.0}]
+    OUTPUT(points, "Points")
+'''
+
+        graph = self._convert(code)
+        out = next(n for n in graph["nodes"] if str(n.get("type", "")).lower() == "output")
+        self.assertEqual(out.get("attrs", {}).get("data_type"), "ArrayVector")
+
 
 if __name__ == "__main__":
     unittest.main()
