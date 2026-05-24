@@ -408,6 +408,8 @@ class IfElseConverter(Converter):
             )
 
         line = getattr(node, "lineno", None)
+        # 先发射条件表达式（在分支编译前，使用当前环境状态）
+        cond_ref = self._emit_expr_as_ref(node.test)
         base_snapshot = self._snapshot_branch_env()
         true_state = self._compile_branch_state(node.body, base_snapshot, line)
         false_state = self._compile_branch_state(node.orelse, base_snapshot, line)
@@ -416,7 +418,6 @@ class IfElseConverter(Converter):
         if not true_state.assignments and not false_state.assignments:
             return
 
-        cond_ref = self._emit_expr_as_ref(node.test)
         merge_order: List[str] = []
         for name in [*true_state.assigned_order, *false_state.assigned_order]:
             if name not in merge_order:
